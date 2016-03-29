@@ -1,0 +1,6 @@
+// TestSuiteLevel
+digraph {
+	Root
+	ezIntegrateFunctionalTest
+		Root -> ezIntegrateFunctionalTest
+}
