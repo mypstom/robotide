@@ -1,0 +1,75 @@
+// TC <-> UK
+digraph {
+	Root
+	"Cannot see"
+		Root -> "Cannot see"
+		"Cannot see" -> "Black List"
+	"Can see"
+		Root -> "Can see"
+		"Can see" -> "Black List"
+	T8
+		Root -> T8
+	T9
+		Root -> T9
+	T10
+		Root -> T10
+	T11
+		Root -> T11
+	T62
+		Root -> T62
+		T62 -> "K and K uses each other"
+	T64
+		Root -> T64
+		T64 -> "K contains a loop"
+	T57
+		Root -> T57
+		T57 -> "K self-loop"
+	T58
+		Root -> T58
+		T58 -> "K to different K 1 times"
+		T58 -> "K to different K 1 times"
+	T60
+		Root -> T60
+		T60 -> "K to different K 2up times"
+		T60 -> "K to different K 2up times"
+		T60 -> "K to different K 1 times"
+	T50
+		Root -> T50
+		T50 -> "K to K 0 times"
+	T56
+		Root -> T56
+		T56 -> "K to K 100 times"
+	T51
+		Root -> T51
+		T51 -> "K to K 1 times"
+	T52
+		Root -> T52
+		T52 -> "K to K 2 times"
+	T53
+		Root -> T53
+		T53 -> "K to K 3 times"
+	T54
+		Root -> T54
+		T54 -> "K to K 4 times"
+	T55
+		Root -> T55
+		T55 -> "K to K 5 times"
+	T6
+		Root -> T6
+	T7
+		Root -> T7
+	T13
+		Root -> T13
+	T12
+		Root -> T12
+	T1
+		Root -> T1
+	T2
+		Root -> T2
+	T3
+		Root -> T3
+	T4
+		Root -> T4
+	T5
+		Root -> T5
+}

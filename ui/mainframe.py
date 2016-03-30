@@ -355,12 +355,10 @@ class RideFrame(wx.Frame, RideEventHandler):
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
-                    graphTC2UK.node(str(df.display_name))
-                    graphTC2UK.edge('Root',str(df.display_name))
                     try: #add Test case level
                         for testCase in df.tests:
                             graphTC2UK.node(str(testCase.name))
-                            graphTC2UK.edge(str(df.display_name),str(testCase.name))
+                            graphTC2UK.edge('Root',str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword: #record all of using UK
@@ -371,7 +369,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                         print str(e)
         except Exception, e:
             print str(e)
-        graphTC2UK.render('TS2TC.gv',view=False)
+        graphTC2UK.render('TC2UK.gv',view=False)
 
     def OnTestSuiteUseKeyword(self,event):
         f = open('node_display_config.txt')
@@ -455,6 +453,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         print '------------------'
         self.relationBetweenTSandTS(user_def_keyword,testSuites)
         self.relationBetweenTSandTC(user_def_keyword,testSuites)
+        self.relationBetweenTCandUK(user_def_keyword,testSuites)
         for node in nodeList:
             if node not in blacklist:
                 dot.node(node)
