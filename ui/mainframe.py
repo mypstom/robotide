@@ -295,25 +295,35 @@ class RideFrame(wx.Frame, RideEventHandler):
         dlg.ShowModal()
         dlg.Destroy()
 
-    def relationBetweenTSandTS(self):
-        dot = graphviz.Digraph(comment='TS<>TS', engine='fdp')
+    def relationBetweenTSandTS(self,user_def_keyword,testSuites):
+        graphTS2TS = graphviz.Digraph(comment='TS <-> TS', engine='fdp')
         edgeList = list()
         nodeList = set()
+        graphTS2TS.node('Root')
+        for suite in testSuites:
+            nodeList.add(suite)
+        for node in nodeList:
+            graphTS2TS.node(node)
+            graphTS2TS.edge('Root',node)
         try:
-            for df in self._get_datafile_list():
-                if len(df.tests._items) > 0:
-                    testSuite_temp = list()
-                    testSuite_temp.append(str(df.display_name))
-                    nodeList.add(str(df.display_name))
-                    edgeList.append(('Root',str(df.display_name)))
-                    try: #add user defined keyword
-                        for keyword in df.data.keywords:
-                            temp_name = keyword.name.encode('ascii', 'ignore')
-                            testSuite_temp.append(temp_name)
+            for df in self._get_datafile_list(): #get suite level
+                tempSuiteUseUserKeyword = list()
+                if len(df.tests._items) > 0: #not empty
+                    try: #add Test case level
+                        for testCase in df.tests:
+                            try:
+                                for testStep in testCase.steps:
+                                    if str(testStep.keyword) in user_def_keyword: #record all of using UK
+                                        tempSuiteUseUserKeyword.append(str(testStep.keyword))
+                            except Exception, e:
+                                print str(e)
+                            for node in tempSuiteUseUserKeyword:
+                                graphTS2TS.edge(str(df.display_name), user_def_keyword[node])
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
+        graphTS2TS.render('TS2TS.gv',view=False)
 
     def relationBetweenTSandTC(self):
         return 0
@@ -401,6 +411,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         print 'SUITE~'
         print testSuites
         print '------------------'
+        self.relationBetweenTSandTS(user_def_keyword,testSuites)
         for node in nodeList:
             if node not in blacklist:
                 dot.node(node)
