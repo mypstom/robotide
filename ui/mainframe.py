@@ -420,6 +420,28 @@ class RideFrame(wx.Frame, RideEventHandler):
             print str(e)
         graphTC2UK.render('TC2UK.gv',view=False)
 
+    def relationBetweenTCandLK(self,user_def_keyword,testSuites):
+        graphTC2LK = graphviz.Digraph(comment='TC <-> LK', engine='fdp')
+        graphTC2LK.node('Root')
+        try:
+            for df in self._get_datafile_list(): #get suite level
+                if len(df.tests._items) > 0: #not empty
+                    try: #add Test case level
+                        for testCase in df.tests:
+                            graphTC2LK.node(str(testCase.name))
+                            graphTC2LK.edge('Root',str(testCase.name))
+                            try:
+                                for testStep in testCase.steps:
+                                    if str(testStep.keyword) not in user_def_keyword: #record all of using UK
+                                        graphTC2LK.edge(str(testCase.name), str(testStep.keyword))
+                            except Exception, e:
+                                print str(e)
+                    except Exception, e:
+                        print str(e)
+        except Exception, e:
+            print str(e)
+        graphTC2LK.render('TC2LK.gv',view=False)
+
     def relationBetweenTCandK(self,user_def_keyword,testSuites):
         graphTC2K = graphviz.Digraph(comment='TC <-> K', engine='fdp')
         graphTC2K.node('Root')
@@ -527,6 +549,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         self.relationBetweenTSandUK(user_def_keyword,testSuites)
         self.relationBetweenTSandK(user_def_keyword,testSuites)
         self.relationBetweenTCandUK(user_def_keyword,testSuites)
+        self.relationBetweenTCandLK(user_def_keyword,testSuites)
         self.relationBetweenTCandK(user_def_keyword,testSuites)
         for node in nodeList:
             if node not in blacklist:
