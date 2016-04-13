@@ -464,6 +464,33 @@ class RideFrame(wx.Frame, RideEventHandler):
             print str(e)
         graphTC2K.render('TC2K.gv',view=False)
 
+    def relationBetweenUKandLK(self,user_def_keyword,userKeywordObject):
+        graphUK2LK = graphviz.Digraph(comment='UK <-> LK', engine='fdp')
+        graphUK2LK.node('Root')
+        try:
+            for df in self._get_datafile_list(): #get suite level
+                if len(df.tests._items) > 0: #not empty
+                    try: #add Test case level
+                        for testCase in df.tests:
+                            try:
+                                for testStep in testCase.steps:
+                                    graphUK2LK.node(str(testStep.keyword))
+                                    graphUK2LK.edge('Root',str(testStep.keyword))
+                            except Exception, e:
+                                print str(e)
+                    except Exception, e:
+                        print str(e)
+        except Exception, e:
+            print str(e)
+        for node in user_def_keyword:
+            graphUK2LK.node(str(node))
+        for node in user_def_keyword:
+            for node2 in userKeywordObject:
+                for step in node2.steps:
+                    if str(step.keyword) == str(node):
+                        graphUK2LK.edge(str(step.keyword),str(node))
+        graphUK2LK.render('UK2LK.gv',view=False)
+
     def OnTestSuiteUseKeyword(self,event):
         f = open('node_display_config.txt')
         blacklist = f.read().splitlines()
@@ -478,6 +505,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         nodeCount += 1
         testSuites = list()
         user_def_keyword = dict()
+        userKeywordObject = list()
         try:
             for df in self._get_datafile_list():
                 if len(df.tests._items) > 0:
@@ -531,8 +559,8 @@ class RideFrame(wx.Frame, RideEventHandler):
                         print str(e)
                     try: #add user defined keyword
                         for keyword in df.data.keywords:
+                            userKeywordObject.append(keyword)
                             temp_name = keyword.name.encode('ascii', 'ignore')
-                            print temp_name
                             user_def_keyword[temp_name]=str(df.display_name)
                     except Exception, e:
                         print str(e)
@@ -551,6 +579,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         self.relationBetweenTCandUK(user_def_keyword,testSuites)
         self.relationBetweenTCandLK(user_def_keyword,testSuites)
         self.relationBetweenTCandK(user_def_keyword,testSuites)
+        self.relationBetweenUKandLK(user_def_keyword,userKeywordObject)
         for node in nodeList:
             if node not in blacklist:
                 dot.node(node)
