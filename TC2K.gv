@@ -1,0 +1,494 @@
+// TC <-> K
+digraph {
+	Root
+	OpenCrosswordSage
+		Root -> OpenCrosswordSage
+	LaunchCrossword
+		OpenCrosswordSage -> LaunchCrossword
+	SelectMessageDialog
+		OpenCrosswordSage -> SelectMessageDialog
+	ClickButtonOK
+		OpenCrosswordSage -> ClickButtonOK
+	TestValidCrosswordSize
+		Root -> TestValidCrosswordSize
+	SelectCrosswordSageWindow
+		TestValidCrosswordSize -> SelectCrosswordSageWindow
+	AssertMenuNewCrosswordEnabled
+		TestValidCrosswordSize -> AssertMenuNewCrosswordEnabled
+	AssertMenuLoadCrosswordSolveEnabled
+		TestValidCrosswordSize -> AssertMenuLoadCrosswordSolveEnabled
+	AssertMenuLoadCrosswordEditEnabled
+		TestValidCrosswordSize -> AssertMenuLoadCrosswordEditEnabled
+	AssertMenuSaveCrosswordNotEnabled
+		TestValidCrosswordSize -> AssertMenuSaveCrosswordNotEnabled
+	ClickMenuNewCrossword
+		TestValidCrosswordSize -> ClickMenuNewCrossword
+	InputGridSize
+		TestValidCrosswordSize -> InputGridSize
+	AssertAddWordButtonExistAndSaveCrosswordEnable
+		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
+	ClickMenuNewCrossword
+		TestValidCrosswordSize -> ClickMenuNewCrossword
+	InputGridSize
+		TestValidCrosswordSize -> InputGridSize
+	AssertAddWordButtonExistAndSaveCrosswordEnable
+		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
+	ClickMenuNewCrossword
+		TestValidCrosswordSize -> ClickMenuNewCrossword
+	InputGridSize
+		TestValidCrosswordSize -> InputGridSize
+	AssertAddWordButtonExistAndSaveCrosswordEnable
+		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
+	TestInvalidCrosswordSize
+		Root -> TestInvalidCrosswordSize
+	ClickNewCorsswordInFile
+		TestInvalidCrosswordSize -> ClickNewCorsswordInFile
+	InputGridSize
+		TestInvalidCrosswordSize -> InputGridSize
+	ClickErrorSize
+		TestInvalidCrosswordSize -> ClickErrorSize
+	InputGridSize
+		TestInvalidCrosswordSize -> InputGridSize
+	ClickErrorSize
+		TestInvalidCrosswordSize -> ClickErrorSize
+	InputGridSize
+		TestInvalidCrosswordSize -> InputGridSize
+	ClickErrorSize
+		TestInvalidCrosswordSize -> ClickErrorSize
+	InputGridSize
+		TestInvalidCrosswordSize -> InputGridSize
+	AssertAddWordButtonExistAndSaveCrosswordEnable
+		TestInvalidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
+	TestAddWord
+		Root -> TestAddWord
+	ClickNewCorsswordInFile
+		TestAddWord -> ClickNewCorsswordInFile
+	InputGridSize
+		TestAddWord -> InputGridSize
+	SelectCrosswordSageWindow
+		TestAddWord -> SelectCrosswordSageWindow
+	AssertButtonAddWordExist
+		TestAddWord -> AssertButtonAddWordExist
+	ClickButtonAddWord
+		TestAddWord -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		TestAddWord -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	AssertButtonSuggestWordExist
+		TestAddWord -> AssertButtonSuggestWordExist
+	ClickSuggestListItem
+		TestAddWord -> ClickSuggestListItem
+	ClickCrosswordCell
+		TestAddWord -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
+	AssertButtonAddWordExist
+		TestAddWord -> AssertButtonAddWordExist
+	ClickButtonAddWord
+		TestAddWord -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		TestAddWord -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	AssertButtonSuggestWordExist
+		TestAddWord -> AssertButtonSuggestWordExist
+	ClickSuggestListItem
+		TestAddWord -> ClickSuggestListItem
+	AssertButtonAddWordExist
+		TestAddWord -> AssertButtonAddWordExist
+	ClickButtonAddWord
+		TestAddWord -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		TestAddWord -> ClickThreeCrossWordCells
+	ClickSuggestListItem
+		TestAddWord -> ClickSuggestListItem
+	ClickCrosswordCell
+		TestAddWord -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
+	AssertButtonAddWordExist
+		TestAddWord -> AssertButtonAddWordExist
+	ClickButtonAddWord
+		TestAddWord -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		TestAddWord -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	"Send Keyboard Event"
+		TestAddWord -> "Send Keyboard Event"
+	ClickSuggestListItem
+		TestAddWord -> ClickSuggestListItem
+	AssertButtonAddWordExist
+		TestAddWord -> AssertButtonAddWordExist
+	ClickButtonAddWord
+		TestAddWord -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		TestAddWord -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+	ClickSuggestListItem
+		TestAddWord -> ClickSuggestListItem
+	ClickCrosswordCell
+		TestAddWord -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
+	ClickCrosswordCell
+		TestAddWord -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
+	ClickCrosswordCell
+		TestAddWord -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
+	TestSaveCrossword
+		Root -> TestSaveCrossword
+	ClickNewCorsswordInFile
+		TestSaveCrossword -> ClickNewCorsswordInFile
+	InputGridSize
+		TestSaveCrossword -> InputGridSize
+	AssertFileNotExist
+		TestSaveCrossword -> AssertFileNotExist
+	SelectCrosswordSageWindow
+		TestSaveCrossword -> SelectCrosswordSageWindow
+	SaveFile
+		TestSaveCrossword -> SaveFile
+	AssertFileExist
+		TestSaveCrossword -> AssertFileExist
+	SelectCrosswordSageWindow
+		TestSaveCrossword -> SelectCrosswordSageWindow
+	SaveFile
+		TestSaveCrossword -> SaveFile
+	AssertFileExist
+		TestSaveCrossword -> AssertFileExist
+	RemoveTestFile
+		TestSaveCrossword -> RemoveTestFile
+	AssertFileNotExist
+		TestSaveCrossword -> AssertFileNotExist
+	ClickNewCorsswordInFile
+		TestSaveCrossword -> ClickNewCorsswordInFile
+	InputGridSize
+		TestSaveCrossword -> InputGridSize
+	SelectCrosswordSageWindow
+		TestSaveCrossword -> SelectCrosswordSageWindow
+	AssertButtonAddWordExist
+		TestSaveCrossword -> AssertButtonAddWordExist
+	ClickButtonAddWord
+		TestSaveCrossword -> ClickButtonAddWord
+	ClickCrosswordCell
+		TestSaveCrossword -> ClickCrosswordCell
+	ClickCrosswordCell
+		TestSaveCrossword -> ClickCrosswordCell
+	SaveFile
+		TestSaveCrossword -> SaveFile
+	AssertFileExist
+		TestSaveCrossword -> AssertFileExist
+	RemoveTestFile
+		TestSaveCrossword -> RemoveTestFile
+	AssertFileNotExist
+		TestSaveCrossword -> AssertFileNotExist
+	TestLoadCrosswordToEdit
+		Root -> TestLoadCrosswordToEdit
+	AssertFileNotExist
+		TestLoadCrosswordToEdit -> AssertFileNotExist
+	SelectCrosswordSageWindow
+		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
+	LoadFile
+		TestLoadCrosswordToEdit -> LoadFile
+	SelectCrosswordSageWindow
+		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
+	AssertButtonAddWordNotExist
+		TestLoadCrosswordToEdit -> AssertButtonAddWordNotExist
+	AssertFileExist
+		TestLoadCrosswordToEdit -> AssertFileExist
+	SelectCrosswordSageWindow
+		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
+	LoadFile
+		TestLoadCrosswordToEdit -> LoadFile
+	SelectCrosswordSageWindow
+		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
+	AssertButtonAddWordExist
+		TestLoadCrosswordToEdit -> AssertButtonAddWordExist
+	TestSolvePattern
+		Root -> TestSolvePattern
+	ClickSolveNewWordInTools
+		TestSolvePattern -> ClickSolveNewWordInTools
+	AssertButtonFindMatchExist
+		TestSolvePattern -> AssertButtonFindMatchExist
+	InputPatternTextAndAssertResult
+		TestSolvePattern -> InputPatternTextAndAssertResult
+	ClearPatternTextField
+		TestSolvePattern -> ClearPatternTextField
+	InputPatternTextAndAssertResult
+		TestSolvePattern -> InputPatternTextAndAssertResult
+	ClearPatternTextField
+		TestSolvePattern -> ClearPatternTextField
+	InputPatternTextAndAssertResult
+		TestSolvePattern -> InputPatternTextAndAssertResult
+	ClearPatternTextField
+		TestSolvePattern -> ClearPatternTextField
+	InputPatternTextAndAssertResult
+		TestSolvePattern -> InputPatternTextAndAssertResult
+	TestSolveAnagram
+		Root -> TestSolveAnagram
+	ClickSolveNewWordInTools
+		TestSolveAnagram -> ClickSolveNewWordInTools
+	AssertButtonFindMatchExist
+		TestSolveAnagram -> AssertButtonFindMatchExist
+	InputAnagramTextAndAssertResult
+		TestSolveAnagram -> InputAnagramTextAndAssertResult
+	ClearAnagramTextField
+		TestSolveAnagram -> ClearAnagramTextField
+	InputAnagramTextAndAssertResult
+		TestSolveAnagram -> InputAnagramTextAndAssertResult
+	ClearAnagramTextField
+		TestSolveAnagram -> ClearAnagramTextField
+	InputAnagramTextAndAssertResult
+		TestSolveAnagram -> InputAnagramTextAndAssertResult
+	"TC-01"
+		Root -> "TC-01"
+	ClickNewCorsswordInFile
+		"TC-01" -> ClickNewCorsswordInFile
+	InputGridSize
+		"TC-01" -> InputGridSize
+	SelectCrosswordSageWindow
+		"TC-01" -> SelectCrosswordSageWindow
+	AssertButtonAddWordExist
+		"TC-01" -> AssertButtonAddWordExist
+	ClickButtonAddWord
+		"TC-01" -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		"TC-01" -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	ClickSuggestListItem
+		"TC-01" -> ClickSuggestListItem
+	ClickButtonAddWord
+		"TC-01" -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		"TC-01" -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	"Send Keyboard Event"
+		"TC-01" -> "Send Keyboard Event"
+	ClickButtonAddWord
+		"TC-01" -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		"TC-01" -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	"Send Keyboard Event"
+		"TC-01" -> "Send Keyboard Event"
+	ClickSuggestListItem
+		"TC-01" -> ClickSuggestListItem
+	ClickCrosswordCell
+		"TC-01" -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
+	ClickButtonAddWord
+		"TC-01" -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		"TC-01" -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	"Send Keyboard Event"
+		"TC-01" -> "Send Keyboard Event"
+	AssertButtonSuggestWordExist
+		"TC-01" -> AssertButtonSuggestWordExist
+	ClickSuggestListItem
+		"TC-01" -> ClickSuggestListItem
+	ClickCrosswordCell
+		"TC-01" -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
+	ClickButtonAddWord
+		"TC-01" -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		"TC-01" -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	AssertButtonSuggestWordExist
+		"TC-01" -> AssertButtonSuggestWordExist
+	ClickSuggestListItem
+		"TC-01" -> ClickSuggestListItem
+	ClickCrosswordCell
+		"TC-01" -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
+	SaveFile
+		"TC-01" -> SaveFile
+	AssertFileExist
+		"TC-01" -> AssertFileExist
+	ClickSolveNewWordInTools
+		"TC-01" -> ClickSolveNewWordInTools
+	AssertButtonFindMatchExist
+		"TC-01" -> AssertButtonFindMatchExist
+	ClickButtonFindMatch
+		"TC-01" -> ClickButtonFindMatch
+	AssertFindMatchResult
+		"TC-01" -> AssertFindMatchResult
+	LoadFile
+		"TC-01" -> LoadFile
+	SelectCrosswordSageWindow
+		"TC-01" -> SelectCrosswordSageWindow
+	ClickButtonAddWord
+		"TC-01" -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		"TC-01" -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+	AssertButtonSuggestWordExist
+		"TC-01" -> AssertButtonSuggestWordExist
+	ClickSuggestListItem
+		"TC-01" -> ClickSuggestListItem
+	ClickCrosswordCell
+		"TC-01" -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
+	SaveFile
+		"TC-01" -> SaveFile
+	AssertFileExist
+		"TC-01" -> AssertFileExist
+	"TC-02"
+		Root -> "TC-02"
+	ClickSolveNewWordInTools
+		"TC-02" -> ClickSolveNewWordInTools
+	InputAnagramTextAndAssertResult
+		"TC-02" -> InputAnagramTextAndAssertResult
+	ClearAnagramTextField
+		"TC-02" -> ClearAnagramTextField
+	InputPatternTextAndAssertResult
+		"TC-02" -> InputPatternTextAndAssertResult
+	AssertFileExist
+		"TC-02" -> AssertFileExist
+	SelectCrosswordSageWindow
+		"TC-02" -> SelectCrosswordSageWindow
+	LoadFile
+		"TC-02" -> LoadFile
+	SelectCrosswordSageWindow
+		"TC-02" -> SelectCrosswordSageWindow
+	AssertButtonAddWordExist
+		"TC-02" -> AssertButtonAddWordExist
+	ClickButtonAddWord
+		"TC-02" -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		"TC-02" -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	ClickSuggestListItem
+		"TC-02" -> ClickSuggestListItem
+	ClickButtonAddWord
+		"TC-02" -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		"TC-02" -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	"Send Keyboard Event"
+		"TC-02" -> "Send Keyboard Event"
+	ClickButtonAddWord
+		"TC-02" -> ClickButtonAddWord
+	ClickCrosswordCell
+		"TC-02" -> ClickCrosswordCell
+	ClickCrosswordCell
+		"TC-02" -> ClickCrosswordCell
+	SaveFile
+		"TC-02" -> SaveFile
+	SelectCrosswordSageWindow
+		"TC-02" -> SelectCrosswordSageWindow
+	AssertButtonAddWordExist
+		"TC-02" -> AssertButtonAddWordExist
+	ClickCrosswordCell
+		"TC-02" -> ClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	AssertButtonSuggestWordExist
+		"TC-02" -> AssertButtonSuggestWordExist
+	ClickSuggestListItem
+		"TC-02" -> ClickSuggestListItem
+	ClickCrosswordCell
+		"TC-02" -> ClickCrosswordCell
+	AssertSuggestWordButtonAndSuggestListItem
+		"TC-02" -> AssertSuggestWordButtonAndSuggestListItem
+	SaveFile
+		"TC-02" -> SaveFile
+	SelectCrosswordSageWindow
+		"TC-02" -> SelectCrosswordSageWindow
+	AssertButtonAddWordExist
+		"TC-02" -> AssertButtonAddWordExist
+	ClickButtonAddWord
+		"TC-02" -> ClickButtonAddWord
+	ClickThreeCrossWordCells
+		"TC-02" -> ClickThreeCrossWordCells
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+	"Send Keyboard Event"
+		"TC-02" -> "Send Keyboard Event"
+	SelectCrosswordSageWindow
+		"TC-02" -> SelectCrosswordSageWindow
+	SaveFile
+		"TC-02" -> SaveFile
+	AssertFileExist
+		"TC-02" -> AssertFileExist
+	AssertFileExist
+		"TC-02" -> AssertFileExist
+	AssertFileExist
+		"TC-02" -> AssertFileExist
+}
