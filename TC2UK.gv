@@ -19,147 +19,147 @@ digraph {
 		Root -> OpenCrosswordSage
 	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestValidCrosswordSize
-		TestValidCrosswordSize -> "05Crossword Lab"
-		TestValidCrosswordSize -> "05Crossword Lab"
-		TestValidCrosswordSize -> "05Crossword Lab"
-		TestValidCrosswordSize -> "05Crossword Lab"
-		TestValidCrosswordSize -> "05Crossword Lab"
-		TestValidCrosswordSize -> "05Crossword Lab"
+		TestValidCrosswordSize -> InputGridSize
+		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
+		TestValidCrosswordSize -> InputGridSize
+		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
+		TestValidCrosswordSize -> InputGridSize
+		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestInvalidCrosswordSize
-		TestInvalidCrosswordSize -> "05Crossword Lab"
-		TestInvalidCrosswordSize -> "05Crossword Lab"
-		TestInvalidCrosswordSize -> "05Crossword Lab"
-		TestInvalidCrosswordSize -> "05Crossword Lab"
-		TestInvalidCrosswordSize -> "05Crossword Lab"
-		TestInvalidCrosswordSize -> "05Crossword Lab"
-		TestInvalidCrosswordSize -> "05Crossword Lab"
-		TestInvalidCrosswordSize -> "05Crossword Lab"
-		TestInvalidCrosswordSize -> "05Crossword Lab"
+		TestInvalidCrosswordSize -> ClickNewCorsswordInFile
+		TestInvalidCrosswordSize -> InputGridSize
+		TestInvalidCrosswordSize -> ClickErrorSize
+		TestInvalidCrosswordSize -> InputGridSize
+		TestInvalidCrosswordSize -> ClickErrorSize
+		TestInvalidCrosswordSize -> InputGridSize
+		TestInvalidCrosswordSize -> ClickErrorSize
+		TestInvalidCrosswordSize -> InputGridSize
+		TestInvalidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	TestAddWord [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestAddWord
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
-		TestAddWord -> "05Crossword Lab"
+		TestAddWord -> ClickNewCorsswordInFile
+		TestAddWord -> InputGridSize
+		TestAddWord -> ClickThreeCrossWordCells
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> ClickSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
+		TestAddWord -> ClickThreeCrossWordCells
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> ClickSuggestListItem
+		TestAddWord -> ClickThreeCrossWordCells
+		TestAddWord -> ClickSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
+		TestAddWord -> ClickThreeCrossWordCells
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> ClickSuggestListItem
+		TestAddWord -> ClickThreeCrossWordCells
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> InputWordAndClickCrosswordCell
+		TestAddWord -> ClickSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
 	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSaveCrossword
-		TestSaveCrossword -> "05Crossword Lab"
-		TestSaveCrossword -> "05Crossword Lab"
-		TestSaveCrossword -> "05Crossword Lab"
-		TestSaveCrossword -> "05Crossword Lab"
-		TestSaveCrossword -> "05Crossword Lab"
-		TestSaveCrossword -> "05Crossword Lab"
-		TestSaveCrossword -> "05Crossword Lab"
+		TestSaveCrossword -> ClickNewCorsswordInFile
+		TestSaveCrossword -> InputGridSize
+		TestSaveCrossword -> SaveFile
+		TestSaveCrossword -> SaveFile
+		TestSaveCrossword -> ClickNewCorsswordInFile
+		TestSaveCrossword -> InputGridSize
+		TestSaveCrossword -> SaveFile
 	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestLoadCrosswordToEdit
-		TestLoadCrosswordToEdit -> "05Crossword Lab"
-		TestLoadCrosswordToEdit -> "05Crossword Lab"
+		TestLoadCrosswordToEdit -> LoadFile
+		TestLoadCrosswordToEdit -> LoadFile
 	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolvePattern
-		TestSolvePattern -> "05Crossword Lab"
-		TestSolvePattern -> "05Crossword Lab"
-		TestSolvePattern -> "05Crossword Lab"
-		TestSolvePattern -> "05Crossword Lab"
-		TestSolvePattern -> "05Crossword Lab"
+		TestSolvePattern -> ClickSolveNewWordInTools
+		TestSolvePattern -> InputPatternTextAndAssertResult
+		TestSolvePattern -> InputPatternTextAndAssertResult
+		TestSolvePattern -> InputPatternTextAndAssertResult
+		TestSolvePattern -> InputPatternTextAndAssertResult
 	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolveAnagram
-		TestSolveAnagram -> "05Crossword Lab"
-		TestSolveAnagram -> "05Crossword Lab"
-		TestSolveAnagram -> "05Crossword Lab"
-		TestSolveAnagram -> "05Crossword Lab"
+		TestSolveAnagram -> ClickSolveNewWordInTools
+		TestSolveAnagram -> InputAnagramTextAndAssertResult
+		TestSolveAnagram -> InputAnagramTextAndAssertResult
+		TestSolveAnagram -> InputAnagramTextAndAssertResult
 	"TC-01" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-01"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
-		"TC-01" -> "05Crossword Lab"
+		"TC-01" -> ClickNewCorsswordInFile
+		"TC-01" -> InputGridSize
+		"TC-01" -> ClickThreeCrossWordCells
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> ClickSuggestListItem
+		"TC-01" -> ClickThreeCrossWordCells
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> ClickThreeCrossWordCells
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> ClickSuggestListItem
+		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
+		"TC-01" -> ClickThreeCrossWordCells
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> ClickSuggestListItem
+		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
+		"TC-01" -> ClickThreeCrossWordCells
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> ClickSuggestListItem
+		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
+		"TC-01" -> SaveFile
+		"TC-01" -> ClickSolveNewWordInTools
+		"TC-01" -> LoadFile
+		"TC-01" -> ClickThreeCrossWordCells
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> InputWordAndClickCrosswordCell
+		"TC-01" -> ClickSuggestListItem
+		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
+		"TC-01" -> SaveFile
 	"TC-02" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-02"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
-		"TC-02" -> "05Crossword Lab"
+		"TC-02" -> ClickSolveNewWordInTools
+		"TC-02" -> InputAnagramTextAndAssertResult
+		"TC-02" -> InputPatternTextAndAssertResult
+		"TC-02" -> LoadFile
+		"TC-02" -> ClickThreeCrossWordCells
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> ClickSuggestListItem
+		"TC-02" -> ClickThreeCrossWordCells
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> SaveFile
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> ClickSuggestListItem
+		"TC-02" -> AssertSuggestWordButtonAndSuggestListItem
+		"TC-02" -> SaveFile
+		"TC-02" -> ClickThreeCrossWordCells
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> InputWordAndClickCrosswordCell
+		"TC-02" -> SaveFile
 }

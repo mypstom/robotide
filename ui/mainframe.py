@@ -413,7 +413,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword: #record all of using UK
-                                        graphTC2UK.edge(str(testCase.name), user_def_keyword[str(testStep.keyword)])
+                                        graphTC2UK.edge(str(testCase.name), str(testStep.keyword))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
