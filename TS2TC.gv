@@ -1,11 +1,11 @@
 // TS <-> TC
 digraph {
 	Root
-	"05Crossword Lab"
+	"05Crossword Lab" [color=cyan3 shape=box style=filled]
 		Root -> "05Crossword Lab"
-	OpenCrosswordSage
+	OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> OpenCrosswordSage
-	TestValidCrosswordSize
+	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> TestValidCrosswordSize
 		TestValidCrosswordSize -> "05Crossword Lab"
 		TestValidCrosswordSize -> "05Crossword Lab"
@@ -13,7 +13,7 @@ digraph {
 		TestValidCrosswordSize -> "05Crossword Lab"
 		TestValidCrosswordSize -> "05Crossword Lab"
 		TestValidCrosswordSize -> "05Crossword Lab"
-	TestInvalidCrosswordSize
+	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> TestInvalidCrosswordSize
 		TestInvalidCrosswordSize -> "05Crossword Lab"
 		TestInvalidCrosswordSize -> "05Crossword Lab"
@@ -24,7 +24,7 @@ digraph {
 		TestInvalidCrosswordSize -> "05Crossword Lab"
 		TestInvalidCrosswordSize -> "05Crossword Lab"
 		TestInvalidCrosswordSize -> "05Crossword Lab"
-	TestAddWord
+	TestAddWord [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> TestAddWord
 		TestAddWord -> "05Crossword Lab"
 		TestAddWord -> "05Crossword Lab"
@@ -54,7 +54,7 @@ digraph {
 		TestAddWord -> "05Crossword Lab"
 		TestAddWord -> "05Crossword Lab"
 		TestAddWord -> "05Crossword Lab"
-	TestSaveCrossword
+	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> TestSaveCrossword
 		TestSaveCrossword -> "05Crossword Lab"
 		TestSaveCrossword -> "05Crossword Lab"
@@ -63,24 +63,24 @@ digraph {
 		TestSaveCrossword -> "05Crossword Lab"
 		TestSaveCrossword -> "05Crossword Lab"
 		TestSaveCrossword -> "05Crossword Lab"
-	TestLoadCrosswordToEdit
+	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> TestLoadCrosswordToEdit
 		TestLoadCrosswordToEdit -> "05Crossword Lab"
 		TestLoadCrosswordToEdit -> "05Crossword Lab"
-	TestSolvePattern
+	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> TestSolvePattern
 		TestSolvePattern -> "05Crossword Lab"
 		TestSolvePattern -> "05Crossword Lab"
 		TestSolvePattern -> "05Crossword Lab"
 		TestSolvePattern -> "05Crossword Lab"
 		TestSolvePattern -> "05Crossword Lab"
-	TestSolveAnagram
+	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> TestSolveAnagram
 		TestSolveAnagram -> "05Crossword Lab"
 		TestSolveAnagram -> "05Crossword Lab"
 		TestSolveAnagram -> "05Crossword Lab"
 		TestSolveAnagram -> "05Crossword Lab"
-	"TC-01"
+	"TC-01" [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> "TC-01"
 		"TC-01" -> "05Crossword Lab"
 		"TC-01" -> "05Crossword Lab"
@@ -120,7 +120,7 @@ digraph {
 		"TC-01" -> "05Crossword Lab"
 		"TC-01" -> "05Crossword Lab"
 		"TC-01" -> "05Crossword Lab"
-	"TC-02"
+	"TC-02" [color=darkolivegreen2 shape=box style=filled]
 		"05Crossword Lab" -> "TC-02"
 		"TC-02" -> "05Crossword Lab"
 		"TC-02" -> "05Crossword Lab"

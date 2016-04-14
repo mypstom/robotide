@@ -1,12 +1,12 @@
 // TC <-> LK
 digraph {
 	Root
-	OpenCrosswordSage
+	OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
 		Root -> OpenCrosswordSage
 		OpenCrosswordSage -> LaunchCrossword
 		OpenCrosswordSage -> SelectMessageDialog
 		OpenCrosswordSage -> ClickButtonOK
-	TestValidCrosswordSize
+	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestValidCrosswordSize
 		TestValidCrosswordSize -> SelectCrosswordSageWindow
 		TestValidCrosswordSize -> AssertMenuNewCrosswordEnabled
@@ -16,9 +16,9 @@ digraph {
 		TestValidCrosswordSize -> ClickMenuNewCrossword
 		TestValidCrosswordSize -> ClickMenuNewCrossword
 		TestValidCrosswordSize -> ClickMenuNewCrossword
-	TestInvalidCrosswordSize
+	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestInvalidCrosswordSize
-	TestAddWord
+	TestAddWord [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestAddWord
 		TestAddWord -> SelectCrosswordSageWindow
 		TestAddWord -> AssertButtonAddWordExist
@@ -39,7 +39,7 @@ digraph {
 		TestAddWord -> ClickCrosswordCell
 		TestAddWord -> ClickCrosswordCell
 		TestAddWord -> ClickCrosswordCell
-	TestSaveCrossword
+	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSaveCrossword
 		TestSaveCrossword -> AssertFileNotExist
 		TestSaveCrossword -> SelectCrosswordSageWindow
@@ -56,7 +56,7 @@ digraph {
 		TestSaveCrossword -> AssertFileExist
 		TestSaveCrossword -> RemoveTestFile
 		TestSaveCrossword -> AssertFileNotExist
-	TestLoadCrosswordToEdit
+	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestLoadCrosswordToEdit
 		TestLoadCrosswordToEdit -> AssertFileNotExist
 		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
@@ -66,18 +66,18 @@ digraph {
 		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
 		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
 		TestLoadCrosswordToEdit -> AssertButtonAddWordExist
-	TestSolvePattern
+	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolvePattern
 		TestSolvePattern -> AssertButtonFindMatchExist
 		TestSolvePattern -> ClearPatternTextField
 		TestSolvePattern -> ClearPatternTextField
 		TestSolvePattern -> ClearPatternTextField
-	TestSolveAnagram
+	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolveAnagram
 		TestSolveAnagram -> AssertButtonFindMatchExist
 		TestSolveAnagram -> ClearAnagramTextField
 		TestSolveAnagram -> ClearAnagramTextField
-	"TC-01"
+	"TC-01" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-01"
 		"TC-01" -> SelectCrosswordSageWindow
 		"TC-01" -> AssertButtonAddWordExist
@@ -103,7 +103,7 @@ digraph {
 		"TC-01" -> AssertButtonSuggestWordExist
 		"TC-01" -> ClickCrosswordCell
 		"TC-01" -> AssertFileExist
-	"TC-02"
+	"TC-02" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-02"
 		"TC-02" -> ClearAnagramTextField
 		"TC-02" -> AssertFileExist

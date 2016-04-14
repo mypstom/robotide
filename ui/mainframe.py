@@ -303,7 +303,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         for suite in testSuites:
             nodeList.add(suite)
         for node in nodeList:
-            graphTS2TS.node(node)
+            graphTS2TS.node(node,color="cyan3", shape="box", style="filled")
             graphTS2TS.edge('Root',node)
         try:
             for df in self._get_datafile_list(): #get suite level
@@ -331,11 +331,11 @@ class RideFrame(wx.Frame, RideEventHandler):
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
-                    graphTS2TC.node(str(df.display_name))
+                    graphTS2TC.node(str(df.display_name), color="cyan3", shape="box", style="filled")
                     graphTS2TC.edge('Root',str(df.display_name))
                     try: #add Test case level
                         for testCase in df.tests:
-                            graphTS2TC.node(str(testCase.name))
+                            graphTS2TC.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
                             graphTS2TC.edge(str(df.display_name),str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
@@ -353,11 +353,11 @@ class RideFrame(wx.Frame, RideEventHandler):
         graphTS2UK = graphviz.Digraph(comment='TS <-> UK', engine='fdp')
         graphTS2UK.node('Root')
         for node in user_def_keyword:
-            graphTS2UK.node(str(node))
+            graphTS2UK.node(str(node), color="coral", shape="box", style="filled")
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
-                    graphTS2UK.node(str(df.display_name))
+                    graphTS2UK.node(str(df.display_name), color="cyan3", shape="box", style="filled")
                     graphTS2UK.edge('Root',str(df.display_name))
                     try: #add Test case level
                         for testCase in df.tests:
@@ -381,7 +381,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
-                    graphTS2K.node(str(df.display_name))
+                    graphTS2K.node(str(df.display_name),color="lightgray", shape="box", style="filled")
                     graphTS2K.edge('Root',str(df.display_name))
                     try: #add Test case level
                         for testCase in df.tests:
@@ -401,12 +401,14 @@ class RideFrame(wx.Frame, RideEventHandler):
     def relationBetweenTCandUK(self,user_def_keyword,testSuites):
         graphTC2UK = graphviz.Digraph(comment='TC <-> UK', engine='fdp')
         graphTC2UK.node('Root')
+        for node in user_def_keyword:
+            graphTC2UK.node(str(node), color="coral", shape="box", style="filled")
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
                     try: #add Test case level
                         for testCase in df.tests:
-                            graphTC2UK.node(str(testCase.name))
+                            graphTC2UK.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
                             graphTC2UK.edge('Root',str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
@@ -428,7 +430,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                 if len(df.tests._items) > 0: #not empty
                     try: #add Test case level
                         for testCase in df.tests:
-                            graphTC2LK.node(str(testCase.name))
+                            graphTC2LK.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
                             graphTC2LK.edge('Root',str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
@@ -450,7 +452,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                 if len(df.tests._items) > 0: #not empty
                     try: #add Test case level
                         for testCase in df.tests:
-                            graphTC2K.node(str(testCase.name))
+                            graphTC2K.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
                             graphTC2K.edge('Root',str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
@@ -483,7 +485,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         except Exception, e:
             print str(e)
         for node in user_def_keyword:
-            graphUK2LK.node(str(node))
+            graphUK2LK.node(str(node), color="coral", shape="box", style="filled")
         for node in user_def_keyword:
             for node2 in userKeywordObject:
                 for step in node2.steps:

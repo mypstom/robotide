@@ -471,18 +471,18 @@ digraph {
 		Root -> AssertFileExist
 	AssertFileExist
 		Root -> AssertFileExist
-	InputPatternTextAndAssertResult
-	Keyword01
-	InputGridSize
-	ClickErrorSize
-	SaveFile
-	ClickSuggestListItem
-	ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
-	InputAnagramTextAndAssertResult
-	LoadFile
-	ClickNewCorsswordInFile
-	AssertAddWordButtonExistAndSaveCrosswordEnable
-	ClickSolveNewWordInTools
-	AssertSuggestWordButtonAndSuggestListItem
+	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
+	Keyword01 [color=coral shape=box style=filled]
+	InputGridSize [color=coral shape=box style=filled]
+	ClickErrorSize [color=coral shape=box style=filled]
+	SaveFile [color=coral shape=box style=filled]
+	ClickSuggestListItem [color=coral shape=box style=filled]
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
+	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
+	LoadFile [color=coral shape=box style=filled]
+	ClickNewCorsswordInFile [color=coral shape=box style=filled]
+	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
+	ClickSolveNewWordInTools [color=coral shape=box style=filled]
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 }

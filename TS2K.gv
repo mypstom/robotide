@@ -15,7 +15,7 @@ digraph {
 	AssertAddWordButtonExistAndSaveCrosswordEnable
 	ClickSolveNewWordInTools
 	AssertSuggestWordButtonAndSuggestListItem
-	"05Crossword Lab"
+	"05Crossword Lab" [color=lightgray shape=box style=filled]
 		Root -> "05Crossword Lab"
 	LaunchCrossword
 		LaunchCrossword -> "05Crossword Lab"
