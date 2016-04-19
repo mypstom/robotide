@@ -460,7 +460,10 @@ class RideFrame(wx.Frame, RideEventHandler):
                             graphTC2K.edge('Root',str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
-                                    graphTC2K.node(str(testStep.keyword))
+                                    if str(testStep.keyword) in user_def_keyword: #record all of using UK
+                                        graphTC2K.node(str(testStep.keyword),color="coral", shape="box", style="filled")
+                                    else:
+                                        graphTC2K.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
                                     graphTC2K.edge(str(testCase.name),str(testStep.keyword))
                             except Exception, e:
                                 print str(e)

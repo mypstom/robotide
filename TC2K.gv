@@ -3,492 +3,492 @@ digraph {
 	Root
 	OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
 		Root -> OpenCrosswordSage
-	LaunchCrossword
+	LaunchCrossword [color=bisque shape=box style=filled]
 		OpenCrosswordSage -> LaunchCrossword
-	SelectMessageDialog
+	SelectMessageDialog [color=bisque shape=box style=filled]
 		OpenCrosswordSage -> SelectMessageDialog
-	ClickButtonOK
+	ClickButtonOK [color=bisque shape=box style=filled]
 		OpenCrosswordSage -> ClickButtonOK
 	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestValidCrosswordSize
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		TestValidCrosswordSize -> SelectCrosswordSageWindow
-	AssertMenuNewCrosswordEnabled
+	AssertMenuNewCrosswordEnabled [color=bisque shape=box style=filled]
 		TestValidCrosswordSize -> AssertMenuNewCrosswordEnabled
-	AssertMenuLoadCrosswordSolveEnabled
+	AssertMenuLoadCrosswordSolveEnabled [color=bisque shape=box style=filled]
 		TestValidCrosswordSize -> AssertMenuLoadCrosswordSolveEnabled
-	AssertMenuLoadCrosswordEditEnabled
+	AssertMenuLoadCrosswordEditEnabled [color=bisque shape=box style=filled]
 		TestValidCrosswordSize -> AssertMenuLoadCrosswordEditEnabled
-	AssertMenuSaveCrosswordNotEnabled
+	AssertMenuSaveCrosswordNotEnabled [color=bisque shape=box style=filled]
 		TestValidCrosswordSize -> AssertMenuSaveCrosswordNotEnabled
-	ClickMenuNewCrossword
+	ClickMenuNewCrossword [color=bisque shape=box style=filled]
 		TestValidCrosswordSize -> ClickMenuNewCrossword
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestValidCrosswordSize -> InputGridSize
-	AssertAddWordButtonExistAndSaveCrosswordEnable
+	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
 		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
-	ClickMenuNewCrossword
+	ClickMenuNewCrossword [color=bisque shape=box style=filled]
 		TestValidCrosswordSize -> ClickMenuNewCrossword
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestValidCrosswordSize -> InputGridSize
-	AssertAddWordButtonExistAndSaveCrosswordEnable
+	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
 		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
-	ClickMenuNewCrossword
+	ClickMenuNewCrossword [color=bisque shape=box style=filled]
 		TestValidCrosswordSize -> ClickMenuNewCrossword
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestValidCrosswordSize -> InputGridSize
-	AssertAddWordButtonExistAndSaveCrosswordEnable
+	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
 		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestInvalidCrosswordSize
-	ClickNewCorsswordInFile
+	ClickNewCorsswordInFile [color=coral shape=box style=filled]
 		TestInvalidCrosswordSize -> ClickNewCorsswordInFile
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestInvalidCrosswordSize -> InputGridSize
-	ClickErrorSize
+	ClickErrorSize [color=coral shape=box style=filled]
 		TestInvalidCrosswordSize -> ClickErrorSize
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestInvalidCrosswordSize -> InputGridSize
-	ClickErrorSize
+	ClickErrorSize [color=coral shape=box style=filled]
 		TestInvalidCrosswordSize -> ClickErrorSize
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestInvalidCrosswordSize -> InputGridSize
-	ClickErrorSize
+	ClickErrorSize [color=coral shape=box style=filled]
 		TestInvalidCrosswordSize -> ClickErrorSize
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestInvalidCrosswordSize -> InputGridSize
-	AssertAddWordButtonExistAndSaveCrosswordEnable
+	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
 		TestInvalidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	TestAddWord [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestAddWord
-	ClickNewCorsswordInFile
+	ClickNewCorsswordInFile [color=coral shape=box style=filled]
 		TestAddWord -> ClickNewCorsswordInFile
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestAddWord -> InputGridSize
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		TestAddWord -> SelectCrosswordSageWindow
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		TestAddWord -> AssertButtonAddWordExist
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		TestAddWord -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		TestAddWord -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	AssertButtonSuggestWordExist
+	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
 		TestAddWord -> AssertButtonSuggestWordExist
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> ClickSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		TestAddWord -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		TestAddWord -> AssertButtonAddWordExist
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		TestAddWord -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		TestAddWord -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	AssertButtonSuggestWordExist
+	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
 		TestAddWord -> AssertButtonSuggestWordExist
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> ClickSuggestListItem
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		TestAddWord -> AssertButtonAddWordExist
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		TestAddWord -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		TestAddWord -> ClickThreeCrossWordCells
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> ClickSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		TestAddWord -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		TestAddWord -> AssertButtonAddWordExist
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		TestAddWord -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		TestAddWord -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	"Send Keyboard Event"
+	"Send Keyboard Event" [color=bisque shape=box style=filled]
 		TestAddWord -> "Send Keyboard Event"
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> ClickSuggestListItem
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		TestAddWord -> AssertButtonAddWordExist
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		TestAddWord -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		TestAddWord -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		TestAddWord -> InputWordAndClickCrosswordCell
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> ClickSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		TestAddWord -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		TestAddWord -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		TestAddWord -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
 	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSaveCrossword
-	ClickNewCorsswordInFile
+	ClickNewCorsswordInFile [color=coral shape=box style=filled]
 		TestSaveCrossword -> ClickNewCorsswordInFile
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestSaveCrossword -> InputGridSize
-	AssertFileNotExist
+	AssertFileNotExist [color=bisque shape=box style=filled]
 		TestSaveCrossword -> AssertFileNotExist
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		TestSaveCrossword -> SelectCrosswordSageWindow
-	SaveFile
+	SaveFile [color=coral shape=box style=filled]
 		TestSaveCrossword -> SaveFile
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		TestSaveCrossword -> AssertFileExist
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		TestSaveCrossword -> SelectCrosswordSageWindow
-	SaveFile
+	SaveFile [color=coral shape=box style=filled]
 		TestSaveCrossword -> SaveFile
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		TestSaveCrossword -> AssertFileExist
-	RemoveTestFile
+	RemoveTestFile [color=bisque shape=box style=filled]
 		TestSaveCrossword -> RemoveTestFile
-	AssertFileNotExist
+	AssertFileNotExist [color=bisque shape=box style=filled]
 		TestSaveCrossword -> AssertFileNotExist
-	ClickNewCorsswordInFile
+	ClickNewCorsswordInFile [color=coral shape=box style=filled]
 		TestSaveCrossword -> ClickNewCorsswordInFile
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		TestSaveCrossword -> InputGridSize
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		TestSaveCrossword -> SelectCrosswordSageWindow
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		TestSaveCrossword -> AssertButtonAddWordExist
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		TestSaveCrossword -> ClickButtonAddWord
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		TestSaveCrossword -> ClickCrosswordCell
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		TestSaveCrossword -> ClickCrosswordCell
-	SaveFile
+	SaveFile [color=coral shape=box style=filled]
 		TestSaveCrossword -> SaveFile
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		TestSaveCrossword -> AssertFileExist
-	RemoveTestFile
+	RemoveTestFile [color=bisque shape=box style=filled]
 		TestSaveCrossword -> RemoveTestFile
-	AssertFileNotExist
+	AssertFileNotExist [color=bisque shape=box style=filled]
 		TestSaveCrossword -> AssertFileNotExist
 	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestLoadCrosswordToEdit
-	AssertFileNotExist
+	AssertFileNotExist [color=bisque shape=box style=filled]
 		TestLoadCrosswordToEdit -> AssertFileNotExist
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
-	LoadFile
+	LoadFile [color=coral shape=box style=filled]
 		TestLoadCrosswordToEdit -> LoadFile
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
-	AssertButtonAddWordNotExist
+	AssertButtonAddWordNotExist [color=bisque shape=box style=filled]
 		TestLoadCrosswordToEdit -> AssertButtonAddWordNotExist
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		TestLoadCrosswordToEdit -> AssertFileExist
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
-	LoadFile
+	LoadFile [color=coral shape=box style=filled]
 		TestLoadCrosswordToEdit -> LoadFile
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		TestLoadCrosswordToEdit -> AssertButtonAddWordExist
 	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolvePattern
-	ClickSolveNewWordInTools
+	ClickSolveNewWordInTools [color=coral shape=box style=filled]
 		TestSolvePattern -> ClickSolveNewWordInTools
-	AssertButtonFindMatchExist
+	AssertButtonFindMatchExist [color=bisque shape=box style=filled]
 		TestSolvePattern -> AssertButtonFindMatchExist
-	InputPatternTextAndAssertResult
+	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
 		TestSolvePattern -> InputPatternTextAndAssertResult
-	ClearPatternTextField
+	ClearPatternTextField [color=bisque shape=box style=filled]
 		TestSolvePattern -> ClearPatternTextField
-	InputPatternTextAndAssertResult
+	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
 		TestSolvePattern -> InputPatternTextAndAssertResult
-	ClearPatternTextField
+	ClearPatternTextField [color=bisque shape=box style=filled]
 		TestSolvePattern -> ClearPatternTextField
-	InputPatternTextAndAssertResult
+	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
 		TestSolvePattern -> InputPatternTextAndAssertResult
-	ClearPatternTextField
+	ClearPatternTextField [color=bisque shape=box style=filled]
 		TestSolvePattern -> ClearPatternTextField
-	InputPatternTextAndAssertResult
+	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
 		TestSolvePattern -> InputPatternTextAndAssertResult
 	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolveAnagram
-	ClickSolveNewWordInTools
+	ClickSolveNewWordInTools [color=coral shape=box style=filled]
 		TestSolveAnagram -> ClickSolveNewWordInTools
-	AssertButtonFindMatchExist
+	AssertButtonFindMatchExist [color=bisque shape=box style=filled]
 		TestSolveAnagram -> AssertButtonFindMatchExist
-	InputAnagramTextAndAssertResult
+	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
 		TestSolveAnagram -> InputAnagramTextAndAssertResult
-	ClearAnagramTextField
+	ClearAnagramTextField [color=bisque shape=box style=filled]
 		TestSolveAnagram -> ClearAnagramTextField
-	InputAnagramTextAndAssertResult
+	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
 		TestSolveAnagram -> InputAnagramTextAndAssertResult
-	ClearAnagramTextField
+	ClearAnagramTextField [color=bisque shape=box style=filled]
 		TestSolveAnagram -> ClearAnagramTextField
-	InputAnagramTextAndAssertResult
+	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
 		TestSolveAnagram -> InputAnagramTextAndAssertResult
 	"TC-01" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-01"
-	ClickNewCorsswordInFile
+	ClickNewCorsswordInFile [color=coral shape=box style=filled]
 		"TC-01" -> ClickNewCorsswordInFile
-	InputGridSize
+	InputGridSize [color=coral shape=box style=filled]
 		"TC-01" -> InputGridSize
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		"TC-01" -> SelectCrosswordSageWindow
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		"TC-01" -> AssertButtonAddWordExist
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-01" -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		"TC-01" -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		"TC-01" -> ClickSuggestListItem
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-01" -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		"TC-01" -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	"Send Keyboard Event"
+	"Send Keyboard Event" [color=bisque shape=box style=filled]
 		"TC-01" -> "Send Keyboard Event"
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-01" -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		"TC-01" -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	"Send Keyboard Event"
+	"Send Keyboard Event" [color=bisque shape=box style=filled]
 		"TC-01" -> "Send Keyboard Event"
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		"TC-01" -> ClickSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		"TC-01" -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-01" -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		"TC-01" -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	"Send Keyboard Event"
+	"Send Keyboard Event" [color=bisque shape=box style=filled]
 		"TC-01" -> "Send Keyboard Event"
-	AssertButtonSuggestWordExist
+	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
 		"TC-01" -> AssertButtonSuggestWordExist
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		"TC-01" -> ClickSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		"TC-01" -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-01" -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		"TC-01" -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	AssertButtonSuggestWordExist
+	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
 		"TC-01" -> AssertButtonSuggestWordExist
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		"TC-01" -> ClickSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		"TC-01" -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
-	SaveFile
+	SaveFile [color=coral shape=box style=filled]
 		"TC-01" -> SaveFile
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		"TC-01" -> AssertFileExist
-	ClickSolveNewWordInTools
+	ClickSolveNewWordInTools [color=coral shape=box style=filled]
 		"TC-01" -> ClickSolveNewWordInTools
-	AssertButtonFindMatchExist
+	AssertButtonFindMatchExist [color=bisque shape=box style=filled]
 		"TC-01" -> AssertButtonFindMatchExist
-	ClickButtonFindMatch
+	ClickButtonFindMatch [color=bisque shape=box style=filled]
 		"TC-01" -> ClickButtonFindMatch
-	AssertFindMatchResult
+	AssertFindMatchResult [color=bisque shape=box style=filled]
 		"TC-01" -> AssertFindMatchResult
-	LoadFile
+	LoadFile [color=coral shape=box style=filled]
 		"TC-01" -> LoadFile
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		"TC-01" -> SelectCrosswordSageWindow
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-01" -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		"TC-01" -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-01" -> InputWordAndClickCrosswordCell
-	AssertButtonSuggestWordExist
+	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
 		"TC-01" -> AssertButtonSuggestWordExist
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		"TC-01" -> ClickSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		"TC-01" -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
-	SaveFile
+	SaveFile [color=coral shape=box style=filled]
 		"TC-01" -> SaveFile
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		"TC-01" -> AssertFileExist
 	"TC-02" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-02"
-	ClickSolveNewWordInTools
+	ClickSolveNewWordInTools [color=coral shape=box style=filled]
 		"TC-02" -> ClickSolveNewWordInTools
-	InputAnagramTextAndAssertResult
+	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
 		"TC-02" -> InputAnagramTextAndAssertResult
-	ClearAnagramTextField
+	ClearAnagramTextField [color=bisque shape=box style=filled]
 		"TC-02" -> ClearAnagramTextField
-	InputPatternTextAndAssertResult
+	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
 		"TC-02" -> InputPatternTextAndAssertResult
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		"TC-02" -> AssertFileExist
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		"TC-02" -> SelectCrosswordSageWindow
-	LoadFile
+	LoadFile [color=coral shape=box style=filled]
 		"TC-02" -> LoadFile
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		"TC-02" -> SelectCrosswordSageWindow
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		"TC-02" -> AssertButtonAddWordExist
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-02" -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		"TC-02" -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		"TC-02" -> ClickSuggestListItem
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-02" -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		"TC-02" -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	"Send Keyboard Event"
+	"Send Keyboard Event" [color=bisque shape=box style=filled]
 		"TC-02" -> "Send Keyboard Event"
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-02" -> ClickButtonAddWord
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		"TC-02" -> ClickCrosswordCell
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		"TC-02" -> ClickCrosswordCell
-	SaveFile
+	SaveFile [color=coral shape=box style=filled]
 		"TC-02" -> SaveFile
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		"TC-02" -> SelectCrosswordSageWindow
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		"TC-02" -> AssertButtonAddWordExist
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		"TC-02" -> ClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	AssertButtonSuggestWordExist
+	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
 		"TC-02" -> AssertButtonSuggestWordExist
-	ClickSuggestListItem
+	ClickSuggestListItem [color=coral shape=box style=filled]
 		"TC-02" -> ClickSuggestListItem
-	ClickCrosswordCell
+	ClickCrosswordCell [color=bisque shape=box style=filled]
 		"TC-02" -> ClickCrosswordCell
-	AssertSuggestWordButtonAndSuggestListItem
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
 		"TC-02" -> AssertSuggestWordButtonAndSuggestListItem
-	SaveFile
+	SaveFile [color=coral shape=box style=filled]
 		"TC-02" -> SaveFile
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		"TC-02" -> SelectCrosswordSageWindow
-	AssertButtonAddWordExist
+	AssertButtonAddWordExist [color=bisque shape=box style=filled]
 		"TC-02" -> AssertButtonAddWordExist
-	ClickButtonAddWord
+	ClickButtonAddWord [color=bisque shape=box style=filled]
 		"TC-02" -> ClickButtonAddWord
-	ClickThreeCrossWordCells
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
 		"TC-02" -> ClickThreeCrossWordCells
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	InputWordAndClickCrosswordCell
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
 		"TC-02" -> InputWordAndClickCrosswordCell
-	"Send Keyboard Event"
+	"Send Keyboard Event" [color=bisque shape=box style=filled]
 		"TC-02" -> "Send Keyboard Event"
-	SelectCrosswordSageWindow
+	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
 		"TC-02" -> SelectCrosswordSageWindow
-	SaveFile
+	SaveFile [color=coral shape=box style=filled]
 		"TC-02" -> SaveFile
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		"TC-02" -> AssertFileExist
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		"TC-02" -> AssertFileExist
-	AssertFileExist
+	AssertFileExist [color=bisque shape=box style=filled]
 		"TC-02" -> AssertFileExist
 }
