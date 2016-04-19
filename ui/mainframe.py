@@ -387,7 +387,10 @@ class RideFrame(wx.Frame, RideEventHandler):
                         for testCase in df.tests:
                             try:
                                 for testStep in testCase.steps:
-                                    graphTS2K.node(str(testStep.keyword))
+                                    if str(testStep.keyword) in user_def_keyword: #record all of using UK
+                                        graphTS2K.node(str(testStep.keyword),color="coral", shape="box", style="filled")
+                                    else:
+                                        graphTS2K.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
                                     graphTS2K.edge(str(testStep.keyword),str(df.display_name))
                             except Exception, e:
                                 print str(e)
@@ -435,6 +438,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) not in user_def_keyword: #record all of using UK
+                                        graphTC2LK.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
                                         graphTC2LK.edge(str(testCase.name), str(testStep.keyword))
                             except Exception, e:
                                 print str(e)
@@ -655,7 +659,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         with open('object.json','w+') as f:
             json.dump(jsonOutput,f)
         #dot.render('TestCases.gv',view=False)
-        dot_testSuiteLevel.render('testSuiteLevel.gv',view=False)
+        #dot_testSuiteLevel.render('testSuiteLevel.gv',view=False)
         self.ShowMessage('Keyword relation diagram has been saved to root folder.\n File name: TestCases.gv.pdf')
 
     def OnIgnoreNodes(self,event):

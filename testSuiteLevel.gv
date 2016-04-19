@@ -1,6 +1,6 @@
 // TestSuiteLevel
 digraph {
 	Root
-	"05Crossword Lab"
-		Root -> "05Crossword Lab"
+	"02Crossword Lab"
+		Root -> "02Crossword Lab"
 }
