@@ -483,21 +483,19 @@ class RideFrame(wx.Frame, RideEventHandler):
                         for testCase in df.tests:
                             try:
                                 for testStep in testCase.steps:
-                                    graphUK2LK.node(str(testStep.keyword))
-                                    graphUK2LK.edge('Root',str(testStep.keyword))
+                                    if str(testStep.keyword) in user_def_keyword: #record all of using UK
+                                        graphUK2LK.node(str(testStep.keyword),color="coral", shape="box", style="filled")
+                                        graphUK2LK.edge('Root',str(testStep.keyword))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
-        for node in user_def_keyword:
-            graphUK2LK.node(str(node), color="coral", shape="box", style="filled")
-        for node in user_def_keyword:
-            for node2 in userKeywordObject:
-                for step in node2.steps:
-                    if str(step.keyword) == str(node):
-                        graphUK2LK.edge(str(step.keyword),str(node))
+        for node2 in userKeywordObject:
+            for step in node2.steps:
+                graphUK2LK.node(str(step.keyword), color="bisque", shape="box", style="filled")
+                graphUK2LK.edge(node2.name.encode('ascii', 'ignore'),str(step.keyword))
         graphUK2LK.render('UK2LK.gv',view=False)
 
     def OnTestSuiteUseKeyword(self,event):
