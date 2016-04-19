@@ -18,147 +18,58 @@ digraph {
 		Root -> OpenCrosswordSage
 	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestValidCrosswordSize
-		TestValidCrosswordSize -> InputGridSize
-		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
-		TestValidCrosswordSize -> InputGridSize
-		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
-		TestValidCrosswordSize -> InputGridSize
-		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestInvalidCrosswordSize
-		TestInvalidCrosswordSize -> ClickNewCorsswordInFile
-		TestInvalidCrosswordSize -> InputGridSize
-		TestInvalidCrosswordSize -> ClickErrorSize
-		TestInvalidCrosswordSize -> InputGridSize
-		TestInvalidCrosswordSize -> ClickErrorSize
-		TestInvalidCrosswordSize -> InputGridSize
-		TestInvalidCrosswordSize -> ClickErrorSize
-		TestInvalidCrosswordSize -> InputGridSize
-		TestInvalidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	TestAddWord [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestAddWord
-		TestAddWord -> ClickNewCorsswordInFile
-		TestAddWord -> InputGridSize
-		TestAddWord -> ClickThreeCrossWordCells
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> ClickSuggestListItem
-		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
-		TestAddWord -> ClickThreeCrossWordCells
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> ClickSuggestListItem
-		TestAddWord -> ClickThreeCrossWordCells
-		TestAddWord -> ClickSuggestListItem
-		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
-		TestAddWord -> ClickThreeCrossWordCells
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> ClickSuggestListItem
-		TestAddWord -> ClickThreeCrossWordCells
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> InputWordAndClickCrosswordCell
-		TestAddWord -> ClickSuggestListItem
-		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
-		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
-		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem
 	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSaveCrossword
-		TestSaveCrossword -> ClickNewCorsswordInFile
-		TestSaveCrossword -> InputGridSize
-		TestSaveCrossword -> SaveFile
-		TestSaveCrossword -> SaveFile
-		TestSaveCrossword -> ClickNewCorsswordInFile
-		TestSaveCrossword -> InputGridSize
-		TestSaveCrossword -> SaveFile
 	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestLoadCrosswordToEdit
-		TestLoadCrosswordToEdit -> LoadFile
-		TestLoadCrosswordToEdit -> LoadFile
 	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolvePattern
-		TestSolvePattern -> ClickSolveNewWordInTools
-		TestSolvePattern -> InputPatternTextAndAssertResult
-		TestSolvePattern -> InputPatternTextAndAssertResult
-		TestSolvePattern -> InputPatternTextAndAssertResult
-		TestSolvePattern -> InputPatternTextAndAssertResult
 	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolveAnagram
-		TestSolveAnagram -> ClickSolveNewWordInTools
-		TestSolveAnagram -> InputAnagramTextAndAssertResult
-		TestSolveAnagram -> InputAnagramTextAndAssertResult
-		TestSolveAnagram -> InputAnagramTextAndAssertResult
 	"TC-01" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-01"
-		"TC-01" -> ClickNewCorsswordInFile
-		"TC-01" -> InputGridSize
-		"TC-01" -> ClickThreeCrossWordCells
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> ClickSuggestListItem
-		"TC-01" -> ClickThreeCrossWordCells
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> ClickThreeCrossWordCells
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> ClickSuggestListItem
-		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
-		"TC-01" -> ClickThreeCrossWordCells
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> ClickSuggestListItem
-		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
-		"TC-01" -> ClickThreeCrossWordCells
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> ClickSuggestListItem
-		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
-		"TC-01" -> SaveFile
-		"TC-01" -> ClickSolveNewWordInTools
-		"TC-01" -> LoadFile
-		"TC-01" -> ClickThreeCrossWordCells
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> InputWordAndClickCrosswordCell
-		"TC-01" -> ClickSuggestListItem
-		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem
-		"TC-01" -> SaveFile
 	"TC-02" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-02"
-		"TC-02" -> ClickSolveNewWordInTools
-		"TC-02" -> InputAnagramTextAndAssertResult
-		"TC-02" -> InputPatternTextAndAssertResult
-		"TC-02" -> LoadFile
-		"TC-02" -> ClickThreeCrossWordCells
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> ClickSuggestListItem
-		"TC-02" -> ClickThreeCrossWordCells
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> SaveFile
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> ClickSuggestListItem
-		"TC-02" -> AssertSuggestWordButtonAndSuggestListItem
-		"TC-02" -> SaveFile
-		"TC-02" -> ClickThreeCrossWordCells
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> InputWordAndClickCrosswordCell
-		"TC-02" -> SaveFile
+		TestValidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable [label=3]
+		TestSaveCrossword -> ClickNewCorsswordInFile [label=2]
+		TestAddWord -> ClickSuggestListItem [label=5]
+		TestInvalidCrosswordSize -> ClickNewCorsswordInFile [label=1]
+		TestLoadCrosswordToEdit -> LoadFile [label=2]
+		"TC-01" -> SaveFile [label=2]
+		"TC-01" -> ClickSolveNewWordInTools [label=1]
+		"TC-01" -> ClickSuggestListItem [label=5]
+		"TC-02" -> SaveFile [label=3]
+		TestAddWord -> AssertSuggestWordButtonAndSuggestListItem [label=5]
+		TestValidCrosswordSize -> InputGridSize [label=3]
+		"TC-01" -> InputGridSize [label=1]
+		"TC-01" -> AssertSuggestWordButtonAndSuggestListItem [label=4]
+		"TC-02" -> LoadFile [label=1]
+		TestInvalidCrosswordSize -> ClickErrorSize [label=3]
+		TestAddWord -> InputGridSize [label=1]
+		"TC-02" -> InputAnagramTextAndAssertResult [label=1]
+		TestAddWord -> InputWordAndClickCrosswordCell [label=11]
+		TestSaveCrossword -> SaveFile [label=3]
+		TestInvalidCrosswordSize -> InputGridSize [label=4]
+		"TC-02" -> ClickSolveNewWordInTools [label=1]
+		TestAddWord -> ClickNewCorsswordInFile [label=1]
+		TestSolveAnagram -> InputAnagramTextAndAssertResult [label=3]
+		TestSolveAnagram -> ClickSolveNewWordInTools [label=1]
+		"TC-01" -> ClickThreeCrossWordCells [label=6]
+		"TC-02" -> AssertSuggestWordButtonAndSuggestListItem [label=1]
+		"TC-01" -> InputWordAndClickCrosswordCell [label=17]
+		"TC-01" -> LoadFile [label=1]
+		TestSaveCrossword -> InputGridSize [label=2]
+		"TC-01" -> ClickNewCorsswordInFile [label=1]
+		"TC-02" -> InputWordAndClickCrosswordCell [label=15]
+		TestSolvePattern -> InputPatternTextAndAssertResult [label=4]
+		TestAddWord -> ClickThreeCrossWordCells [label=5]
+		"TC-02" -> ClickSuggestListItem [label=2]
+		"TC-02" -> InputPatternTextAndAssertResult [label=1]
+		TestSolvePattern -> ClickSolveNewWordInTools [label=1]
+		TestInvalidCrosswordSize -> AssertAddWordButtonExistAndSaveCrosswordEnable [label=1]
+		"TC-02" -> ClickThreeCrossWordCells [label=3]
 }

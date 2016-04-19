@@ -4,237 +4,178 @@ digraph {
 	OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
 		Root -> OpenCrosswordSage
 	LaunchCrossword [color=bisque shape=box style=filled]
-		OpenCrosswordSage -> LaunchCrossword
 	SelectMessageDialog [color=bisque shape=box style=filled]
-		OpenCrosswordSage -> SelectMessageDialog
 	ClickButtonOK [color=bisque shape=box style=filled]
-		OpenCrosswordSage -> ClickButtonOK
 	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestValidCrosswordSize
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		TestValidCrosswordSize -> SelectCrosswordSageWindow
 	AssertMenuNewCrosswordEnabled [color=bisque shape=box style=filled]
-		TestValidCrosswordSize -> AssertMenuNewCrosswordEnabled
 	AssertMenuLoadCrosswordSolveEnabled [color=bisque shape=box style=filled]
-		TestValidCrosswordSize -> AssertMenuLoadCrosswordSolveEnabled
 	AssertMenuLoadCrosswordEditEnabled [color=bisque shape=box style=filled]
-		TestValidCrosswordSize -> AssertMenuLoadCrosswordEditEnabled
 	AssertMenuSaveCrosswordNotEnabled [color=bisque shape=box style=filled]
-		TestValidCrosswordSize -> AssertMenuSaveCrosswordNotEnabled
 	ClickMenuNewCrossword [color=bisque shape=box style=filled]
-		TestValidCrosswordSize -> ClickMenuNewCrossword
 	ClickMenuNewCrossword [color=bisque shape=box style=filled]
-		TestValidCrosswordSize -> ClickMenuNewCrossword
 	ClickMenuNewCrossword [color=bisque shape=box style=filled]
-		TestValidCrosswordSize -> ClickMenuNewCrossword
 	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestInvalidCrosswordSize
 	TestAddWord [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestAddWord
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		TestAddWord -> SelectCrosswordSageWindow
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		TestAddWord -> AssertButtonAddWordExist
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		TestAddWord -> ClickButtonAddWord
 	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
-		TestAddWord -> AssertButtonSuggestWordExist
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		TestAddWord -> ClickCrosswordCell
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		TestAddWord -> AssertButtonAddWordExist
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		TestAddWord -> ClickButtonAddWord
 	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
-		TestAddWord -> AssertButtonSuggestWordExist
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		TestAddWord -> AssertButtonAddWordExist
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		TestAddWord -> ClickButtonAddWord
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		TestAddWord -> ClickCrosswordCell
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		TestAddWord -> AssertButtonAddWordExist
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		TestAddWord -> ClickButtonAddWord
 	"Send Keyboard Event" [color=bisque shape=box style=filled]
-		TestAddWord -> "Send Keyboard Event"
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		TestAddWord -> AssertButtonAddWordExist
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		TestAddWord -> ClickButtonAddWord
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		TestAddWord -> ClickCrosswordCell
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		TestAddWord -> ClickCrosswordCell
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		TestAddWord -> ClickCrosswordCell
 	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSaveCrossword
 	AssertFileNotExist [color=bisque shape=box style=filled]
-		TestSaveCrossword -> AssertFileNotExist
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		TestSaveCrossword -> SelectCrosswordSageWindow
 	AssertFileExist [color=bisque shape=box style=filled]
-		TestSaveCrossword -> AssertFileExist
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		TestSaveCrossword -> SelectCrosswordSageWindow
 	AssertFileExist [color=bisque shape=box style=filled]
-		TestSaveCrossword -> AssertFileExist
 	RemoveTestFile [color=bisque shape=box style=filled]
-		TestSaveCrossword -> RemoveTestFile
 	AssertFileNotExist [color=bisque shape=box style=filled]
-		TestSaveCrossword -> AssertFileNotExist
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		TestSaveCrossword -> SelectCrosswordSageWindow
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		TestSaveCrossword -> AssertButtonAddWordExist
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		TestSaveCrossword -> ClickButtonAddWord
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		TestSaveCrossword -> ClickCrosswordCell
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		TestSaveCrossword -> ClickCrosswordCell
 	AssertFileExist [color=bisque shape=box style=filled]
-		TestSaveCrossword -> AssertFileExist
 	RemoveTestFile [color=bisque shape=box style=filled]
-		TestSaveCrossword -> RemoveTestFile
 	AssertFileNotExist [color=bisque shape=box style=filled]
-		TestSaveCrossword -> AssertFileNotExist
 	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestLoadCrosswordToEdit
 	AssertFileNotExist [color=bisque shape=box style=filled]
-		TestLoadCrosswordToEdit -> AssertFileNotExist
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
 	AssertButtonAddWordNotExist [color=bisque shape=box style=filled]
-		TestLoadCrosswordToEdit -> AssertButtonAddWordNotExist
 	AssertFileExist [color=bisque shape=box style=filled]
-		TestLoadCrosswordToEdit -> AssertFileExist
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		TestLoadCrosswordToEdit -> AssertButtonAddWordExist
 	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolvePattern
 	AssertButtonFindMatchExist [color=bisque shape=box style=filled]
-		TestSolvePattern -> AssertButtonFindMatchExist
 	ClearPatternTextField [color=bisque shape=box style=filled]
-		TestSolvePattern -> ClearPatternTextField
 	ClearPatternTextField [color=bisque shape=box style=filled]
-		TestSolvePattern -> ClearPatternTextField
 	ClearPatternTextField [color=bisque shape=box style=filled]
-		TestSolvePattern -> ClearPatternTextField
 	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolveAnagram
 	AssertButtonFindMatchExist [color=bisque shape=box style=filled]
-		TestSolveAnagram -> AssertButtonFindMatchExist
 	ClearAnagramTextField [color=bisque shape=box style=filled]
-		TestSolveAnagram -> ClearAnagramTextField
 	ClearAnagramTextField [color=bisque shape=box style=filled]
-		TestSolveAnagram -> ClearAnagramTextField
 	"TC-01" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-01"
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		"TC-01" -> SelectCrosswordSageWindow
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		"TC-01" -> AssertButtonAddWordExist
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-01" -> ClickButtonAddWord
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-01" -> ClickButtonAddWord
 	"Send Keyboard Event" [color=bisque shape=box style=filled]
-		"TC-01" -> "Send Keyboard Event"
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-01" -> ClickButtonAddWord
 	"Send Keyboard Event" [color=bisque shape=box style=filled]
-		"TC-01" -> "Send Keyboard Event"
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		"TC-01" -> ClickCrosswordCell
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-01" -> ClickButtonAddWord
 	"Send Keyboard Event" [color=bisque shape=box style=filled]
-		"TC-01" -> "Send Keyboard Event"
 	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
-		"TC-01" -> AssertButtonSuggestWordExist
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		"TC-01" -> ClickCrosswordCell
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-01" -> ClickButtonAddWord
 	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
-		"TC-01" -> AssertButtonSuggestWordExist
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		"TC-01" -> ClickCrosswordCell
 	AssertFileExist [color=bisque shape=box style=filled]
-		"TC-01" -> AssertFileExist
 	AssertButtonFindMatchExist [color=bisque shape=box style=filled]
-		"TC-01" -> AssertButtonFindMatchExist
 	ClickButtonFindMatch [color=bisque shape=box style=filled]
-		"TC-01" -> ClickButtonFindMatch
 	AssertFindMatchResult [color=bisque shape=box style=filled]
-		"TC-01" -> AssertFindMatchResult
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		"TC-01" -> SelectCrosswordSageWindow
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-01" -> ClickButtonAddWord
 	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
-		"TC-01" -> AssertButtonSuggestWordExist
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		"TC-01" -> ClickCrosswordCell
 	AssertFileExist [color=bisque shape=box style=filled]
-		"TC-01" -> AssertFileExist
 	"TC-02" [color=darkolivegreen2 shape=box style=filled]
 		Root -> "TC-02"
 	ClearAnagramTextField [color=bisque shape=box style=filled]
-		"TC-02" -> ClearAnagramTextField
 	AssertFileExist [color=bisque shape=box style=filled]
-		"TC-02" -> AssertFileExist
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		"TC-02" -> SelectCrosswordSageWindow
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		"TC-02" -> SelectCrosswordSageWindow
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		"TC-02" -> AssertButtonAddWordExist
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-02" -> ClickButtonAddWord
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-02" -> ClickButtonAddWord
 	"Send Keyboard Event" [color=bisque shape=box style=filled]
-		"TC-02" -> "Send Keyboard Event"
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-02" -> ClickButtonAddWord
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		"TC-02" -> ClickCrosswordCell
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		"TC-02" -> ClickCrosswordCell
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		"TC-02" -> SelectCrosswordSageWindow
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		"TC-02" -> AssertButtonAddWordExist
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		"TC-02" -> ClickCrosswordCell
 	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
-		"TC-02" -> AssertButtonSuggestWordExist
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		"TC-02" -> ClickCrosswordCell
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		"TC-02" -> SelectCrosswordSageWindow
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		"TC-02" -> AssertButtonAddWordExist
 	ClickButtonAddWord [color=bisque shape=box style=filled]
-		"TC-02" -> ClickButtonAddWord
 	"Send Keyboard Event" [color=bisque shape=box style=filled]
-		"TC-02" -> "Send Keyboard Event"
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		"TC-02" -> SelectCrosswordSageWindow
 	AssertFileExist [color=bisque shape=box style=filled]
-		"TC-02" -> AssertFileExist
 	AssertFileExist [color=bisque shape=box style=filled]
-		"TC-02" -> AssertFileExist
 	AssertFileExist [color=bisque shape=box style=filled]
-		"TC-02" -> AssertFileExist
+		"TC-01" -> AssertButtonSuggestWordExist [label=3]
+		"TC-02" -> ClearAnagramTextField [label=1]
+		TestAddWord -> AssertButtonSuggestWordExist [label=2]
+		TestAddWord -> ClickCrosswordCell [label=5]
+		TestSaveCrossword -> SelectCrosswordSageWindow [label=3]
+		TestSaveCrossword -> AssertFileExist [label=3]
+		TestValidCrosswordSize -> AssertMenuLoadCrosswordSolveEnabled [label=1]
+		TestLoadCrosswordToEdit -> AssertButtonAddWordExist [label=1]
+		TestSaveCrossword -> ClickCrosswordCell [label=2]
+		TestSaveCrossword -> ClickButtonAddWord [label=1]
+		"TC-01" -> AssertFindMatchResult [label=1]
+		OpenCrosswordSage -> SelectMessageDialog [label=1]
+		"TC-02" -> AssertFileExist [label=4]
+		TestValidCrosswordSize -> ClickMenuNewCrossword [label=3]
+		TestValidCrosswordSize -> SelectCrosswordSageWindow [label=1]
+		"TC-02" -> AssertButtonAddWordExist [label=3]
+		TestLoadCrosswordToEdit -> AssertFileExist [label=1]
+		"TC-01" -> ClickButtonFindMatch [label=1]
+		TestLoadCrosswordToEdit -> AssertButtonAddWordNotExist [label=1]
+		TestAddWord -> SelectCrosswordSageWindow [label=1]
+		TestSaveCrossword -> AssertButtonAddWordExist [label=1]
+		"TC-01" -> AssertButtonAddWordExist [label=1]
+		"TC-02" -> ClickButtonAddWord [label=4]
+		"TC-02" -> ClickCrosswordCell [label=4]
+		TestSaveCrossword -> RemoveTestFile [label=2]
+		"TC-01" -> AssertButtonFindMatchExist [label=1]
+		"TC-01" -> ClickCrosswordCell [label=4]
+		TestAddWord -> AssertButtonAddWordExist [label=5]
+		OpenCrosswordSage -> LaunchCrossword [label=1]
+		"TC-01" -> SelectCrosswordSageWindow [label=2]
+		"TC-01" -> AssertFileExist [label=2]
+		"TC-02" -> SelectCrosswordSageWindow [label=5]
+		TestSolveAnagram -> AssertButtonFindMatchExist [label=1]
+		TestLoadCrosswordToEdit -> AssertFileNotExist [label=1]
+		TestValidCrosswordSize -> AssertMenuSaveCrosswordNotEnabled [label=1]
+		"TC-02" -> "Send Keyboard Event" [label=2]
+		TestAddWord -> "Send Keyboard Event" [label=1]
+		"TC-02" -> AssertButtonSuggestWordExist [label=1]
+		TestSolvePattern -> AssertButtonFindMatchExist [label=1]
+		TestValidCrosswordSize -> AssertMenuLoadCrosswordEditEnabled [label=1]
+		TestLoadCrosswordToEdit -> SelectCrosswordSageWindow [label=4]
+		"TC-01" -> "Send Keyboard Event" [label=3]
+		TestSolveAnagram -> ClearAnagramTextField [label=2]
+		TestValidCrosswordSize -> AssertMenuNewCrosswordEnabled [label=1]
+		TestAddWord -> ClickButtonAddWord [label=5]
+		TestSolvePattern -> ClearPatternTextField [label=3]
+		OpenCrosswordSage -> ClickButtonOK [label=1]
+		TestSaveCrossword -> AssertFileNotExist [label=3]
+		"TC-01" -> ClickButtonAddWord [label=6]
 }

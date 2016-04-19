@@ -363,6 +363,8 @@ class RideFrame(wx.Frame, RideEventHandler):
     def relationBetweenTSandUK(self,user_def_keyword,testSuites):
         graphTS2UK = graphviz.Digraph(comment='TS <-> UK', engine='fdp')
         graphTS2UK.node('Root')
+        tempEdge = list()
+        tempEdgeSet = set()
         for node in user_def_keyword:
             graphTS2UK.node(str(node), color="coral", shape="box", style="filled")
         try:
@@ -375,18 +377,27 @@ class RideFrame(wx.Frame, RideEventHandler):
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword: #record all of using UK
-                                        graphTS2UK.edge(str(testStep.keyword),str(df.display_name))
+                                        tempEdge.append((str(testStep.keyword),str(df.display_name)))
+                                        #graphTS2UK.edge(str(testStep.keyword),str(df.display_name))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
+
+        for node in tempEdge:
+            tempEdgeSet.add(node)
+        for node in tempEdgeSet:
+            graphTS2UK.edge(node[0], node[1], label=str(tempEdge.count(node)))
+
         graphTS2UK.render('TS2UK.gv',view=False)
 
     def relationBetweenTSandK(self,user_def_keyword,testSuites):
         graphTS2K = graphviz.Digraph(comment='TS <-> K', engine='fdp')
         graphTS2K.node('Root')
+        tempEdge = list()
+        tempEdgeSet = set()
         for node in user_def_keyword:
             graphTS2K.node(str(node))
         try:
@@ -402,21 +413,33 @@ class RideFrame(wx.Frame, RideEventHandler):
                                         graphTS2K.node(str(testStep.keyword),color="coral", shape="box", style="filled")
                                     else:
                                         graphTS2K.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
-                                    graphTS2K.edge(str(testStep.keyword),str(df.display_name))
+                                    tempEdge.append((str(testStep.keyword),str(df.display_name)))
+                                    #graphTS2K.edge(str(testStep.keyword),str(df.display_name))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
-        graphTS2K.render('TS2K.gv',view=False)
 
+        for node in tempEdge:
+            tempEdgeSet.add(node)
+        for node in tempEdgeSet:
+            graphTS2K.edge(node[0], node[1], label=str(tempEdge.count(node)))
+
+
+        graphTS2K.render('TS2K.gv',view=False)
 
     def relationBetweenTCandUK(self,user_def_keyword,testSuites):
         graphTC2UK = graphviz.Digraph(comment='TC <-> UK', engine='fdp')
         graphTC2UK.node('Root')
+
+        tempEdge = list()
+        tempEdgeSet = set()
+
         for node in user_def_keyword:
             graphTC2UK.node(str(node), color="coral", shape="box", style="filled")
+
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
@@ -427,18 +450,30 @@ class RideFrame(wx.Frame, RideEventHandler):
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword: #record all of using UK
-                                        graphTC2UK.edge(str(testCase.name), str(testStep.keyword))
+                                        tempEdge.append((str(testCase.name), str(testStep.keyword)))
+                                        #graphTC2UK.edge(str(testCase.name), str(testStep.keyword))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
+
+        for node in tempEdge:
+            tempEdgeSet.add(node)
+        for node in tempEdgeSet:
+            graphTC2UK.edge(node[0], node[1], label=str(tempEdge.count(node)))
+
+
         graphTC2UK.render('TC2UK.gv',view=False)
 
     def relationBetweenTCandLK(self,user_def_keyword,testSuites):
         graphTC2LK = graphviz.Digraph(comment='TC <-> LK', engine='fdp')
         graphTC2LK.node('Root')
+
+        tempEdge = list()
+        tempEdgeSet = set()
+
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
@@ -450,18 +485,29 @@ class RideFrame(wx.Frame, RideEventHandler):
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) not in user_def_keyword: #record all of using UK
                                         graphTC2LK.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
-                                        graphTC2LK.edge(str(testCase.name), str(testStep.keyword))
+                                        tempEdge.append((str(testCase.name), str(testStep.keyword)))
+                                        #graphTC2LK.edge(str(testCase.name), str(testStep.keyword))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
+
+        for node in tempEdge:
+            tempEdgeSet.add(node)
+        for node in tempEdgeSet:
+            graphTC2LK.edge(node[0], node[1], label=str(tempEdge.count(node)))
+
         graphTC2LK.render('TC2LK.gv',view=False)
 
     def relationBetweenTCandK(self,user_def_keyword,testSuites):
         graphTC2K = graphviz.Digraph(comment='TC <-> K', engine='fdp')
         graphTC2K.node('Root')
+
+        tempEdge = list()
+        tempEdgeSet = set()
+
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
@@ -475,18 +521,29 @@ class RideFrame(wx.Frame, RideEventHandler):
                                         graphTC2K.node(str(testStep.keyword),color="coral", shape="box", style="filled")
                                     else:
                                         graphTC2K.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
-                                    graphTC2K.edge(str(testCase.name),str(testStep.keyword))
+                                    tempEdge.append((str(testCase.name),str(testStep.keyword)))
+                                    #graphTC2K.edge(str(testCase.name),str(testStep.keyword))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
+
+        for node in tempEdge:
+            tempEdgeSet.add(node)
+        for node in tempEdgeSet:
+            graphTC2K.edge(node[0], node[1], label=str(tempEdge.count(node)))
+
         graphTC2K.render('TC2K.gv',view=False)
 
     def relationBetweenUKandLK(self,user_def_keyword,userKeywordObject):
         graphUK2LK = graphviz.Digraph(comment='UK <-> LK', engine='fdp')
         graphUK2LK.node('Root')
+
+        tempEdge = list()
+        tempEdgeSet = set()
+
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
@@ -496,7 +553,8 @@ class RideFrame(wx.Frame, RideEventHandler):
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword: #record all of using UK
                                         graphUK2LK.node(str(testStep.keyword),color="coral", shape="box", style="filled")
-                                        graphUK2LK.edge('Root',str(testStep.keyword))
+                                        tempEdge.append(('Root',str(testStep.keyword)))
+                                        #graphUK2LK.edge('Root',str(testStep.keyword))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
@@ -506,7 +564,14 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node2 in userKeywordObject:
             for step in node2.steps:
                 graphUK2LK.node(str(step.keyword), color="bisque", shape="box", style="filled")
-                graphUK2LK.edge(node2.name.encode('ascii', 'ignore'),str(step.keyword))
+                tempEdge.append((node2.name.encode('ascii', 'ignore'),str(step.keyword)))
+                #graphUK2LK.edge(node2.name.encode('ascii', 'ignore'),str(step.keyword))
+
+        for node in tempEdge:
+            tempEdgeSet.add(node)
+        for node in tempEdgeSet:
+            graphUK2LK.edge(node[0], node[1], label=str(tempEdge.count(node)))
+
         graphUK2LK.render('UK2LK.gv',view=False)
 
     def OnTestSuiteUseKeyword(self,event):

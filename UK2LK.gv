@@ -2,325 +2,209 @@
 digraph {
 	Root
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
-		Root -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
-		Root -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
-		Root -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	ClickNewCorsswordInFile [color=coral shape=box style=filled]
-		Root -> ClickNewCorsswordInFile
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	ClickErrorSize [color=coral shape=box style=filled]
-		Root -> ClickErrorSize
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	ClickErrorSize [color=coral shape=box style=filled]
-		Root -> ClickErrorSize
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	ClickErrorSize [color=coral shape=box style=filled]
-		Root -> ClickErrorSize
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
-		Root -> AssertAddWordButtonExistAndSaveCrosswordEnable
 	ClickNewCorsswordInFile [color=coral shape=box style=filled]
-		Root -> ClickNewCorsswordInFile
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	ClickNewCorsswordInFile [color=coral shape=box style=filled]
-		Root -> ClickNewCorsswordInFile
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	SaveFile [color=coral shape=box style=filled]
-		Root -> SaveFile
 	SaveFile [color=coral shape=box style=filled]
-		Root -> SaveFile
 	ClickNewCorsswordInFile [color=coral shape=box style=filled]
-		Root -> ClickNewCorsswordInFile
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	SaveFile [color=coral shape=box style=filled]
-		Root -> SaveFile
 	LoadFile [color=coral shape=box style=filled]
-		Root -> LoadFile
 	LoadFile [color=coral shape=box style=filled]
-		Root -> LoadFile
 	ClickSolveNewWordInTools [color=coral shape=box style=filled]
-		Root -> ClickSolveNewWordInTools
 	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
-		Root -> InputPatternTextAndAssertResult
 	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
-		Root -> InputPatternTextAndAssertResult
 	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
-		Root -> InputPatternTextAndAssertResult
 	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
-		Root -> InputPatternTextAndAssertResult
 	ClickSolveNewWordInTools [color=coral shape=box style=filled]
-		Root -> ClickSolveNewWordInTools
 	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
-		Root -> InputAnagramTextAndAssertResult
 	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
-		Root -> InputAnagramTextAndAssertResult
 	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
-		Root -> InputAnagramTextAndAssertResult
 	ClickNewCorsswordInFile [color=coral shape=box style=filled]
-		Root -> ClickNewCorsswordInFile
 	InputGridSize [color=coral shape=box style=filled]
-		Root -> InputGridSize
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	SaveFile [color=coral shape=box style=filled]
-		Root -> SaveFile
 	ClickSolveNewWordInTools [color=coral shape=box style=filled]
-		Root -> ClickSolveNewWordInTools
 	LoadFile [color=coral shape=box style=filled]
-		Root -> LoadFile
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	SaveFile [color=coral shape=box style=filled]
-		Root -> SaveFile
 	ClickSolveNewWordInTools [color=coral shape=box style=filled]
-		Root -> ClickSolveNewWordInTools
 	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
-		Root -> InputAnagramTextAndAssertResult
 	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
-		Root -> InputPatternTextAndAssertResult
 	LoadFile [color=coral shape=box style=filled]
-		Root -> LoadFile
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	SaveFile [color=coral shape=box style=filled]
-		Root -> SaveFile
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	ClickSuggestListItem [color=coral shape=box style=filled]
-		Root -> ClickSuggestListItem
 	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
-		Root -> AssertSuggestWordButtonAndSuggestListItem
 	SaveFile [color=coral shape=box style=filled]
-		Root -> SaveFile
 	ClickThreeCrossWordCells [color=coral shape=box style=filled]
-		Root -> ClickThreeCrossWordCells
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
-		Root -> InputWordAndClickCrosswordCell
 	SaveFile [color=coral shape=box style=filled]
-		Root -> SaveFile
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		ClickNewCorsswordInFile -> SelectCrosswordSageWindow
 	ClickMenuNewCrossword [color=bisque shape=box style=filled]
-		ClickNewCorsswordInFile -> ClickMenuNewCrossword
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		ClickSolveNewWordInTools -> SelectCrosswordSageWindow
 	ClickMenuSolveNewWord [color=bisque shape=box style=filled]
-		ClickSolveNewWordInTools -> ClickMenuSolveNewWord
 	SelectInputDialog [color=bisque shape=box style=filled]
-		InputGridSize -> SelectInputDialog
 	TypeInGridSizeTextField [color=bisque shape=box style=filled]
-		InputGridSize -> TypeInGridSizeTextField
 	ClickButtonOK [color=bisque shape=box style=filled]
-		InputGridSize -> ClickButtonOK
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]
-		AssertAddWordButtonExistAndSaveCrosswordEnable -> SelectCrosswordSageWindow
 	AssertButtonAddWordExist [color=bisque shape=box style=filled]
-		AssertAddWordButtonExistAndSaveCrosswordEnable -> AssertButtonAddWordExist
 	AssertMenuSaveCrosswordEnabled [color=bisque shape=box style=filled]
-		AssertAddWordButtonExistAndSaveCrosswordEnable -> AssertMenuSaveCrosswordEnabled
 	SelectErrorSizeDialog [color=bisque shape=box style=filled]
-		ClickErrorSize -> SelectErrorSizeDialog
 	ClickButtonOK [color=bisque shape=box style=filled]
-		ClickErrorSize -> ClickButtonOK
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		ClickThreeCrossWordCells -> ClickCrosswordCell
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		ClickThreeCrossWordCells -> ClickCrosswordCell
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		ClickThreeCrossWordCells -> ClickCrosswordCell
 	"Send Keyboard Event" [color=bisque shape=box style=filled]
-		InputWordAndClickCrosswordCell -> "Send Keyboard Event"
 	ClickCrosswordCell [color=bisque shape=box style=filled]
-		InputWordAndClickCrosswordCell -> ClickCrosswordCell
 	ClickButtonSuggestWord [color=bisque shape=box style=filled]
-		ClickSuggestListItem -> ClickButtonSuggestWord
 	DoubleClickSuggestListItem [color=bisque shape=box style=filled]
-		ClickSuggestListItem -> DoubleClickSuggestListItem
 	AssertButtonSuggestWordExist [color=bisque shape=box style=filled]
-		AssertSuggestWordButtonAndSuggestListItem -> AssertButtonSuggestWordExist
 	ClickButtonSuggestWord [color=bisque shape=box style=filled]
-		AssertSuggestWordButtonAndSuggestListItem -> ClickButtonSuggestWord
 	AssertSuggestListItem [color=bisque shape=box style=filled]
-		AssertSuggestWordButtonAndSuggestListItem -> AssertSuggestListItem
 	ClickMenuSaveCrossword [color=bisque shape=box style=filled]
-		SaveFile -> ClickMenuSaveCrossword
 	SelectSaveDialog [color=bisque shape=box style=filled]
-		SaveFile -> SelectSaveDialog
 	FileChooserSaveFile [color=bisque shape=box style=filled]
-		SaveFile -> FileChooserSaveFile
 	ClickMenuLoadCrosswordToEdit [color=bisque shape=box style=filled]
-		LoadFile -> ClickMenuLoadCrosswordToEdit
 	SelectOpenDialog [color=bisque shape=box style=filled]
-		LoadFile -> SelectOpenDialog
 	FileChooserLoadFile [color=bisque shape=box style=filled]
-		LoadFile -> FileChooserLoadFile
 	TypeInPatternTextField [color=bisque shape=box style=filled]
-		InputPatternTextAndAssertResult -> TypeInPatternTextField
 	ClickButtonFindMatch [color=bisque shape=box style=filled]
-		InputPatternTextAndAssertResult -> ClickButtonFindMatch
 	AssertFindMatchResult [color=bisque shape=box style=filled]
-		InputPatternTextAndAssertResult -> AssertFindMatchResult
 	TypeInAnagramTextField [color=bisque shape=box style=filled]
-		InputAnagramTextAndAssertResult -> TypeInAnagramTextField
 	ClickButtonFindMatch [color=bisque shape=box style=filled]
-		InputAnagramTextAndAssertResult -> ClickButtonFindMatch
 	AssertFindMatchResult [color=bisque shape=box style=filled]
-		InputAnagramTextAndAssertResult -> AssertFindMatchResult
+		Root -> AssertSuggestWordButtonAndSuggestListItem [label=10]
+		Root -> InputWordAndClickCrosswordCell [label=43]
+		InputPatternTextAndAssertResult -> TypeInPatternTextField [label=1]
+		InputPatternTextAndAssertResult -> ClickButtonFindMatch [label=1]
+		Root -> LoadFile [label=4]
+		ClickThreeCrossWordCells -> ClickCrosswordCell [label=3]
+		LoadFile -> FileChooserLoadFile [label=1]
+		InputGridSize -> ClickButtonOK [label=1]
+		InputAnagramTextAndAssertResult -> ClickButtonFindMatch [label=1]
+		ClickNewCorsswordInFile -> SelectCrosswordSageWindow [label=1]
+		InputWordAndClickCrosswordCell -> ClickCrosswordCell [label=1]
+		InputAnagramTextAndAssertResult -> AssertFindMatchResult [label=1]
+		InputGridSize -> TypeInGridSizeTextField [label=1]
+		InputWordAndClickCrosswordCell -> "Send Keyboard Event" [label=1]
+		InputAnagramTextAndAssertResult -> TypeInAnagramTextField [label=1]
+		Root -> ClickThreeCrossWordCells [label=14]
+		Root -> SaveFile [label=8]
+		Root -> ClickErrorSize [label=3]
+		ClickErrorSize -> ClickButtonOK [label=1]
+		AssertAddWordButtonExistAndSaveCrosswordEnable -> AssertButtonAddWordExist [label=1]
+		AssertAddWordButtonExistAndSaveCrosswordEnable -> AssertMenuSaveCrosswordEnabled [label=1]
+		Root -> ClickNewCorsswordInFile [label=5]
+		SaveFile -> SelectSaveDialog [label=1]
+		ClickSuggestListItem -> DoubleClickSuggestListItem [label=1]
+		Root -> ClickSuggestListItem [label=12]
+		AssertAddWordButtonExistAndSaveCrosswordEnable -> SelectCrosswordSageWindow [label=1]
+		ClickSolveNewWordInTools -> ClickMenuSolveNewWord [label=1]
+		InputGridSize -> SelectInputDialog [label=1]
+		AssertSuggestWordButtonAndSuggestListItem -> AssertSuggestListItem [label=1]
+		LoadFile -> SelectOpenDialog [label=1]
+		Root -> InputGridSize [label=11]
+		SaveFile -> ClickMenuSaveCrossword [label=1]
+		Root -> InputAnagramTextAndAssertResult [label=4]
+		Root -> InputPatternTextAndAssertResult [label=5]
+		Root -> ClickSolveNewWordInTools [label=4]
+		InputPatternTextAndAssertResult -> AssertFindMatchResult [label=1]
+		ClickErrorSize -> SelectErrorSizeDialog [label=1]
+		ClickSolveNewWordInTools -> SelectCrosswordSageWindow [label=1]
+		ClickSuggestListItem -> ClickButtonSuggestWord [label=1]
+		LoadFile -> ClickMenuLoadCrosswordToEdit [label=1]
+		AssertSuggestWordButtonAndSuggestListItem -> AssertButtonSuggestWordExist [label=1]
+		ClickNewCorsswordInFile -> ClickMenuNewCrossword [label=1]
+		Root -> AssertAddWordButtonExistAndSaveCrosswordEnable [label=4]
+		SaveFile -> FileChooserSaveFile [label=1]
+		AssertSuggestWordButtonAndSuggestListItem -> ClickButtonSuggestWord [label=1]
 }
