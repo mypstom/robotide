@@ -308,17 +308,21 @@ class RideFrame(wx.Frame, RideEventHandler):
         try:
             for df in self._get_datafile_list(): #get suite level
                 tempSuiteUseUserKeyword = list()
+                tempSet = set()
                 if len(df.tests._items) > 0: #not empty
                     try: #add Test case level
                         for testCase in df.tests:
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword: #record all of using UK
-                                        tempSuiteUseUserKeyword.append(str(testStep.keyword))
+                                        tempSuiteUseUserKeyword.append( user_def_keyword[str(testStep.keyword)] )
                             except Exception, e:
                                 print str(e)
-                            for node in tempSuiteUseUserKeyword:
-                                graphTS2TS.edge(str(df.display_name), user_def_keyword[node])
+
+                        for node2 in tempSuiteUseUserKeyword:
+                            tempSet.add(node2)
+                        for node3 in tempSet:
+                            graphTS2TS.edge(str(df.display_name), node3, label=str(tempSuiteUseUserKeyword.count(node3)))
                     except Exception, e:
                         print str(e)
         except Exception, e:
@@ -328,6 +332,8 @@ class RideFrame(wx.Frame, RideEventHandler):
     def relationBetweenTSandTC(self,user_def_keyword,testSuites):
         graphTS2TC = graphviz.Digraph(comment='TS <-> TC', engine='fdp')
         graphTS2TC.node('Root')
+        tempEdge = list()
+        tempEdgeSet = set()
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
@@ -340,13 +346,18 @@ class RideFrame(wx.Frame, RideEventHandler):
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword: #record all of using UK
-                                        graphTS2TC.edge(str(testCase.name), user_def_keyword[str(testStep.keyword)])
+                                        tempEdge.append((str(testCase.name), user_def_keyword[str(testStep.keyword)]))
+                                        #graphTS2TC.edge(str(testCase.name), user_def_keyword[str(testStep.keyword)])
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
+        for node in tempEdge:
+            tempEdgeSet.add(node)
+        for node in tempEdgeSet:
+            graphTS2TC.edge(node[0], node[1], label=str(tempEdge.count(node)))
         graphTS2TC.render('TS2TC.gv',view=False)
 
     def relationBetweenTSandUK(self,user_def_keyword,testSuites):
