@@ -358,7 +358,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTS2TC.edge(node[0], node[1], label=str(tempEdge.count(node)) ,penwidth=str(math.log(tempEdge.count(node),2)+1))
+            graphTS2TC.edge(node[0], node[1], label=str(tempEdge.count(node)), penwidth=str(math.log(tempEdge.count(node),2)+1))
         graphTS2TC.render('TS2TC.gv',view=False)
 
     def relationBetweenTSandUK(self,user_def_keyword,testSuites):
@@ -390,7 +390,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTS2UK.edge(node[0], node[1], label=str(tempEdge.count(node)))
+            graphTS2UK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
         graphTS2UK.render('TS2UK.gv',view=False)
 
@@ -426,7 +426,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTS2K.edge(node[0], node[1], label=str(tempEdge.count(node)))
+            graphTS2K.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
 
         graphTS2K.render('TS2K.gv',view=False)
@@ -463,7 +463,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTC2UK.edge(node[0], node[1], label=str(tempEdge.count(node)))
+            graphTC2UK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
 
         graphTC2UK.render('TC2UK.gv',view=False)
@@ -498,7 +498,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTC2LK.edge(node[0], node[1], label=str(tempEdge.count(node)))
+            graphTC2LK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
         graphTC2LK.render('TC2LK.gv',view=False)
 
@@ -536,7 +536,7 @@ class RideFrame(wx.Frame, RideEventHandler):
             tempEdgeSet.add(node)
 
         for node in tempEdgeSet:
-            graphTC2K.edge(node[0], node[1], label=str(tempEdge.count(node)))
+            graphTC2K.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
         graphTC2K.render('TC2K.gv',view=False)
         return tempAllStep
@@ -579,7 +579,7 @@ class RideFrame(wx.Frame, RideEventHandler):
 
         UKLKCount = dict()
         for node in tempEdgeSet:
-            graphUK2LK.edge(node[0], node[1], label=str(tempEdge.count(node)))
+            graphUK2LK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
             UKLKCount[node[0]] = tempEdge.count(node)
 
         graphUK2LK.render('UK2LK.gv',view=False)
