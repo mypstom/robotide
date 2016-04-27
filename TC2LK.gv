@@ -18,6 +18,8 @@ digraph {
 	ClickMenuNewCrossword [color=bisque shape=box style=filled]
 	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestInvalidCrosswordSize
+	";" [color=darkolivegreen2 shape=box style=filled]
+		Root -> ";"
 	TestAddWord [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestAddWord
 	SelectCrosswordSageWindow [color=bisque shape=box style=filled]

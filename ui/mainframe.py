@@ -16,6 +16,7 @@ from robotide.context.platform import IS_MAC
 import wx
 import json
 import webbrowser
+import math
 from robotide.action import ActionInfoCollection, ActionFactory, SeparatorInfo
 from robotide.context import ABOUT_RIDE, SHORTCUT_KEYS
 from robotide.controller.commands import SaveFile, SaveAll
@@ -322,7 +323,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                         for node2 in tempSuiteUseUserKeyword:
                             tempSet.add(node2)
                         for node3 in tempSet:
-                            graphTS2TS.edge(str(df.display_name), node3, label=str(tempSuiteUseUserKeyword.count(node3)))
+                            graphTS2TS.edge(str(df.display_name), node3, label=str(tempSuiteUseUserKeyword.count(node3)), penwidth= str(math.log(tempSuiteUseUserKeyword.count(node3),2)+1))
                     except Exception, e:
                         print str(e)
         except Exception, e:
@@ -330,7 +331,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         graphTS2TS.render('TS2TS.gv',view=False)
 
     def relationBetweenTSandTC(self,user_def_keyword,testSuites):
-        graphTS2TC = graphviz.Digraph(comment='TS <-> TC', engine='fdp')
+        graphTS2TC = graphviz.Digraph(comment='TS <-> TC', engine='dot')
         graphTS2TC.node('Root')
         tempEdge = list()
         tempEdgeSet = set()
@@ -357,7 +358,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTS2TC.edge(node[0], node[1], label=str(tempEdge.count(node)))
+            graphTS2TC.edge(node[0], node[1], label=str(tempEdge.count(node)) ,penwidth=str(math.log(tempEdge.count(node),2)+1))
         graphTS2TC.render('TS2TC.gv',view=False)
 
     def relationBetweenTSandUK(self,user_def_keyword,testSuites):
@@ -431,7 +432,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         graphTS2K.render('TS2K.gv',view=False)
 
     def relationBetweenTCandUK(self,user_def_keyword,testSuites):
-        graphTC2UK = graphviz.Digraph(comment='TC <-> UK', engine='fdp')
+        graphTC2UK = graphviz.Digraph(comment='TC <-> UK', engine='dot')
         graphTC2UK.node('Root')
 
         tempEdge = list()
@@ -507,7 +508,7 @@ class RideFrame(wx.Frame, RideEventHandler):
 
         tempEdge = list()
         tempEdgeSet = set()
-
+        tempAllStep = list()
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
@@ -522,6 +523,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                                     else:
                                         graphTC2K.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
                                     tempEdge.append((str(testCase.name),str(testStep.keyword)))
+                                    tempAllStep.append(str(testStep.keyword))
                                     #graphTC2K.edge(str(testCase.name),str(testStep.keyword))
                             except Exception, e:
                                 print str(e)
@@ -532,10 +534,12 @@ class RideFrame(wx.Frame, RideEventHandler):
 
         for node in tempEdge:
             tempEdgeSet.add(node)
+
         for node in tempEdgeSet:
             graphTC2K.edge(node[0], node[1], label=str(tempEdge.count(node)))
 
         graphTC2K.render('TC2K.gv',view=False)
+        return tempAllStep
 
     def relationBetweenUKandLK(self,user_def_keyword,userKeywordObject):
         graphUK2LK = graphviz.Digraph(comment='UK <-> LK', engine='fdp')
@@ -555,24 +559,33 @@ class RideFrame(wx.Frame, RideEventHandler):
                                         graphUK2LK.node(str(testStep.keyword),color="coral", shape="box", style="filled")
                                         tempEdge.append(('Root',str(testStep.keyword)))
                                         #graphUK2LK.edge('Root',str(testStep.keyword))
+                                    else:
+                                        graphUK2LK.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
                             except Exception, e:
                                 print str(e)
+
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
         for node2 in userKeywordObject:
             for step in node2.steps:
-                graphUK2LK.node(str(step.keyword), color="bisque", shape="box", style="filled")
+                #graphUK2LK.node(str(step.keyword), color="bisque", shape="box", style="filled")
                 tempEdge.append((node2.name.encode('ascii', 'ignore'),str(step.keyword)))
                 #graphUK2LK.edge(node2.name.encode('ascii', 'ignore'),str(step.keyword))
 
         for node in tempEdge:
             tempEdgeSet.add(node)
+
+        UKLKCount = dict()
         for node in tempEdgeSet:
             graphUK2LK.edge(node[0], node[1], label=str(tempEdge.count(node)))
+            UKLKCount[node[0]] = tempEdge.count(node)
 
         graphUK2LK.render('UK2LK.gv',view=False)
+        return UKLKCount
+
+
 
     def OnTestSuiteUseKeyword(self,event):
         f = open('node_display_config.txt')
@@ -602,40 +615,29 @@ class RideFrame(wx.Frame, RideEventHandler):
                     try: #add Test case level
                         for testCase in df.tests:
                             if str(testCase.name) not in blacklist:
-                                #dot.node(str(testCase.name))
                                 nodeList.add(str(testCase.name))
                                 edgeList.append((str(df.display_name),str(testCase.name)))
-                                #dot.edge(str(df.display_name),str(testCase.name))
                                 try: #sometimes test case will be not found
                                     for testStep in testCase.steps:
                                         if str(testStep.keyword) not in blacklist:
-                                            #dot.node(str(testStep.keyword)) #if there isn't this step in diagram , add it
                                             nodeList.add(str(testStep.keyword))
                                             edgeList.append((str(testCase.name),str(testStep.keyword)))
-                                            #dot.edge(str(testCase.name),str(testStep.keyword))
                                 except Exception, e:
                                     print str(e)
                     except Exception, e:
                         print str(e)
-               # dot.node('Unused Keyword')
-               # if len(df.tests._items) > 0:
-                    #edgeList.append((str(df.display_name),'Unused Keyword'))
                     try: #add keyword level
                         for keyword in df.keywords:
-                            #dot.node(str(keyword.name))
                             nodeList.add(str(keyword.name))
                             try:
                                 for keywordStep in keyword.steps:
                                     if str(keywordStep.keyword) not in blacklist:
-                                        #dot.node(str(keywordStep.keyword))
                                         nodeList.add(str(keywordStep.keyword))
                                         edgeList.append((str(keyword.name),str(keywordStep.keyword)))
                                         usedKeyword = False
                                         for edge in edgeList:
                                             if str(keyword.name) == edge[1]:
                                                 usedKeyword = True
-                                        #if usedKeyword == False:
-                                            #edgeList.append(('Unused Keyword',str(keyword.name)))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
@@ -650,19 +652,28 @@ class RideFrame(wx.Frame, RideEventHandler):
                     testSuites.append(df.display_name.encode('ascii', 'ignore'))
         except Exception, e:
             print str(e)
-        print "KEY~~~~~ "
-        print user_def_keyword
-        print 'SUITE~'
-        print testSuites
-        print '------------------'
+
         self.relationBetweenTSandTS(user_def_keyword,testSuites)
         self.relationBetweenTSandTC(user_def_keyword,testSuites)
         self.relationBetweenTSandUK(user_def_keyword,testSuites)
         self.relationBetweenTSandK(user_def_keyword,testSuites)
         self.relationBetweenTCandUK(user_def_keyword,testSuites)
         self.relationBetweenTCandLK(user_def_keyword,testSuites)
-        self.relationBetweenTCandK(user_def_keyword,testSuites)
+        tempAllStep = self.relationBetweenTCandK(user_def_keyword,testSuites)
         self.relationBetweenUKandLK(user_def_keyword,userKeywordObject)
+
+        ukWeight = dict()
+        for uk in userKeywordObject:
+            ukWeight[uk.name.encode('ascii', 'ignore')] = len(uk.steps)
+            print len(uk.steps)
+        actionCount = 0
+        for node in tempAllStep:
+            if node in user_def_keyword:
+                actionCount += ukWeight[node]
+            else:
+                actionCount += 1
+        print actionCount
+
         for node in nodeList:
             if node not in blacklist:
                 dot.node(node)
@@ -725,6 +736,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         jsonOutput = dict()
         nodeOutput = list()
         edgeOutput = list()
+
         for node in nodeList:
             nodeOutput.append({node: {'name': node}})
         for edge in edgeSet:

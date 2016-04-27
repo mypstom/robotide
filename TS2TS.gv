@@ -3,5 +3,5 @@ digraph {
 	Root
 	"05Crossword Lab" [color=cyan3 shape=box style=filled]
 		Root -> "05Crossword Lab"
-		"05Crossword Lab" -> "05Crossword Lab" [label=127]
+		"05Crossword Lab" -> "05Crossword Lab" [label=127 penwidth=7.98868468677]
 }
