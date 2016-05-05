@@ -17,6 +17,7 @@ import wx
 import json
 import webbrowser
 import math
+import copy
 from robotide.action import ActionInfoCollection, ActionFactory, SeparatorInfo
 from robotide.context import ABOUT_RIDE, SHORTCUT_KEYS
 from robotide.controller.commands import SaveFile, SaveAll
@@ -503,7 +504,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         graphTC2LK.render('TC2LK.gv',view=False)
 
     def relationBetweenTCandK(self,user_def_keyword,testSuites):
-        graphTC2K = graphviz.Digraph(comment='TC <-> K', engine='fdp')
+        graphTC2K = graphviz.Digraph(comment='TC <-> K', engine='dot')
         graphTC2K.node('Root')
 
         tempEdge = list()
@@ -570,7 +571,10 @@ class RideFrame(wx.Frame, RideEventHandler):
             print str(e)
         for node2 in userKeywordObject:
             for step in node2.steps:
-                #graphUK2LK.node(str(step.keyword), color="bisque", shape="box", style="filled")
+                if str(step.keyword) in user_def_keyword:
+                    graphUK2LK.node(str(step.keyword),color="coral", shape="box", style="filled")
+                else:
+                    graphUK2LK.node(str(step.keyword), color="bisque", shape="box", style="filled")
                 tempEdge.append((node2.name.encode('ascii', 'ignore'),str(step.keyword)))
                 #graphUK2LK.edge(node2.name.encode('ascii', 'ignore'),str(step.keyword))
 
@@ -585,9 +589,58 @@ class RideFrame(wx.Frame, RideEventHandler):
         graphUK2LK.render('UK2LK.gv',view=False)
         return UKLKCount
 
+    def listComponent(self, user_def_keyword):
+        graphC = graphviz.Digraph(comment='Component-only', engine='dot')
+        graphC.node('Root')
 
+
+        try:
+            for df in self._get_datafile_list(): #get suite level
+                if len(df.tests._items) > 0: #not empty
+                    try: #add Test case level
+                        for testCase in df.tests:
+                            graphC.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
+                            graphC.edge('Root',str(testCase.name))
+                            try:
+                                for testStep in testCase.steps:
+                                    try:
+                                        if len(testStep.args) != 0:
+                                            print str(testStep.args[0])
+                                            #for arg in testStep.args:
+                                             #   print str(testStep.arg[0])
+                                    except Exception, e:
+                                        print str(e)
+                            except Exception, e:
+                                print str(e)
+                    except Exception, e:
+                        print str(e)
+        except Exception, e:
+            print str(e)
+        graphC.render('C.gv',view=False)
+
+
+    def insertScreenShot(self):
+        tempList = list()
+        try:
+            for df in self._get_datafile_list():
+                if len(df.tests._items) > 0:
+                    try:
+                        for testCase in df.tests:
+                            try:
+                                for step in testCase.steps:
+                                    counter = len(step)
+                                    while counter > 0:
+                                        testCase.insert("ScreenShot", counter)
+                                        counter -=1
+                            except Exception, e:
+                                print str(e)
+                    except Exception, e:
+                        print str(e)
+        except Exception, e:
+            print str(e)
 
     def OnTestSuiteUseKeyword(self,event):
+        self.insertScreenShot()
         f = open('node_display_config.txt')
         blacklist = f.read().splitlines()
         nodeCount = 0.0
@@ -661,18 +714,17 @@ class RideFrame(wx.Frame, RideEventHandler):
         self.relationBetweenTCandLK(user_def_keyword,testSuites)
         tempAllStep = self.relationBetweenTCandK(user_def_keyword,testSuites)
         self.relationBetweenUKandLK(user_def_keyword,userKeywordObject)
-
+        self.listComponent(user_def_keyword)
         ukWeight = dict()
         for uk in userKeywordObject:
             ukWeight[uk.name.encode('ascii', 'ignore')] = len(uk.steps)
-            print len(uk.steps)
         actionCount = 0
         for node in tempAllStep:
             if node in user_def_keyword:
                 actionCount += ukWeight[node]
             else:
                 actionCount += 1
-        print actionCount
+        print "Action: " + str(actionCount)
 
         for node in nodeList:
             if node not in blacklist:

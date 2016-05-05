@@ -1,0 +1,24 @@
+// Component-only
+digraph {
+	Root
+	OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
+		Root -> OpenCrosswordSage
+	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestValidCrosswordSize
+	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestInvalidCrosswordSize
+	TestAddword [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestAddword
+	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestSaveCrossword
+	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestLoadCrosswordToEdit
+	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestSolvePattern
+	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestSolveAnagram
+	"TC-01" [color=darkolivegreen2 shape=box style=filled]
+		Root -> "TC-01"
+	"TC-02" [color=darkolivegreen2 shape=box style=filled]
+		Root -> "TC-02"
+}
