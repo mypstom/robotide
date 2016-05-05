@@ -591,7 +591,7 @@ class RideFrame(wx.Frame, RideEventHandler):
 
     def listComponent(self, user_def_keyword):
         graphC = graphviz.Digraph(comment='Component-only', engine='dot')
-        graphC.node('Root')
+        #graphC.node('Root')
 
         tempEdgeSet = set()
         tempEdge = list()
@@ -602,11 +602,12 @@ class RideFrame(wx.Frame, RideEventHandler):
                     try: #add Test case level
                         for testCase in df.tests:
                             #tempEdge.append(('Root',str(testCase.name)))
+                            graphC.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword:
                                         graphC.node(str(testStep.keyword),color="coral", shape="box", style="filled")
-                                        tempEdge.append(('Root',str(testStep.keyword)))
+                                        tempEdge.append((str(testCase.name), str(testStep.keyword)))
                                     else:
                                         print ''
                                         #graphC.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
@@ -615,10 +616,12 @@ class RideFrame(wx.Frame, RideEventHandler):
                                         if len(testStep.args) != 0:
                                             for arg in testStep.args:
                                                 if str(testStep.keyword) not in user_def_keyword:
-                                                    print "(UK)"
-                                                    #graphC.node(str(arg), color="pink", shape="box", style="filled")
+                                                    print "(LK)"
+
+                                                    tempEdge.append((str(testCase.name), str(arg)))
+                                                    graphC.node(str(arg), color="pink", shape="box", style="filled")
                                                     #tempEdge.append((str(testStep.keyword), str(arg)))
-                                                    #print str(testStep.keyword)+ "(LK): " + str(testStep.args[0])
+                                                    print str(testStep.keyword)+ "(LK): " + str(testStep.args[0])
                                                 else:
                                                     graphC.node(str(arg), color="pink", shape="box", style="filled")
                                                     tempEdge.append((str(testStep.keyword), str(arg)))
@@ -636,7 +639,7 @@ class RideFrame(wx.Frame, RideEventHandler):
             tempEdgeSet.add(node)
 
         for node in tempEdgeSet:
-            graphC.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            graphC.edge(node[0], node[1], splines="polyline" ,minlen="10.0", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
 
         graphC.render('C.gv',view=False)
