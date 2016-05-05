@@ -37,6 +37,7 @@ from .tree import Tree
 from .notebook import NoteBook
 from .progress import LoadProgressObserver
 import graphviz
+from graphviz import Graph
 
 _menudata = """
 [File]
@@ -590,7 +591,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         return UKLKCount
 
     def listComponent(self, user_def_keyword):
-        graphC = graphviz.Digraph(comment='Component-only', engine='dot')
+        graphC = graphviz.Graph(comment='Component-only', engine='dot' , graph_attr={'splines': 'false'} )
         #graphC.node('Root')
 
         tempEdgeSet = set()
@@ -639,7 +640,7 @@ class RideFrame(wx.Frame, RideEventHandler):
             tempEdgeSet.add(node)
 
         for node in tempEdgeSet:
-            graphC.edge(node[0], node[1], splines="polyline" ,minlen="10.0", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
 
         graphC.render('C.gv',view=False)
