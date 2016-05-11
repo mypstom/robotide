@@ -1,36 +1,35 @@
 // TS <-> TC
 digraph {
 	Root
-	"01Crossword Lab" [color=cyan3 shape=box style=filled]
-		Root -> "01Crossword Lab"
+	"03Crossword Lab" [color=cyan3 shape=box style=filled]
+		Root -> "03Crossword Lab"
 	OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> OpenCrosswordSage
+		"03Crossword Lab" -> OpenCrosswordSage
 	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> TestValidCrosswordSize
+		"03Crossword Lab" -> TestValidCrosswordSize
 	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> TestInvalidCrosswordSize
-	TestAddword [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> TestAddword
+		"03Crossword Lab" -> TestInvalidCrosswordSize
+	TestAddWord [color=darkolivegreen2 shape=box style=filled]
+		"03Crossword Lab" -> TestAddWord
 	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> TestSaveCrossword
+		"03Crossword Lab" -> TestSaveCrossword
 	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> TestLoadCrosswordToEdit
+		"03Crossword Lab" -> TestLoadCrosswordToEdit
 	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> TestSolvePattern
+		"03Crossword Lab" -> TestSolvePattern
 	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> TestSolveAnagram
-	"TC-01" [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> "TC-01"
-	"TC-02" [color=darkolivegreen2 shape=box style=filled]
-		"01Crossword Lab" -> "TC-02"
-		TestLoadCrosswordToEdit -> "01Crossword Lab" [label=2 penwidth=2.0]
-		TestSolvePattern -> "01Crossword Lab" [label=4 penwidth=3.0]
-		"TC-02" -> "01Crossword Lab" [label=29 penwidth=5.85798099513]
-		TestSaveCrossword -> "01Crossword Lab" [label=5 penwidth=3.32192809489]
-		TestInvalidCrosswordSize -> "01Crossword Lab" [label=8 penwidth=4.0]
-		TestSolveAnagram -> "01Crossword Lab" [label=3 penwidth=2.58496250072]
-		TestValidCrosswordSize -> "01Crossword Lab" [label=6 penwidth=3.58496250072]
-		"TC-01" -> "01Crossword Lab" [label=35 penwidth=6.12928301694]
-		OpenCrosswordSage -> "01Crossword Lab" [label=1 penwidth=1.0]
-		TestAddword -> "01Crossword Lab" [label=25 penwidth=5.64385618977]
+		"03Crossword Lab" -> TestSolveAnagram
+	Test_Q2_1 [color=darkolivegreen2 shape=box style=filled]
+		"03Crossword Lab" -> Test_Q2_1
+	Test_Q2_2 [color=darkolivegreen2 shape=box style=filled]
+		"03Crossword Lab" -> Test_Q2_2
+		TestInvalidCrosswordSize -> "03Crossword Lab" [label=9 penwidth=4.16992500144]
+		TestValidCrosswordSize -> "03Crossword Lab" [label=6 penwidth=3.58496250072]
+		TestSaveCrossword -> "03Crossword Lab" [label=8 penwidth=4.0]
+		TestSolveAnagram -> "03Crossword Lab" [label=2 penwidth=2.0]
+		Test_Q2_2 -> "03Crossword Lab" [label=9 penwidth=4.16992500144]
+		TestAddWord -> "03Crossword Lab" [label=14 penwidth=4.80735492206]
+		Test_Q2_1 -> "03Crossword Lab" [label=13 penwidth=4.70043971814]
+		TestSolvePattern -> "03Crossword Lab" [label=3 penwidth=2.58496250072]
+		OpenCrosswordSage -> "03Crossword Lab" [label=1 penwidth=1.0]
 }

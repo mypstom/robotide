@@ -617,16 +617,14 @@ class RideFrame(wx.Frame, RideEventHandler):
                                         if len(testStep.args) != 0:
                                             for arg in testStep.args:
                                                 if str(testStep.keyword) not in user_def_keyword:
-                                                    print "(LK)"
-
                                                     tempEdge.append((str(testCase.name), str(arg)))
                                                     graphC.node(str(arg), color="pink", shape="box", style="filled")
-                                                    #tempEdge.append((str(testStep.keyword), str(arg)))
+                                                    tempEdge.append((str(testStep.keyword), str(arg)))
                                                     print str(testStep.keyword)+ "(LK): " + str(testStep.args[0])
                                                 else:
                                                     graphC.node(str(arg), color="pink", shape="box", style="filled")
                                                     tempEdge.append((str(testStep.keyword), str(arg)))
-                                                    #print str(testStep.keyword)+ "(UK): " +  str(testStep.args[0])
+                                                    print str(testStep.keyword)+ "(UK): " +  str(testStep.args[0])
                                     except Exception, e:
                                         print str(e)
                             except Exception, e:
@@ -640,7 +638,7 @@ class RideFrame(wx.Frame, RideEventHandler):
             tempEdgeSet.add(node)
 
         for node in tempEdgeSet:
-            graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
 
         graphC.render('C.gv',view=False)
@@ -743,8 +741,19 @@ class RideFrame(wx.Frame, RideEventHandler):
         self.relationBetweenUKandLK(user_def_keyword,userKeywordObject)
         self.listComponent(user_def_keyword)
         ukWeight = dict()
+        ukTempCount = 0
         for uk in userKeywordObject:
             ukWeight[uk.name.encode('ascii', 'ignore')] = len(uk.steps)
+        for uk in userKeywordObject:
+            ukTempCount = 0
+            for step in uk.steps:
+                if str(step.keyword) in user_def_keyword:
+                    ukTempCount += ukWeight[str(step.keyword)]
+                else:
+                    ukTempCount += 1
+            ukWeight[uk.name.encode('ascii', 'ignore')] = ukTempCount
+        print ukWeight
+        print "******************"
         actionCount = 0
         for node in tempAllStep:
             if node in user_def_keyword:
@@ -752,6 +761,7 @@ class RideFrame(wx.Frame, RideEventHandler):
             else:
                 actionCount += 1
         print "Action: " + str(actionCount)
+
 
         for node in nodeList:
             if node not in blacklist:
@@ -828,7 +838,9 @@ class RideFrame(wx.Frame, RideEventHandler):
             json.dump(jsonOutput,f)
         #dot.render('TestCases.gv',view=False)
         #dot_testSuiteLevel.render('testSuiteLevel.gv',view=False)
-        self.ShowMessage('Keyword relation diagram has been saved to root folder.\n File name: TestCases.gv.pdf')
+        #self.ShowMessage('Keyword relation diagram has been saved to root folder.\n File name: TestCases.gv.pdf')
+        tempDataFile = self._get_datafile_list()
+        self.ShowMessage('Script:  '+ tempDataFile[0].display_name +'\nGenerate Script Graph Finish. \n Actions:' + str(actionCount))
 
     def OnIgnoreNodes(self,event):
         filename = 'file:///Bitnami/wordpress-4.4.1-0/apache2/htdocs/TSVisual/' + 'index.html'
