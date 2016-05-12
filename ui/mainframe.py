@@ -619,7 +619,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                                                 if str(testStep.keyword) not in user_def_keyword:
                                                     tempEdge.append((str(testCase.name), str(arg)))
                                                     graphC.node(str(arg), color="pink", shape="box", style="filled")
-                                                    tempEdge.append((str(testStep.keyword), str(arg)))
+                                                    tempEdge.append((str(testCase.name), str(arg)))
                                                     print str(testStep.keyword)+ "(LK): " + str(testStep.args[0])
                                                 else:
                                                     graphC.node(str(arg), color="pink", shape="box", style="filled")
@@ -638,7 +638,8 @@ class RideFrame(wx.Frame, RideEventHandler):
             tempEdgeSet.add(node)
 
         for node in tempEdgeSet:
-            graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            graphC.edge(node[0], node[1], minlen="30.0", penwidth=str(tempEdge.count(node)*5))
+            #graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
 
         graphC.render('C.gv',view=False)

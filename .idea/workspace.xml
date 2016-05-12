@@ -14,7 +14,7 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/robotide$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1462984146056" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/robotide$__init__.coverage" NAME="__init__ Coverage Results" MODIFIED="1463012331632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/robotide$run_demo.coverage" NAME="run_demo Coverage Results" MODIFIED="1460565027864" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../SwingLibrary/demo" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -35,8 +35,8 @@
       <file leaf-file-name="mainframe.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ui/mainframe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32916147">
-              <caret line="843" column="0" selection-start-line="843" selection-start-column="0" selection-end-line="843" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.51898736">
+              <caret line="622" column="110" selection-start-line="622" selection-start-column="110" selection-end-line="622" selection-end-column="110" />
               <folding>
                 <element signature="e#605#649#0" expanded="true" />
                 <element signature="e#14903#16480#0" expanded="false" />
@@ -416,7 +416,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297414" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32833335" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27954546" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27954546" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -443,13 +443,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/ui/mainframe.py</url>
-          <line>842</line>
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -689,8 +682,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ui/mainframe.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32916147">
-          <caret line="843" column="0" selection-start-line="843" selection-start-column="0" selection-end-line="843" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.51898736">
+          <caret line="622" column="110" selection-start-line="622" selection-start-column="110" selection-end-line="622" selection-end-column="110" />
           <folding>
             <element signature="e#605#649#0" expanded="true" />
             <element signature="e#14903#16480#0" expanded="false" />
