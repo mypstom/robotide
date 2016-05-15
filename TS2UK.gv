@@ -1,34 +1,7 @@
 // TS <-> UK
 digraph {
 	Root
-	SaveFile [color=coral shape=box style=filled]
-	SelectMsgAndOK [color=coral shape=box style=filled]
-	ClickSuggestWordAndDbl [color=coral shape=box style=filled]
-	SelectErrorSizeDialogAndOK [color=coral shape=box style=filled]
-	SelectWindowAndNewCrossword [color=coral shape=box style=filled]
-	SelectWindowAndSave [color=coral shape=box style=filled]
-	AssertAndClickSuggest [color=coral shape=box style=filled]
-	InputWordToAnagramMatchAndClear [color=coral shape=box style=filled]
-	AssertAndClickAddWord [color=coral shape=box style=filled]
-	AssertOnlyOneAndAssertClickAddWord [color=coral shape=box style=filled]
-	AssertAddWordAndClickNewCrossword [color=coral shape=box style=filled]
-	ClickSuggestWordAndDbl0 [color=coral shape=box style=filled]
-	InputGridSizeAndOK [color=coral shape=box style=filled]
-	InputWordToMatchAndClear [color=coral shape=box style=filled]
-	"03Crossword Lab" [color=cyan3 shape=box style=filled]
-		Root -> "03Crossword Lab"
-		AssertOnlyOneAndAssertClickAddWord -> "03Crossword Lab" [label=1 penwidth=1.0]
-		SelectWindowAndNewCrossword -> "03Crossword Lab" [label=4 penwidth=3.0]
-		InputWordToMatchAndClear -> "03Crossword Lab" [label=3 penwidth=2.58496250072]
-		SelectErrorSizeDialogAndOK -> "03Crossword Lab" [label=3 penwidth=2.58496250072]
-		SaveFile -> "03Crossword Lab" [label=8 penwidth=4.0]
-		InputGridSizeAndOK -> "03Crossword Lab" [label=11 penwidth=4.45943161864]
-		ClickSuggestWordAndDbl -> "03Crossword Lab" [label=3 penwidth=2.58496250072]
-		AssertAddWordAndClickNewCrossword -> "03Crossword Lab" [label=2 penwidth=2.0]
-		InputWordToAnagramMatchAndClear -> "03Crossword Lab" [label=3 penwidth=2.58496250072]
-		SelectMsgAndOK -> "03Crossword Lab" [label=1 penwidth=1.0]
-		SelectWindowAndSave -> "03Crossword Lab" [label=2 penwidth=2.0]
-		ClickSuggestWordAndDbl0 -> "03Crossword Lab" [label=1 penwidth=1.0]
-		AssertAndClickAddWord -> "03Crossword Lab" [label=7 penwidth=3.80735492206]
-		AssertAndClickSuggest -> "03Crossword Lab" [label=16 penwidth=5.0]
+	Keyword01 [color=coral shape=box style=filled]
+	"04Crossword Lab" [color=cyan3 shape=box style=filled]
+		Root -> "04Crossword Lab"
 }

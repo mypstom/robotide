@@ -17,7 +17,8 @@ import wx
 import json
 import webbrowser
 import math
-import copy
+import robotide
+from operator import itemgetter, attrgetter
 from robotide.action import ActionInfoCollection, ActionFactory, SeparatorInfo
 from robotide.context import ABOUT_RIDE, SHORTCUT_KEYS
 from robotide.controller.commands import SaveFile, SaveAll
@@ -543,7 +544,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         graphTC2K.render('TC2K.gv',view=False)
         return tempAllStep
 
-    def relationBetweenUKandLK(self,user_def_keyword,userKeywordObject):
+    def relationBetweenUKandLK(self,user_def_keyword, userKeywordObject):
         graphUK2LK = graphviz.Digraph(comment='UK <-> LK', engine='fdp')
         graphUK2LK.node('Root')
 
@@ -590,55 +591,58 @@ class RideFrame(wx.Frame, RideEventHandler):
         graphUK2LK.render('UK2LK.gv',view=False)
         return UKLKCount
 
-    def listComponent(self, user_def_keyword):
-        graphC = graphviz.Graph(comment='Component-only', engine='dot' , graph_attr={'splines': 'false'} )
-        #graphC.node('Root')
-
+    def listComponent(self, user_def_keyword, tempComponentList, userKeywordObject):
+        graphC = graphviz.Graph(comment='Component-only', engine='dot', graph_attr={'splines': 'false'} )
         tempEdgeSet = set()
         tempEdge = list()
+        appearList = list()
+        for node in tempComponentList:
+          graphC.node("C_"+str(node), color="pink", shape="box", style="filled")
 
         try:
-            for df in self._get_datafile_list(): #get suite level
-                if len(df.tests._items) > 0: #not empty
-                    try: #add Test case level
+            for df in self._get_datafile_list():
+                if len(df.tests._items) > 0:
+                    try:
                         for testCase in df.tests:
-                            #tempEdge.append(('Root',str(testCase.name)))
                             graphC.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
                             try:
                                 for testStep in testCase.steps:
+
                                     if str(testStep.keyword) in user_def_keyword:
                                         graphC.node(str(testStep.keyword),color="coral", shape="box", style="filled")
-                                        tempEdge.append((str(testCase.name), str(testStep.keyword)))
-                                    else:
-                                        print ''
-                                        #graphC.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
+                                        tempEdge.append((str(testCase.name),str(testStep.keyword)))
 
-                                    try:
-                                        if len(testStep.args) != 0:
-                                            for arg in testStep.args:
-                                                if str(testStep.keyword) not in user_def_keyword:
-                                                    tempEdge.append((str(testCase.name), str(arg)))
-                                                    graphC.node(str(arg), color="pink", shape="box", style="filled")
-                                                    tempEdge.append((str(testCase.name), str(arg)))
-                                                    print str(testStep.keyword)+ "(LK): " + str(testStep.args[0])
-                                                else:
-                                                    graphC.node(str(arg), color="pink", shape="box", style="filled")
-                                                    tempEdge.append((str(testStep.keyword), str(arg)))
-                                                    print str(testStep.keyword)+ "(UK): " +  str(testStep.args[0])
-                                    except Exception, e:
-                                        print str(e)
+                                    else:
+                                        if str(testStep.keyword) in tempComponentList:
+                                            appearList.append((str(testCase.name),"C_"+str(testStep.keyword)))
                             except Exception, e:
                                 print str(e)
                     except Exception, e:
                         print str(e)
         except Exception, e:
             print str(e)
+        tempAppear = sorted(appearList, key=itemgetter(0,1))
+        tempCount = 0
+        tempNodeName = ''
+        for node in tempAppear:
+            if tempNodeName != node[1]:
+                tempCount += 1
+            tempEdge.append((node[0], str(tempCount)))
+            graphC.node(str(tempCount), shape="point")
+            tempEdge.append((str(tempCount), node[1]))
+            tempNodeName = node[1]
+
+        for node2 in userKeywordObject:
+            for step in node2.steps:
+                if str(step.keyword) in tempComponentList:
+                    tempEdge.append((str(node2.name),'C_'+ str(step.keyword)))
+
 
         for node in tempEdge:
             tempEdgeSet.add(node)
 
         for node in tempEdgeSet:
-            graphC.edge(node[0], node[1], minlen="30.0", penwidth=str(tempEdge.count(node)*5))
+            graphC.edge(node[0], node[1], minlen="30.0", penwidth=( tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
             #graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
 
@@ -681,8 +685,12 @@ class RideFrame(wx.Frame, RideEventHandler):
         testSuites = list()
         user_def_keyword = dict()
         userKeywordObject = list()
+        tempComponentList = list()
         try:
             for df in self._get_datafile_list():
+                if type(df) is robotide.controller.filecontrollers.ResourceFileController:
+                    for item in df.keywords:
+                        tempComponentList.append(item.name.encode('ascii', 'ignore'))
                 if len(df.tests._items) > 0:
                     if str(df.display_name) not in blacklist:
                          testSuite_temp = list()
@@ -740,7 +748,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         self.relationBetweenTCandLK(user_def_keyword,testSuites)
         tempAllStep = self.relationBetweenTCandK(user_def_keyword,testSuites)
         self.relationBetweenUKandLK(user_def_keyword,userKeywordObject)
-        self.listComponent(user_def_keyword)
+        self.listComponent(user_def_keyword, tempComponentList, userKeywordObject)
         ukWeight = dict()
         ukTempCount = 0
         for uk in userKeywordObject:
@@ -753,8 +761,6 @@ class RideFrame(wx.Frame, RideEventHandler):
                 else:
                     ukTempCount += 1
             ukWeight[uk.name.encode('ascii', 'ignore')] = ukTempCount
-        print ukWeight
-        print "******************"
         actionCount = 0
         for node in tempAllStep:
             if node in user_def_keyword:

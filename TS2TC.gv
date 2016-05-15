@@ -1,35 +1,26 @@
 // TS <-> TC
 digraph {
 	Root
-	"03Crossword Lab" [color=cyan3 shape=box style=filled]
-		Root -> "03Crossword Lab"
+	"04Crossword Lab" [color=cyan3 shape=box style=filled]
+		Root -> "04Crossword Lab"
 	OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> OpenCrosswordSage
+		"04Crossword Lab" -> OpenCrosswordSage
+	"TC-01" [color=darkolivegreen2 shape=box style=filled]
+		"04Crossword Lab" -> "TC-01"
+	"TC-02" [color=darkolivegreen2 shape=box style=filled]
+		"04Crossword Lab" -> "TC-02"
 	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> TestValidCrosswordSize
+		"04Crossword Lab" -> TestValidCrosswordSize
 	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> TestInvalidCrosswordSize
+		"04Crossword Lab" -> TestInvalidCrosswordSize
 	TestAddWord [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> TestAddWord
+		"04Crossword Lab" -> TestAddWord
 	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> TestSaveCrossword
+		"04Crossword Lab" -> TestSaveCrossword
 	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> TestLoadCrosswordToEdit
+		"04Crossword Lab" -> TestLoadCrosswordToEdit
 	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> TestSolvePattern
+		"04Crossword Lab" -> TestSolvePattern
 	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> TestSolveAnagram
-	Test_Q2_1 [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> Test_Q2_1
-	Test_Q2_2 [color=darkolivegreen2 shape=box style=filled]
-		"03Crossword Lab" -> Test_Q2_2
-		TestInvalidCrosswordSize -> "03Crossword Lab" [label=9 penwidth=4.16992500144]
-		TestValidCrosswordSize -> "03Crossword Lab" [label=6 penwidth=3.58496250072]
-		TestSaveCrossword -> "03Crossword Lab" [label=8 penwidth=4.0]
-		TestSolveAnagram -> "03Crossword Lab" [label=2 penwidth=2.0]
-		Test_Q2_2 -> "03Crossword Lab" [label=9 penwidth=4.16992500144]
-		TestAddWord -> "03Crossword Lab" [label=14 penwidth=4.80735492206]
-		Test_Q2_1 -> "03Crossword Lab" [label=13 penwidth=4.70043971814]
-		TestSolvePattern -> "03Crossword Lab" [label=3 penwidth=2.58496250072]
-		OpenCrosswordSage -> "03Crossword Lab" [label=1 penwidth=1.0]
+		"04Crossword Lab" -> TestSolveAnagram
 }

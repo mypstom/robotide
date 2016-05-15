@@ -1,22 +1,13 @@
 // TC <-> UK
 digraph {
 	Root
-	SaveFile [color=coral shape=box style=filled]
-	SelectMsgAndOK [color=coral shape=box style=filled]
-	ClickSuggestWordAndDbl [color=coral shape=box style=filled]
-	SelectErrorSizeDialogAndOK [color=coral shape=box style=filled]
-	SelectWindowAndNewCrossword [color=coral shape=box style=filled]
-	SelectWindowAndSave [color=coral shape=box style=filled]
-	AssertAndClickSuggest [color=coral shape=box style=filled]
-	InputWordToAnagramMatchAndClear [color=coral shape=box style=filled]
-	AssertAndClickAddWord [color=coral shape=box style=filled]
-	AssertOnlyOneAndAssertClickAddWord [color=coral shape=box style=filled]
-	AssertAddWordAndClickNewCrossword [color=coral shape=box style=filled]
-	ClickSuggestWordAndDbl0 [color=coral shape=box style=filled]
-	InputGridSizeAndOK [color=coral shape=box style=filled]
-	InputWordToMatchAndClear [color=coral shape=box style=filled]
+	Keyword01 [color=coral shape=box style=filled]
 	OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
 		Root -> OpenCrosswordSage
+	"TC-01" [color=darkolivegreen2 shape=box style=filled]
+		Root -> "TC-01"
+	"TC-02" [color=darkolivegreen2 shape=box style=filled]
+		Root -> "TC-02"
 	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestValidCrosswordSize
 	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
@@ -31,38 +22,4 @@ digraph {
 		Root -> TestSolvePattern
 	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolveAnagram
-	Test_Q2_1 [color=darkolivegreen2 shape=box style=filled]
-		Root -> Test_Q2_1
-	Test_Q2_2 [color=darkolivegreen2 shape=box style=filled]
-		Root -> Test_Q2_2
-		Test_Q2_2 -> AssertAndClickAddWord [label=2 penwidth=2.0]
-		TestInvalidCrosswordSize -> InputGridSizeAndOK [label=4 penwidth=3.0]
-		TestAddWord -> AssertAndClickAddWord [label=3 penwidth=2.58496250072]
-		TestValidCrosswordSize -> AssertAddWordAndClickNewCrossword [label=2 penwidth=2.0]
-		Test_Q2_2 -> AssertAndClickSuggest [label=2 penwidth=2.0]
-		Test_Q2_2 -> SaveFile [label=3 penwidth=2.58496250072]
-		TestSolvePattern -> InputWordToMatchAndClear [label=3 penwidth=2.58496250072]
-		TestSolveAnagram -> InputWordToAnagramMatchAndClear [label=2 penwidth=2.0]
-		TestAddWord -> AssertAndClickSuggest [label=7 penwidth=3.80735492206]
-		Test_Q2_2 -> InputWordToAnagramMatchAndClear [label=1 penwidth=1.0]
-		TestInvalidCrosswordSize -> SelectWindowAndNewCrossword [label=1 penwidth=1.0]
-		TestInvalidCrosswordSize -> SelectWindowAndSave [label=1 penwidth=1.0]
-		TestValidCrosswordSize -> SelectWindowAndSave [label=1 penwidth=1.0]
-		TestInvalidCrosswordSize -> SelectErrorSizeDialogAndOK [label=3 penwidth=2.58496250072]
-		TestSaveCrossword -> AssertAndClickAddWord [label=1 penwidth=1.0]
-		TestSaveCrossword -> SelectWindowAndNewCrossword [label=2 penwidth=2.0]
-		TestSaveCrossword -> SaveFile [label=3 penwidth=2.58496250072]
-		Test_Q2_2 -> ClickSuggestWordAndDbl [label=1 penwidth=1.0]
-		TestAddWord -> AssertOnlyOneAndAssertClickAddWord [label=1 penwidth=1.0]
-		TestAddWord -> ClickSuggestWordAndDbl0 [label=1 penwidth=1.0]
-		Test_Q2_1 -> AssertAndClickSuggest [label=7 penwidth=3.80735492206]
-		TestAddWord -> InputGridSizeAndOK [label=1 penwidth=1.0]
-		OpenCrosswordSage -> SelectMsgAndOK [label=1 penwidth=1.0]
-		Test_Q2_1 -> SaveFile [label=2 penwidth=2.0]
-		TestAddWord -> SelectWindowAndNewCrossword [label=1 penwidth=1.0]
-		Test_Q2_1 -> InputGridSizeAndOK [label=1 penwidth=1.0]
-		Test_Q2_1 -> AssertAndClickAddWord [label=1 penwidth=1.0]
-		TestSaveCrossword -> InputGridSizeAndOK [label=2 penwidth=2.0]
-		TestValidCrosswordSize -> InputGridSizeAndOK [label=3 penwidth=2.58496250072]
-		Test_Q2_1 -> ClickSuggestWordAndDbl [label=2 penwidth=2.0]
 }
