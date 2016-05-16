@@ -1,7 +1,33 @@
 // TS <-> UK
 digraph {
 	Root
+	InputPatternTextAndAssertResult [color=coral shape=box style=filled]
 	Keyword01 [color=coral shape=box style=filled]
-	"04Crossword Lab" [color=cyan3 shape=box style=filled]
-		Root -> "04Crossword Lab"
+	InputGridSize [color=coral shape=box style=filled]
+	ClickErrorSize [color=coral shape=box style=filled]
+	SaveFile [color=coral shape=box style=filled]
+	ClickSuggestListItem [color=coral shape=box style=filled]
+	ClickThreeCrossWordCells [color=coral shape=box style=filled]
+	InputWordAndClickCrosswordCell [color=coral shape=box style=filled]
+	InputAnagramTextAndAssertResult [color=coral shape=box style=filled]
+	LoadFile [color=coral shape=box style=filled]
+	ClickNewCorsswordInFile [color=coral shape=box style=filled]
+	AssertAddWordButtonExistAndSaveCrosswordEnable [color=coral shape=box style=filled]
+	ClickSolveNewWordInTools [color=coral shape=box style=filled]
+	AssertSuggestWordButtonAndSuggestListItem [color=coral shape=box style=filled]
+	"05Crossword Lab" [color=cyan3 shape=box style=filled]
+		Root -> "05Crossword Lab"
+		SaveFile -> "05Crossword Lab" [label=8 penwidth=4.0]
+		AssertAddWordButtonExistAndSaveCrosswordEnable -> "05Crossword Lab" [label=4 penwidth=3.0]
+		ClickErrorSize -> "05Crossword Lab" [label=3 penwidth=2.58496250072]
+		InputPatternTextAndAssertResult -> "05Crossword Lab" [label=5 penwidth=3.32192809489]
+		InputGridSize -> "05Crossword Lab" [label=11 penwidth=4.45943161864]
+		ClickThreeCrossWordCells -> "05Crossword Lab" [label=14 penwidth=4.80735492206]
+		ClickSolveNewWordInTools -> "05Crossword Lab" [label=4 penwidth=3.0]
+		InputWordAndClickCrosswordCell -> "05Crossword Lab" [label=43 penwidth=6.4262647547]
+		ClickSuggestListItem -> "05Crossword Lab" [label=12 penwidth=4.58496250072]
+		AssertSuggestWordButtonAndSuggestListItem -> "05Crossword Lab" [label=10 penwidth=4.32192809489]
+		ClickNewCorsswordInFile -> "05Crossword Lab" [label=5 penwidth=3.32192809489]
+		LoadFile -> "05Crossword Lab" [label=4 penwidth=3.0]
+		InputAnagramTextAndAssertResult -> "05Crossword Lab" [label=4 penwidth=3.0]
 }

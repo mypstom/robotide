@@ -596,8 +596,10 @@ class RideFrame(wx.Frame, RideEventHandler):
         tempEdgeSet = set()
         tempEdge = list()
         appearList = list()
+        nodeCount = 0
         for node in tempComponentList:
-          graphC.node("C_"+str(node), color="pink", shape="box", style="filled")
+            graphC.node("C_"+str(node), color="pink", shape="box", style="filled")
+            nodeCount +=1
 
         try:
             for df in self._get_datafile_list():
@@ -605,11 +607,13 @@ class RideFrame(wx.Frame, RideEventHandler):
                     try:
                         for testCase in df.tests:
                             graphC.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
+                            nodeCount +=1
                             try:
                                 for testStep in testCase.steps:
 
                                     if str(testStep.keyword) in user_def_keyword:
                                         graphC.node(str(testStep.keyword),color="coral", shape="box", style="filled")
+                                        nodeCount +=1
                                         tempEdge.append((str(testCase.name),str(testStep.keyword)))
 
                                     else:
@@ -629,6 +633,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                 tempCount += 1
             tempEdge.append((node[0], str(tempCount)))
             graphC.node(str(tempCount), shape="point")
+            nodeCount +=1
             tempEdge.append((str(tempCount), node[1]))
             tempNodeName = node[1]
 
@@ -646,6 +651,9 @@ class RideFrame(wx.Frame, RideEventHandler):
             #graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
 
+        coupling = str(round(len(tempEdge)/float(nodeCount -1),2))
+
+        graphC.node("Edge: "+str(len(tempEdge))+"\nNode: "+str(nodeCount)+"\nCoupling: "+coupling, style="filled", fillcolor="yellow", shape="rect", width="2", height="3", fontsize="40")
         graphC.render('C.gv',view=False)
 
 
