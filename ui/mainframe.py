@@ -18,6 +18,7 @@ import json
 import webbrowser
 import math
 import robotide
+import copy
 from operator import itemgetter, attrgetter
 from robotide.action import ActionInfoCollection, ActionFactory, SeparatorInfo
 from robotide.context import ABOUT_RIDE, SHORTCUT_KEYS
@@ -598,9 +599,11 @@ class RideFrame(wx.Frame, RideEventHandler):
         tempEdge = list()
         appearList = list()
         tempNode = set()
+        nodesWithType = dict()
         for node in tempComponentList:
             graphC.node("C_"+str(node), color="pink", shape="box", style="filled")
             tempNode.add("C_"+str(node))
+            nodesWithType["C_"+str(node)] = "Component"
 
         try:
             for df in self._get_datafile_list():
@@ -609,12 +612,14 @@ class RideFrame(wx.Frame, RideEventHandler):
                         for testCase in df.tests:
                             graphC.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
                             tempNode.add(str(testCase.name))
+                            nodesWithType[str(testCase.name)] = "Test Case"
                             try:
                                 for testStep in testCase.steps:
 
                                     if str(testStep.keyword) in user_def_keyword:
                                         graphC.node(str(testStep.keyword),color="coral", shape="box", style="filled")
                                         tempNode.add(str(testStep.keyword))
+                                        nodesWithType[str(testStep.keyword)] = "User Keyword"
                                         tempEdge.append((str(testCase.name),str(testStep.keyword)))
 
                                     else:
@@ -626,23 +631,29 @@ class RideFrame(wx.Frame, RideEventHandler):
                         print str(e)
         except Exception, e:
             print str(e)
-        tempAppear = sorted(appearList, key=itemgetter(0,1))
+        tempAppear = sorted(appearList, key=itemgetter(0, 1))
         tempCount = 0
         tempEdgeCount = 0
         tempNodeName = ''
-        for node in tempAppear:#insert ghost node to adjest the node level
+
+        tempNodeWithoutGhostNode = list(tempNode)
+        tempEdgeWithoutGhostNode = list(tempEdge)
+
+        for node in tempAppear: #insert ghost node to adjest the node level
             if tempNodeName != node[1]:
                 tempCount += 1
             tempEdge.append((node[0], str(tempCount)))
             graphC.node(str(tempCount), shape="point")
             tempEdge.append((str(tempCount), node[1]))
+            tempEdgeWithoutGhostNode.append((node[0], node[1]))
             tempNodeName = node[1]
             tempEdgeCount += 1
 
         for node2 in userKeywordObject:
             for step in node2.steps:
                 if str(step.keyword) in tempComponentList:
-                    tempEdge.append((str(node2.name), 'C_'+ str(step.keyword)))
+                    tempEdge.append((str(node2.name), 'C_' + str(step.keyword)))
+                    tempEdgeWithoutGhostNode.append((str(node2.name), 'C_' + str(step.keyword)))
 
 
         for node in tempEdge:
@@ -652,13 +663,15 @@ class RideFrame(wx.Frame, RideEventHandler):
             graphC.edge(node[0], node[1], minlen="30.0", penwidth=(tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
             #graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
-
-
         #len(tempEdgeSet)-tempCount means we should sub the ghost edges
         unWeightedCoupling = str(round((len(tempEdgeSet)-tempCount)/float(len(tempNode) -(1+7)),2))#8 is coupling node and six unused Component
 
+        self.generateD3Graph(tempEdgeWithoutGhostNode, nodesWithType, tempNodeWithoutGhostNode)
+
         graphC.node("Weighted Coupling: "+str(len(tempEdge)-tempEdgeCount)+"\nEdge: "+str(len(tempEdgeSet)-tempCount)+"\nNode: "+str(len(tempNode))+"\nUnweighted Coupling: "+unWeightedCoupling, style="filled", fillcolor="yellow", shape="rect", width="2", height="3", fontsize="40")
         graphC.render('C.gv',view=False)
+
+
 
 
     def insertScreenShot(self):
@@ -857,13 +870,33 @@ class RideFrame(wx.Frame, RideEventHandler):
             json.dump(jsonOutput,f)
         #dot.render('TestCases.gv',view=False)
         #dot_testSuiteLevel.render('testSuiteLevel.gv',view=False)
-        #self.ShowMessage('Keyword relation diagram has been saved to root folder.\n File name: TestCases.gv.pdf')
         tempDataFile = self._get_datafile_list()
         self.ShowMessage('Script:  '+ tempDataFile[0].display_name +'\nGenerate Script Graph Finish. \n Actions:' + str(actionCount))
 
     def OnIgnoreNodes(self,event):
         filename = 'file:///Bitnami/wordpress-4.4.1-0/apache2/htdocs/TSVisual/' + 'index.html'
         webbrowser.open_new_tab(filename)
+
+    def generateD3Graph(self, edges, nodesWithType, nodes):
+        jsonOutput = []
+        edgeSet =set()
+        for item in edges:
+            edgeSet.add(item)
+
+        for node in nodes:
+            tempDepend = list()
+            for item in edgeSet:
+                if item[0] == node:
+                    tempDepend.append(item[1])
+            jsonOutput.append({
+                    "depends": tempDepend,
+                    "type": nodesWithType[node],
+                    "name": node
+            })
+        with open('component.json','w+') as f:
+            json.dump(jsonOutput,f)
+
+        print jsonOutput
 
     def _get_datafile_list(self):
         return [df for df in self._controller.datafiles]
