@@ -319,7 +319,8 @@ class RideFrame(wx.Frame, RideEventHandler):
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword: #record all of using UK
-                                        tempSuiteUseUserKeyword.append( user_def_keyword[str(testStep.keyword)] )
+                                        if user_def_keyword[str(testStep.keyword)] != str(df.display_name):
+                                            tempSuiteUseUserKeyword.append(user_def_keyword[str(testStep.keyword)])
                             except Exception, e:
                                 print str(e)
 
@@ -596,10 +597,10 @@ class RideFrame(wx.Frame, RideEventHandler):
         tempEdgeSet = set()
         tempEdge = list()
         appearList = list()
-        nodeCount = 0
+        tempNode = set()
         for node in tempComponentList:
             graphC.node("C_"+str(node), color="pink", shape="box", style="filled")
-            nodeCount +=1
+            tempNode.add("C_"+str(node))
 
         try:
             for df in self._get_datafile_list():
@@ -607,13 +608,13 @@ class RideFrame(wx.Frame, RideEventHandler):
                     try:
                         for testCase in df.tests:
                             graphC.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
-                            nodeCount +=1
+                            tempNode.add(str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
 
                                     if str(testStep.keyword) in user_def_keyword:
                                         graphC.node(str(testStep.keyword),color="coral", shape="box", style="filled")
-                                        nodeCount +=1
+                                        tempNode.add(str(testStep.keyword))
                                         tempEdge.append((str(testCase.name),str(testStep.keyword)))
 
                                     else:
@@ -627,33 +628,36 @@ class RideFrame(wx.Frame, RideEventHandler):
             print str(e)
         tempAppear = sorted(appearList, key=itemgetter(0,1))
         tempCount = 0
+        tempEdgeCount = 0
         tempNodeName = ''
-        for node in tempAppear:
+        for node in tempAppear:#insert ghost node to adjest the node level
             if tempNodeName != node[1]:
                 tempCount += 1
             tempEdge.append((node[0], str(tempCount)))
             graphC.node(str(tempCount), shape="point")
-            nodeCount +=1
             tempEdge.append((str(tempCount), node[1]))
             tempNodeName = node[1]
+            tempEdgeCount += 1
 
         for node2 in userKeywordObject:
             for step in node2.steps:
                 if str(step.keyword) in tempComponentList:
-                    tempEdge.append((str(node2.name),'C_'+ str(step.keyword)))
+                    tempEdge.append((str(node2.name), 'C_'+ str(step.keyword)))
 
 
         for node in tempEdge:
             tempEdgeSet.add(node)
 
         for node in tempEdgeSet:
-            graphC.edge(node[0], node[1], minlen="30.0", penwidth=( tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
+            graphC.edge(node[0], node[1], minlen="30.0", penwidth=(tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
             #graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
 
-        coupling = str(round(len(tempEdge)/float(nodeCount -1),2))
 
-        graphC.node("Edge: "+str(len(tempEdge))+"\nNode: "+str(nodeCount)+"\nCoupling: "+coupling, style="filled", fillcolor="yellow", shape="rect", width="2", height="3", fontsize="40")
+        #len(tempEdgeSet)-tempCount means we should sub the ghost edges
+        unWeightedCoupling = str(round((len(tempEdgeSet)-tempCount)/float(len(tempNode) -(1+7)),2))#8 is coupling node and six unused Component
+
+        graphC.node("Weighted Coupling: "+str(len(tempEdge)-tempEdgeCount)+"\nEdge: "+str(len(tempEdgeSet)-tempCount)+"\nNode: "+str(len(tempNode))+"\nUnweighted Coupling: "+unWeightedCoupling, style="filled", fillcolor="yellow", shape="rect", width="2", height="3", fontsize="40")
         graphC.render('C.gv',view=False)
 
 
