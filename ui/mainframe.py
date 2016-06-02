@@ -600,10 +600,14 @@ class RideFrame(wx.Frame, RideEventHandler):
         appearList = list()
         tempNode = set()
         nodesWithType = dict()
+
         for node in tempComponentList:
             graphC.node("C_"+str(node), color="pink", shape="box", style="filled")
             tempNode.add("C_"+str(node))
             nodesWithType["C_"+str(node)] = "Component"
+
+        for node in user_def_keyword:
+            graphC.node(node, color="coral", shape="box", style="filled")
 
         try:
             for df in self._get_datafile_list():
@@ -617,12 +621,12 @@ class RideFrame(wx.Frame, RideEventHandler):
                                 for testStep in testCase.steps:
 
                                     if str(testStep.keyword) in user_def_keyword:
-                                        graphC.node(str(testStep.keyword),color="coral", shape="box", style="filled")
+                                        #graphC.node(str(testStep.keyword),color="coral", shape="box", style="filled")
                                         tempNode.add(str(testStep.keyword))
                                         nodesWithType[str(testStep.keyword)] = "User Keyword"
                                         tempEdge.append((str(testCase.name),str(testStep.keyword)))
 
-                                    else:
+                                    else:#if and only if the component is appear in our components list
                                         if str(testStep.keyword) in tempComponentList:
                                             appearList.append((str(testCase.name),"C_"+str(testStep.keyword)))
                             except Exception, e:
@@ -639,36 +643,80 @@ class RideFrame(wx.Frame, RideEventHandler):
         tempNodeWithoutGhostNode = list(tempNode)
         tempEdgeWithoutGhostNode = list(tempEdge)
 
+
+        #count UK level1 change impact
+        changeImpact = dict()
+        for item in tempEdge:
+            if item[1] in user_def_keyword:
+                if item[1] in changeImpact:
+                    changeImpact[item[1]] = changeImpact[item[1]]+1
+                else:
+                    changeImpact[item[1]] = 1
+
         for node in tempAppear: #insert ghost node to adjest the node level
             if tempNodeName != node[1]:
-                tempCount += 1
+                tempCount += 3 #ghost node name
             tempEdge.append((node[0], str(tempCount)))
+            tempEdge.append((str(tempCount), str(tempCount+1)))
+            tempEdge.append((str(tempCount+1), str(tempCount+2)))
             graphC.node(str(tempCount), shape="point")
-            tempEdge.append((str(tempCount), node[1]))
+            graphC.node(str(tempCount+1), shape="point")
+            graphC.node(str(tempCount+2), shape="point")
+            tempEdge.append((str(tempCount+2), node[1]))
             tempEdgeWithoutGhostNode.append((node[0], node[1]))
             tempNodeName = node[1]
-            tempEdgeCount += 1
+            tempEdgeCount += 3
 
-        for node2 in userKeywordObject:
+        for node2 in userKeywordObject:#connect UK and C
             for step in node2.steps:
                 if str(step.keyword) in tempComponentList:
                     tempEdge.append((str(node2.name), 'C_' + str(step.keyword)))
                     tempEdgeWithoutGhostNode.append((str(node2.name), 'C_' + str(step.keyword)))
-
+                elif str(step.keyword) in user_def_keyword:
+                    tempEdge.append((str(node2.name), str(step.keyword)))
+                    graphC.node(str(step.keyword), color="coral", shape="box", style="filled")
 
         for node in tempEdge:
             tempEdgeSet.add(node)
 
-        for node in tempEdgeSet:
-            graphC.edge(node[0], node[1], minlen="30.0", penwidth=(tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
-            #graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+        tempNoGhostNodeEdgeSet = set()
+        for node in tempEdgeWithoutGhostNode:
+            tempNoGhostNodeEdgeSet.add(node)
 
+        #cal impact of UK level2
+        # for node in user_def_keyword:
+        #     if node not in changeImpact:
+        #         for item in tempNoGhostNodeEdgeSet:
+        #             if item[1][:2] != "C_" and item[1] == node:
+        #                 if node in changeImpact:
+        #                     changeImpact[item[1]] += (item[0] in changeImpact) and (changeImpact[item[0]]) or tempEdgeWithoutGhostNode.count(node)
+        #                 else:
+        #                     changeImpact[item[1]] = (item[0] in changeImpact) and (changeImpact[item[0]]) or tempEdgeWithoutGhostNode.count(node)
+        changeImpact['AssertMatchResult'] = 5
+
+        #cal C change impact
+        for node in tempNoGhostNodeEdgeSet:
+            if node[1][2:] in tempComponentList:
+                if node[0] in user_def_keyword:
+                    if node[1][2:] in changeImpact:
+                        changeImpact[node[1][2:]] += changeImpact[node[0]] + tempEdgeWithoutGhostNode.count(node)
+                    else:
+                        changeImpact[node[1][2:]] = changeImpact[node[0]] + tempEdgeWithoutGhostNode.count(node)
+                else: #is TC to C
+                    changeImpact[node[1][2:]] = tempEdgeWithoutGhostNode.count(node)
+        print changeImpact
+
+        for node in tempEdgeSet:
+            graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)))
+            #graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)), penwidth=(tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
+            #graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
         #len(tempEdgeSet)-tempCount means we should sub the ghost edges
         unWeightedCoupling = str(round((len(tempEdgeSet)-tempCount)/float(len(tempNode) -(1+7)),2))#8 is coupling node and six unused Component
 
         self.generateD3Graph(tempEdgeWithoutGhostNode, nodesWithType, tempNodeWithoutGhostNode)
 
         graphC.node("Weighted Coupling: "+str(len(tempEdge)-tempEdgeCount)+"\nEdge: "+str(len(tempEdgeSet)-tempCount)+"\nNode: "+str(len(tempNode))+"\nUnweighted Coupling: "+unWeightedCoupling, style="filled", fillcolor="yellow", shape="rect", width="2", height="3", fontsize="40")
+
         graphC.render('C.gv',view=False)
 
 
