@@ -644,36 +644,28 @@ class RideFrame(wx.Frame, RideEventHandler):
         tempEdgeWithoutGhostNode = list(tempEdge)
 
 
-        #count UK level1 change impact
-        changeImpact = dict()
-        for item in tempEdge:
-            if item[1] in user_def_keyword:
-                if item[1] in changeImpact:
-                    changeImpact[item[1]] = changeImpact[item[1]]+1
-                else:
-                    changeImpact[item[1]] = 1
+
+
+
 
         for node in tempAppear: #insert ghost node to adjest the node level
             if tempNodeName != node[1]:
-                tempCount += 3 #ghost node name
+                tempCount += 1 #ghost node name
             tempEdge.append((node[0], str(tempCount)))
-            tempEdge.append((str(tempCount), str(tempCount+1)))
-            tempEdge.append((str(tempCount+1), str(tempCount+2)))
             graphC.node(str(tempCount), shape="point")
-            graphC.node(str(tempCount+1), shape="point")
-            graphC.node(str(tempCount+2), shape="point")
-            tempEdge.append((str(tempCount+2), node[1]))
+            tempEdge.append((str(tempCount), node[1]))
             tempEdgeWithoutGhostNode.append((node[0], node[1]))
             tempNodeName = node[1]
-            tempEdgeCount += 3
+            tempEdgeCount += 1
 
-        for node2 in userKeywordObject:#connect UK and C
+        for node2 in userKeywordObject:#connect UK and C and UK UK
             for step in node2.steps:
                 if str(step.keyword) in tempComponentList:
                     tempEdge.append((str(node2.name), 'C_' + str(step.keyword)))
                     tempEdgeWithoutGhostNode.append((str(node2.name), 'C_' + str(step.keyword)))
                 elif str(step.keyword) in user_def_keyword:
                     tempEdge.append((str(node2.name), str(step.keyword)))
+                    tempEdgeWithoutGhostNode.append((str(node2.name), str(step.keyword)))
                     graphC.node(str(step.keyword), color="coral", shape="box", style="filled")
 
         for node in tempEdge:
@@ -683,28 +675,33 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdgeWithoutGhostNode:
             tempNoGhostNodeEdgeSet.add(node)
 
-        #cal impact of UK level2
-        # for node in user_def_keyword:
-        #     if node not in changeImpact:
-        #         for item in tempNoGhostNodeEdgeSet:
-        #             if item[1][:2] != "C_" and item[1] == node:
-        #                 if node in changeImpact:
-        #                     changeImpact[item[1]] += (item[0] in changeImpact) and (changeImpact[item[0]]) or tempEdgeWithoutGhostNode.count(node)
-        #                 else:
-        #                     changeImpact[item[1]] = (item[0] in changeImpact) and (changeImpact[item[0]]) or tempEdgeWithoutGhostNode.count(node)
-        changeImpact['AssertMatchResult'] = 5
+        #calculate the changing impact
+        changeImpact = dict()
+        for uk in user_def_keyword:
+            changeImpact[uk] = [False,0,list()]
+        for edge in tempNoGhostNodeEdgeSet:
+            if str(edge[1]) in user_def_keyword:
+                changeImpact[edge[1]][2].append(str(edge[0]))
+        finishTag = True
+        while finishTag:
+            finishTag = False
+            for uk in user_def_keyword:
+                if len(changeImpact[uk][2]) != 0:
+                    for node in changeImpact[uk][2]:
+                        if node in user_def_keyword:
+                            if changeImpact[node][0]: #get Impact finished UK
+                                changeImpact[uk][1] += changeImpact[node][1] + tempEdgeWithoutGhostNode.count((node,uk))
+                                changeImpact[uk][2].remove(node)
+                        else: #is TC
+                            changeImpact[uk][1] += tempEdgeWithoutGhostNode.count((node,uk))
+                            changeImpact[uk][2].remove(node)
+                    finishTag = True
+                else:
+                    changeImpact[uk][0] = True
 
-        #cal C change impact
-        for node in tempNoGhostNodeEdgeSet:
-            if node[1][2:] in tempComponentList:
-                if node[0] in user_def_keyword:
-                    if node[1][2:] in changeImpact:
-                        changeImpact[node[1][2:]] += changeImpact[node[0]] + tempEdgeWithoutGhostNode.count(node)
-                    else:
-                        changeImpact[node[1][2:]] = changeImpact[node[0]] + tempEdgeWithoutGhostNode.count(node)
-                else: #is TC to C
-                    changeImpact[node[1][2:]] = tempEdgeWithoutGhostNode.count(node)
         print changeImpact
+
+
 
         for node in tempEdgeSet:
             graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)))
