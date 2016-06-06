@@ -676,30 +676,41 @@ class RideFrame(wx.Frame, RideEventHandler):
             tempNoGhostNodeEdgeSet.add(node)
 
         #calculate the changing impact
-        changeImpact = dict()
+        ukChangeImpact = dict()
         for uk in user_def_keyword:
-            changeImpact[uk] = [False,0,list()]
+            ukChangeImpact[uk] = [False,0,list()]
         for edge in tempNoGhostNodeEdgeSet:
             if str(edge[1]) in user_def_keyword:
-                changeImpact[edge[1]][2].append(str(edge[0]))
+                ukChangeImpact[edge[1]][2].append(str(edge[0]))
         finishTag = True
         while finishTag:
             finishTag = False
             for uk in user_def_keyword:
-                if len(changeImpact[uk][2]) != 0:
-                    for node in changeImpact[uk][2]:
+                if len(ukChangeImpact[uk][2]) != 0:
+                    for node in ukChangeImpact[uk][2]:
                         if node in user_def_keyword:
-                            if changeImpact[node][0]: #get Impact finished UK
-                                changeImpact[uk][1] += changeImpact[node][1] + tempEdgeWithoutGhostNode.count((node,uk))
-                                changeImpact[uk][2].remove(node)
+                            if ukChangeImpact[node][0]: #get Impact finished UK
+                                ukChangeImpact[uk][1] += ukChangeImpact[node][1] + tempEdgeWithoutGhostNode.count((node,uk))
+                                ukChangeImpact[uk][2].remove(node)
                         else: #is TC
-                            changeImpact[uk][1] += tempEdgeWithoutGhostNode.count((node,uk))
-                            changeImpact[uk][2].remove(node)
+                            ukChangeImpact[uk][1] += tempEdgeWithoutGhostNode.count((node,uk))
+                            ukChangeImpact[uk][2].remove(node)
                     finishTag = True
                 else:
-                    changeImpact[uk][0] = True
+                    ukChangeImpact[uk][0] = True
 
-        print changeImpact
+        componentChangeImpact = dict()
+        for c in tempComponentList:
+            componentChangeImpact[c] = 0
+            for node in tempNoGhostNodeEdgeSet:
+                if node[1] == "C_"+c:
+                    if node[0] in user_def_keyword:
+                        componentChangeImpact[c] += ukChangeImpact[node[0]][1] + tempEdgeWithoutGhostNode.count(node)
+                    else:
+                        componentChangeImpact[c] += tempEdgeWithoutGhostNode.count(node)
+
+
+        print componentChangeImpact
 
 
 
