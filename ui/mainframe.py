@@ -710,17 +710,15 @@ class RideFrame(wx.Frame, RideEventHandler):
                     else:
                         componentChangeImpact[c] += tempEdgeWithoutGhostNode.count(node)
 
-
-        print componentChangeImpact
-
         #combine same component
-
         f = open('componentList.txt')
         samelist = f.read().splitlines()
         checkSameList = dict()
         for item in samelist:
             checkSameList["C_"+item.split()[0]] = "C_"+item.split()[1]
-
+        for node in checkSameList:
+            componentChangeImpact[node[2:]] += componentChangeImpact[checkSameList[node][2:]]
+            componentChangeImpact[checkSameList[node][2:]] = 0
 
 
         for node in tempEdgeSet:
