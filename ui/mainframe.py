@@ -594,6 +594,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         return UKLKCount
 
     def listComponent(self, user_def_keyword, tempComponentList, userKeywordObject):
+
         graphC = graphviz.Graph(comment='Component-only', engine='dot', graph_attr={'splines': 'false'} )
         tempEdgeSet = set()
         tempEdge = list()
@@ -712,10 +713,18 @@ class RideFrame(wx.Frame, RideEventHandler):
 
         print componentChangeImpact
 
+        #combine same component
+
+        f = open('componentList.txt')
+        samelist = f.read().splitlines()
+        checkSameList = dict()
+        for item in samelist:
+            checkSameList["C_"+item.split()[0]] = "C_"+item.split()[1]
+
 
 
         for node in tempEdgeSet:
-            graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)))
+            graphC.edge(node[0] in checkSameList and checkSameList[node[0]] or node[0], node[1] in checkSameList and checkSameList[node[1]] or node[1], minlen="30.0", label=str(tempEdge.count(node)))
             #graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)), penwidth=(tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
             #graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
         #len(tempEdgeSet)-tempCount means we should sub the ghost edges
@@ -724,6 +733,9 @@ class RideFrame(wx.Frame, RideEventHandler):
         self.generateD3Graph(tempEdgeWithoutGhostNode, nodesWithType, tempNodeWithoutGhostNode)
 
         graphC.node("Weighted Coupling: "+str(len(tempEdge)-tempEdgeCount)+"\nEdge: "+str(len(tempEdgeSet)-tempCount)+"\nNode: "+str(len(tempNode))+"\nUnweighted Coupling: "+unWeightedCoupling, style="filled", fillcolor="yellow", shape="rect", width="2", height="3", fontsize="40")
+
+
+
 
         graphC.render('C.gv',view=False)
 
