@@ -716,10 +716,14 @@ class RideFrame(wx.Frame, RideEventHandler):
         checkSameList = dict()
         for item in samelist:
             checkSameList["C_"+item.split()[0]] = "C_"+item.split()[1]
+        tempClearNode = list()
         for node in checkSameList:
-            componentChangeImpact[node[2:]] += componentChangeImpact[checkSameList[node][2:]]
-            componentChangeImpact[checkSameList[node][2:]] = 0
+            componentChangeImpact[checkSameList[node][2:]] += componentChangeImpact[node[2:]]
+            tempClearNode.append(node[2:])
+        for node in tempClearNode:
+            componentChangeImpact[node] = 0
 
+        print componentChangeImpact
 
         for node in tempEdgeSet:
             graphC.edge(node[0] in checkSameList and checkSameList[node[0]] or node[0], node[1] in checkSameList and checkSameList[node[1]] or node[1], minlen="30.0", label=str(tempEdge.count(node)))
