@@ -66,8 +66,9 @@ _menudata = """
 !Release notes | Shows release notes
 !About | Information about RIDE
 
-[Graphic Tool]
-!Test Suite Use Keyword | Generate the diagram of test suite use the keyword
+[KDT Test Script Visualizer]
+!Hierarchical Graph | Generate the Hierarchical Graph
+!Fully Graph Data | Generate the Fully Graph
 !Insert Screenshot Keyword Into Script | Insert screenshot keyword into scripts
 !Ignore Nodes | Ignore
 """
@@ -676,7 +677,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdgeWithoutGhostNode:
             tempNoGhostNodeEdgeSet.add(node)
 
-        #calculate the changing impact
+        #calculate the changing impact(full size)
         ukChangeImpact = dict()
         for uk in user_def_keyword:
             ukChangeImpact[uk] = [False,0,list()]
@@ -710,23 +711,34 @@ class RideFrame(wx.Frame, RideEventHandler):
                     else:
                         componentChangeImpact[c] += tempEdgeWithoutGhostNode.count(node)
 
-        #combine same component
-        f = open('componentList.txt')
-        samelist = f.read().splitlines()
-        checkSameList = dict()
-        for item in samelist:
-            checkSameList["C_"+item.split()[0]] = "C_"+item.split()[1]
-        tempClearNode = list()
-        for node in checkSameList:
-            componentChangeImpact[checkSameList[node][2:]] += componentChangeImpact[node[2:]]
-            tempClearNode.append(node[2:])
-        for node in tempClearNode:
-            componentChangeImpact[node] = 0
 
-        print componentChangeImpact
+        #calculate the level1 change impact
+        lv1CI = 0
+        for node in tempEdgeWithoutGhostNode:
+            if node[1][2:] in tempComponentList:
+                lv1CI +=1
+        print str(lv1CI) + "  :CI"
+
+        #combine same component
+        combineTag = True
+        if combineTag:
+            f = open('componentList.txt')
+            samelist = f.read().splitlines()
+            checkSameList = dict()
+            for item in samelist:
+                checkSameList["C_"+item.split()[0]] = "C_"+item.split()[1]
+            tempClearNode = list()
+            for node in checkSameList:
+                componentChangeImpact[checkSameList[node][2:]] += componentChangeImpact[node[2:]]
+                tempClearNode.append(node[2:])
+            for node in tempClearNode:
+                componentChangeImpact[node] = 0
 
         for node in tempEdgeSet:
-            graphC.edge(node[0] in checkSameList and checkSameList[node[0]] or node[0], node[1] in checkSameList and checkSameList[node[1]] or node[1], minlen="30.0", label=str(tempEdge.count(node)))
+            if not combineTag:
+                graphC.edge(node[0],node[1], minlen="30.0", label=str(tempEdge.count(node)))
+            else:
+                graphC.edge(node[0] in checkSameList and checkSameList[node[0]] or node[0], node[1] in checkSameList and checkSameList[node[1]] or node[1], minlen="30.0", label=str(tempEdge.count(node)))
             #graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)), penwidth=(tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
             #graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
         #len(tempEdgeSet)-tempCount means we should sub the ghost edges
@@ -736,8 +748,14 @@ class RideFrame(wx.Frame, RideEventHandler):
 
         graphC.node("Weighted Coupling: "+str(len(tempEdge)-tempEdgeCount)+"\nEdge: "+str(len(tempEdgeSet)-tempCount)+"\nNode: "+str(len(tempNode))+"\nUnweighted Coupling: "+unWeightedCoupling, style="filled", fillcolor="yellow", shape="rect", width="2", height="3", fontsize="40")
 
+        tempString = ""
+        totalImapct = 0
+        for node in componentChangeImpact:
+            if componentChangeImpact[node] != 0:
+                totalImapct += componentChangeImpact[node]
+                tempString += node +": "+ str(componentChangeImpact[node])+"\n"
 
-
+        graphC.node("Change Impact: \n" + tempString+"\nTotalImpact: "+ str(totalImapct), style="filled", fillcolor="lightblue", shape="rect", width="2", height="3", fontsize="40")
 
         graphC.render('C.gv',view=False)
 
@@ -764,7 +782,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         except Exception, e:
             print str(e)
 
-    def OnTestSuiteUseKeyword(self,event):
+    def OnHierarchicalGraph(self,event):
         self.insertScreenShot()
         f = open('node_display_config.txt')
         blacklist = f.read().splitlines()
@@ -946,6 +964,9 @@ class RideFrame(wx.Frame, RideEventHandler):
     def OnIgnoreNodes(self,event):
         filename = 'file:///Bitnami/wordpress-4.4.1-0/apache2/htdocs/TSVisual/' + 'index.html'
         webbrowser.open_new_tab(filename)
+
+    def OnFullyGraphData(self):
+        return
 
     def generateD3Graph(self, edges, nodesWithType, nodes):
         jsonOutput = []
