@@ -755,7 +755,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                 totalImapct += componentChangeImpact[node]
                 tempString += node +": "+ str(componentChangeImpact[node])+"\n"
 
-        graphC.node("Change Impact: \n" + tempString+"\nTotalImpact: "+ str(totalImapct), style="filled", fillcolor="lightblue", shape="rect", width="2", height="3", fontsize="40")
+        graphC.node("Change Impact: \n" + tempString+"\nTotal Fully Impact: "+ str(totalImapct) + "\nDirect Change Imapct: "+ str(lv1CI), style="filled", fillcolor="lightblue", shape="rect", width="2", height="3", fontsize="40")
 
         graphC.render('C.gv',view=False)
 

@@ -1,6 +1,6 @@
 // TS <-> TS
 digraph {
 	Root
-	"03Crossword Lab" [color=cyan3 shape=box style=filled]
-		Root -> "03Crossword Lab"
+	"05Crossword Lab" [color=cyan3 shape=box style=filled]
+		Root -> "05Crossword Lab"
 }
