@@ -41,6 +41,8 @@ from .progress import LoadProgressObserver
 import graphviz
 from graphviz import Graph
 
+from shutil import copyfile
+
 _menudata = """
 [File]
 !&New Project | Create a new top level suite | Ctrlcmd-N
@@ -66,11 +68,8 @@ _menudata = """
 !Release notes | Shows release notes
 !About | Information about RIDE
 
-[KDT Test Script Visualizer]
-!Hierarchical Graph | Generate the Hierarchical Graph
-!Fully Graph Data | Generate the Fully Graph
-!Insert Screenshot Keyword Into Script | Insert screenshot keyword into scripts
-!Ignore Nodes | Ignore
+[KTV]
+!Generate Graph | Generate the Hierarchical Graph
 """
 
 
@@ -334,29 +333,23 @@ class RideFrame(wx.Frame, RideEventHandler):
                         print str(e)
         except Exception, e:
             print str(e)
-        graphTS2TS.render('TS2TS.gv',view=False)
+        graphTS2TS.render('KTVgraph/TS2TS.gv',view=False)
+        #copyfile('KTVgraph/TS2TS.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TS2TS.gv.pdf')
 
     def relationBetweenTSandTC(self,user_def_keyword,testSuites):
-        graphTS2TC = graphviz.Digraph(comment='TS <-> TC', engine='dot')
-        graphTS2TC.node('Root')
+        graphTS2TC = graphviz.Digraph(comment='TS <-> TC', engine='sfdp')
+        #graphTS2TC.node('Root')
         tempEdge = list()
         tempEdgeSet = set()
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
                     graphTS2TC.node(str(df.display_name), color="cyan3", shape="box", style="filled")
-                    graphTS2TC.edge('Root',str(df.display_name))
+                    #graphTS2TC.edge('Root',str(df.display_name))
                     try: #add Test case level
                         for testCase in df.tests:
                             graphTS2TC.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
-                            graphTS2TC.edge(str(df.display_name),str(testCase.name))
-                            try:
-                                for testStep in testCase.steps:
-                                    if str(testStep.keyword) in user_def_keyword: #record all of using UK
-                                        tempEdge.append((str(testCase.name), user_def_keyword[str(testStep.keyword)]))
-                                        #graphTS2TC.edge(str(testCase.name), user_def_keyword[str(testStep.keyword)])
-                            except Exception, e:
-                                print str(e)
+                            graphTS2TC.edge(str(df.display_name),str(testCase.name), len="10")
                     except Exception, e:
                         print str(e)
         except Exception, e:
@@ -364,12 +357,13 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTS2TC.edge(node[0], node[1], label=str(tempEdge.count(node)), penwidth=str(math.log(tempEdge.count(node),2)+1))
-        graphTS2TC.render('TS2TC.gv',view=False)
+            graphTS2TC.edge(node[0], node[1], label=str(tempEdge.count(node)))
+        graphTS2TC.render('KTVgraph/TS2TC.gv',view=False)
+        copyfile('KTVgraph/TS2TC.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TS2TC.gv.pdf')
 
     def relationBetweenTSandUK(self,user_def_keyword,testSuites):
-        graphTS2UK = graphviz.Digraph(comment='TS <-> UK', engine='fdp')
-        graphTS2UK.node('Root')
+        graphTS2UK = graphviz.Digraph(comment='TS <-> UK', engine='sfdp')
+        #graphTS2UK.node('Root')
         tempEdge = list()
         tempEdgeSet = set()
         for node in user_def_keyword:
@@ -378,13 +372,13 @@ class RideFrame(wx.Frame, RideEventHandler):
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
                     graphTS2UK.node(str(df.display_name), color="cyan3", shape="box", style="filled")
-                    graphTS2UK.edge('Root',str(df.display_name))
+                    #graphTS2UK.edge('Root',str(df.display_name))
                     try: #add Test case level
                         for testCase in df.tests:
                             try:
                                 for testStep in testCase.steps:
                                     if str(testStep.keyword) in user_def_keyword: #record all of using UK
-                                        tempEdge.append((str(testStep.keyword),str(df.display_name)))
+                                        tempEdge.append((str(df.display_name),str(testStep.keyword)))
                                         #graphTS2UK.edge(str(testStep.keyword),str(df.display_name))
                             except Exception, e:
                                 print str(e)
@@ -396,31 +390,31 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTS2UK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
-
-        graphTS2UK.render('TS2UK.gv',view=False)
+            #graphTS2UK.edge(node[0], node[1], minlen="10", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            graphTS2UK.edge(node[0], node[1], len="10.0", label=str(tempEdge.count(node)))
+        graphTS2UK.render('KTVgraph/TS2UK.gv',view=False)
+        copyfile('KTVgraph/TS2UK.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TS2UK.gv.pdf')
 
     def relationBetweenTSandK(self,user_def_keyword,testSuites):
         graphTS2K = graphviz.Digraph(comment='TS <-> K', engine='fdp')
-        graphTS2K.node('Root')
         tempEdge = list()
         tempEdgeSet = set()
-        for node in user_def_keyword:
-            graphTS2K.node(str(node))
+        #  for node in user_def_keyword:
+        #  graphTS2K.node(str(node))
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
-                    graphTS2K.node(str(df.display_name),color="lightgray", shape="box", style="filled")
-                    graphTS2K.edge('Root',str(df.display_name))
+                    graphTS2K.node(str(df.display_name),color="cyan3", shape="box", style="filled")
                     try: #add Test case level
                         for testCase in df.tests:
                             try:
                                 for testStep in testCase.steps:
-                                    if str(testStep.keyword) in user_def_keyword: #record all of using UK
-                                        graphTS2K.node(str(testStep.keyword),color="coral", shape="box", style="filled")
-                                    else:
-                                        graphTS2K.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
-                                    tempEdge.append((str(testStep.keyword),str(df.display_name)))
+                                    #if str(testStep.keyword) in user_def_keyword: #record all of using UK
+                                        #graphTS2K.node(str(testStep.keyword),color="coral", shape="box", style="filled")
+                                    #else:
+                                        #graphTS2K.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
+                                    graphTS2K.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
+                                    tempEdge.append((str(df.display_name),str(testStep.keyword)))
                                     #graphTS2K.edge(str(testStep.keyword),str(df.display_name))
                             except Exception, e:
                                 print str(e)
@@ -432,13 +426,15 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTS2K.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            #graphTS2K.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            graphTS2K.edge(node[0], node[1], label=str(tempEdge.count(node)))
 
 
-        graphTS2K.render('TS2K.gv',view=False)
+        graphTS2K.render('KTVgraph/TS2K.gv',view=False)
+        copyfile('KTVgraph/TS2K.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TS2K.gv.pdf')
 
     def relationBetweenTCandUK(self,user_def_keyword,testSuites):
-        graphTC2UK = graphviz.Digraph(comment='TC <-> UK', engine='dot')
+        graphTC2UK = graphviz.Digraph(comment='TC <-> UK', engine='sfdp')
         graphTC2UK.node('Root')
 
         tempEdge = list()
@@ -469,10 +465,11 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdge:
             tempEdgeSet.add(node)
         for node in tempEdgeSet:
-            graphTC2UK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            #graphTC2UK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            graphTC2UK.edge(node[0], node[1], len="10.0", label=str(tempEdge.count(node)))
 
-
-        graphTC2UK.render('TC2UK.gv',view=False)
+        graphTC2UK.render('KTVgraph/TC2UK.gv',view=False)
+        copyfile('KTVgraph/TC2UK.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TC2UK.gv.pdf')
 
     def relationBetweenTCandLK(self,user_def_keyword,testSuites):
         graphTC2LK = graphviz.Digraph(comment='TC <-> LK', engine='fdp')
@@ -506,7 +503,8 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdgeSet:
             graphTC2LK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
-        graphTC2LK.render('TC2LK.gv',view=False)
+        graphTC2LK.render('KTVgraph/TC2LK.gv',view=False)
+        copyfile('KTVgraph/TC2LK.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TC2LK.gv.pdf')
 
     def relationBetweenTCandK(self,user_def_keyword,testSuites):
         graphTC2K = graphviz.Digraph(comment='TC <-> K', engine='dot')
@@ -544,7 +542,8 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdgeSet:
             graphTC2K.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
 
-        graphTC2K.render('TC2K.gv',view=False)
+        graphTC2K.render('KTVgraph/TC2K.gv',view=False)
+        #copyfile('KTVgraph/TC2K.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TC2K.gv.pdf')
         return tempAllStep
 
     def relationBetweenUKandLK(self,user_def_keyword, userKeywordObject):
@@ -565,8 +564,8 @@ class RideFrame(wx.Frame, RideEventHandler):
                                         graphUK2LK.node(str(testStep.keyword),color="coral", shape="box", style="filled")
                                         tempEdge.append(('Root',str(testStep.keyword)))
                                         #graphUK2LK.edge('Root',str(testStep.keyword))
-                                    else:
-                                        graphUK2LK.node(str(testStep.keyword), color="bisque", shape="box", style="filled")
+                                    '''else:
+                                        graphUK2LK.node(str(testStep.keyword), color="bisque", shape="box", style="filled")'''
                             except Exception, e:
                                 print str(e)
 
@@ -588,10 +587,12 @@ class RideFrame(wx.Frame, RideEventHandler):
 
         UKLKCount = dict()
         for node in tempEdgeSet:
-            graphUK2LK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            #graphUK2LK.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+            graphUK2LK.edge(node[0], node[1], label=str(tempEdge.count(node)))
             UKLKCount[node[0]] = tempEdge.count(node)
 
-        graphUK2LK.render('UK2LK.gv',view=False)
+        graphUK2LK.render('KTVgraph/UK2LK.gv',view=False)
+        copyfile('KTVgraph/UK2LK.gv.pdf', 'C:/wamp64/www/TSVisual/graph/UK2LK.gv.pdf')
         return UKLKCount
 
     def listComponent(self, user_def_keyword, tempComponentList, userKeywordObject):
@@ -644,10 +645,6 @@ class RideFrame(wx.Frame, RideEventHandler):
 
         tempNodeWithoutGhostNode = list(tempNode)
         tempEdgeWithoutGhostNode = list(tempEdge)
-
-
-
-
 
 
         for node in tempAppear: #insert ghost node to adjest the node level
@@ -712,12 +709,17 @@ class RideFrame(wx.Frame, RideEventHandler):
                         componentChangeImpact[c] += tempEdgeWithoutGhostNode.count(node)
 
 
-        #calculate the level1 change impact
+        #calculate the directly change impact
         lv1CI = 0
+        componentCI = dict()
+        for node in tempComponentList:
+            componentCI[node] = 0
         for node in tempEdgeWithoutGhostNode:
             if node[1][2:] in tempComponentList:
+                componentCI[node[1][2:]] += 1
                 lv1CI +=1
         print str(lv1CI) + "  :CI"
+
 
         #combine same component
         combineTag = True
@@ -754,12 +756,18 @@ class RideFrame(wx.Frame, RideEventHandler):
             if componentChangeImpact[node] != 0:
                 totalImapct += componentChangeImpact[node]
                 tempString += node +": "+ str(componentChangeImpact[node])+"\n"
+        tempCIString=""
+        for node in componentCI:
+            if componentCI[node] != 0:
+                tempCIString  += (node+": " + str(componentCI[node]) +"\n")
 
-        graphC.node("Change Impact: \n" + tempString+"\nTotal Fully Impact: "+ str(totalImapct) + "\nDirect Change Imapct: "+ str(lv1CI), style="filled", fillcolor="lightblue", shape="rect", width="2", height="3", fontsize="40")
 
-        graphC.render('C.gv',view=False)
+        graphC.node("Level 3 change Impact: \n" + tempString+"\nTotal Impact: "+ str(totalImapct), style="filled", fillcolor="lightblue", shape="rect", width="2", height="3", fontsize="40")
+        graphC.node("Level 1 change Impact: \n"+ tempCIString+ "\nTotal Imapct: "+ str(lv1CI), style="filled", fillcolor="lightblue2", shape="rect", width="2", height="3", fontsize="40")
 
-
+        webbrowser.open('http://localhost/TSVisual/index.html')
+        graphC.render('KTVgraph/C.gv',view=False)
+        copyfile('KTVgraph/C.gv.pdf', 'C:/wamp64/www/TSVisual/graph/C.gv.pdf')
 
 
     def insertScreenShot(self):
@@ -782,7 +790,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         except Exception, e:
             print str(e)
 
-    def OnHierarchicalGraph(self,event):
+    def OnGenerateGraph(self,event):
         self.insertScreenShot()
         f = open('node_display_config.txt')
         blacklist = f.read().splitlines()

@@ -35,7 +35,7 @@ class MenuBar(object):
         self._frame.SetMenuBar(self._mb)
 
     def _create_default_menus(self):
-        for name in ['File', 'Edit', 'Tools', 'Help','KDT Test Script Visualizer']:
+        for name in ['File', 'Edit', 'Tools', 'Help','KTV']:
             self._create_menu(name, before_help=False)
 
     def _create_menu(self, name, before_help=True):
