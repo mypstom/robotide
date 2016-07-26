@@ -54,20 +54,17 @@ _menudata = """
 !Save &All | Save all changes | Ctrlcmd-Shift-S | ART_FILE_SAVE_AS
 ---
 !E&xit | Exit RIDE | Ctrlcmd-Q
-
 [Tools]
 !Search Unused Keywords | | | | POSITION-54
 !Manage Plugins | | | | POSITION-81
 !View All Tags | | F7 | | POSITION-82
 !Preferences | | | | POSITION-99
-
 [Help]
 !Shortcut keys | RIDE shortcut keys
 !User Guide | RIDE User Guide
 !Report a Problem | Open browser to the RIDE issue tracker
 !Release notes | Shows release notes
 !About | Information about RIDE
-
 [KTV]
 !Generate Graph | Generate the Hierarchical Graph
 """
@@ -400,7 +397,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         tempEdge = list()
         tempEdgeSet = set()
         #  for node in user_def_keyword:
-        #  graphTS2K.node(str(node))
+        #     graphTS2K.node(str(node))
         try:
             for df in self._get_datafile_list(): #get suite level
                 if len(df.tests._items) > 0: #not empty
@@ -428,7 +425,6 @@ class RideFrame(wx.Frame, RideEventHandler):
         for node in tempEdgeSet:
             #graphTS2K.edge(node[0], node[1], label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
             graphTS2K.edge(node[0], node[1], label=str(tempEdge.count(node)))
-
 
         graphTS2K.render('KTVgraph/TS2K.gv',view=False)
         copyfile('KTVgraph/TS2K.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TS2K.gv.pdf')
@@ -768,7 +764,6 @@ class RideFrame(wx.Frame, RideEventHandler):
         webbrowser.open('http://localhost/TSVisual/index.html')
         graphC.render('KTVgraph/C.gv',view=False)
         copyfile('KTVgraph/C.gv.pdf', 'C:/wamp64/www/TSVisual/graph/C.gv.pdf')
-
 
     def insertScreenShot(self):
         tempList = list()

@@ -100,6 +100,7 @@ class Action(_Registrable):
             listener.enabled_status_changed(self)
 
     def is_active(self):
+        print 'is_active %r' %(self.name)
         if self._is_always_inactive() or not self._enabled:
             return False
         if self._is_always_active():
