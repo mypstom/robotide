@@ -600,6 +600,8 @@ class RideFrame(wx.Frame, RideEventHandler):
             nodesWithType["C_"+str(node)] = "Component"
 
         for node in user_def_keyword:
+            nodesWithType[node] = "User Keyword"
+            tempNode.add(node)
             graphC.node(node, color="coral", shape="box", style="filled")
 
         try:
@@ -616,7 +618,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                                     if str(testStep.keyword) in user_def_keyword:
                                         #graphC.node(str(testStep.keyword),color="coral", shape="box", style="filled")
                                         tempNode.add(str(testStep.keyword))
-                                        nodesWithType[str(testStep.keyword)] = "User Keyword"
+                                        #nodesWithType[str(testStep.keyword)] = "User Keyword"
                                         tempEdge.append((str(testCase.name),str(testStep.keyword)))
 
                                     else:#if and only if the component is appear in our components list
@@ -951,7 +953,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         with open('scriptGraph.json','w+') as f:
             json.dump(jsonOutput,f)
         #create for process map
-        with open('object.json','w+') as f:
+        with open('jsonOutPut.json','w+') as f:
             json.dump(jsonOutput,f)
         #dot.render('TestCases.gv',view=False)
         #dot_testSuiteLevel.render('testSuiteLevel.gv',view=False)
@@ -981,7 +983,7 @@ class RideFrame(wx.Frame, RideEventHandler):
                     "type": nodesWithType[node],
                     "name": node
             })
-        with open('component.json','w+') as f:
+        with open('objects.json','w+') as f:
             json.dump(jsonOutput,f)
 
         print jsonOutput
