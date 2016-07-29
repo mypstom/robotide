@@ -1,3 +1,0 @@
-AssertButtonSuggestWordExist ClickButtonSuggestWord
-AssertFindMatchResult ClickButtonFindMatch
-AssertButtonAddWordExist ClickButtonAddWord

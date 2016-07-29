@@ -1,53 +1,6 @@
 // TS <-> TS
 digraph {
 	Root
-	"T to K 1 time" [color=cyan3 shape=box style=filled]
-		Root -> "T to K 1 time"
-	"K to K 100 times" [color=cyan3 shape=box style=filled]
-		Root -> "K to K 100 times"
-	"K to K 3 times" [color=cyan3 shape=box style=filled]
-		Root -> "K to K 3 times"
-	"T to K 4 times" [color=cyan3 shape=box style=filled]
-		Root -> "T to K 4 times"
-	"Black List" [color=cyan3 shape=box style=filled]
-		Root -> "Black List"
-	"K and K uses each other" [color=cyan3 shape=box style=filled]
-		Root -> "K and K uses each other"
-	"different T to same K 2up times" [color=cyan3 shape=box style=filled]
-		Root -> "different T to same K 2up times"
-	"K to K 0 times" [color=cyan3 shape=box style=filled]
-		Root -> "K to K 0 times"
-	"T to K 2 times" [color=cyan3 shape=box style=filled]
-		Root -> "T to K 2 times"
-	"T to K 3 times" [color=cyan3 shape=box style=filled]
-		Root -> "T to K 3 times"
-	"K to different K 1 times" [color=cyan3 shape=box style=filled]
-		Root -> "K to different K 1 times"
-	"T to different K 1 time" [color=cyan3 shape=box style=filled]
-		Root -> "T to different K 1 time"
-	"T to K 100 times" [color=cyan3 shape=box style=filled]
-		Root -> "T to K 100 times"
-	"T to different K 2up time" [color=cyan3 shape=box style=filled]
-		Root -> "T to different K 2up time"
-	"K contains a loop" [color=cyan3 shape=box style=filled]
-		Root -> "K contains a loop"
-	"K to K 1 times" [color=cyan3 shape=box style=filled]
-		Root -> "K to K 1 times"
-	"K self-loop" [color=cyan3 shape=box style=filled]
-		Root -> "K self-loop"
-	"K to different K 2up times" [color=cyan3 shape=box style=filled]
-		Root -> "K to different K 2up times"
-	"T to K 5 times" [color=cyan3 shape=box style=filled]
-		Root -> "T to K 5 times"
-	"K to K 4 times" [color=cyan3 shape=box style=filled]
-		Root -> "K to K 4 times"
-	"K to K 2 times" [color=cyan3 shape=box style=filled]
-		Root -> "K to K 2 times"
-	"K to K 5 times" [color=cyan3 shape=box style=filled]
-		Root -> "K to K 5 times"
-	"T to K 0 time" [color=cyan3 shape=box style=filled]
-		Root -> "T to K 0 time"
-	"different T to same K 1 time" [color=cyan3 shape=box style=filled]
-		Root -> "different T to same K 1 time"
-		"K to different K 2up times" -> "K to different K 1 times" [label=1 penwidth=1.0]
+	"01Crossword Lab" [color=cyan3 shape=box style=filled]
+		Root -> "01Crossword Lab"
 }
