@@ -101,6 +101,7 @@ class TestRunner(object):
         self.port = self._server.server_address[1]
 
     def _result_handler(self, event, *args):
+        #print 'event = %r' %(event)
         if event == 'pid':
             self._pid_to_kill = int(args[0])
         if event == 'port' and self._process:

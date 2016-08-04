@@ -84,3 +84,8 @@ class PluginLoader(object):
                 file.close()
         return [ cls for _, cls in
                  inspect.getmembers(module, predicate=inspect.isclass) ]
+
+    """def getPluginByName(self, name):
+        for plugin in self.plugins:
+            if plugin.name == name:
+                return plugin"""

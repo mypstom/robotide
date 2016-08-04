@@ -28,6 +28,8 @@ def PluginFactory(application, plugin_class):
 class _PluginConnector(object):
 
     def __init__(self, name, doc='', error=None):
+        #print('_PluginConnector')
+        #print 'name = %r' %(name)
         self.name = name
         self.doc = doc
         self.error = error
