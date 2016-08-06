@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ from robotide import utils
 def PluginFactory(application, plugin_class):
     try:
         plugin = plugin_class(application)
-    except Exception, err:
-        return BrokenPlugin(str(err), plugin_class)
+    except Exception:
+        return BrokenPlugin(utils.get_error_details(), plugin_class)
     else:
         return PluginConnector(plugin, application)
 
@@ -28,8 +28,6 @@ def PluginFactory(application, plugin_class):
 class _PluginConnector(object):
 
     def __init__(self, name, doc='', error=None):
-        #print('_PluginConnector')
-        #print 'name = %r' %(name)
         self.name = name
         self.doc = doc
         self.error = error

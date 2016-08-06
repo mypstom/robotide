@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-from chiefcontroller import ChiefController
+from project import Project
 from commands import FindOccurrences, RenameKeywordOccurrences
 from dataloader import DataLoader
 from filecontrollers import DataController, ResourceFileController

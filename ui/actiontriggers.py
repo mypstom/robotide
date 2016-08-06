@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,10 +13,8 @@
 #  limitations under the License.
 
 import wx
-from robotide.action import ActionInfo
 
-from robotide.context import IS_WINDOWS
-from robotide.context.platform import IS_MAC
+from robotide.context import IS_WINDOWS, IS_MAC
 
 
 class MenuBar(object):
@@ -35,7 +33,7 @@ class MenuBar(object):
         self._frame.SetMenuBar(self._mb)
 
     def _create_default_menus(self):
-        for name in ['File', 'Edit', 'Tools', 'Help','KTV']:
+        for name in ['File', 'Edit', 'Tools', 'Help', 'KTV']:
             self._create_menu(name, before_help=False)
 
     def _create_menu(self, name, before_help=True):

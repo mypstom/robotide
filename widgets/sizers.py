@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -26,8 +26,9 @@ class _BoxSizer(wx.BoxSizer):
     def add_with_padding(self, component, padding=5):
         self.Add(component, flag=wx.ALL, border=padding)
 
-    def add_expanding(self, component, propotion=1):
-        self.Add(component, proportion=propotion, flag=wx.EXPAND)
+    def add_expanding(self, component, propotion=1, padding=0):
+        self.Add(component, proportion=propotion, flag=wx.EXPAND | wx.ALL,
+                 border=padding)
 
 
 class VerticalSizer(_BoxSizer):
@@ -39,4 +40,3 @@ class HorizontalSizer(_BoxSizer):
 
     def add_to_end(self, component):
         self.Add(component, flag=wx.ALIGN_RIGHT)
-

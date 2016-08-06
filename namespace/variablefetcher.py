@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -11,20 +11,22 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-from robot.errors import DataError
-from robot.variables import Variables as RobotVariables
+
+from robotide import robotapi
 
 # NOTE! This is in own module to reduce the number of dependencies as this is executed in another process
 
 def import_varfile(varfile_path, args):
-    temp = RobotVariables()
+    temp = robotapi.RobotVariables()
     try:
         temp.set_from_file(varfile_path, args)
     except SystemExit:
-        raise DataError('Variable file import failed')
-    return [(name, _format_value(value), varfile_path) for (name, value) in temp.items()]
+        raise robotapi.DataError('Variable file import failed')
+    return [(name, _format_value(value), varfile_path)
+            for (name, value) in temp.store.data.items()]
 
-# Must be pickable
+
+# Must be picklable
 def _format_value(value):
     if isinstance(value, basestring):
         return value

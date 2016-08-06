@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -11,7 +11,8 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-from robot.running.namespace import STDLIB_NAMES
+
+from robotide import robotapi
 
 
 class SuggestionSource(object):
@@ -67,7 +68,7 @@ class _ImportSuggester(_Suggester):
 class ResourceSuggester(_ImportSuggester):
 
     def _get_all_available(self):
-        return set(self._df_controller.relative_path_to(r) for r in self._df_controller._chief_controller.resources)
+        return set(self._df_controller.relative_path_to(r) for r in self._df_controller._project.resources)
 
 
 class CachedLibrarySuggester(_ImportSuggester):
@@ -79,7 +80,7 @@ class CachedLibrarySuggester(_ImportSuggester):
 class BuiltInLibrariesSuggester(_Suggester):
 
     def get_suggestions(self, name, *args):
-        return [self._suggestion(n) for n in sorted(STDLIB_NAMES)
+        return [self._suggestion(n) for n in sorted(robotapi.STDLIB_NAMES)
                 if name.lower() in n.lower() and n not in ['BuiltIn', 'Reserved', 'Easter']]
 
 

@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -19,12 +19,13 @@ import wx
 wxFONTWEIGHT_BOLD = 92
 wxFONTWEIGHT_NORMAL = 90
 
+
 class Colorizer(object):
 
-    def __init__(self, grid, controller, colors):
+    def __init__(self, grid, controller):
         self._grid = grid
         self._controller = controller
-        self._colors=colors
+        self._colors = ColorizationSettings(grid.settings)
         self._current_task_id = 0
         self._timer = None
 
@@ -39,7 +40,10 @@ class Colorizer(object):
             self._timer.Restart(50, self._current_task_id, selection_content)
 
     def _coloring_task(self, task_index, selection_content, row=0, col=0):
-        if task_index != self._current_task_id or self._grid is None:
+        # Since this is a callback in CallLater, the grid might have
+        # been destroyed e.g. when changing tree nodes. In this case
+        # self._grid points to a PyDeadObject, which is Falsy.
+        if task_index != self._current_task_id or not(self._grid):
             return
         if row >= self._grid.NumberRows:
             self._grid.ForceRefresh()
@@ -109,4 +113,4 @@ class ColorizationSettings(object):
         return self.get_background_color('error')
 
     def _get(self, name):
-        return self._settings['Grid Colors'][name.lower().replace('_',' ')]
+        return self._settings[name.lower().replace('_',' ')]

@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
 
 import os
 
-from robot.utils.normalizing import normalize
-from robotide.utils import html_format, unescape
+from robotide import utils
 
 
 class ItemInfo(object):
@@ -45,10 +44,10 @@ class ItemInfo(object):
         return '%s.%s' % (self.source, self.name)
 
     def name_begins_with(self, prefix):
-        return normalize(self.name).startswith(prefix)
+        return utils.normalize(self.name).startswith(prefix)
 
     def longname_begins_with(self, prefix):
-        return normalize(self.longname).startswith(prefix)
+        return utils.normalize(self.longname).startswith(prefix)
 
     def is_library_keyword(self):
         return False
@@ -79,6 +78,26 @@ class VariableInfo(ItemInfo):
     def _source_name(self, source):
         return unicode(os.path.basename(source)) if source else ''
 
+    def name_matches(self, pattern):
+        normalized = utils.normalize(self._undecorate(pattern))
+        return utils.normalize(self.name[2:-1]).startswith(normalized)
+
+    def _undecorate(self, pattern):
+        def get_prefix_length():
+            if pattern[0] not in ['$', '@', '&']:
+                return 0
+            elif len(pattern) > 1 and pattern[1] == '{':
+                return 2
+            else:
+                return 1
+        if not pattern:
+            return pattern
+        without_prefix = pattern[get_prefix_length():]
+        if pattern[-1] == '}':
+            return without_prefix[:-1]
+        else:
+            return without_prefix
+
     @property
     def details(self):
         value = self._value
@@ -99,12 +118,14 @@ class ArgumentInfo(VariableInfo):
     def __init__(self, name, value):
         VariableInfo.__init__(self, name, value, self.SOURCE)
 
+
 class LocalVariableInfo(VariableInfo):
 
     SOURCE = 'Local variable'
 
     def __init__(self, name):
         VariableInfo.__init__(self, name, '', self.SOURCE)
+
 
 class _KeywordInfo(ItemInfo):
 
@@ -131,7 +152,7 @@ class _KeywordInfo(ItemInfo):
                 '</table>') % \
                 (self._name(self.item), self._source(self.item), self._type,
                  self._format_args(self.arguments),
-                 html_format(self.doc))
+                 utils.html_format(self.doc))
 
     def _format_args(self, args):
         return '[ %s ]' % ' | '.join(args)
@@ -140,6 +161,7 @@ class _KeywordInfo(ItemInfo):
         return 'KeywordInfo[name: %s, source: %s, doc: %s]' %(self.name,
                                                               self.source,
                                                               self.doc)
+
     def _name(self, item):
         return item.name
 
@@ -211,7 +233,7 @@ class _UserKeywordInfo(_KeywordInfo):
         return unicode(os.path.basename(item.source)) if item.source else ''
 
     def _doc(self, item):
-        return unescape(item.doc.value)
+        return utils.unescape(item.doc.value)
 
     def _parse_args(self, uk):
         parsed = []
@@ -220,6 +242,8 @@ class _UserKeywordInfo(_KeywordInfo):
                 parsed.append(self._parse_name_and_default(arg))
             elif self._is_list(arg):
                 parsed.append(self._parse_vararg(arg))
+            elif self._is_dict(arg):
+                parsed.append(self._parse_kwarg(arg))
         return parsed
 
     def _is_scalar(self, arg):
@@ -238,8 +262,14 @@ class _UserKeywordInfo(_KeywordInfo):
     def _is_list(self, arg):
         return arg.startswith('@')
 
+    def _is_dict(self, arg):
+        return arg.startswith('&')
+
     def _parse_vararg(self, arg):
         return '*' + self._strip_var_syntax_chars(arg)
+
+    def _parse_kwarg(self, arg):
+        return '**' + self._strip_var_syntax_chars(arg)
 
 
 class TestCaseUserKeywordInfo(_UserKeywordInfo):

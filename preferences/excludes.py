@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -11,12 +11,15 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+
 from datetime import datetime
 from fnmatch import fnmatch
 import os
 import wx
+
 from robotide.widgets import Dialog, HtmlWindow
 from .widgets import PreferencesPanel
+
 
 class Excludes():
 
@@ -132,6 +135,7 @@ class ExcludePreferences(PreferencesPanel):
         dialog = ExcludeHelpDialog()
         dialog.Show()
 
+
 class ExcludeHelpDialog(Dialog):
     help = """<font size="5">
 <h1>Excludes</h1>
@@ -225,4 +229,3 @@ The following shell-style wildcards are supported:
 
     def OnKey(self, *args):
         pass
-

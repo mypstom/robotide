@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ class TagsDisplay(wx.Panel):
         wx.Panel.__init__(self, parent, wx.ID_ANY)
         self._controller = controller
         self._sizer = HorizontalFlowSizer()
+        self._sizer.SetMinSize((0, 20))
         self._tag_boxes = []
         self.SetSizer(self._sizer)
 
@@ -43,7 +44,6 @@ class TagsDisplay(wx.Panel):
     def build(self):
         if not (self._tag_boxes and self._tag_boxes[-1].add_new):
             self.add_new_tag_tagbox(rebuild=False)
-        self._sizer.SetSizeHints(self)
         parent_sizer = self.GetParent().GetSizer()
         if parent_sizer:
             parent_sizer.Layout()

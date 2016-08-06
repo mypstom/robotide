@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
 
 from .settings import Settings, initialize_settings, RideSettings
 from .editor import PreferenceEditor
-from .widgets import (PreferencesPanel, PreferencesComboBox,
-    PreferencesColorPicker)
+from .widgets import PreferencesPanel, PreferencesComboBox,\
+    PreferencesColorPicker
 from .imports import ImportPreferences
 from .saving import SavingPreferences
-from .colors import GridColorPreferences, TextEditColorPreferences
+from .editors import GridEditorPreferences, TextEditorPreferences
 from .excludes import ExcludePreferences
 
 
@@ -44,6 +44,6 @@ class Preferences(object):
     def _add_builtin_preferences(self):
         self.add(SavingPreferences)
         self.add(ImportPreferences)
-        self.add(GridColorPreferences)
-        self.add(TextEditColorPreferences)
+        self.add(GridEditorPreferences)
+        self.add(TextEditorPreferences)
         self.add(ExcludePreferences)

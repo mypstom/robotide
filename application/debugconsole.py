@@ -12,15 +12,25 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-import wx
+import sys
+import traceback
+import threading
 
 
-class ButtonWithHandler(wx.Button):
+def _print_stacks():
+    id2name = dict((th.ident, th.name) for th in threading.enumerate())
+    for threadId, stack in sys._current_frames().items():
+        print(id2name[threadId])
+        traceback.print_stack(f=stack)
 
-    def __init__(self, parent, label, handler=None, width=-1,
-                 height=25):
-        wx.Button.__init__(self, parent, label=label,
-                           size=(width, height))
-        if not handler:
-            handler = getattr(parent, 'On'+label.replace(' ', ''))
-        parent.Bind(wx.EVT_BUTTON, handler, self)
+
+def start(ride):
+    import code
+    help_string = """\
+RIDE - access to the running application
+print_stacks() - print current stack traces
+"""
+    console = code.InteractiveConsole(
+        locals={'RIDE': ride, 'print_stacks': _print_stacks})
+    thread = threading.Thread(target=lambda: console.interact(help_string))
+    thread.start()

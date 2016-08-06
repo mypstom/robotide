@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,19 +13,18 @@
 #  limitations under the License.
 
 import wx
-from robot.parsing.settings import Setting
 
-from robotide import context
-from robotide.controller.settingcontrollers import (DocumentationController,
-    VariableController, TagsController)
+from robotide import robotapi, context
+from robotide.controller.settingcontrollers import (
+    DocumentationController, VariableController, TagsController)
 from robotide.usages.UsageRunner import ResourceFileUsages
-from robotide.publish import (RideItemSettingsChanged, RideInitFileRemoved,
-                              RideFileNameChanged)
-from robotide.widgets import (ButtonWithHandler, Label, HeaderLabel,
-        HorizontalSizer, HtmlWindow)
-
-from .settingeditors import (DocumentationEditor, SettingEditor, TagsEditor,
-        ImportSettingListEditor, VariablesListEditor, MetadataListEditor)
+from robotide.publish import (
+    RideItemSettingsChanged, RideInitFileRemoved, RideFileNameChanged)
+from robotide.widgets import (
+    ButtonWithHandler, Label, HeaderLabel, HorizontalSizer, HtmlWindow)
+from .settingeditors import (
+    DocumentationEditor, SettingEditor, TagsEditor,
+    ImportSettingListEditor, VariablesListEditor, MetadataListEditor)
 
 
 class WelcomePage(HtmlWindow):
@@ -73,8 +72,8 @@ class _RobotTableEditor(EditorPanel):
         self.SetSizer(self.sizer)
         if self.title:
             self.sizer.Add(self._create_header(self.title),
-                           0, wx.EXPAND|wx.ALL, 5)
-            self.sizer.Add((0,10))
+                           0, wx.EXPAND | wx.ALL, 5)
+            self.sizer.Add((0, 10))
         self._editors = []
         self._reset_last_show_tooltip()
         self._populate()
@@ -86,7 +85,8 @@ class _RobotTableEditor(EditorPanel):
         return self.plugin.global_settings[self._settings_open_id]
 
     def _store_settings_open_status(self):
-        self.plugin.global_settings[self._settings_open_id] = self._settings.IsExpanded()
+        self.plugin.global_settings[self._settings_open_id] = \
+            self._settings.IsExpanded()
 
     def _settings_changed(self, data):
         if data.item == self.controller:
@@ -102,7 +102,7 @@ class _RobotTableEditor(EditorPanel):
         mx, my = wx.GetMousePosition()
         tx, ty = self._last_shown_tooltip.screen_position
         dx, dy = self._last_shown_tooltip.size
-        return (mx<tx or mx>tx+dx) or (my<ty or my>ty+dy)
+        return (mx < tx or mx > tx+dx) or (my < ty or my > ty+dy)
 
     def tooltip_allowed(self, tooltip):
         if wx.GetMouseState().ControlDown() or \
@@ -115,7 +115,8 @@ class _RobotTableEditor(EditorPanel):
         self._last_shown_tooltip = None
 
     def close(self):
-        self.plugin.unsubscribe(self._settings_changed, RideItemSettingsChanged)
+        self.plugin.unsubscribe(
+            self._settings_changed, RideItemSettingsChanged)
         self.Unbind(wx.EVT_MOTION)
         self.Show(False)
 
@@ -133,15 +134,13 @@ class _RobotTableEditor(EditorPanel):
         self._settings = self._create_settings()
         self._restore_settings_open_status()
         self._editors.append(self._settings)
-        self.sizer.Add(self._settings, 0, wx.ALL|wx.EXPAND, 2)
+        self.sizer.Add(self._settings, 0, wx.ALL | wx.EXPAND, 2)
 
     def _create_settings(self):
-        settings = Settings(self, self.plugin, self._tree)
-        settings.Bind(wx.EVT_COLLAPSIBLEPANE_CHANGED, self._collabsible_changed)
-        for setting in self.controller.settings:
-            editor = settings.create_editor_for(setting)
-            settings.add(editor)
-        settings.build()
+        settings = Settings(self)
+        settings.Bind(
+            wx.EVT_COLLAPSIBLEPANE_CHANGED, self._collabsible_changed)
+        settings.build(self.controller.settings, self.plugin, self._tree)
         return settings
 
     def _restore_settings_open_status(self):
@@ -160,7 +159,7 @@ class _RobotTableEditor(EditorPanel):
 
     def highlight_cell(self, obj, row, column):
         '''Highlight the given object at the given row and column'''
-        if isinstance(obj, Setting):
+        if isinstance(obj, robotapi.Setting):
             setting_editor = self._get_settings_editor(obj)
             if setting_editor and hasattr(setting_editor, "highlight"):
                 setting_editor.highlight(column)
@@ -183,12 +182,11 @@ class _RobotTableEditor(EditorPanel):
 class Settings(wx.CollapsiblePane):
     BORDER = 2
 
-    def __init__(self, parent, plugin, tree):
-        wx.CollapsiblePane.__init__(self, parent, wx.ID_ANY, 'Settings',
-                                    style=wx.CP_DEFAULT_STYLE|wx.CP_NO_TLW_RESIZE)
+    def __init__(self, parent):
+        wx.CollapsiblePane.__init__(
+            self, parent, wx.ID_ANY, 'Settings',
+            style=wx.CP_DEFAULT_STYLE | wx.CP_NO_TLW_RESIZE)
         self._sizer = wx.BoxSizer(wx.VERTICAL)
-        self._plugin = plugin
-        self._tree = tree
         self._editors = []
         self.Bind(wx.EVT_SIZE, self._recalc_size)
 
@@ -208,9 +206,9 @@ class Settings(wx.CollapsiblePane):
         for editor in self._editors:
             editor.update_value()
 
-    def create_editor_for(self, controller):
+    def create_editor_for(self, controller, plugin, tree):
         editor_cls = self._get_editor_class(controller)
-        return editor_cls(self.GetPane(), controller, self._plugin, self._tree)
+        return editor_cls(self.GetPane(), controller, plugin, tree)
 
     def _get_editor_class(self, controller):
         if isinstance(controller, DocumentationController):
@@ -219,19 +217,20 @@ class Settings(wx.CollapsiblePane):
             return TagsEditor
         return SettingEditor
 
-    def add(self, editor):
-        self._sizer.Add(editor, 0, wx.ALL|wx.EXPAND, self.BORDER)
-        self._editors.append(editor)
-
-    def build(self):
+    def build(self, settings, plugin, tree):
+        for setting in settings:
+            editor = self.create_editor_for(setting, plugin, tree)
+            self._sizer.Add(editor, 0, wx.ALL | wx.EXPAND, self.BORDER)
+            self._editors.append(editor)
         self.GetPane().SetSizer(self._sizer)
-        self._sizer.SetSizeHints(self.GetPane())
 
     def _recalc_size(self, event=None):
         if self.IsExpanded():
             expand_button_height = 32  # good guess...
-            height = sum(editor.Size[1]+2*self.BORDER for editor in self._editors)
-            self.SetSizeHints(-1, height + expand_button_height)
+            height = sum(editor.Size[1] + 2 * self.BORDER
+                         for editor in self._editors)
+            self.SetSize((-1, height + expand_button_height))
+            self._sizer.Layout()
         if event:
             event.Skip()
 
@@ -252,7 +251,8 @@ class _FileEditor(_RobotTableEditor):
 
     def __init__(self, *args):
         _RobotTableEditor.__init__(self, *args)
-        self.plugin.subscribe(self._update_source_and_name, RideFileNameChanged)
+        self.plugin.subscribe(
+            self._update_source_and_name, RideFileNameChanged)
 
     def _update_source(self, message=None):
         self._source.SetValue(self.controller.data.source)
@@ -267,8 +267,11 @@ class _FileEditor(_RobotTableEditor):
 
     def _populate(self):
         datafile = self.controller.data
-        self.sizer.Add(self._create_header(datafile.name, not self.controller.is_modifiable()), 0, wx.EXPAND|wx.ALL, 5)
-        self.sizer.Add(self._create_source_label(datafile.source), 0, wx.EXPAND|wx.ALL, 1)
+        header = self._create_header(
+            datafile.name, not self.controller.is_modifiable())
+        self.sizer.Add(header, 0, wx.EXPAND | wx.ALL, 5)
+        self.sizer.Add(self._create_source_label(datafile.source),
+                       0, wx.EXPAND | wx.ALL, 1)
         self.sizer.Add((0, 10))
         self._add_settings()
         self._add_import_settings()
@@ -276,11 +279,11 @@ class _FileEditor(_RobotTableEditor):
 
     def _create_source_label(self, source):
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        sizer.Add((5,0))
+        sizer.Add((5, 0))
         sizer.Add(Label(self, label='Source',
                         size=(context.SETTING_LABEL_WIDTH,
                               context.SETTING_ROW_HEIGTH)))
-        self._source = wx.TextCtrl(self, style=wx.TE_READONLY|wx.NO_BORDER)
+        self._source = wx.TextCtrl(self, style=wx.TE_READONLY | wx.NO_BORDER)
         self._source.SetBackgroundColour(self.BackgroundColour)
         self._source.SetValue(source)
         self._source.SetMaxSize(wx.Size(-1, context.SETTING_ROW_HEIGTH))
@@ -288,23 +291,27 @@ class _FileEditor(_RobotTableEditor):
         return sizer
 
     def _add_import_settings(self):
-        import_editor = ImportSettingListEditor(self, self._tree, self.controller.imports)
+        import_editor = ImportSettingListEditor(
+            self, self._tree, self.controller.imports)
         self.sizer.Add(import_editor, 1, wx.EXPAND)
         self._editors.append(import_editor)
 
     def _add_variable_table(self):
-        self._var_editor = VariablesListEditor(self, self._tree, self.controller.variables)
+        self._var_editor = VariablesListEditor(
+            self, self._tree, self.controller.variables)
         self.sizer.Add(self._var_editor, 1, wx.EXPAND)
         self._editors.append(self._var_editor)
 
     def close(self):
-        self.plugin.unsubscribe(self._update_source_and_name, RideFileNameChanged)
+        self.plugin.unsubscribe(
+            self._update_source_and_name, RideFileNameChanged)
         for editor in self._editors:
             editor.close()
         self._editors = []
         _RobotTableEditor.close(self)
 
-    delete_rows = insert_rows = lambda s:0 #Stubs so that ctrl+d ctrl+i don't throw exceptions
+    # Stubs so that ctrl+d ctrl+i don't throw exceptions
+    delete_rows = insert_rows = lambda s: None
 
 
 class FindUsagesHeader(HorizontalSizer):
@@ -325,6 +332,7 @@ class ResourceFileEditor(_FileEditor):
     def _create_header(self, text, readonly=False):
         if readonly:
             text += ' (READ ONLY)'
+
         def cb(event):
             ResourceFileUsages(self.controller, self._tree.highlight).show()
         self._title_display = FindUsagesHeader(self, text, cb)
@@ -340,7 +348,8 @@ class TestCaseFileEditor(_FileEditor):
         self._add_metadata()
 
     def _add_metadata(self):
-        metadata_editor = MetadataListEditor(self, self._tree, self.controller.metadata)
+        metadata_editor = MetadataListEditor(
+            self, self._tree, self.controller.metadata)
         self.sizer.Add(metadata_editor, 1, wx.EXPAND)
         self._editors.append(metadata_editor)
 

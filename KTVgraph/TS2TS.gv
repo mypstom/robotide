@@ -1,36 +1,6 @@
 // TS <-> TS
 digraph {
 	Root
-	"ezScrum 2 ProductBacklog Search TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 2 ProductBacklog Search TestSuite"
-	"ezScrum 5 AccountManagement TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 5 AccountManagement TestSuite"
-	"ezScrum 8 TaskBorad TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 8 TaskBorad TestSuite"
-	"ezScrum 2 ProductBacklog Mark TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 2 ProductBacklog Mark TestSuite"
-	"ezScrum 10 Unplanned TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 10 Unplanned TestSuite"
-	"99  Concurrent TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "99  Concurrent TestSuite"
-	"ezScrum GAE TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum GAE TestSuite"
-	"ezScrum 6 ScrumRole TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 6 ScrumRole TestSuite"
-	"ezScrum 1 Project TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 1 Project TestSuite"
-	"ezScrum 7 ReleasePlan TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 7 ReleasePlan TestSuite"
-	"ezScrum 9 Retrospective TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 9 Retrospective TestSuite"
-	"ezScrum 3 SprintPlan TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 3 SprintPlan TestSuite"
-	"ezScrum 2 ProductBacklog TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 2 ProductBacklog TestSuite"
-	"ezScrum Plugin TestCase" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum Plugin TestCase"
-	"ezScrum 4 SprintBacklog TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 4 SprintBacklog TestSuite"
-	"ezScrum 0 Login TestSuite" [color=cyan3 shape=box style=filled]
-		Root -> "ezScrum 0 Login TestSuite"
+	Test [color=cyan3 shape=box style=filled]
+		Root -> Test
 }

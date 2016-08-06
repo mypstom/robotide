@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,17 +13,31 @@
 #  limitations under the License.
 
 import sys
+import os
+import wx
 
 from robotide.version import VERSION
 from robotide.robotapi import ROBOT_LOGGER
+import logger
 
-from coreplugins import get_core_plugins
-from logger import Logger
-from platform import (IS_MAC, IS_WINDOWS, WX_VERSION, ctrl_or_cmd,
-    bind_keys_to_evt_menu)
-LOG = Logger()
-ROBOT_LOGGER.disable_automatic_console_logger()
+APP = None
+LOG = logger.Logger()
+ROBOT_LOGGER.unregister_console_logger()
 ROBOT_LOGGER.register_logger(LOG)
+
+IS_WINDOWS = os.sep == '\\'
+IS_MAC = sys.platform == 'darwin'
+WX_VERSION = wx.VERSION_STRING
+
+if IS_WINDOWS:
+    SETTINGS_DIRECTORY = os.path.join(
+        os.environ['APPDATA'], 'RobotFramework', 'ride')
+else:
+    SETTINGS_DIRECTORY = os.path.join(
+        os.path.expanduser('~/.robotframework'), 'ride')
+LIBRARY_XML_DIRECTORY = os.path.join(SETTINGS_DIRECTORY, 'library_xmls')
+if not os.path.isdir(LIBRARY_XML_DIRECTORY):
+    os.makedirs(LIBRARY_XML_DIRECTORY)
 
 SETTING_EDITOR_WIDTH = 450
 SETTING_LABEL_WIDTH = 150
@@ -32,7 +46,7 @@ POPUP_BACKGROUND = (255, 255, 187)
 
 pyversion = '.'.join(str(v) for v in sys.version_info[:3])
 SYSTEM_INFO = "Started RIDE %s using python version %s with wx version %s in %s." % \
-        (VERSION, pyversion, WX_VERSION, sys.platform)
+    (VERSION, pyversion, WX_VERSION, sys.platform)
 ABOUT_RIDE = '''<h3>RIDE -- Robot Framework Test Data Editor</h3>
 <p>RIDE %s running on Python %s.</p>
 <p>RIDE is a test data editor for <a href="http://robotframework.org">Robot Framework</a>.
@@ -40,6 +54,23 @@ For more information, see project pages at
 <a href="http://github.com/robotframework/RIDE">http://github.com/robotframework/RIDE</a>.</p>
 <p>Some of the icons are from <a href="http://www.famfamfam.com/lab/icons/silk/">Silk Icons</a>.</p>
 ''' % (VERSION, pyversion)
+
+
+def ctrl_or_cmd():
+    if IS_MAC:
+        return wx.ACCEL_CMD
+    return wx.ACCEL_CTRL
+
+
+def bind_keys_to_evt_menu(target, actions):
+    accelrators = []
+    for accel, keycode, handler in actions:
+        id = wx.NewId()
+        target.Bind(wx.EVT_MENU, handler, id=id)
+        accelrators.append((accel, keycode, id))
+    target.SetAcceleratorTable(wx.AcceleratorTable(accelrators))
+
+
 SHORTCUT_KEYS = '''\
 <h2>Shortcut keys in RIDE</h2>
 <table>
@@ -291,5 +322,3 @@ SHORTCUT_KEYS = '''\
     </tr>
 </table>
 '''
-
-APP = None

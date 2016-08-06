@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -15,23 +15,25 @@
 import wx
 
 from robotide import context
-from robotide.controller.commands import (UpdateVariable, UpdateDocumentation,
-        SetValues, AddLibrary, AddResource, AddVariablesFileImport,
-        ClearSetting)
+from robotide.controller.commands import UpdateVariable, UpdateDocumentation,\
+    SetValues, AddLibrary, AddResource, AddVariablesFileImport, ClearSetting
 from robotide.editor.listeditor import ListEditorBase
-from robotide.publish.messages import RideImportSetting, RideOpenVariableDialog, RideExecuteSpecXmlImport, RideSaving
+from robotide.publish.messages import RideImportSetting,\
+    RideOpenVariableDialog, RideExecuteSpecXmlImport, RideSaving
 from robotide.utils import overrides
-from robotide.widgets import ButtonWithHandler, Label, HtmlWindow, PopupMenu, PopupMenuItems
+from robotide.widgets import ButtonWithHandler, Label, HtmlWindow, PopupMenu,\
+    PopupMenuItems, HtmlDialog
 from robotide.publish import PUBLISHER
 from robotide import utils
+from robotide.utils.highlightmatcher import highlight_matcher
 
 from .formatters import ListToStringFormatter
 from .gridcolorizer import ColorizationSettings
-from .editordialogs import (EditorDialog, DocumentationDialog, MetadataDialog,
-        ScalarVariableDialog, ListVariableDialog, LibraryDialog,
-        ResourceDialog, VariablesDialog)
+from .editordialogs import EditorDialog, DocumentationDialog, MetadataDialog,\
+    ScalarVariableDialog, ListVariableDialog, DictionaryVariableDialog, LibraryDialog,\
+    ResourceDialog, VariablesDialog
 from .listeditor import ListEditor
-from .popupwindow import HtmlPopupWindow, HtmlDialog
+from .popupwindow import HtmlPopupWindow
 from .tags import TagsDisplay
 
 
@@ -49,10 +51,10 @@ class SettingEditor(wx.Panel, utils.RideEventHandler):
 
     def _create_controls(self):
         sizer = wx.BoxSizer(wx.HORIZONTAL)
-        sizer.Add((5,0))
-        sizer.Add(Label(self, label=self._controller.label,
-                                size=(context.SETTING_LABEL_WIDTH,
-                                      context.SETTING_ROW_HEIGTH)))
+        sizer.Add((5, 0))
+        sizer.Add(Label(
+            self, label=self._controller.label,
+            size=(context.SETTING_LABEL_WIDTH, context.SETTING_ROW_HEIGTH)))
         self._value_display = self._create_value_display()
         self.update_value()
         self._tooltip = self._get_tooltip()
@@ -63,7 +65,8 @@ class SettingEditor(wx.Panel, utils.RideEventHandler):
         self.SetSizer(sizer)
 
     def _add_edit(self, sizer):
-        sizer.Add(ButtonWithHandler(self, 'Edit'), flag=wx.LEFT|wx.RIGHT, border=5)
+        sizer.Add(
+            ButtonWithHandler(self, 'Edit'), flag=wx.LEFT | wx.RIGHT, border=5)
 
     def _create_value_display(self):
         display = self._value_display_control()
@@ -126,7 +129,7 @@ class SettingEditor(wx.Panel, utils.RideEventHandler):
 
     def _mainframe_has_focus(self):
         return wx.GetTopLevelParent(self.FindFocus()) == \
-                wx.GetTopLevelParent(self)
+            wx.GetTopLevelParent(self)
 
     def OnLeaveWindow(self, event):
         self._stop_popup_timer()
@@ -201,10 +204,12 @@ class SettingEditor(wx.Panel, utils.RideEventHandler):
 class SettingValueDisplay(wx.TextCtrl):
 
     def __init__(self, parent):
-        wx.TextCtrl.__init__(self, parent, size=(-1, context.SETTING_ROW_HEIGTH),
-                             style=wx.TE_RICH|wx.TE_MULTILINE)
+        wx.TextCtrl.__init__(
+            self, parent, size=(-1, context.SETTING_ROW_HEIGTH),
+            style=wx.TE_RICH | wx.TE_MULTILINE)
         self.SetEditable(False)
-        self._colour_provider = ColorizationSettings(parent.plugin.global_settings)
+        self._colour_provider = ColorizationSettings(
+            parent.plugin.global_settings['Grid'])
         self._empty_values()
 
     def _empty_values(self):
@@ -248,7 +253,8 @@ class SettingValueDisplay(wx.TextCtrl):
     def contains(self, text):
         if self._value is None:
             return False
-        return [item for item in self._value.split(' | ') if utils.highlight_matcher(text, item)] != []
+        return [item for item in self._value.split(' | ')
+                if highlight_matcher(text, item)] != []
 
     def highlight(self, text):
         self._colorize_data(match=text)
@@ -297,14 +303,9 @@ class TagsEditor(SettingEditor):
     def __init__(self, parent, controller, plugin, tree):
         SettingEditor.__init__(self, parent, controller, plugin, tree)
         self.plugin.subscribe(self._saving, RideSaving)
-        self.Bind(wx.EVT_SIZE, self.OnSize)
 
     def _saving(self, message):
         self._tags_display.saving()
-
-    def OnSize(self, event):
-        self.SetSizeHints(-1, max(self._tags_display.get_height(), 25))
-        event.Skip()
 
     def _value_display_control(self):
         self._tags_display = TagsDisplay(self, self._controller)
@@ -355,12 +356,15 @@ class _AbstractListEditor(ListEditor):
 
 class VariablesListEditor(_AbstractListEditor):
     _titles = ['Variable', 'Value', 'Comment']
-    _buttons = ['Add Scalar', 'Add List']
+    _buttons = ['Add Scalar', 'Add List', 'Add Dict']
 
     def __init__(self, parent, tree, controller):
-        PUBLISHER.subscribe(self._update_vars, 'ride.variable.added', key=self)
-        PUBLISHER.subscribe(self._update_vars, 'ride.variable.updated', key=self)
-        PUBLISHER.subscribe(self._update_vars, 'ride.variable.removed', key=self)
+        PUBLISHER.subscribe(
+            self._update_vars, 'ride.variable.added', key=self)
+        PUBLISHER.subscribe(
+            self._update_vars, 'ride.variable.updated', key=self)
+        PUBLISHER.subscribe(
+            self._update_vars, 'ride.variable.removed', key=self)
         PUBLISHER.subscribe(self._open_variable_dialog, RideOpenVariableDialog)
         _AbstractListEditor.__init__(self, parent, tree, controller)
 
@@ -368,8 +372,10 @@ class VariablesListEditor(_AbstractListEditor):
         ListEditor.update_data(self)
 
     def get_column_values(self, item):
-        return [item.name, item.value if isinstance(item.value, basestring)
-                            else ' | '.join(item.value), ListToStringFormatter(item.comment).value]
+        return [item.name, item.value
+                if isinstance(item.value, basestring)
+                else ' | '.join(item.value),
+                ListToStringFormatter(item.comment).value]
 
     def OnMoveUp(self, event):
         _AbstractListEditor.OnMoveUp(self, event)
@@ -380,15 +386,19 @@ class VariablesListEditor(_AbstractListEditor):
         self._list.SetFocus()
 
     def OnAddScalar(self, event):
-        dlg = ScalarVariableDialog(self._controller)
-        if dlg.ShowModal() == wx.ID_OK:
-            ctrl = self._controller.add_variable(*dlg.get_value())
-            ctrl.set_comment(dlg.get_comment())
-            self.update_data()
-        dlg.Destroy()
+        self._show_dialog(
+            ScalarVariableDialog(self._controller))
 
     def OnAddList(self, event):
-        dlg = ListVariableDialog(self._controller, plugin=self.Parent.plugin)
+        self._show_dialog(
+            ListVariableDialog(self._controller, plugin=self.Parent.plugin))
+
+    def OnAddDict(self, event):
+        self._show_dialog(
+            DictionaryVariableDialog(self._controller,
+                                     plugin=self.Parent.plugin))
+
+    def _show_dialog(self, dlg):
         if dlg.ShowModal() == wx.ID_OK:
             ctrl = self._controller.add_variable(*dlg.get_value())
             ctrl.set_comment(dlg.get_comment())
@@ -400,14 +410,20 @@ class VariablesListEditor(_AbstractListEditor):
         self._open_var_dialog(var)
 
     def _open_variable_dialog(self, message):
-        self._open_var_dialog(message.controller)
+        # Prevent opening a dialog if self hase been destroyed
+        if self:
+            self._open_var_dialog(message.controller)
 
     def _open_var_dialog(self, var):
-        if var.name.startswith('${'):
+        var_name = var.name.lower()
+        if var_name.startswith('${'):
             dlg = ScalarVariableDialog(self._controller, item=var)
-        else:
+        elif var_name.startswith('@{'):
             dlg = ListVariableDialog(self._controller, item=var,
                                      plugin=self.Parent.plugin)
+        elif var_name.startswith('&{'):
+            dlg = DictionaryVariableDialog(self._controller, item=var,
+                                           plugin=self.Parent.plugin)
         if dlg.ShowModal() == wx.ID_OK:
             name, value = dlg.get_value()
             var.execute(UpdateVariable(name, value, dlg.get_comment()))
@@ -429,7 +445,9 @@ class ImportSettingListEditor(_AbstractListEditor):
     @overrides(ListEditorBase)
     def _create_buttons(self):
         sizer = wx.BoxSizer(wx.VERTICAL)
-        sizer.Add(Label(self, label='Add Import', size=wx.Size(120, 20), style=wx.ALIGN_CENTER))
+        sizer.Add(Label(
+            self, label='Add Import', size=wx.Size(120, 20),
+            style=wx.ALIGN_CENTER))
         for label in self._buttons:
             sizer.Add(ButtonWithHandler(self, label, width=120), 0, wx.ALL, 1)
         return sizer
@@ -468,22 +486,26 @@ class ImportSettingListEditor(_AbstractListEditor):
 
     def OnEdit(self, event):
         setting = self._get_setting()
-        self._show_import_editor_dialog(EditorDialog(setting),
-                                        lambda v, c: setting.execute(SetValues(v, c)),
-                                        setting,
-                                        on_empty=self._delete_selected)
+        self._show_import_editor_dialog(
+            EditorDialog(setting),
+            lambda v, c: setting.execute(SetValues(v, c)),
+            setting, on_empty=self._delete_selected)
 
     def OnLibrary(self, event):
-        self._show_import_editor_dialog(LibraryDialog,
-                                        lambda v, c: self._controller.execute(AddLibrary(v, c)))
+        self._show_import_editor_dialog(
+            LibraryDialog,
+            lambda v, c: self._controller.execute(AddLibrary(v, c)))
 
     def OnResource(self, event):
-        self._show_import_editor_dialog(ResourceDialog,
-                                        lambda v, c: self._controller.execute(AddResource(v, c)))
+        self._show_import_editor_dialog(
+            ResourceDialog,
+            lambda v, c: self._controller.execute(AddResource(v, c)))
 
     def OnVariables(self, event):
-        self._show_import_editor_dialog(VariablesDialog,
-                                        lambda v, c: self._controller.execute(AddVariablesFileImport(v, c)))
+        self._show_import_editor_dialog(
+            VariablesDialog,
+            lambda v, c:
+                self._controller.execute(AddVariablesFileImport(v, c)))
 
     def OnImportFailedHelp(self, event):
         if self._import_failed_shown:
@@ -513,7 +535,8 @@ class ImportSettingListEditor(_AbstractListEditor):
     def _get_setting(self):
         return self._controller[self._selection]
 
-    def _show_import_editor_dialog(self, dialog, creator_or_setter, item=None, on_empty=None):
+    def _show_import_editor_dialog(
+            self, dialog, creator_or_setter, item=None, on_empty=None):
         dlg = dialog(self._controller, item=item)
         if dlg.ShowModal() == wx.ID_OK:
             value = dlg.get_value()
@@ -528,7 +551,8 @@ class ImportSettingListEditor(_AbstractListEditor):
         return not value[0]
 
     def get_column_values(self, item):
-        return [item.type, item.name, item.display_value, ListToStringFormatter(item.comment).value]
+        return [item.type, item.name, item.display_value,
+                ListToStringFormatter(item.comment).value]
 
 
 class MetadataListEditor(_AbstractListEditor):
@@ -554,4 +578,5 @@ class MetadataListEditor(_AbstractListEditor):
         dlg.Destroy()
 
     def get_column_values(self, item):
-        return [item.name, utils.html_escape(item.value), ListToStringFormatter(item.comment).value]
+        return [item.name, utils.html_escape(item.value),
+                ListToStringFormatter(item.comment).value]

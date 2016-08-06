@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -35,6 +35,10 @@ Give name and value of the variable.
 
 List Variable
 Give name and value of the variable. Input list variable items into separate cells.
+
+Dictionary Variable
+Give name and value of the variable. Input dictionary items into separate cells.
+Individual items must be in format `key=value`
 
 Library
 Give name, optional arguments and optional alias of the library to import.

@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -11,10 +11,12 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
+
 from robotide.controller.basecontroller import _BaseController
 
+
 class Tag(_BaseController):
-    tooltip = "Test case's tag"
+    tooltip = "Own tag"
 
     def __init__(self, name, index=None, controller=None):
         self.name = name
@@ -52,10 +54,13 @@ class ForcedTag(Tag):
 
     @property
     def tooltip(self):
-        return 'Force tag from suite '+self.controller.datafile_controller.name
+        return u'Force tag from suite {0}'.format(
+            self.controller.datafile_controller.name)
+
 
 class DefaultTag(Tag):
 
     @property
     def tooltip(self):
-        return 'Default tag from suite '+self.controller.datafile_controller.name
+        return u'Default tag from suite {0}'.format(
+            self.controller.datafile_controller.name)

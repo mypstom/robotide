@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,30 +13,33 @@
 #  limitations under the License.
 
 
-from robotide.utils import normalize, get_variable_basename, find_variable_basenames
+from robotide import utils
+from robotide.utils import variablematcher
 
 
 def highlight_matcher(value, content):
     if not value or not content:
         return False
-    selection = normalize(value, ignore=['_'])
+    selection = utils.normalize(value, ignore=['_'])
     if not selection:
         return False
-    target = normalize(content, ignore=['_'])
+    target = utils.normalize(content, ignore=['_'])
     if not target:
         return False
     if selection == target:
         return True
     return _variable_matches(selection, target)
 
+
 def _variable_matches(selection, target):
-    variable = get_variable_basename(selection)
+    variable = variablematcher.get_variable_basename(selection)
     if not variable:
         return False
-    variables = find_variable_basenames(target)
+    variables = variablematcher.find_variable_basenames(target)
     if variable in variables:
         return True
     return _list_variable_used_as_scalar(variable, variables)
+
 
 def _list_variable_used_as_scalar(variable, variables):
     return '$%s' % variable[1:] in variables

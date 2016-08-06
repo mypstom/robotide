@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -24,10 +24,13 @@ class Process(object):
         self._command = self._parse_command(command)
         self._process = None
         self._error = None
+        self._out_file = None
+        self._out_path = None
+        self._out_fd = None
 
     def _parse_command(self, command):
         if isinstance(command, basestring):
-            return [ val.replace('<SPACE>', ' ') for val in command.split() ]
+            return [val.replace('<SPACE>', ' ') for val in command.split()]
         return command
 
     def start(self):
@@ -48,11 +51,7 @@ class Process(object):
         return self._error is not None or self._process.poll() is not None
 
     def stop(self):
-        try:
-            self._process.kill()
-        except AttributeError:
-            raise AttributeError('Stopping process is possible only with '
-                                 'Python 2.6 or newer')
+        self._process.kill()
 
     def wait(self):
         if self._process is not None:

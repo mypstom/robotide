@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Modified by NSN
-#  Copyright 2010-2012 Nokia Siemens Networks Oyj
+#  Copyright 2010-2012 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -37,11 +37,11 @@ import tempfile
 import threading
 import signal
 import sys
-import robotide.utils as utils
 from Queue import Empty, Queue
-from robot.output.loggerhelper import LEVELS
-from robot.utils.encoding import SYSTEM_ENCODING
-from robotide.context.platform import IS_WINDOWS
+
+from robotide import utils
+from robotide.robotapi import LOG_LEVELS
+from robotide.context import IS_WINDOWS
 from robotide.contrib.testrunner import TestRunnerAgent
 from robotide.controller.testexecutionresults import TestExecutionResults
 
@@ -49,7 +49,7 @@ ATEXIT_LOCK = threading.RLock()
 
 class TestRunner(object):
 
-    def __init__(self, chief):
+    def __init__(self, project):
         self._output_dir = None
         self._process = None
         self._server = None
@@ -58,7 +58,7 @@ class TestRunner(object):
         self._pid_to_kill = None
         self._results = TestExecutionResults()
         self.port = None
-        self._chief = chief
+        self._project = project
         self.profiles = {}
 
     def enable(self, result_handler):
@@ -101,7 +101,6 @@ class TestRunner(object):
         self.port = self._server.server_address[1]
 
     def _result_handler(self, event, *args):
-        #print 'event = %r' %(event)
         if event == 'pid':
             self._pid_to_kill = int(args[0])
         if event == 'port' and self._process:
@@ -122,7 +121,7 @@ class TestRunner(object):
                                                                    testname))
 
     def _get_test_controller(self, longname, testname = None):
-        ret = self._chief.find_controller_by_longname(longname, testname)
+        ret = self._project.find_controller_by_longname(longname, testname)
         return ret
 
     def clear_server(self):
@@ -172,19 +171,20 @@ class TestRunner(object):
         self._process = Process(cwd)
         self._process.run_command(command)
 
-    def get_command(self, profile, pythonpath, monitor_width, names_to_run):
+    def get_command(self, profile, pythonpath, console_width, names_to_run):
         '''Return the command (as a list) used to run the test'''
         command = profile.get_command_prefix()[:]
         argfile = os.path.join(self._output_dir, "argfile.txt")
         command.extend(["--argumentfile", argfile])
         command.extend(["--listener", self._get_listener_to_cmd()])
         command.append(self._get_suite_source_for_command())
-        self._write_argfile(argfile, self._create_standard_args(command, profile, pythonpath, monitor_width, names_to_run))
+        self._write_argfile(argfile, self._create_standard_args(
+            command, profile, pythonpath, console_width, names_to_run))
         return command
 
     @staticmethod
     def get_message_log_level(command):
-        min_log_level_number = LEVELS['INFO']
+        min_log_level_number = LOG_LEVELS['INFO']
         if '-L' in command:
             switch = '-L'
         elif '--loglevel' in command:
@@ -195,7 +195,7 @@ class TestRunner(object):
         if len(command) == i:
             return
         level = command[i+1].upper().split(':')[0]
-        return LEVELS.get(level, min_log_level_number)
+        return LOG_LEVELS.get(level, min_log_level_number)
 
     def _get_listener_to_cmd(self):
         path = os.path.abspath(TestRunnerAgent.__file__)
@@ -205,22 +205,22 @@ class TestRunner(object):
 
     def _get_suite_source_for_command(self):
         cur = os.path.abspath(os.path.curdir)
-        source = os.path.abspath(self._chief.suite.source)
+        source = os.path.abspath(self._project.suite.source)
         if not utils.is_same_drive(cur, source):
             return source
-        return os.path.abspath(self._chief.suite.source)
+        return os.path.abspath(self._project.suite.source)
 
-    def _create_standard_args(self, command, profile, pythonpath, monitor_width, names_to_run):
+    def _create_standard_args(
+            self, command, profile, pythonpath, console_width, names_to_run):
         standard_args = []
         standard_args.extend(profile.get_custom_args())
         self._add_tmp_outputdir_if_not_given_by_user(command, standard_args)
-        self._add_pythonpath_if_in_settings_and_not_given_by_user(command,
-                                                                  standard_args,
-                                                                  pythonpath)
+        self._add_pythonpath_if_in_settings_and_not_given_by_user(
+            command, standard_args, pythonpath)
+        # Have to use short options, because of long option was changed in
+        # RF 2.8 -> 2.9, and we don't necessarily know the installed version.
         standard_args.extend(["-C", "off"]) # --consolecolor
-        standard_args.extend(["-W", monitor_width]) # --consolewidth
-        #standard_args.extend(["--monitorcolors", "off"])   
-        #standard_args.extend(["--monitorwidth", monitor_width])
+        standard_args.extend(["-W", console_width]) # --consolewidth
         for suite, test in names_to_run:
             standard_args += ['--suite', suite, '--test', test]
         return standard_args
@@ -231,7 +231,7 @@ class TestRunner(object):
 
     @staticmethod
     def _add_pythonpath_if_in_settings_and_not_given_by_user(
-        command, standard_args, pythonpath):
+            command, standard_args, pythonpath):
         if '--pythonpath' in command:
             return
         if '-P' in command:
@@ -246,8 +246,11 @@ class TestRunner(object):
         f.write("\n".join(args))
         f.close()
 
-    def get_output_and_errors(self):
-        return self._process.get_output(), self._process.get_errors()
+    def get_output_and_errors(self, profile):
+        stdout, stderr, returncode = self._process.get_output(), \
+            self._process.get_errors(), self._process.get_returncode()
+        error, log_message = profile.format_error(stderr, returncode)
+        return stdout, error, log_message
 
     def is_running(self):
         return self._process and self._process.is_alive()
@@ -274,7 +277,7 @@ class Process(object):
                         stdout=subprocess.PIPE,
                         stderr=subprocess.PIPE,
                         stdin=subprocess.PIPE,
-                        cwd=self._cwd.encode(SYSTEM_ENCODING))
+                        cwd=self._cwd.encode(utils.SYSTEM_ENCODING))
         if IS_WINDOWS:
             startupinfo = subprocess.STARTUPINFO()
             try:
@@ -286,7 +289,7 @@ class Process(object):
         else:
             subprocess_args['preexec_fn'] = os.setsid
             subprocess_args['shell'] = True
-        self._process = subprocess.Popen(command.encode(SYSTEM_ENCODING),
+        self._process = subprocess.Popen(command.encode(utils.SYSTEM_ENCODING),
                                          **subprocess_args)
         self._process.stdin.close()
         self._output_stream = StreamReaderThread(self._process.stdout)
@@ -303,6 +306,9 @@ class Process(object):
 
     def get_errors(self):
         return self._error_stream.pop()
+
+    def get_returncode(self):
+        return self._process.returncode
 
     def is_alive(self):
         return self._process.poll() is None

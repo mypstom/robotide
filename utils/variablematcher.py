@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,36 +13,51 @@
 #  limitations under the License.
 
 import re
-from robot.utils import matches
+from robotide import utils
 
 _VAR_BODY = r'([^\}]|\\\})*'
 _SCALAR_VARIABLE_MATCHER = re.compile(r'\$\{'+_VAR_BODY+'\}')
 _SCALAR_VARIABLE_LINE_MATCHER = re.compile(r'^(\$\{'+_VAR_BODY+'\}) *=?$')
 _LIST_VARIABLE_MATCHER = re.compile(r'^(@\{'+_VAR_BODY+'\})( ?=?|\[\d*\])$')
-_LIST_VARIABLE_SUBITEM_END_MATCHER = re.compile(r'\[\d+\]\s*(=\s*)?$')
+_DICT_VARIABLE_MATCHER = re.compile(r'^(&\{'+_VAR_BODY+'\})( ?=?|\[[a-zA-Z_]*\])$')
+_LIST_VARIABLE_SUBITEM_END_MATCHER = re.compile(r'\[\d+\]$')
+_DICT_VARIABLE_SUBITEM_END_MATCHER = re.compile(r'\[[a-zA-Z_]+\]$')
+
 
 def is_variable(value):
-    return is_scalar_variable(value) or is_list_variable(value)
+    return is_scalar_variable(value) or is_list_variable(value) or \
+        is_dict_variable(value)
+
 
 def is_scalar_variable(value):
-    return _match_scalar_variable(value)
-
-def _match_scalar_variable(value):
     return _SCALAR_VARIABLE_LINE_MATCHER.match(value.strip())
 
+
 def is_list_variable(value):
-    return _match_list_variable(value)
-
-def is_list_variable_subitem(value):
-    return is_list_variable(value) and _LIST_VARIABLE_SUBITEM_END_MATCHER.search(value)
-
-def _match_list_variable(value):
     return _LIST_VARIABLE_MATCHER.match(value.strip())
 
+
+def is_dict_variable(value):
+    return _DICT_VARIABLE_MATCHER.match(value.strip())
+
+
+def is_list_variable_subitem(value):
+    return is_list_variable(value) and \
+        _LIST_VARIABLE_SUBITEM_END_MATCHER.search(value)
+
+
+def is_dict_var_access(value):
+    return is_dict_variable(value) and \
+        _DICT_VARIABLE_SUBITEM_END_MATCHER.search(value)
+
+
 def get_variable(value):
-    """Returns variables name without equal sign '=' and indexing '[2]' or None"""
+    """Returns variables name without equal sign '=' and indexing '[2]'
+    or None
+    """
     match = is_variable(value)
     return match.groups()[0] if match else None
+
 
 def get_variable_basename(value):
     "Return variable without extended variable syntax part"
@@ -53,11 +68,15 @@ def get_variable_basename(value):
         return None
     return '${%s}' % (match.groups()[0].strip())
 
+
 def find_variable_basenames(value):
-    return [get_variable_basename(var) for var in re.findall('[\@\$]{.*?}', value)]
+    return [get_variable_basename(var)
+            for var in re.findall('[\@\$]{.*?}', value)]
+
 
 def contains_scalar_variable(value):
     return bool(_SCALAR_VARIABLE_MATCHER.findall(value))
 
+
 def value_contains_variable(value, varname):
-    return matches(value, "*%s*" % varname)
+    return utils.Matcher("*%s*" % varname).match(value)

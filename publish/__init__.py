@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -117,11 +117,12 @@ the `robotide.pluginapi` module and plugins should import them there.
 """
 
 
-from robotide.context import WX_VERSION
-if WX_VERSION > '2.9':
-    from wx.lib.pubsub import setupv1
-from messages import *
-from publisher import Publisher
+import os
 
-PUBLISHER = Publisher()
-"""Global `Publisher` instance for subscribing to and unsubscribing from messages."""
+from messages import *
+from publisher import PUBLISHER
+
+
+def get_html_message(name):
+    return open(os.path.join(
+        os.path.dirname(__file__), 'html', '{}.html'.format(name))).read()

@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -100,7 +100,6 @@ class Action(_Registrable):
             listener.enabled_status_changed(self)
 
     def is_active(self):
-        print 'is_active %r' %(self.name)
         if self._is_always_inactive() or not self._enabled:
             return False
         if self._is_always_active():

@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -15,23 +15,22 @@
 import os
 import sys
 import inspect
+import subprocess
 
-import robot.utils
-from robot.utils import printable_name, normalize, eq, ET, \
+import robotide.lib.robot.utils
+from robotide.lib.robot.utils.encoding import SYSTEM_ENCODING
+from robotide.lib.robot.utils import printable_name, normalize, eq, ET, \
     HtmlWriter, NormalizedDict, timestr_to_secs, secs_to_timestr, normpath,\
-    unic, asserts, unescape, html_escape, html_attr_escape,\
-    get_timestamp
+    unic, asserts, unescape, html_escape, html_attr_escape, robottime,\
+    get_timestamp, Matcher, is_list_like, is_dict_like, decode_from_system,\
+    ArgumentParser, get_error_details
+
 from eventhandler import RideEventHandler
-from variablematcher import is_variable, is_scalar_variable, is_list_variable, \
-    is_list_variable_subitem, \
-    get_variable, get_variable_basename, find_variable_basenames, \
-    value_contains_variable
-from highlightmatcher import highlight_matcher
 from printing import Printing
 
 
 def html_format(text):
-    return robot.utils.html_format(text)
+    return robotide.lib.robot.utils.html_format(text)
 
 
 def name_from_class(item, drop=None):
@@ -45,7 +44,8 @@ def name_from_class(item, drop=None):
 def split_value(value, sep='|'):
     if not value:
         return []
-    return [ v.strip() for v in _split_value(value, sep) ]
+    return [v.strip() for v in _split_value(value, sep)]
+
 
 def _split_value(value, sep):
     if '\\' not in value:
@@ -68,7 +68,7 @@ def _split_value(value, sep):
 def join_value(value, sep='|', joiner=None):
     if not joiner:
         joiner = ' %s ' % sep
-    return joiner.join([ v.replace(sep, '\\'+sep) for v in value ])
+    return joiner.join([v.replace(sep, '\\' + sep) for v in value])
 
 
 def find_from_pythonpath(name):
@@ -85,6 +85,7 @@ def replace_extension(path, new_extension):
     base = path.rsplit('.', 1)
     return '%s.%s' % (base[0], new_extension.lower())
 
+
 def overrides(interface_class):
     """
     A decorator that can be used to validate method override
@@ -96,5 +97,17 @@ def overrides(interface_class):
         return method
     return overrider
 
+
 def is_same_drive(path1, path2):
-    return os.path.splitdrive(path1)[0].lower() == os.path.splitdrive(path2)[0].lower()
+    return os.path.splitdrive(path1)[0].lower() == \
+        os.path.splitdrive(path2)[0].lower()
+
+
+def run_python_command(command, mode='c'):
+    cmd = [sys.executable, '-{0}'.format(mode)] + command
+    process = subprocess.Popen(
+        cmd,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT)
+    output, _ = process.communicate()
+    return output

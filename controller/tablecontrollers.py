@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -12,19 +12,18 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-from robotide.publish import (RideTestCaseRemoved, RideVariableAdded,
-        RideVariableRemoved, RideVariableMovedUp, RideVariableMovedDown,
-        RideImportSettingAdded, RideUserKeywordRemoved, RideUserKeywordAdded,
-        RideTestCaseAdded)
+from robotide.publish import RideTestCaseRemoved, RideVariableAdded, \
+    RideVariableRemoved, RideVariableMovedUp, RideVariableMovedDown, \
+    RideUserKeywordRemoved, RideUserKeywordAdded, RideTestCaseAdded
 from robotide.publish.messages import RideItemMovedUp, RideItemMovedDown
-from robotide.robotapi import is_list_var, is_scalar_var
+from robotide.robotapi import is_list_var, is_scalar_var, is_dict_var
 from robotide import utils
 
 from .basecontroller import ControllerWithParent
 from .macrocontrollers import TestCaseController, UserKeywordController
-from robotide.utils import overrides
-from .settingcontrollers import (MetadataController, ImportController,
-        VariableController)
+from robotide.utils import overrides, variablematcher
+from .settingcontrollers import MetadataController, ImportController, \
+    VariableController
 
 
 class _WithListOperations(object):
@@ -114,6 +113,9 @@ class VariableTableController(_TableController, _WithListOperations):
     def validate_list_variable_name(self, name, item=None):
         return self._validate_name(_ListVarValidator(), name, item)
 
+    def validate_dict_variable_name(self, name, item=None):
+        return self._validate_name(_DictVarValidator(), name, item)
+
     def _validate_name(self, validator, name, item=None):
         return VariableNameValidation(self, validator, name, item)
 
@@ -141,7 +143,8 @@ class VariableTableController(_TableController, _WithListOperations):
         vars_as_list = []
         for var in self._items:
             vars_as_list += var.as_list()
-        return any(utils.value_contains_variable(string, name) for string in vars_as_list)
+        return any(variablematcher.value_contains_variable(string, name)
+                   for string in vars_as_list)
 
 
 class _ScalarVarValidator(object):
@@ -154,6 +157,12 @@ class _ListVarValidator(object):
     __call__ = lambda self, name: is_list_var(name)
     name = 'List'
     prefix = '@'
+
+
+class _DictVarValidator(object):
+    __call__ = lambda self, name: is_dict_var(name)
+    name = 'Dictionary'
+    prefix = '&'
 
 
 class _NameValidation(object):

@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -274,7 +274,6 @@ class _InsertionPoint(object):
 
     def __init__(self, before=None, after=None):
         self._item = before or after
-        self._insert_before = before is not None
         self._insert_before = before is not None
 
     def get_index(self, menu):

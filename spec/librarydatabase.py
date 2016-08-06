@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@ import sqlite3
 import time
 from robotide.preferences.settings import SETTINGS_DIRECTORY
 from robotide.spec.iteminfo import LibraryKeywordInfo
-from robot.utils import decode_from_system
+from robotide.utils import decode_from_system
 
 CREATION_SCRIPT = """\
 CREATE TABLE libraries (id INTEGER PRIMARY KEY,

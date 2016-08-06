@@ -1,19 +1,4 @@
 // TS <-> UK
 digraph {
-	"ezScrum 0 Login TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 10 Unplanned TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 1 Project TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 2 ProductBacklog Mark TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 2 ProductBacklog Search TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 2 ProductBacklog TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 3 SprintPlan TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 4 SprintBacklog TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 5 AccountManagement TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 6 ScrumRole TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 7 ReleasePlan TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 8 TaskBorad TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum 9 Retrospective TestSuite" [color=cyan3 shape=box style=filled]
-	"99  Concurrent TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum GAE TestSuite" [color=cyan3 shape=box style=filled]
-	"ezScrum Plugin TestCase" [color=cyan3 shape=box style=filled]
+	Test [color=cyan3 shape=box style=filled]
 }

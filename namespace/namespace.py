@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,25 +13,21 @@
 #  limitations under the License.
 
 import os
+import sys
 import re
 import operator
 import tempfile
 from itertools import chain
 
-from robot.errors import DataError
-from robot.parsing.model import ResourceFile
-from robot.parsing.settings import Library, Resource, Variables
-from robot.utils.normalizing import normalize
-from robot.variables import Variables as RobotVariables
-from robotide.namespace import variablefetcher
-from robotide.namespace.cache import LibraryCache, ExpiringCache
-from robotide.namespace.resourcefactory import ResourceFactory
-from robotide.spec.iteminfo import (TestCaseUserKeywordInfo,
-                                    ResourceUserKeywordInfo,
-                                    VariableInfo, _UserKeywordInfo,
-    ArgumentInfo)
-from robotide.robotapi import NormalizedDict, is_var
-from robotide.namespace.embeddedargs import EmbeddedArgsHandler
+from robotide import robotapi, utils
+from robotide.publish import PUBLISHER, RideSettingsChanged, RideLogMessage
+from robotide.robotapi import VariableFileSetter
+from robotide.spec.iteminfo import TestCaseUserKeywordInfo,\
+    ResourceUserKeywordInfo, VariableInfo, _UserKeywordInfo, ArgumentInfo
+
+from .cache import LibraryCache, ExpiringCache
+from .resourcefactory import ResourceFactory
+from .embeddedargs import EmbeddedArgsHandler
 
 
 class Namespace(object):
@@ -39,15 +35,37 @@ class Namespace(object):
     def __init__(self, settings):
         self._settings = settings
         self._library_manager = None
-        self._init_caches()
         self._content_assist_hooks = []
         self._update_listeners = set()
+        self._init_caches()
+        self._set_pythonpath()
+        PUBLISHER.subscribe(self._setting_changed, RideSettingsChanged)
 
     def _init_caches(self):
-        self._lib_cache = LibraryCache(self._settings, self.update, self._library_manager)
+        self._lib_cache = LibraryCache(
+            self._settings, self.update, self._library_manager)
         self._resource_factory = ResourceFactory(self._settings)
-        self._retriever = DatafileRetriever(self._lib_cache, self._resource_factory)
+        self._retriever = DatafileRetriever(self._lib_cache,
+                                            self._resource_factory)
         self._context_factory = _RetrieverContextFactory()
+
+    def _set_pythonpath(self):
+        """Add user configured paths to PYTHONAPATH.
+        """
+        for path in self._settings.get('pythonpath', []):
+            if path not in sys.path:
+                normalized = path.replace('/', os.sep)
+                sys.path.insert(0, normalized)
+                RideLogMessage(u'Inserted \'{0}\' to sys.path.'
+                               .format(normalized)).publish()
+
+    def _setting_changed(self, message):
+        section, setting = message.keys
+        if section == '' and setting == 'pythonpath':
+            for p in set(message.old).difference(message.new):
+                if p in sys.path:
+                    sys.path.remove(p)
+            self._set_pythonpath()
 
     def set_library_manager(self, library_manager):
         self._library_manager = library_manager
@@ -92,13 +110,11 @@ class Namespace(object):
         ctx = self._context_factory.ctx_for_controller(controller)
         sugs = set()
         sugs.update(self._get_suggestions_from_hooks(datafile, start))
-        if self._blank(start) or self._looks_like_variable(start):
-            sugs.update(self._variable_suggestions(controller, start, ctx))
-        else:
-            sugs.update(self._variable_suggestions(controller, '${'+start, ctx))
-            sugs.update(self._variable_suggestions(controller, '@{'+start, ctx))
         if self._blank(start) or not self._looks_like_variable(start):
+            sugs.update(self._variable_suggestions(controller, start, ctx))
             sugs.update(self._keyword_suggestions(datafile, start, ctx))
+        else:
+            sugs.update(self._variable_suggestions(controller, start, ctx))
         sugs_list = list(sugs)
         sugs_list.sort()
         return sugs_list
@@ -116,33 +132,35 @@ class Namespace(object):
         return start == ''
 
     def _looks_like_variable(self, start):
-        return (len(start) == 1 and start.startswith('$') or start.startswith('@')) \
-            or (len(start) >= 2 and start.startswith('${') or start.startswith('@{'))
+        return len(start) == 1 and start[0] in ['$', '@', '&'] \
+            or (len(start) >= 2 and start[:2] in ['${', '@{', '&{'])
 
     def _variable_suggestions(self, controller, start, ctx):
-        datafile = controller.datafile
-        start_normalized = normalize(start)
         self._add_kw_arg_vars(controller, ctx.vars)
-        vars = self._retriever.get_variables_from(datafile, ctx)
-        return (v for v in vars
-                if normalize(v.name).startswith(start_normalized))
+        variables = self._retriever.get_variables_from(
+            controller.datafile, ctx)
+        sugs = (v for v in variables if v.name_matches(start))
+        return sugs
 
-    def _add_kw_arg_vars(self, controller, vars):
+    def _add_kw_arg_vars(self, controller, variables):
         for name, value in controller.get_local_variables().iteritems():
-            vars.set_argument(name, value)
+            variables.set_argument(name, value)
 
     def _keyword_suggestions(self, datafile, start, ctx):
-        start_normalized = normalize(start)
-        return (sug for sug in chain(self._get_default_keywords(),
-                                           self._retriever.get_keywords_from(datafile, ctx))
-                      if sug.name_begins_with(start_normalized) or
-                         sug.longname_begins_with(start_normalized))
+        start_normalized = utils.normalize(start)
+        all_kws = chain(self._get_default_keywords(),
+                        self._retriever.get_keywords_from(datafile, ctx))
+        return (sug for sug in all_kws
+                if sug.name_begins_with(start_normalized) or
+                sug.longname_begins_with(start_normalized))
 
     def get_resources(self, datafile):
         return self._retriever.get_resources_from(datafile)
 
     def get_resource(self, path, directory='', report_status=True):
-        return self._resource_factory.get_resource(directory, path, report_status=report_status)
+        return self._resource_factory.get_resource(
+            directory, path,
+            report_status=report_status)
 
     def find_resource_with_import(self, imp):
         ctx = self._context_factory.ctx_for_datafile(imp.parent.parent)
@@ -163,10 +181,12 @@ class Namespace(object):
         return kw if kw and kw.is_library_keyword() else None
 
     def is_library_import_ok(self, datafile, imp):
-        return self._retriever.is_library_import_ok(datafile, imp, self._context_factory.ctx_for_datafile(datafile))
+        return self._retriever.is_library_import_ok(
+            datafile, imp, self._context_factory.ctx_for_datafile(datafile))
 
     def is_variables_import_ok(self, datafile, imp):
-        return self._retriever.is_variables_import_ok(datafile, imp, self._context_factory.ctx_for_datafile(datafile))
+        return self._retriever.is_variables_import_ok(
+            datafile, imp, self._context_factory.ctx_for_datafile(datafile))
 
     def find_keyword(self, datafile, kw_name):
         if not kw_name:
@@ -184,14 +204,14 @@ class Namespace(object):
 
 
 class _RetrieverContextFactory(object):
-
     def __init__(self):
         self._context_cache = {}
 
     def ctx_for_controller(self, controller):
         if controller not in self._context_cache:
             self._context_cache[controller] = RetrieverContext()
-            self._context_cache[controller.datafile] = self._context_cache[controller]
+            self._context_cache[controller.datafile
+                                ] = self._context_cache[controller]
         return self._context_cache[controller]
 
     def ctx_for_datafile(self, datafile):
@@ -203,7 +223,6 @@ class _RetrieverContextFactory(object):
 
 
 class RetrieverContext(object):
-
     def __init__(self):
         self.vars = _VariableStash()
         self.parsed = set()
@@ -215,57 +234,60 @@ class RetrieverContext(object):
         return self.vars.replace_variables(text)
 
     def allow_going_through_resources_again(self):
-        """Resets the parsed-cache.
+        """Resets the parsed resources cache.
+
         Normally all resources that have been handled are added to 'parsed' and
-        then not handled again, to prevent looping forever. If this same context
-        is used for going through the resources again, then you should call
-        this.
+        then not handled again, to prevent looping forever. If this same
+        context is used for going through the resources again, this method
+        should be called first.
         """
         self.parsed = set()
 
 
 class _VariableStash(object):
     # Global variables copied from robot.variables.__init__.py
-    global_variables =  {'${TEMPDIR}': os.path.normpath(tempfile.gettempdir()),
-                         '${EXECDIR}': os.path.abspath('.'),
-                         '${/}': os.sep,
-                         '${:}': os.pathsep,
-                         '${SPACE}': ' ',
-                         '${EMPTY}': '',
-                         '${True}': True,
-                         '${False}': False,
-                         '${None}': None,
-                         '${null}': None,
-                         '${OUTPUT_DIR}': '',
-                         '${OUTPUT_FILE}': '',
-                         '${SUMMARY_FILE}': '',
-                         '${REPORT_FILE}': '',
-                         '${LOG_FILE}': '',
-                         '${DEBUG_FILE}': '',
-                         '${PREV_TEST_NAME}': '',
-                         '${PREV_TEST_STATUS}': '',
-                         '${PREV_TEST_MESSAGE}': '',
-                         '${CURDIR}': '.',
-                         '${TEST_NAME}': '',
-                         '@{TEST_TAGS}': '',
-                         '${TEST_STATUS}': '',
-                         '${TEST_MESSAGE}': '',
-                         '${SUITE_NAME}': '',
-                         '${SUITE_SOURCE}': '',
-                         '${SUITE_STATUS}': '',
-                         '${SUITE_MESSAGE}': ''}
+    global_variables = {
+        '${TEMPDIR}': os.path.normpath(tempfile.gettempdir()),
+        '${EXECDIR}': os.path.abspath('.'),
+        '${/}': os.sep,
+        '${:}': os.pathsep,
+        '${SPACE}': ' ',
+        '${EMPTY}': '',
+        '${True}': True,
+        '${False}': False,
+        '${None}': None,
+        '${null}': None,
+        '${OUTPUT_DIR}': '',
+        '${OUTPUT_FILE}': '',
+        '${SUMMARY_FILE}': '',
+        '${REPORT_FILE}': '',
+        '${LOG_FILE}': '',
+        '${DEBUG_FILE}': '',
+        '${PREV_TEST_NAME}': '',
+        '${PREV_TEST_STATUS}': '',
+        '${PREV_TEST_MESSAGE}': '',
+        '${CURDIR}': '.',
+        '${TEST_NAME}': '',
+        '@{TEST_TAGS}': [],
+        '${TEST_STATUS}': '',
+        '${TEST_MESSAGE}': '',
+        '${SUITE_NAME}': '',
+        '${SUITE_SOURCE}': '',
+        '${SUITE_STATUS}': '',
+        '${SUITE_MESSAGE}': ''
+    }
 
     ARGUMENT_SOURCE = object()
 
     def __init__(self):
-        self._vars = RobotVariables()
+        self._vars = robotapi.RobotVariables()
         self._sources = {}
         for k, v in self.global_variables.iteritems():
             self.set(k, v, 'built-in')
 
     def set(self, name, value, source):
         self._vars[name] = value
-        self._sources[name] = source
+        self._sources[name[2:-1]] = source
 
     def set_argument(self, name, value):
         self.set(name, value, self.ARGUMENT_SOURCE)
@@ -273,28 +295,52 @@ class _VariableStash(object):
     def replace_variables(self, value):
         try:
             return self._vars.replace_scalar(value)
-        except DataError:
+        except robotapi.DataError:
             return self._vars.replace_string(value, ignore_errors=True)
 
     def set_from_variable_table(self, variable_table):
+        reader = robotapi.VariableTableReader()
         for variable in variable_table:
             try:
-                if not self._vars.has_key(variable.name):
-                    _, value = self._vars._get_var_table_name_and_value(
+                if variable.name not in self._vars.store:
+                    _, value = reader._get_name_and_value(
                         variable.name,
-                        variable.value)
-                    self.set(variable.name, value, variable_table.source)
-            except DataError:
-                if is_var(variable.name):
-                    self.set(variable.name, '', variable_table.source)
+                        variable.value,
+                        variable.report_invalid_syntax
+                    )
+                    self.set(variable.name, value.resolve(self._vars),
+                             variable_table.source)
+            except robotapi.DataError:
+                if robotapi.is_var(variable.name):
+                    val = self._empty_value_for_variable_type(variable.name)
+                    self.set(variable.name, val, variable_table.source)
+
+    def _empty_value_for_variable_type(self, name):
+        if name[0] == '$':
+            return ''
+        if name[0] == '@':
+            return []
+        return {}
 
     def set_from_file(self, varfile_path, args):
-        for item in variablefetcher.import_varfile(varfile_path, args):
-            self.set(*item)
+        vars_from_file = VariableFileSetter(None)._import_if_needed(
+            varfile_path, args)
+        for name, value in vars_from_file:
+            self.set(name, value, varfile_path)
+
+    def _get_prefix(self, value):
+        if utils.is_dict_like(value):
+            return '&'
+        elif utils.is_list_like(value):
+            return '@'
+        else:
+            return '$'
 
     def __iter__(self):
-        for name, value in self._vars.items():
+        for name, value in self._vars.store.data.items():
             source = self._sources[name]
+            prefix = self._get_prefix(value)
+            name = u'{0}{{{1}}}'.format(prefix, name)
             if source == self.ARGUMENT_SOURCE:
                 yield ArgumentInfo(name, value)
             else:
@@ -302,7 +348,6 @@ class _VariableStash(object):
 
 
 class DatafileRetriever(object):
-
     def __init__(self, lib_cache, resource_factory):
         self._lib_cache = lib_cache
         self._resource_factory = resource_factory
@@ -332,9 +377,10 @@ class DatafileRetriever(object):
     def get_keywords_from(self, datafile, ctx):
         self._get_vars_recursive(datafile, ctx)
         ctx.allow_going_through_resources_again()
-        return sorted(set(self._get_datafile_keywords(datafile) +\
-              self._get_imported_resource_keywords(datafile, ctx) +\
-              self._get_imported_library_keywords(datafile, ctx)))
+        return sorted(set(
+            self._get_datafile_keywords(datafile) +
+            self._get_imported_resource_keywords(datafile, ctx) +
+            self._get_imported_library_keywords(datafile, ctx)))
 
     def is_library_import_ok(self, datafile, imp, ctx):
         self._get_vars_recursive(datafile, ctx)
@@ -345,12 +391,12 @@ class DatafileRetriever(object):
         return self._import_vars(ctx, datafile, imp)
 
     def _get_datafile_keywords(self, datafile):
-        if isinstance(datafile, ResourceFile):
+        if isinstance(datafile, robotapi.ResourceFile):
             return [ResourceUserKeywordInfo(kw) for kw in datafile.keywords]
         return [TestCaseUserKeywordInfo(kw) for kw in datafile.keywords]
 
     def _get_imported_library_keywords(self, datafile, ctx):
-        return self._collect_kws_from_imports(datafile, Library,
+        return self._collect_kws_from_imports(datafile, robotapi.Library,
                                               self._lib_kw_getter, ctx)
 
     def _collect_kws_from_imports(self, datafile, instance_type, getter, ctx):
@@ -377,8 +423,9 @@ class DatafileRetriever(object):
                 if isinstance(imp, instance_type)]
 
     def _get_imported_resource_keywords(self, datafile, ctx):
-        return self._collect_kws_from_imports(datafile, Resource,
-                                              self._res_kw_recursive_getter, ctx)
+        return self._collect_kws_from_imports(datafile, robotapi.Resource,
+                                              self._res_kw_recursive_getter,
+                                              ctx)
 
     def _res_kw_recursive_getter(self, imp, ctx):
         kws = []
@@ -387,13 +434,14 @@ class DatafileRetriever(object):
             return kws
         ctx.parsed.add(res)
         ctx.set_variables_from_datafile_variable_table(res)
-        for child in self._collect_import_of_type(res, Resource):
+        for child in self._collect_import_of_type(res, robotapi.Resource):
             kws.extend(self._res_kw_recursive_getter(child, ctx))
         kws.extend(self._get_imported_library_keywords(res, ctx))
         return [ResourceUserKeywordInfo(kw) for kw in res.keywords] + kws
 
     def get_variables_from(self, datafile, ctx=None):
-        return self._get_vars_recursive(datafile, ctx or RetrieverContext()).vars
+        return self._get_vars_recursive(datafile,
+                                        ctx or RetrieverContext()).vars
 
     def _get_vars_recursive(self, datafile, ctx):
         ctx.set_variables_from_datafile_variable_table(datafile)
@@ -402,18 +450,18 @@ class DatafileRetriever(object):
         return ctx
 
     def _collect_vars_from_variable_files(self, datafile, ctx):
-        for imp in self._collect_import_of_type(datafile, Variables):
+        for imp in self._collect_import_of_type(datafile, robotapi.Variables):
             self._import_vars(ctx, datafile, imp)
 
     def _import_vars(self, ctx, datafile, imp):
         varfile_path = os.path.join(datafile.directory,
-            ctx.replace_variables(imp.name))
+                                    ctx.replace_variables(imp.name))
         args = [ctx.replace_variables(a) for a in imp.args]
         try:
             ctx.vars.set_from_file(varfile_path, args)
             return True
-        except DataError:
-            return False # TODO: log somewhere
+        except robotapi.DataError:
+            return False  # TODO: log somewhere
 
     def _var_collector(self, res, ctx, items):
         self._get_vars_recursive(res, ctx)
@@ -421,27 +469,31 @@ class DatafileRetriever(object):
     def get_keywords_cached(self, datafile, context_factory):
         values = self.keyword_cache.get(datafile.source)
         if not values:
-            words = self.get_keywords_from(datafile, context_factory.ctx_for_datafile(datafile))
+            words = self.get_keywords_from(
+                datafile, context_factory.ctx_for_datafile(datafile))
             words.extend(self.default_kws)
             values = _Keywords(words)
             self.keyword_cache.put(datafile.source, values)
         return values
 
     def _get_user_keywords_from(self, datafile):
-        return list(self._get_user_keywords_recursive(datafile, RetrieverContext()))
+        return list(self._get_user_keywords_recursive(datafile,
+                                                      RetrieverContext()))
 
     def _get_user_keywords_recursive(self, datafile, ctx):
         kws = set()
         kws.update(datafile.keywords)
-        kws_from_res = self._collect_each_res_import(datafile, ctx,
-            lambda res, ctx, kws: kws.update(self._get_user_keywords_recursive(res, ctx)))
+        kws_from_res = self._collect_each_res_import(
+            datafile, ctx,
+            lambda res, ctx, kws:
+                kws.update(self._get_user_keywords_recursive(res, ctx)))
         kws.update(kws_from_res)
         return kws
 
     def _collect_each_res_import(self, datafile, ctx, collector):
         items = set()
         ctx.set_variables_from_datafile_variable_table(datafile)
-        for imp in self._collect_import_of_type(datafile, Resource):
+        for imp in self._collect_import_of_type(datafile, robotapi.Resource):
             res = self._resource_factory.get_resource_from_import(imp, ctx)
             if res and res not in ctx.parsed:
                 ctx.parsed.add(res)
@@ -449,7 +501,8 @@ class DatafileRetriever(object):
         return items
 
     def get_resources_from(self, datafile):
-        resources = list(self._get_resources_recursive(datafile, RetrieverContext()))
+        resources = list(self._get_resources_recursive(datafile,
+                                                       RetrieverContext()))
         resources.sort(key=operator.attrgetter('name'))
         return resources
 
@@ -459,7 +512,6 @@ class DatafileRetriever(object):
         resources.update(res)
         for child in datafile.children:
             resources.update(self.get_resources_from(child))
-
         return resources
 
     def _add_resource(self, res, ctx, items):
@@ -469,10 +521,10 @@ class DatafileRetriever(object):
 
 class _Keywords(object):
 
-    regexp = re.compile("\s*(given|when|then|and)\s*(.*)", re.IGNORECASE)
+    regexp = re.compile("\s*(given|when|then|and|but)\s*(.*)", re.IGNORECASE)
 
     def __init__(self, keywords):
-        self.keywords = NormalizedDict(ignore=['_'])
+        self.keywords = robotapi.NormalizedDict(ignore=['_'])
         self.embedded_keywords = {}
         self._add_keywords(keywords)
 
@@ -481,8 +533,9 @@ class _Keywords(object):
             self._add_keyword(kw)
 
     def _add_keyword(self, kw):
-        # TODO: this hack creates a preference for local keywords over resources and libraries
-        # Namespace should be rewritten to handle keyword preference order
+        # TODO: this hack creates a preference for local keywords over
+        # resources and libraries Namespace should be rewritten to handle
+        # keyword preference order
         if kw.name not in self.keywords:
             self.keywords[kw.name] = kw
             self._add_embedded(kw)
@@ -511,4 +564,3 @@ class _Keywords(object):
     def _get_bdd_name(self, kw_name):
         match = self.regexp.match(kw_name)
         return match.group(2) if match else None
-

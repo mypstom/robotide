@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -12,15 +12,15 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-from robot.running.userkeyword import EmbeddedArgsTemplate
+from robotide import robotapi
 
 
-class EmbeddedArgsHandler(EmbeddedArgsTemplate):
+class EmbeddedArgsHandler(object):
 
     def __init__(self, keyword):
         if keyword.arguments:
             raise TypeError('Cannot have normal arguments')
-        self.embedded_args, self.name_regexp \
-                = self._read_embedded_args_and_regexp(keyword.name)
+        self.name_regexp, self.embedded_args = \
+            robotapi.EmbeddedArgumentParser().parse(keyword.name)
         if not self.embedded_args:
             raise TypeError('Must have embedded arguments')

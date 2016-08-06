@@ -25,7 +25,7 @@ class KTV:
 
     def ShowMessage(self, keywordInfo):
         wx.MessageBox(keywordInfo, 'Info',
-                      wx.OK | wx.ICON_INFORMATION)
+                      wx.ICON_INFORMATION | wx.OK)
 
     """def CustomizedDiagram(self):
         dlg = wx.MultiChoiceDialog(self, 'Customize your diagram',  'Tase case relation diagram',['Root','Foloder','Node label'])
@@ -287,11 +287,18 @@ class KTV:
 
         for node in userKeywordObject:
             for step in node.steps:
-                if str(step.keyword) in user_def_keyword:
+                #print 'step = %r' %(step)
+                #print(step.name)
+                """if str(step.keyword) in user_def_keyword:
                     graphUK2LK.node(str(step.keyword), color="coral", shape="box", style="filled")
                 else:
                     graphUK2LK.node(str(step.keyword), color="bisque", shape="box", style="filled")
-                tempEdge.append((node.name.encode('ascii', 'ignore'), str(step.keyword)))
+                tempEdge.append((node.name.encode('ascii', 'ignore'), str(step.keyword)))"""
+                if str(step.name) in user_def_keyword:
+                    graphUK2LK.node(str(step.name), color="coral", shape="box", style="filled")
+                else:
+                    graphUK2LK.node(str(step.name), color="bisque", shape="box", style="filled")
+                tempEdge.append((node.name.encode('ascii', 'ignore'), str(step.name)))
 
         for node in tempEdge:
             tempEdgeSet.add(node)
@@ -361,13 +368,20 @@ class KTV:
 
         for node in userKeywordObject:  # connect UK and C and UK UK
             for step in node.steps:
-                if str(step.keyword) in tempComponentList:
+                """if str(step.keyword) in tempComponentList:
                     tempEdge.append((str(node.name), 'C_' + str(step.keyword)))
                     tempEdgeWithoutGhostNode.append((str(node.name), 'C_' + str(step.keyword)))
                 elif str(step.keyword) in user_def_keyword:
                     tempEdge.append((str(node.name), str(step.keyword)))
                     tempEdgeWithoutGhostNode.append((str(node.name), str(step.keyword)))
-                    graphC.node(str(step.keyword), color="coral", shape="box", style="filled")
+                    graphC.node(str(step.keyword), color="coral", shape="box", style="filled")"""
+                if str(step.name) in tempComponentList:
+                    tempEdge.append((str(node.name), 'C_' + str(step.name)))
+                    tempEdgeWithoutGhostNode.append((str(node.name), 'C_' + str(step.name)))
+                elif str(step.name) in user_def_keyword:
+                    tempEdge.append((str(node.name), str(step.name)))
+                    tempEdgeWithoutGhostNode.append((str(node.name), str(step.name)))
+                    graphC.node(str(step.name), color="coral", shape="box", style="filled")
 
         for node in tempEdge:  # remove the duplicate node
             tempEdgeSet.add(node)
@@ -517,7 +531,7 @@ class KTV:
         try:  # add user defined keyword into userKeywordObject and add user_def_keyword dict
             for keywordObject in df.data.keywords:
                 userKeywordObject.append(keywordObject)
-                print 'df.data.keyword = %r' % (keywordObject)
+                #print 'df.data.keyword = %r' % (keywordObject)
                 temp_name = keywordObject.name.encode('ascii', 'ignore')
                 # print 'keyword.name = %r' %(temp_name)
                 user_def_keyword[temp_name] = str(df.display_name)
@@ -579,8 +593,8 @@ class KTV:
         for uk in userKeywordObject:
             ukTempCount = 0
             for step in uk.steps:
-                if str(step.keyword) in user_def_keyword:
-                    ukTempCount += ukWeight[str(step.keyword)]
+                if str(step.name) in user_def_keyword:
+                    ukTempCount += ukWeight[str(step.name)]
                 else:
                     ukTempCount += 1
             ukWeight[uk.name.encode('ascii', 'ignore')] = ukTempCount

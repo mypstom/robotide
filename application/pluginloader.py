@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -84,8 +84,3 @@ class PluginLoader(object):
                 file.close()
         return [ cls for _, cls in
                  inspect.getmembers(module, predicate=inspect.isclass) ]
-
-    """def getPluginByName(self, name):
-        for plugin in self.plugins:
-            if plugin.name == name:
-                return plugin"""

@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ from robotide.controller.commands import MoveUp, MoveDown, DeleteItem
 
 from robotide.utils import RideEventHandler
 from robotide.widgets import PopupMenu, PopupMenuItems, ButtonWithHandler, Font
-from robotide.context.platform import ctrl_or_cmd, bind_keys_to_evt_menu, IS_WINDOWS
+from robotide.context import ctrl_or_cmd, bind_keys_to_evt_menu, IS_WINDOWS
 
 
 class ListEditorBase(wx.Panel):
@@ -215,4 +215,3 @@ class AutoWidthColumnList(wx.ListCtrl, ListCtrlAutoWidthMixin):
             self.Select(index, on=True)
             self.EnsureVisible(index)
             self.Focus(index)
-

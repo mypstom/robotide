@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Modified by NSN
-#  Copyright 2010-2012 Nokia Siemens Networks Oyj
+#  Copyright 2010-2012 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -42,30 +42,26 @@ linux it's /tmp).
 You can safely manually remove these directories, except for the one
 being used for a currently running test.
 '''
-from Queue import Queue
 import datetime
 import time
 import os
-import sys
-import posixpath
 import re
-from posixpath import curdir, sep, pardir, join
-from robot.output import LEVELS
-from robot.utils import robottime
-from robotide.action.shortcut import localize_shortcuts
-from robotide.contrib.testrunner.runprofiles import CustomScriptProfile
-from robotide.contrib.testrunner.testrunner import TestRunner
-from robotide.publish.messages import RideTestSelectedForRunningChanged, RideNewProject
-
-ON_POSIX = 'posix' in sys.builtin_module_names
-
+from Queue import Queue
 import wx
 import wx.stc
 from wx.lib.embeddedimage import PyEmbeddedImage
-from robotide.pluginapi import Plugin, ActionInfo
-from robotide.contrib.testrunner import runprofiles
-from robotide.widgets import Label, ImageProvider
+
+
+from robotide.action.shortcut import localize_shortcuts
 from robotide.context import IS_WINDOWS, IS_MAC
+from robotide.contrib.testrunner.testrunner import TestRunner
+from robotide.contrib.testrunner import runprofiles
+from robotide.publish.messages import RideTestSelectedForRunningChanged
+from robotide.pluginapi import Plugin, ActionInfo
+from robotide.widgets import Label, ImageProvider
+from robotide.robotapi import LOG_LEVELS
+from robotide.utils import robottime
+
 
 ID_RUN = wx.NewId()
 ID_STOP = wx.NewId()
@@ -81,24 +77,6 @@ ID_SHOW_MESSAGE_LOG = wx.NewId()
 STYLE_STDERR = 2
 
 
-try:
-    from os.path import relpath
-except ImportError:
-    # the python 2.6 os.path package provides a relpath() function,
-    # but we're running 2.5 so we have to roll our own
-    def relpath(path, start=curdir):
-        """Return a relative version of a path"""
-        if not path:
-            raise ValueError("no path specified")
-        start_list = posixpath.abspath(start).split(sep)
-        path_list = posixpath.abspath(path).split(sep)
-        # Work out how much of the filepath is shared by start and path.
-        i = len(posixpath.commonprefix([start_list, path_list]))
-        rel_list = [pardir] * (len(start_list)-i) + path_list[i:]
-        if not rel_list:
-            return curdir
-        return join(*rel_list)
-
 def _RunProfile(name, run_prefix):
     return type('Profile', (runprofiles.PybotProfile,),
                 {'name': name, 'get_command': lambda self: run_prefix})
@@ -110,7 +88,8 @@ class TestRunnerPlugin(Plugin):
                 "show_message_log": True,
                 "profile": "pybot",
                 "sash_position": 200,
-                "runprofiles": [('jybot', 'jybot' + ('.bat' if os.name == 'nt' else ''))]}
+                "runprofiles":
+                    [('jybot', 'jybot' + ('.bat' if os.name == 'nt' else ''))]}
     report_regex = re.compile("^Report: {2}(.*\.html)$", re.MULTILINE)
     log_regex = re.compile("^Log: {5}(.*\.html)$", re.MULTILINE)
     title = "Run"
@@ -119,7 +98,7 @@ class TestRunnerPlugin(Plugin):
         Plugin.__init__(self, application, initially_enabled=True,
                         default_settings=self.defaults)
         self.version = "3.01"
-        self.metadata = {"url": "http://code.google.com/p/robotframework-ride/wiki/TestRunnerPlugin"}
+        self.metadata = {"url": "https://github.com/robotframework/RIDE/wiki/Test-Runner-Plugin"}
         self._reload_timer = None
         self._frame = application.frame
         self._report_file = None
@@ -129,7 +108,7 @@ class TestRunnerPlugin(Plugin):
         self._currently_executing_keyword = None
         self._test_runner = TestRunner(application.model)
         self._register_shortcuts()
-        self._min_log_level_number = LEVELS['INFO']
+        self._min_log_level_number = LOG_LEVELS['INFO']
         self._names_to_run = set()
 
     def _register_shortcuts(self):
@@ -270,20 +249,24 @@ class TestRunnerPlugin(Plugin):
         command = self._create_command()
         self._output("command: %s\n" % command)
         try:
-            self._test_runner.run_command(command, self._get_current_working_dir())
+            self._test_runner.run_command(
+                command, self._get_current_working_dir())
             self._process_timer.Start(41) # roughly 24fps
             self._set_running()
             self._progress_bar.Start()
         except Exception, e:
             self._set_stopped()
-            self._output(str(e))
-            wx.MessageBox("Could not start running tests with command '%s'" % command, "Error", wx.ICON_ERROR)
+            error, log_message = self.get_current_profile().format_error(
+                unicode(e), None)
+            self._output(error)
+            if log_message:
+                log_message.publish()
 
     def _create_command(self):
         command_as_list = self._test_runner.get_command(
             self.get_current_profile(),
             self.global_settings.get('pythonpath', None),
-            self._get_monitor_width(),
+            self._get_console_width(),
             self._names_to_run)
         self._min_log_level_number = self._test_runner.get_message_log_level(command_as_list)
         command = self._format_command(command_as_list)
@@ -291,7 +274,7 @@ class TestRunnerPlugin(Plugin):
 
     def _get_current_working_dir(self):
         profile = self.get_current_profile()
-        if profile.name == CustomScriptProfile.name:
+        if profile.name == runprofiles.CustomScriptProfile.name:
             return profile.get_cwd()
         if not os.path.isdir(self.model.suite.source):
             return os.path.dirname(self.model.suite.source)
@@ -347,20 +330,21 @@ class TestRunnerPlugin(Plugin):
         self.SetProfile(self.profile)
 
     def OnProcessEnded(self, evt):
-        output, errors = self._test_runner.get_output_and_errors()
+        output, errors, log_message = self._test_runner.get_output_and_errors(
+            self.get_current_profile())
         self._output(output)
         self._read_report_and_log_from_stdout_if_needed()
         if len(errors) > 0:
             self._output("unexpected error: " + errors)
-        self._progress_bar.Stop()
         if self._process_timer:
             self._process_timer.Stop()
         self._set_stopped()
         self._progress_bar.Stop()
         now = datetime.datetime.now()
         self._output("\ntest finished %s" % robottime.format_time(now.timetuple()))
-        self._set_stopped()
         self._test_runner.command_ended()
+        if log_message:
+            log_message.publish()
 
     def _read_report_and_log_from_stdout_if_needed(self):
         output = self.out.GetText()
@@ -382,7 +366,8 @@ class TestRunnerPlugin(Plugin):
         if not self._test_runner.is_running():
             self.OnProcessEnded(None)
             return
-        out_buffer, err_buffer = self._test_runner.get_output_and_errors()
+        out_buffer, err_buffer, log_message =\
+            self._test_runner.get_output_and_errors(self.get_current_profile())
         if len(out_buffer) > 0:
             self._output(out_buffer, source="stdout")
         if len(err_buffer) > 0:
@@ -416,7 +401,7 @@ class TestRunnerPlugin(Plugin):
         '''
         result = []
         for arg in argv:
-            if "'" in arg or " " in arg:
+            if "'" in arg or " " in arg or "&" in arg:
                 # for windows, if there are spaces we need to use
                 # double quotes. Single quotes cause problems
                 result.append('"%s"' % arg)
@@ -461,7 +446,7 @@ class TestRunnerPlugin(Plugin):
             linecount = textctrl.GetLineCount()
             textctrl.ScrollToLine(linecount)
 
-    def _get_monitor_width(self):
+    def _get_console_width(self):
         # robot wants to know a fixed size for output, so calculate the
         # width of the window based on average width of a character. A
         # little is subtracted just to make sure there's a little margin
@@ -654,7 +639,7 @@ class TestRunnerPlugin(Plugin):
         out.SetMarginWidth(3,0)
 
     def _create_font(self):
-        font=wx.SystemSettings.GetFont(wx.SYS_SYSTEM_FIXED_FONT)
+        font=wx.SystemSettings.GetFont(wx.SYS_ANSI_FIXED_FONT)
         if not font.IsFixedWidth():
             # fixed width fonts are typically a little bigger than their variable width
             # peers so subtract one from the point size.
@@ -725,7 +710,7 @@ class TestRunnerPlugin(Plugin):
 
     def _handle_log_message(self, args):
         a = args[0]
-        if self.show_message_log and LEVELS[a['level']] >= self._min_log_level_number:
+        if self.show_message_log and LOG_LEVELS[a['level']] >= self._min_log_level_number:
             prefix = '%s : %s : ' % (a['timestamp'], a['level'].rjust(5))
             message = a['message']
             if '\n' in message:
@@ -793,7 +778,8 @@ class ProgressBar(wx.Panel):
         self._current_keywords.append(name)
 
     def empty_current_keyword(self):
-        self._current_keywords.pop()
+        if self._current_keywords:
+            self._current_keywords.pop()
 
     def OnTimer(self, event):
         '''A handler for timer events; it updates the statusbar'''
@@ -939,4 +925,3 @@ LogIcon = PyEmbeddedImage(
     "+KEM01SY3gM6wBsEAQB0gJ+maZoC3gI6iPYaAIBJsiRmHU0AALOeFC3aK2cWAACUXe7+AwO0"
     "lc9eTHYTAAAAAElFTkSuQmCC")
 getLogIconBitmap = LogIcon.GetBitmap
-

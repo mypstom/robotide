@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -86,7 +86,7 @@ WELCOME_TEXT = """
 # Release notes are updated automatically by package.py script whenever
 # a numbered distribution is created.
 RELEASE_NOTES = """
-<h2>Release notes for 1.3</h2>
+<h2>Release notes for 1.5.2.1</h2>
 <table border="1">
 <tr>
 <td><p><b>ID</b></p></td>
@@ -95,23 +95,11 @@ RELEASE_NOTES = """
 <td><p><b>Summary</b></p></td>
 </tr>
 <tr>
-<td><a href="http://code.google.com/p/robotframework-ride/issues/detail?id=1326">Issue 1326</a></td>
-<td>Defect</td>
-<td>High</td>
-<td>If wxpython is not installed or correct version, point user to the correct download page</td>
-</tr>
-<tr>
-<td><a href="http://code.google.com/p/robotframework-ride/issues/detail?id=1182">Issue 1182</a></td>
-<td>Enhancement</td>
-<td>High</td>
-<td>Support for `*.robot` files</td>
-</tr>
-<tr>
-<td><a href="http://code.google.com/p/robotframework-ride/issues/detail?id=1325">Issue 1325</a></td>
-<td>Enhancement</td>
-<td>Medium</td>
-<td>Autocomplete: Support variable completion without ${ or @{ at the start</td>
+<td><a href="http://github.com/robotframework/RIDE/issues/1577">Issue 1577</a></td>
+<td>bug</td>
+<td>critical</td>
+<td>RIDE 1.5.2 does not work with wxPython 2.8.12.1</td>
 </tr>
 </table>
-<p>Altogether 3 issues.</p>
+<p>Altogether 1 issues.</p>
 """

@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
 
 import os
 
-from robot.parsing.model import TestCaseFile, TestDataDirectory
+from robotide import robotapi
 
 
 def NewTestCaseFile(path):
-    datafile = TestCaseFile(source=path)
+    datafile = robotapi.TestCaseFile(source=path)
     _create_missing_directories(datafile.directory)
     return datafile
 
 
 def NewTestDataDirectory(path):
     dirname = os.path.dirname(path)
-    datafile = TestDataDirectory(source=dirname)
+    datafile = robotapi.TestDataDirectory(source=dirname)
     datafile.initfile = path
     _create_missing_directories(dirname)
     return datafile

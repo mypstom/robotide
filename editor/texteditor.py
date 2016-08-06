@@ -1,4 +1,4 @@
-#  Copyright 2008-2012 Nokia Siemens Networks Oyj
+#  Copyright 2008-2015 Nokia Solutions and Networks
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -13,32 +13,26 @@
 #  limitations under the License.
 
 from time import time
-from robotide.context.platform import IS_WINDOWS, IS_MAC
-import wx
-from wx import stc
 from StringIO import StringIO
 import string
+import wx
+from wx import stc
 
-from robot.parsing.model import TestDataDirectory
-from robot.parsing.populators import FromFilePopulator
-from robot.parsing.txtreader import TxtReader
-
+from robotide import robotapi
+from robotide.context import IS_WINDOWS, IS_MAC
 from robotide.controller.commands import SetDataFile
-from robotide.controller.dataloader import TestDataDirectoryWithExcludes
 from robotide.publish.messages import RideMessage
 from robotide.widgets import VerticalSizer, HorizontalSizer, ButtonWithHandler
-from robotide.pluginapi import (Plugin, RideSaving, TreeAwarePluginMixin,
-        RideTreeSelection, RideNotebookTabChanging, RideDataChanged,
-        RideOpenSuite, RideDataChangedToDirty)
-from robotide.widgets.text import TextField
-from robotide.widgets.label import Label
+from robotide.pluginapi import Plugin, RideSaving, TreeAwarePluginMixin,\
+    RideTreeSelection, RideNotebookTabChanging, RideDataChanged,\
+    RideOpenSuite, RideDataChangedToDirty
+from robotide.widgets import TextField, Label, HtmlDialog
 
 try:
     from . import robotframeworklexer
 except Exception as e:
     robotframeworklexer = None
 
-from popupwindow import HtmlDialog
 
 class TextEditorPlugin(Plugin, TreeAwarePluginMixin):
     title = 'Text Edit'
@@ -241,8 +235,8 @@ class DataFileWrapper(object): # TODO: bad class name
     def _create_target(self):
         data = self._data.data
         target_class = type(data)
-        if isinstance(data, TestDataDirectory):
-            target = TestDataDirectory(source=self._data.directory)
+        if isinstance(data, robotapi.TestDataDirectory):
+            target = robotapi.TestDataDirectory(source=self._data.directory)
             target.initfile = data.initfile
             return target
         return target_class(source=self._data.source)
@@ -514,17 +508,18 @@ class RobotDataEditor(stc.StyledTextCtrl):
         self.stylizer.stylize()
 
 
-class FromStringIOPopulator(FromFilePopulator):
+class FromStringIOPopulator(robotapi.FromFilePopulator):
 
     def populate(self, content):
-        TxtReader().read(content, self)
+        robotapi.TxtReader().read(content, self)
+
 
 class RobotStylizer(object):
     def __init__(self, editor, settings):
         self.editor = editor
         self.lexer = None
         self.settings = settings
-        self.font_size = settings.get('text edit font size', 8)
+        self.font_size = settings['Text Edit'].get('font size', 8)
         if robotframeworklexer:
             self.lexer = robotframeworklexer.RobotFrameworkLexer()
             self._set_styles()
@@ -532,7 +527,7 @@ class RobotStylizer(object):
             self.editor.GetParent().create_syntax_colorization_help()
 
     def _set_styles(self):
-        color_settings = self.settings.get_without_default('Text Edit Colors')
+        color_settings = self.settings.get_without_default('Text Edit')
         styles = {
             robotframeworklexer.ARGUMENT: {
                 'fore': color_settings['argument']
@@ -597,4 +592,3 @@ class RobotStylizer(object):
             self.editor.StartStyling(position+shift, 31)
             self.editor.SetStyling(len(value.encode('utf-8')), self.tokens[token])
             shift += len(value.encode('utf-8'))-len(value)
-
