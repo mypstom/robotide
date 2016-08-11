@@ -1,6 +1,0 @@
-// TestSuiteLevel
-digraph {
-	Root
-	"02Crossword Lab"
-		Root -> "02Crossword Lab"
-}

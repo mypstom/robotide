@@ -1,0 +1,6 @@
+// TS <-> TS
+digraph {
+	Root
+	Test [color=cyan3 shape=box style=filled]
+		Root -> Test
+}

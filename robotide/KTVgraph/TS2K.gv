@@ -1,0 +1,16 @@
+// TS <-> K
+digraph {
+	Test [color=cyan3 shape=box style=filled]
+	"set selenium speed" [color=bisque shape=box style=filled]
+	"Open Browser" [color=bisque shape=box style=filled]
+	"Get Value" [color=bisque shape=box style=filled]
+	"Input Text" [color=bisque shape=box style=filled]
+	"Click Element" [color=bisque shape=box style=filled]
+	"Close Browser" [color=bisque shape=box style=filled]
+		Test -> "Input Text" [label=1]
+		Test -> "Click Element" [label=1]
+		Test -> "Get Value" [label=1]
+		Test -> "set selenium speed" [label=1]
+		Test -> "Open Browser" [label=1]
+		Test -> "Close Browser" [label=1]
+}

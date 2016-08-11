@@ -1,0 +1,15 @@
+// Component-only
+graph {
+	graph [splines=false]
+		"google search" [color=darkolivegreen2 shape=box style=filled]
+		"Level 3 change Impact: 
+
+Total Impact: 0" [fillcolor=lightblue fontsize=40 height=3 shape=rect style=filled width=2]
+		"Level 1 change Impact: 
+
+Total Imapct: 0" [fillcolor=lightblue2 fontsize=40 height=3 shape=rect style=filled width=2]
+		"Weighted Coupling: 0
+Edge: 0
+Node: 1
+Unweighted Coupling: -0.0" [fillcolor=yellow fontsize=40 height=3 shape=rect style=filled width=2]
+}

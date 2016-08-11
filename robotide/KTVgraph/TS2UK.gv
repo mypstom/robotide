@@ -1,0 +1,4 @@
+// TS <-> UK
+digraph {
+	Test [color=cyan3 shape=box style=filled]
+}

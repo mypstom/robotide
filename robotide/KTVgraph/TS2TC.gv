@@ -1,0 +1,6 @@
+// TS <-> TC
+digraph {
+	Test [color=cyan3 shape=box style=filled]
+	"google search" [color=darkolivegreen2 shape=box style=filled]
+		Test -> "google search" [len=10]
+}
