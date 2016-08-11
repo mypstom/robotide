@@ -1,0 +1,18 @@
+// TC <-> LK
+digraph {
+	Root
+	"google search" [color=darkolivegreen2 shape=box style=filled]
+		Root -> "google search"
+	"set selenium speed" [color=bisque shape=box style=filled]
+	"Open Browser" [color=bisque shape=box style=filled]
+	"Get Value" [color=bisque shape=box style=filled]
+	"Input Text" [color=bisque shape=box style=filled]
+	"Click Element" [color=bisque shape=box style=filled]
+	"Close Browser" [color=bisque shape=box style=filled]
+		"google search" -> "set selenium speed" [label=1 penwidth=1.0]
+		"google search" -> "Open Browser" [label=1 penwidth=1.0]
+		"google search" -> "Input Text" [label=1 penwidth=1.0]
+		"google search" -> "Click Element" [label=1 penwidth=1.0]
+		"google search" -> "Get Value" [label=1 penwidth=1.0]
+		"google search" -> "Close Browser" [label=1 penwidth=1.0]
+}
