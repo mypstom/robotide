@@ -14,11 +14,15 @@ from shutil import copyfile
 class KTV:
     def __init__(self):
         self.datafiles = None
+        self.componentChangeImpact = dict()
+        self.user_def_keyword = dict()
+        self.userKeywordObject = list()
+
+        # self.duplicatedactiondetection = LongestCommonSubsequence()
+        self.duplicatedactiondetection = LongestRepeatedSubstring()
 
     def setDataFiles(self, datafiles):
         self.datafiles = datafiles
-        #self.duplicatedactiondetection = LongestCommonSubsequence()
-        self.duplicatedactiondetection = LongestRepeatedSubstring()
 
     """def OnInsertScreenshotKeywordIntoScript(self):
         wx.MessageBox('Yoo', 'Info',
@@ -33,7 +37,7 @@ class KTV:
         dlg.ShowModal()
         dlg.Destroy()"""
 
-    def relationBetweenTSandTS(self, user_def_keyword, testSuites):
+    def relationBetweenTSandTS(self, testSuites):
         graphTS2TS = graphviz.Digraph(comment='TS <-> TS', engine='dot')
         edgeSet = list()
         nodeList = set()
@@ -52,9 +56,9 @@ class KTV:
                         for testCase in df.tests:
                             try:
                                 for testStep in testCase.steps:
-                                    if str(testStep.keyword) in user_def_keyword:  # record all of using UK
-                                        if user_def_keyword[str(testStep.keyword)] != str(df.display_name):
-                                            tempSuiteUseUserKeyword.append(user_def_keyword[str(testStep.keyword)])
+                                    if str(testStep.keyword) in self.user_def_keyword:  # record all of using UK
+                                        if self.user_def_keyword[str(testStep.keyword)] != str(df.display_name):
+                                            tempSuiteUseUserKeyword.append(self.user_def_keyword[str(testStep.keyword)])
                             except Exception, e:
                                 print str(e)
 
@@ -71,7 +75,7 @@ class KTV:
 
     # copyfile('KTVgraph/TS2TS.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TS2TS.gv.pdf')
 
-    def relationBetweenTSandTC(self, user_def_keyword, testSuites):
+    def relationBetweenTSandTC(self):
         graphTS2TC = graphviz.Digraph(comment='TS <-> TC', engine='sfdp')
         # graphTS2TC.node('Root')
         tempEdge = list()
@@ -95,12 +99,12 @@ class KTV:
         graphTS2TC.render('KTVgraph/TS2TC.gv', view=False)
         copyfile('KTVgraph/TS2TC.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TS2TC.gv.pdf')
 
-    def relationBetweenTSandUK(self, user_def_keyword, testSuites):
+    def relationBetweenTSandUK(self):
         graphTS2UK = graphviz.Digraph(comment='TS <-> UK', engine='sfdp')
         # graphTS2UK.node('Root')
         tempEdge = list()
         tempEdgeSet = set()
-        for node in user_def_keyword:
+        for node in self.user_def_keyword:
             graphTS2UK.node(str(node), color="coral", shape="box", style="filled")
         try:
             for df in self.datafiles:  # get suite level
@@ -110,7 +114,7 @@ class KTV:
                         for testCase in df.tests:
                             try:
                                 for testStep in testCase.steps:
-                                    if str(testStep.keyword) in user_def_keyword:  # record all of using UK
+                                    if str(testStep.keyword) in self.user_def_keyword:  # record all of using UK
                                         tempEdge.append((str(df.display_name), str(testStep.keyword)))
                             except Exception, e:
                                 print str(e)
@@ -126,7 +130,7 @@ class KTV:
         graphTS2UK.render('KTVgraph/TS2UK.gv', view=False)
         copyfile('KTVgraph/TS2UK.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TS2UK.gv.pdf')
 
-    def relationBetweenTSandK(self, user_def_keyword, testSuites):
+    def relationBetweenTSandK(self):
         graphTS2K = graphviz.Digraph(comment='TS <-> K', engine='fdp')
         tempEdge = list()
         tempEdgeSet = set()
@@ -155,12 +159,12 @@ class KTV:
         graphTS2K.render('KTVgraph/TS2K.gv', view=False)
         copyfile('KTVgraph/TS2K.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TS2K.gv.pdf')
 
-    def relationBetweenTCandUK(self, user_def_keyword, testSuites):
+    def relationBetweenTCandUK(self):
         graphTC2UK = graphviz.Digraph(comment='TC <-> UK', engine='sfdp')
         graphTC2UK.node('Root')
         tempEdge = list()
         tempEdgeSet = set()
-        for node in user_def_keyword:
+        for node in self.user_def_keyword:
             graphTC2UK.node(str(node), color="coral", shape="box", style="filled")
 
         try:
@@ -172,7 +176,7 @@ class KTV:
                             graphTC2UK.edge('Root', str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
-                                    if str(testStep.keyword) in user_def_keyword:  # record all of using UK
+                                    if str(testStep.keyword) in self.user_def_keyword:  # record all of using UK
                                         tempEdge.append((str(testCase.name), str(testStep.keyword)))
                             except Exception, e:
                                 print str(e)
@@ -189,7 +193,7 @@ class KTV:
         graphTC2UK.render('KTVgraph/TC2UK.gv', view=False)
         copyfile('KTVgraph/TC2UK.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TC2UK.gv.pdf')
 
-    def relationBetweenTCandLK(self, user_def_keyword, testSuites):
+    def relationBetweenTCandLK(self):
         graphTC2LK = graphviz.Digraph(comment='TC <-> LK', engine='fdp')
         graphTC2LK.node('Root')
         tempEdge = list()
@@ -203,7 +207,7 @@ class KTV:
                             graphTC2LK.edge('Root', str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
-                                    if str(testStep.keyword) not in user_def_keyword:  # record all of using UK
+                                    if str(testStep.keyword) not in self.user_def_keyword:  # record all of using UK
                                         graphTC2LK.node(str(testStep.keyword), color="bisque", shape="box",
                                                         style="filled")
                                         tempEdge.append((str(testCase.name), str(testStep.keyword)))
@@ -223,7 +227,7 @@ class KTV:
         graphTC2LK.render('KTVgraph/TC2LK.gv', view=False)
         copyfile('KTVgraph/TC2LK.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TC2LK.gv.pdf')
 
-    def relationBetweenTCandK(self, user_def_keyword, testSuites):
+    def relationBetweenTCandK(self):
         graphTC2K = graphviz.Digraph(comment='TC <-> K', engine='dot')
         graphTC2K.node('Root')
         tempEdge = list()
@@ -238,7 +242,7 @@ class KTV:
                             graphTC2K.edge('Root', str(testCase.name))
                             try:
                                 for testStep in testCase.steps:
-                                    if str(testStep.keyword) in user_def_keyword:  # record all of using UK
+                                    if str(testStep.keyword) in self.user_def_keyword:  # record all of using UK
                                         graphTC2K.node(str(testStep.keyword), color="coral", shape="box",
                                                        style="filled")
                                     else:
@@ -263,7 +267,7 @@ class KTV:
         # copyfile('KTVgraph/TC2K.gv.pdf', 'C:/wamp64/www/TSVisual/graph/TC2K.gv.pdf')
         return tempAllStep
 
-    def relationBetweenUKandLK(self, user_def_keyword, userKeywordObject):
+    def relationBetweenUKandLK(self):
         graphUK2LK = graphviz.Digraph(comment='UK <-> LK', engine='fdp')
         graphUK2LK.node('Root')
         tempEdge = list()
@@ -275,7 +279,7 @@ class KTV:
                         for testCase in df.tests:
                             try:
                                 for testStep in testCase.steps:
-                                    if str(testStep.keyword) in user_def_keyword:  # record all of using UK
+                                    if str(testStep.keyword) in self.user_def_keyword:  # record all of using UK
                                         graphUK2LK.node(str(testStep.keyword), color="coral", shape="box",
                                                         style="filled")
                                         tempEdge.append(('Root', str(testStep.keyword)))
@@ -286,7 +290,7 @@ class KTV:
         except Exception, e:
             print str(e)
 
-        for node in userKeywordObject:
+        for node in self.userKeywordObject:
             for step in node.steps:
                 # print 'step = %r' %(step)
                 # print(step.name)
@@ -295,7 +299,7 @@ class KTV:
                 else:
                     graphUK2LK.node(str(step.keyword), color="bisque", shape="box", style="filled")
                 tempEdge.append((node.name.encode('ascii', 'ignore'), str(step.keyword)))"""
-                if str(step.name) in user_def_keyword:
+                if str(step.name) in self.user_def_keyword:
                     graphUK2LK.node(str(step.name), color="coral", shape="box", style="filled")
                 else:
                     graphUK2LK.node(str(step.name), color="bisque", shape="box", style="filled")
@@ -310,7 +314,7 @@ class KTV:
         graphUK2LK.render('KTVgraph/UK2LK.gv', view=False)
         copyfile('KTVgraph/UK2LK.gv.pdf', 'C:/wamp64/www/TSVisual/graph/UK2LK.gv.pdf')
 
-    def listComponent(self, user_def_keyword, tempComponentList, userKeywordObject):
+    def listComponent(self, tempComponentList):
         graphC = graphviz.Graph(comment='Component-only', engine='dot', graph_attr={'splines': 'false'})
         tempEdgeSet = set()
         tempEdge = list()
@@ -322,7 +326,7 @@ class KTV:
             graphC.node("C_" + str(node), color="pink", shape="box", style="filled")
             tempNode.add("C_" + str(node))
             nodesWithType["C_" + str(node)] = "Component"
-        for node in user_def_keyword:
+        for node in self.user_def_keyword:
             nodesWithType[node] = "User Keyword"
             tempNode.add(node)
             graphC.node(node, color="coral", shape="box", style="filled")
@@ -337,7 +341,7 @@ class KTV:
                             nodesWithType[str(testCase.name)] = "Test Case"
                             try:
                                 for testStep in testCase.steps:
-                                    if str(testStep.keyword) in user_def_keyword:  # add userkeyword into node and edge
+                                    if str(testStep.keyword) in self.user_def_keyword:  # add userkeyword into node and edge
                                         tempNode.add(str(testStep.keyword))
                                         tempEdge.append((str(testCase.name), str(testStep.keyword)))
                                     else:  # if and only if the component is appear in our components list
@@ -367,7 +371,7 @@ class KTV:
             tempNodeName = node[1]
             tempEdgeCount += 1
 
-        for node in userKeywordObject:  # connect UK and C and UK UK
+        for node in self.userKeywordObject:  # connect UK and C and UK UK
             for step in node.steps:
                 """if str(step.keyword) in tempComponentList:
                     tempEdge.append((str(node.name), 'C_' + str(step.keyword)))
@@ -379,7 +383,7 @@ class KTV:
                 if str(step.name) in tempComponentList:
                     tempEdge.append((str(node.name), 'C_' + str(step.name)))
                     tempEdgeWithoutGhostNode.append((str(node.name), 'C_' + str(step.name)))
-                elif str(step.name) in user_def_keyword:
+                elif str(step.name) in self.user_def_keyword:
                     tempEdge.append((str(node.name), str(step.name)))
                     tempEdgeWithoutGhostNode.append((str(node.name), str(step.name)))
                     graphC.node(str(step.name), color="coral", shape="box", style="filled")
@@ -391,6 +395,9 @@ class KTV:
         for node in tempEdgeWithoutGhostNode:
             tempNoGhostNodeEdgeSet.add(node)
 
+        self.calculateChangeImpact(tempNoGhostNodeEdgeSet, tempEdgeWithoutGhostNode,
+                                   tempComponentList, graphC)
+
         # combine same component
         combineTag = True
         if combineTag:
@@ -401,10 +408,10 @@ class KTV:
                 checkSameList["C_" + item.split()[0]] = "C_" + item.split()[1]
             tempClearNode = list()
             for node in checkSameList:
-                componentChangeImpact[checkSameList[node][2:]] += componentChangeImpact[node[2:]]
+                self.componentChangeImpact[checkSameList[node][2:]] += self.componentChangeImpact[node[2:]]
                 tempClearNode.append(node[2:])
             for node in tempClearNode:
-                componentChangeImpact[node] = 0
+                self.componentChangeImpact[node] = 0
 
         for node in tempEdgeSet:
             if not combineTag:
@@ -420,8 +427,6 @@ class KTV:
                                        2))  # 8 is coupling node and six unused Component
 
         self.generateD3Graph(tempEdgeWithoutGhostNode, nodesWithType, tempNodeWithoutGhostNode)
-        self.calculateChangeImpact(user_def_keyword, tempNoGhostNodeEdgeSet, tempEdgeWithoutGhostNode,
-                                   tempComponentList, graphC)
 
         graphC.node("Weighted Coupling: " + str(len(tempEdge) - tempEdgeCount) + "\nEdge: " + str(
             len(tempEdgeSet) - tempCount) + "\nNode: " + str(
@@ -432,22 +437,22 @@ class KTV:
         graphC.render('KTVgraph/C.gv', view=False)
         copyfile('KTVgraph/C.gv.pdf', 'C:/wamp64/www/TSVisual/graph/C.gv.pdf')
 
-    def calculateChangeImpact(self, user_def_keyword, tempNoGhostNodeEdgeSet, tempEdgeWithoutGhostNode,
+    def calculateChangeImpact(self, tempNoGhostNodeEdgeSet, tempEdgeWithoutGhostNode,
                               tempComponentList, graphC):
         # calculate the changing impact(full size)
         ukChangeImpact = dict()
-        for uk in user_def_keyword:
+        for uk in self.user_def_keyword:
             ukChangeImpact[uk] = [False, 0, list()]  # [whether calculate is finish, CI, children list]
         for edge in tempNoGhostNodeEdgeSet:
-            if str(edge[1]) in user_def_keyword:
+            if str(edge[1]) in self.user_def_keyword:
                 ukChangeImpact[edge[1]][2].append(str(edge[0]))
         finishTag = True
         while finishTag:
             finishTag = False
-            for uk in user_def_keyword:
+            for uk in self.user_def_keyword:
                 if len(ukChangeImpact[uk][2]) != 0:
                     for node in ukChangeImpact[uk][2]:
-                        if node in user_def_keyword:
+                        if node in self.user_def_keyword:
                             if ukChangeImpact[node][0]:  # get Impact finished UK
                                 ukChangeImpact[uk][1] += ukChangeImpact[node][1] + tempEdgeWithoutGhostNode.count(
                                     (node, uk))
@@ -460,15 +465,15 @@ class KTV:
                     ukChangeImpact[uk][0] = True
 
         # calculate components' change impact
-        componentChangeImpact = dict()
+        #componentChangeImpact = dict()
         for c in tempComponentList:
-            componentChangeImpact[c] = 0
+            self.componentChangeImpact[c] = 0
             for node in tempNoGhostNodeEdgeSet:
                 if node[1] == "C_" + c:
-                    if node[0] in user_def_keyword:
-                        componentChangeImpact[c] += ukChangeImpact[node[0]][1] + tempEdgeWithoutGhostNode.count(node)
+                    if node[0] in self.user_def_keyword:
+                        self.componentChangeImpact[c] += ukChangeImpact[node[0]][1] + tempEdgeWithoutGhostNode.count(node)
                     else:
-                        componentChangeImpact[c] += tempEdgeWithoutGhostNode.count(node)
+                        self.componentChangeImpact[c] += tempEdgeWithoutGhostNode.count(node)
 
         # calculate the directly change impact
         lv1CI = 0
@@ -483,10 +488,10 @@ class KTV:
 
         tempString = ""
         totalImapct = 0
-        for node in componentChangeImpact:
-            if componentChangeImpact[node] != 0:
-                totalImapct += componentChangeImpact[node]
-                tempString += node + ": " + str(componentChangeImpact[node]) + "\n"
+        for node in self.componentChangeImpact:
+            if self.componentChangeImpact[node] != 0:
+                totalImapct += self.componentChangeImpact[node]
+                tempString += node + ": " + str(self.componentChangeImpact[node]) + "\n"
         tempCIString = ""
         for node in componentCI:
             if componentCI[node] != 0:
@@ -513,7 +518,7 @@ class KTV:
         except Exception, e:
             print str(e)
 
-    def AddKeyworksIntoNodeAndEdgeList(self, df, blacklist, nodeList, edgeList, userKeywordObject, user_def_keyword):
+    def AddKeyworksIntoNodeAndEdgeList(self, df, blacklist, nodeList, edgeList):
         try:  # add keyword level
             for keyword in df.keywords:
                 nodeList.add(str(keyword.name))
@@ -532,11 +537,11 @@ class KTV:
             print str(e)
         try:  # add user defined keyword into userKeywordObject and add user_def_keyword dict
             for keywordObject in df.data.keywords:
-                userKeywordObject.append(keywordObject)
+                self.userKeywordObject.append(keywordObject)
                 # print 'df.data.keyword = %r' % (keywordObject)
                 temp_name = keywordObject.name.encode('ascii', 'ignore')
                 # print 'keyword.name = %r' %(temp_name)
-                user_def_keyword[temp_name] = str(df.display_name)
+                self.user_def_keyword[temp_name] = str(df.display_name)
         except Exception, e:
             print str(e)
 
@@ -554,8 +559,8 @@ class KTV:
         dot_testSuiteLevel.node('Root')
         nodeCount += 1
         testSuites = list()
-        user_def_keyword = dict()
-        userKeywordObject = list()
+        #user_def_keyword = dict()
+        #userKeywordObject = list()
         tempComponentList = list()
         try:
             for df in self.datafiles:
@@ -573,37 +578,36 @@ class KTV:
                         nodeList.add(str(df.display_name))
                         edgeList.append(('Root', str(df.display_name)))
                     self.AddTestCaseIntoNodeAndEdgeList(df, blacklist, nodeList, edgeList)
-                    self.AddKeyworksIntoNodeAndEdgeList(df, blacklist, nodeList, edgeList, userKeywordObject,
-                                                        user_def_keyword)
+                    self.AddKeyworksIntoNodeAndEdgeList(df, blacklist, nodeList, edgeList)
                     testSuites.append(df.display_name.encode('ascii', 'ignore'))
         except Exception, e:
             print str(e)
 
-        self.relationBetweenTSandTS(user_def_keyword, testSuites)
-        self.relationBetweenTSandTC(user_def_keyword, testSuites)
-        self.relationBetweenTSandUK(user_def_keyword, testSuites)
-        self.relationBetweenTSandK(user_def_keyword, testSuites)
-        self.relationBetweenTCandUK(user_def_keyword, testSuites)
-        self.relationBetweenTCandLK(user_def_keyword, testSuites)
-        tempAllStep = self.relationBetweenTCandK(user_def_keyword, testSuites)
-        self.relationBetweenUKandLK(user_def_keyword, userKeywordObject)
-        self.listComponent(user_def_keyword, tempComponentList, userKeywordObject)
+        self.relationBetweenTSandTS(testSuites)
+        self.relationBetweenTSandTC()
+        self.relationBetweenTSandUK()
+        self.relationBetweenTSandK()
+        self.relationBetweenTCandUK()
+        self.relationBetweenTCandLK()
+        tempAllStep = self.relationBetweenTCandK()
+        self.relationBetweenUKandLK()
+        self.listComponent(tempComponentList)
         ukWeight = dict()
         ukTempCount = 0
 
-        for uk in userKeywordObject:
+        for uk in self.userKeywordObject:
             ukWeight[uk.name.encode('ascii', 'ignore')] = len(uk.steps)
-        for uk in userKeywordObject:
+        for uk in self.userKeywordObject:
             ukTempCount = 0
             for step in uk.steps:
-                if str(step.name) in user_def_keyword:
+                if str(step.name) in self.user_def_keyword:
                     ukTempCount += ukWeight[str(step.name)]
                 else:
                     ukTempCount += 1
             ukWeight[uk.name.encode('ascii', 'ignore')] = ukTempCount
         actionCount = 0
         for node in tempAllStep:
-            if node in user_def_keyword:
+            if node in self.user_def_keyword:
                 actionCount += ukWeight[node]
             else:
                 actionCount += 1

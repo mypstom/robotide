@@ -1,15 +1,419 @@
 // Component-only
 graph {
 	graph [splines=false]
-		"google search" [color=darkolivegreen2 shape=box style=filled]
+		C_AssertButtonAddWordExist [color=pink shape=box style=filled]
+		C_AssertButtonAddWordNotExist [color=pink shape=box style=filled]
+		C_AssertButtonSuggestWordExist [color=pink shape=box style=filled]
+		C_AssertButtonFindMatchExist [color=pink shape=box style=filled]
+		C_AssertFileExist [color=pink shape=box style=filled]
+		C_AssertFileNotExist [color=pink shape=box style=filled]
+		C_AssertFindMatchResult [color=pink shape=box style=filled]
+		C_AssertMenuLoadCrosswordEditEnabled [color=pink shape=box style=filled]
+		C_AssertMenuLoadCrosswordSolveEnabled [color=pink shape=box style=filled]
+		C_AssertMenuNewCrosswordEnabled [color=pink shape=box style=filled]
+		C_AssertMenuSaveCrosswordNotEnabled [color=pink shape=box style=filled]
+		C_AssertMenuSaveCrosswordEnabled [color=pink shape=box style=filled]
+		C_AssertSuggestListItem [color=pink shape=box style=filled]
+		C_ClearAnagramTextField [color=pink shape=box style=filled]
+		C_ClearPatternTextField [color=pink shape=box style=filled]
+		C_ClickButtonAddWord [color=pink shape=box style=filled]
+		C_ClickButtonFindMatch [color=pink shape=box style=filled]
+		C_ClickButtonOK [color=pink shape=box style=filled]
+		C_ClickButtonSuggestWord [color=pink shape=box style=filled]
+		C_ClickCrosswordCell [color=pink shape=box style=filled]
+		C_ClickMenuLoadCrosswordToEdit [color=pink shape=box style=filled]
+		C_ClickMenuNewCrossword [color=pink shape=box style=filled]
+		C_ClickMenuSaveCrossword [color=pink shape=box style=filled]
+		C_ClickMenuSolveNewWord [color=pink shape=box style=filled]
+		C_DoubleClickSuggestListItem [color=pink shape=box style=filled]
+		C_FileChooserLoadFile [color=pink shape=box style=filled]
+		C_FileChooserSaveFile [color=pink shape=box style=filled]
+		C_LaunchCrossword [color=pink shape=box style=filled]
+		C_RemoveTestFile [color=pink shape=box style=filled]
+		C_SelectCrosswordSageWindow [color=pink shape=box style=filled]
+		C_SelectErrorSizeDialog [color=pink shape=box style=filled]
+		C_SelectInputDialog [color=pink shape=box style=filled]
+		C_SelectMessageDialog [color=pink shape=box style=filled]
+		C_SelectOpenDialog [color=pink shape=box style=filled]
+		C_SelectSaveDialog [color=pink shape=box style=filled]
+		C_TypeInAnagramTextField [color=pink shape=box style=filled]
+		C_TypeInGridSizeTextField [color=pink shape=box style=filled]
+		C_TypeInPatternTextField [color=pink shape=box style=filled]
+		C_AssertButtonGetClueExist [color=pink shape=box style=filled]
+		C_AssertButtonGetClueNotExist [color=pink shape=box style=filled]
+		C_AssertPatternTextFieldExist [color=pink shape=box style=filled]
+		C_AssertPatternTextFieldNotExist [color=pink shape=box style=filled]
+		C_DoubleClickCrosswordCell [color=pink shape=box style=filled]
+		C_SelectAddWordTipsDialog [color=pink shape=box style=filled]
+		FindPossibleWordByPattern [color=coral shape=box style=filled]
+		Keyword01 [color=coral shape=box style=filled]
+		InputGridSize [color=coral shape=box style=filled]
+		SaveFileWithAssert [color=coral shape=box style=filled]
+		InputValidGridSize [color=coral shape=box style=filled]
+		InputCrosswordCell [color=coral shape=box style=filled]
+		ChooseSuggestWord [color=coral shape=box style=filled]
+		InputValidCrosswordSize [color=coral shape=box style=filled]
+		LoadFile [color=coral shape=box style=filled]
+		AddWord [color=coral shape=box style=filled]
+		FindPossibleWordByAnagram [color=coral shape=box style=filled]
+		AssertCrosswordOnlyOneSuggestWordExists [color=coral shape=box style=filled]
+		ClickOKonErrorSizeDialog [color=coral shape=box style=filled]
+		InputInvalidGridSize [color=coral shape=box style=filled]
+		SaveFileWithoutAssert [color=coral shape=box style=filled]
+		DeleteFile [color=coral shape=box style=filled]
+		OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
+		TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
+		TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
+		TestAddWord [color=darkolivegreen2 shape=box style=filled]
+		TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
+		TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
+		TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
+		TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
+		"TC-01" [color=darkolivegreen2 shape=box style=filled]
+		"TC-02" [color=darkolivegreen2 shape=box style=filled]
+		1 [shape=point]
+		2 [shape=point]
+		3 [shape=point]
+		4 [shape=point]
+		5 [shape=point]
+		6 [shape=point]
+		6 [shape=point]
+		6 [shape=point]
+		7 [shape=point]
+		8 [shape=point]
+		9 [shape=point]
+		9 [shape=point]
+		9 [shape=point]
+		10 [shape=point]
+		11 [shape=point]
+		11 [shape=point]
+		11 [shape=point]
+		11 [shape=point]
+		12 [shape=point]
+		12 [shape=point]
+		12 [shape=point]
+		13 [shape=point]
+		14 [shape=point]
+		14 [shape=point]
+		14 [shape=point]
+		14 [shape=point]
+		15 [shape=point]
+		16 [shape=point]
+		16 [shape=point]
+		17 [shape=point]
+		18 [shape=point]
+		19 [shape=point]
+		20 [shape=point]
+		20 [shape=point]
+		20 [shape=point]
+		20 [shape=point]
+		20 [shape=point]
+		20 [shape=point]
+		21 [shape=point]
+		22 [shape=point]
+		22 [shape=point]
+		22 [shape=point]
+		22 [shape=point]
+		22 [shape=point]
+		23 [shape=point]
+		23 [shape=point]
+		24 [shape=point]
+		24 [shape=point]
+		24 [shape=point]
+		24 [shape=point]
+		25 [shape=point]
+		25 [shape=point]
+		26 [shape=point]
+		27 [shape=point]
+		28 [shape=point]
+		29 [shape=point]
+		30 [shape=point]
+		31 [shape=point]
+		32 [shape=point]
+		32 [shape=point]
+		32 [shape=point]
+		32 [shape=point]
+		33 [shape=point]
+		34 [shape=point]
+		35 [shape=point]
+		35 [shape=point]
+		35 [shape=point]
+		35 [shape=point]
+		35 [shape=point]
+		36 [shape=point]
+		37 [shape=point]
+		37 [shape=point]
+		38 [shape=point]
+		39 [shape=point]
+		40 [shape=point]
+		41 [shape=point]
+		41 [shape=point]
+		41 [shape=point]
+		42 [shape=point]
+		43 [shape=point]
+		44 [shape=point]
+		45 [shape=point]
+		46 [shape=point]
+		47 [shape=point]
+		48 [shape=point]
+		48 [shape=point]
+		48 [shape=point]
+		49 [shape=point]
+		InputGridSize [color=coral shape=box style=filled]
+		InputGridSize [color=coral shape=box style=filled]
+		InputGridSize [color=coral shape=box style=filled]
+		ClickOKonErrorSizeDialog [color=coral shape=box style=filled]
+		SaveFileWithoutAssert [color=coral shape=box style=filled]
 		"Level 3 change Impact: 
+ClearAnagramTextField: 3
+SelectMessageDialog: 1
+DoubleClickSuggestListItem: 13
+ClickButtonOK: 21
+RemoveTestFile: 3
+ClickMenuSaveCrossword: 10
+SelectOpenDialog: 5
+SelectSaveDialog: 10
+LaunchCrossword: 1
+AssertButtonAddWordNotExist: 1
+AssertButtonSuggestWordExist: 17
+AssertSuggestListItem: 11
+ClickButtonAddWord: 17
+ClickButtonSuggestWord: 24
+ClickMenuNewCrossword: 9
+TypeInAnagramTextField: 5
+AssertFileNotExist: 5
+AssertButtonAddWordExist: 16
+AssertMenuLoadCrosswordSolveEnabled: 1
+SelectErrorSizeDialog: 5
+AssertFindMatchResult: 12
+AssertButtonFindMatchExist: 3
+AssertMenuSaveCrosswordEnabled: 5
+ClearPatternTextField: 3
+ClickButtonFindMatch: 12
+AssertMenuLoadCrosswordEditEnabled: 1
+FileChooserSaveFile: 10
+ClickMenuLoadCrosswordToEdit: 5
+ClickCrosswordCell: 88
+FileChooserLoadFile: 5
+ClickMenuSolveNewWord: 4
+AssertFileExist: 11
+AssertMenuSaveCrosswordNotEnabled: 1
+TypeInPatternTextField: 6
+SelectInputDialog: 15
+AssertMenuNewCrosswordEnabled: 1
+TypeInGridSizeTextField: 15
+SelectCrosswordSageWindow: 30
 
-Total Impact: 0" [fillcolor=lightblue fontsize=40 height=3 shape=rect style=filled width=2]
+Total Impact: 405" [fillcolor=lightblue fontsize=40 height=3 shape=rect style=filled width=2]
 		"Level 1 change Impact: 
+ClearAnagramTextField: 3
+SelectMessageDialog: 1
+DoubleClickSuggestListItem: 1
+ClickButtonOK: 3
+RemoveTestFile: 1
+ClickMenuSaveCrossword: 2
+SelectOpenDialog: 1
+SelectSaveDialog: 2
+LaunchCrossword: 1
+AssertButtonAddWordNotExist: 1
+AssertButtonSuggestWordExist: 7
+AssertSuggestListItem: 1
+ClickButtonAddWord: 1
+ClickButtonSuggestWord: 2
+ClickMenuNewCrossword: 5
+TypeInAnagramTextField: 1
+AssertFileNotExist: 3
+AssertButtonAddWordExist: 12
+AssertMenuLoadCrosswordSolveEnabled: 1
+SelectErrorSizeDialog: 1
+AssertFindMatchResult: 3
+AssertButtonFindMatchExist: 3
+AssertMenuSaveCrosswordEnabled: 1
+ClearPatternTextField: 3
+ClickButtonFindMatch: 3
+AssertMenuLoadCrosswordEditEnabled: 1
+FileChooserSaveFile: 2
+ClickMenuLoadCrosswordToEdit: 1
+ClickCrosswordCell: 13
+FileChooserLoadFile: 1
+ClickMenuSolveNewWord: 4
+AssertFileExist: 6
+AssertMenuSaveCrosswordNotEnabled: 1
+TypeInPatternTextField: 1
+SelectInputDialog: 1
+AssertMenuNewCrosswordEnabled: 1
+TypeInGridSizeTextField: 1
+SelectCrosswordSageWindow: 26
 
-Total Imapct: 0" [fillcolor=lightblue2 fontsize=40 height=3 shape=rect style=filled width=2]
-		"Weighted Coupling: 0
-Edge: 0
-Node: 1
-Unweighted Coupling: -0.0" [fillcolor=yellow fontsize=40 height=3 shape=rect style=filled width=2]
+Total Imapct: 122" [fillcolor=lightblue2 fontsize=40 height=3 shape=rect style=filled width=2]
+			"TC-01" -- 7 [label=1 minlen=30.0]
+			23 -- C_AssertButtonSuggestWordExist [label=2 minlen=30.0]
+			TestValidCrosswordSize -- 47 [label=1 minlen=30.0]
+			"TC-02" -- 19 [label=1 minlen=30.0]
+			TestSolvePattern -- 43 [label=1 minlen=30.0]
+			TestAddWord -- AddWord [label=5 minlen=30.0]
+			LoadFile -- C_SelectOpenDialog [label=1 minlen=30.0]
+			27 -- C_SelectCrosswordSageWindow [label=1 minlen=30.0]
+			"TC-01" -- SaveFileWithAssert [label=2 minlen=30.0]
+			"TC-01" -- AddWord [label=6 minlen=30.0]
+			"TC-02" -- ChooseSuggestWord [label=2 minlen=30.0]
+			"TC-01" -- 6 [label=3 minlen=30.0]
+			"TC-02" -- 21 [label=1 minlen=30.0]
+			ClickOKonErrorSizeDialog -- C_SelectErrorSizeDialog [label=1 minlen=30.0]
+			"TC-02" -- 13 [label=1 minlen=30.0]
+			"TC-01" -- 11 [label=4 minlen=30.0]
+			TestValidCrosswordSize -- 49 [label=1 minlen=30.0]
+			SaveFileWithAssert -- SaveFileWithoutAssert [label=1 minlen=30.0]
+			49 -- C_SelectCrosswordSageWindow [label=1 minlen=30.0]
+			SaveFileWithoutAssert -- C_SelectSaveDialog [label=1 minlen=30.0]
+			InputInvalidGridSize -- ClickOKonErrorSizeDialog [label=1 minlen=30.0]
+			InputGridSize -- C_TypeInGridSizeTextField [label=1 minlen=30.0]
+			TestLoadCrosswordToEdit -- 30 [label=1 minlen=30.0]
+			TestAddWord -- 22 [label=5 minlen=30.0]
+			45 -- C_AssertMenuLoadCrosswordSolveEnabled [label=1 minlen=30.0]
+			TestAddWord -- ChooseSuggestWord [label=5 minlen=30.0]
+			6 -- C_AssertButtonSuggestWordExist [label=3 minlen=30.0]
+			"TC-01" -- ChooseSuggestWord [label=5 minlen=30.0]
+			TestValidCrosswordSize -- InputValidCrosswordSize [label=3 minlen=30.0]
+			"TC-02" -- AddWord [label=4 minlen=30.0]
+			TestSolveAnagram -- 39 [label=1 minlen=30.0]
+			OpenCrosswordSage -- 3 [label=1 minlen=30.0]
+			InputGridSize -- C_ClickButtonOK [label=1 minlen=30.0]
+			SaveFileWithoutAssert -- C_ClickMenuSaveCrossword [label=1 minlen=30.0]
+			TestSolveAnagram -- FindPossibleWordByAnagram [label=3 minlen=30.0]
+			"TC-02" -- AssertCrosswordOnlyOneSuggestWordExists [label=1 minlen=30.0]
+			"TC-02" -- 15 [label=1 minlen=30.0]
+			"TC-02" -- InputCrosswordCell [label=17 minlen=30.0]
+			TestSolveAnagram -- 37 [label=2 minlen=30.0]
+			"TC-02" -- SaveFileWithoutAssert [label=2 minlen=30.0]
+			InputInvalidGridSize -- InputGridSize [label=1 minlen=30.0]
+			InputCrosswordCell -- C_ClickCrosswordCell [label=1 minlen=30.0]
+			7 -- C_AssertFindMatchResult [label=1 minlen=30.0]
+			TestAddWord -- 25 [label=2 minlen=30.0]
+			ChooseSuggestWord -- C_ClickButtonSuggestWord [label=1 minlen=30.0]
+			41 -- C_ClearPatternTextField [label=3 minlen=30.0]
+			FindPossibleWordByAnagram -- C_AssertFindMatchResult [label=1 minlen=30.0]
+			"TC-02" -- FindPossibleWordByAnagram [label=1 minlen=30.0]
+			OpenCrosswordSage -- 1 [label=1 minlen=30.0]
+			17 -- C_ClickMenuSaveCrossword [label=1 minlen=30.0]
+			TestAddWord -- InputCrosswordCell [label=12 minlen=30.0]
+			SaveFileWithoutAssert -- C_FileChooserSaveFile [label=1 minlen=30.0]
+			"TC-02" -- LoadFile [label=1 minlen=30.0]
+			12 -- C_AssertButtonAddWordExist [label=3 minlen=30.0]
+			InputValidGridSize -- C_ClickMenuNewCrossword [label=1 minlen=30.0]
+			19 -- C_FileChooserSaveFile [label=1 minlen=30.0]
+			TestInvalidCrosswordSize -- InputValidCrosswordSize [label=1 minlen=30.0]
+			22 -- C_AssertButtonAddWordExist [label=5 minlen=30.0]
+			31 -- C_AssertFileNotExist [label=1 minlen=30.0]
+			InputValidCrosswordSize -- C_AssertButtonAddWordExist [label=1 minlen=30.0]
+			InputValidCrosswordSize -- InputGridSize [label=1 minlen=30.0]
+			"TC-02" -- 20 [label=6 minlen=30.0]
+			ChooseSuggestWord -- C_DoubleClickSuggestListItem [label=1 minlen=30.0]
+			InputGridSize -- C_SelectInputDialog [label=1 minlen=30.0]
+			TestInvalidCrosswordSize -- 26 [label=1 minlen=30.0]
+			26 -- C_ClickMenuNewCrossword [label=1 minlen=30.0]
+			"TC-01" -- 10 [label=1 minlen=30.0]
+			TestValidCrosswordSize -- 48 [label=3 minlen=30.0]
+			TestSolvePattern -- 41 [label=3 minlen=30.0]
+			40 -- C_AssertButtonFindMatchExist [label=1 minlen=30.0]
+			FindPossibleWordByAnagram -- C_ClickButtonFindMatch [label=1 minlen=30.0]
+			AssertCrosswordOnlyOneSuggestWordExists -- C_AssertButtonSuggestWordExist [label=1 minlen=30.0]
+			39 -- C_SelectCrosswordSageWindow [label=1 minlen=30.0]
+			14 -- C_AssertFileExist [label=4 minlen=30.0]
+			10 -- C_ClickMenuSolveNewWord [label=1 minlen=30.0]
+			15 -- C_ClearAnagramTextField [label=1 minlen=30.0]
+			TestAddWord -- 23 [label=2 minlen=30.0]
+			"TC-01" -- 9 [label=3 minlen=30.0]
+			44 -- C_AssertMenuLoadCrosswordEditEnabled [label=1 minlen=30.0]
+			32 -- C_SelectCrosswordSageWindow [label=4 minlen=30.0]
+			AssertCrosswordOnlyOneSuggestWordExists -- C_ClickButtonSuggestWord [label=1 minlen=30.0]
+			TestValidCrosswordSize -- 46 [label=1 minlen=30.0]
+			InputValidGridSize -- InputGridSize [label=1 minlen=30.0]
+			TestSaveCrossword -- 35 [label=5 minlen=30.0]
+			TestSolveAnagram -- 38 [label=1 minlen=30.0]
+			LoadFile -- C_FileChooserLoadFile [label=1 minlen=30.0]
+			3 -- C_SelectMessageDialog [label=1 minlen=30.0]
+			TestAddWord -- InputValidGridSize [label=1 minlen=30.0]
+			TestLoadCrosswordToEdit -- LoadFile [label=2 minlen=30.0]
+			13 -- C_AssertButtonSuggestWordExist [label=1 minlen=30.0]
+			TestLoadCrosswordToEdit -- 32 [label=4 minlen=30.0]
+			"TC-01" -- InputCrosswordCell [label=20 minlen=30.0]
+			2 -- C_LaunchCrossword [label=1 minlen=30.0]
+			29 -- C_AssertButtonAddWordNotExist [label=1 minlen=30.0]
+			InputValidCrosswordSize -- C_AssertMenuSaveCrosswordEnabled [label=1 minlen=30.0]
+			11 -- C_SelectCrosswordSageWindow [label=4 minlen=30.0]
+			"TC-02" -- 16 [label=2 minlen=30.0]
+			47 -- C_AssertMenuSaveCrosswordNotEnabled [label=1 minlen=30.0]
+			TestSolveAnagram -- 36 [label=1 minlen=30.0]
+			DeleteFile -- C_RemoveTestFile [label=1 minlen=30.0]
+			TestLoadCrosswordToEdit -- 28 [label=1 minlen=30.0]
+			5 -- C_AssertButtonFindMatchExist [label=1 minlen=30.0]
+			TestSaveCrossword -- SaveFileWithAssert [label=3 minlen=30.0]
+			8 -- C_ClickButtonFindMatch [label=1 minlen=30.0]
+			TestInvalidCrosswordSize -- InputInvalidGridSize [label=3 minlen=30.0]
+			"TC-01" -- 8 [label=1 minlen=30.0]
+			LoadFile -- C_ClickMenuLoadCrosswordToEdit [label=1 minlen=30.0]
+			OpenCrosswordSage -- 2 [label=1 minlen=30.0]
+			FindPossibleWordByPattern -- C_ClickButtonFindMatch [label=1 minlen=30.0]
+			TestSaveCrossword -- 33 [label=1 minlen=30.0]
+			TestSaveCrossword -- DeleteFile [label=2 minlen=30.0]
+			43 -- C_SelectCrosswordSageWindow [label=1 minlen=30.0]
+			TestSaveCrossword -- InputValidGridSize [label=2 minlen=30.0]
+			FindPossibleWordByPattern -- C_TypeInPatternTextField [label=1 minlen=30.0]
+			46 -- C_AssertMenuNewCrosswordEnabled [label=1 minlen=30.0]
+			"TC-01" -- LoadFile [label=1 minlen=30.0]
+			34 -- C_AssertFileNotExist [label=1 minlen=30.0]
+			TestInvalidCrosswordSize -- 27 [label=1 minlen=30.0]
+			TestValidCrosswordSize -- 45 [label=1 minlen=30.0]
+			AddWord -- C_ClickCrosswordCell [label=2 minlen=30.0]
+			"TC-02" -- 18 [label=1 minlen=30.0]
+			TestSolvePattern -- 40 [label=1 minlen=30.0]
+			"TC-01" -- InputValidGridSize [label=1 minlen=30.0]
+			TestSaveCrossword -- AddWord [label=1 minlen=30.0]
+			FindPossibleWordByAnagram -- C_TypeInAnagramTextField [label=1 minlen=30.0]
+			20 -- C_SelectCrosswordSageWindow [label=6 minlen=30.0]
+			AssertCrosswordOnlyOneSuggestWordExists -- C_ClickCrosswordCell [label=1 minlen=30.0]
+			42 -- C_ClickMenuSolveNewWord [label=1 minlen=30.0]
+			"TC-02" -- 12 [label=3 minlen=30.0]
+			48 -- C_ClickMenuNewCrossword [label=3 minlen=30.0]
+			DeleteFile -- C_AssertFileNotExist [label=1 minlen=30.0]
+			18 -- C_ClickMenuSolveNewWord [label=1 minlen=30.0]
+			TestSaveCrossword -- 34 [label=1 minlen=30.0]
+			4 -- C_AssertButtonAddWordExist [label=1 minlen=30.0]
+			28 -- C_AssertButtonAddWordExist [label=1 minlen=30.0]
+			SaveFileWithAssert -- C_AssertFileExist [label=1 minlen=30.0]
+			24 -- C_ClickCrosswordCell [label=4 minlen=30.0]
+			TestLoadCrosswordToEdit -- 31 [label=1 minlen=30.0]
+			FindPossibleWordByPattern -- C_AssertFindMatchResult [label=1 minlen=30.0]
+			25 -- C_SelectCrosswordSageWindow [label=2 minlen=30.0]
+			"TC-02" -- 17 [label=1 minlen=30.0]
+			36 -- C_AssertButtonFindMatchExist [label=1 minlen=30.0]
+			1 -- C_ClickButtonOK [label=1 minlen=30.0]
+			38 -- C_ClickMenuSolveNewWord [label=1 minlen=30.0]
+			TestLoadCrosswordToEdit -- 29 [label=1 minlen=30.0]
+			TestAddWord -- AssertCrosswordOnlyOneSuggestWordExists [label=5 minlen=30.0]
+			AddWord -- C_ClickButtonAddWord [label=1 minlen=30.0]
+			"TC-01" -- 5 [label=1 minlen=30.0]
+			16 -- C_ClickCrosswordCell [label=2 minlen=30.0]
+			21 -- C_SelectSaveDialog [label=1 minlen=30.0]
+			9 -- C_ClickCrosswordCell [label=3 minlen=30.0]
+			TestValidCrosswordSize -- 44 [label=1 minlen=30.0]
+			InputValidCrosswordSize -- C_SelectCrosswordSageWindow [label=1 minlen=30.0]
+			37 -- C_ClearAnagramTextField [label=2 minlen=30.0]
+			30 -- C_AssertFileExist [label=1 minlen=30.0]
+			"TC-02" -- 14 [label=4 minlen=30.0]
+			"TC-01" -- 4 [label=1 minlen=30.0]
+			"TC-01" -- AssertCrosswordOnlyOneSuggestWordExists [label=4 minlen=30.0]
+			33 -- C_AssertButtonAddWordExist [label=1 minlen=30.0]
+			AssertCrosswordOnlyOneSuggestWordExists -- C_AssertSuggestListItem [label=1 minlen=30.0]
+			35 -- C_SelectCrosswordSageWindow [label=5 minlen=30.0]
+			TestSolvePattern -- FindPossibleWordByPattern [label=4 minlen=30.0]
+			"TC-02" -- FindPossibleWordByPattern [label=1 minlen=30.0]
+			ClickOKonErrorSizeDialog -- C_ClickButtonOK [label=1 minlen=30.0]
+			TestAddWord -- 24 [label=4 minlen=30.0]
+			TestSolvePattern -- 42 [label=1 minlen=30.0]
+		"Weighted Coupling: 247
+Edge: 117
+Node: 70
+Unweighted Coupling: 1.89" [fillcolor=yellow fontsize=40 height=3 shape=rect style=filled width=2]
 }

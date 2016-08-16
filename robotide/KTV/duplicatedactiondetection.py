@@ -230,18 +230,18 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
         return longest
 
     def LongestRepeatedSubstring(self, list1, list2):
+        #string1 = ''.join(list1)
+        #string2 = ''.join(list2)
         string1 = ''
         for item in list1:
             string1 += item
             string1 += ','
         string1 = string1[:len(string1) - 1]
-        #string1 += '\''
         string2 = ''
         for item in list2:
             string2 += item
             string2 += ','
         string2 = string2[:len(string2) - 1]
-        #string2 += '\''
         #print 'string1 = %s , string2 = %s' % (string1, string2)
         lst = list()
         lst.append(string1)

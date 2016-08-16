@@ -60,7 +60,17 @@ class StepRunner(object):
             f.write('Keyword = ')
             f.write(name or step.name)
             f.write('\targs = ')
-            f.write(str(step.args))
+            string = '['
+            for arg in step.args:
+                string += '\''
+                string += str(arg)
+                string += '\','
+            if len(string) > 1:
+                string = string[:len(string) - 1] + ']'
+            else:
+                string += ']'
+            f.write(string)
+            #f.write(str(step.args))
             f.write('\n')
             f.write('parent = ')
             f.write(str(step.parent))

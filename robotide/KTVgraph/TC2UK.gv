@@ -1,6 +1,70 @@
 // TC <-> UK
 digraph {
 	Root
-	"google search" [color=darkolivegreen2 shape=box style=filled]
-		Root -> "google search"
+	FindPossibleWordByPattern [color=coral shape=box style=filled]
+	Keyword01 [color=coral shape=box style=filled]
+	InputGridSize [color=coral shape=box style=filled]
+	SaveFileWithAssert [color=coral shape=box style=filled]
+	InputValidGridSize [color=coral shape=box style=filled]
+	InputCrosswordCell [color=coral shape=box style=filled]
+	ChooseSuggestWord [color=coral shape=box style=filled]
+	InputValidCrosswordSize [color=coral shape=box style=filled]
+	LoadFile [color=coral shape=box style=filled]
+	AddWord [color=coral shape=box style=filled]
+	FindPossibleWordByAnagram [color=coral shape=box style=filled]
+	AssertCrosswordOnlyOneSuggestWordExists [color=coral shape=box style=filled]
+	ClickOKonErrorSizeDialog [color=coral shape=box style=filled]
+	InputInvalidGridSize [color=coral shape=box style=filled]
+	SaveFileWithoutAssert [color=coral shape=box style=filled]
+	DeleteFile [color=coral shape=box style=filled]
+	OpenCrosswordSage [color=darkolivegreen2 shape=box style=filled]
+		Root -> OpenCrosswordSage
+	TestValidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestValidCrosswordSize
+	TestInvalidCrosswordSize [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestInvalidCrosswordSize
+	TestAddWord [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestAddWord
+	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestSaveCrossword
+	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestLoadCrosswordToEdit
+	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestSolvePattern
+	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestSolveAnagram
+	"TC-01" [color=darkolivegreen2 shape=box style=filled]
+		Root -> "TC-01"
+	"TC-02" [color=darkolivegreen2 shape=box style=filled]
+		Root -> "TC-02"
+		"TC-02" -> InputCrosswordCell [label=17 len=10.0]
+		TestAddWord -> InputValidGridSize [label=1 len=10.0]
+		TestLoadCrosswordToEdit -> LoadFile [label=2 len=10.0]
+		TestAddWord -> AddWord [label=5 len=10.0]
+		"TC-01" -> InputCrosswordCell [label=20 len=10.0]
+		"TC-01" -> SaveFileWithAssert [label=2 len=10.0]
+		"TC-01" -> AddWord [label=6 len=10.0]
+		TestInvalidCrosswordSize -> InputValidCrosswordSize [label=1 len=10.0]
+		"TC-02" -> ChooseSuggestWord [label=2 len=10.0]
+		"TC-02" -> FindPossibleWordByAnagram [label=1 len=10.0]
+		TestAddWord -> InputCrosswordCell [label=12 len=10.0]
+		"TC-02" -> LoadFile [label=1 len=10.0]
+		TestSolveAnagram -> FindPossibleWordByAnagram [label=3 len=10.0]
+		"TC-02" -> SaveFileWithoutAssert [label=2 len=10.0]
+		TestSaveCrossword -> SaveFileWithAssert [label=3 len=10.0]
+		TestInvalidCrosswordSize -> InputInvalidGridSize [label=3 len=10.0]
+		"TC-02" -> FindPossibleWordByPattern [label=1 len=10.0]
+		TestAddWord -> ChooseSuggestWord [label=5 len=10.0]
+		TestSaveCrossword -> DeleteFile [label=2 len=10.0]
+		TestSaveCrossword -> InputValidGridSize [label=2 len=10.0]
+		"TC-01" -> ChooseSuggestWord [label=5 len=10.0]
+		TestValidCrosswordSize -> InputValidCrosswordSize [label=3 len=10.0]
+		"TC-02" -> AddWord [label=4 len=10.0]
+		"TC-01" -> LoadFile [label=1 len=10.0]
+		"TC-01" -> AssertCrosswordOnlyOneSuggestWordExists [label=4 len=10.0]
+		"TC-01" -> InputValidGridSize [label=1 len=10.0]
+		TestSolvePattern -> FindPossibleWordByPattern [label=4 len=10.0]
+		TestSaveCrossword -> AddWord [label=1 len=10.0]
+		TestAddWord -> AssertCrosswordOnlyOneSuggestWordExists [label=5 len=10.0]
+		"TC-02" -> AssertCrosswordOnlyOneSuggestWordExists [label=1 len=10.0]
 }
