@@ -1,0 +1,5330 @@
+Keyword01 , InputValidCrosswordSize
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , InputValidGridSize
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , InputInvalidGridSize
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , ClickOKonErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , InputGridSize
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , InputCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , AddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , ChooseSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , AssertCrosswordOnlyOneSuggestWordExists
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+Keyword01 , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , InputValidGridSize
+len(lcs) = 1
+len(result) = 1
+lcs = [InputGridSize , ]
+
+InputValidCrosswordSize , InputInvalidGridSize
+len(lcs) = 1
+len(result) = 1
+lcs = [InputGridSize , ]
+
+InputValidCrosswordSize , ClickOKonErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , InputGridSize
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , InputCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , AddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , ChooseSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , AssertCrosswordOnlyOneSuggestWordExists
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidCrosswordSize , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , InputInvalidGridSize
+len(lcs) = 1
+len(result) = 1
+lcs = [InputGridSize , ]
+
+InputValidGridSize , ClickOKonErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , InputGridSize
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , InputCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , AddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , ChooseSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , AssertCrosswordOnlyOneSuggestWordExists
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputValidGridSize , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , ClickOKonErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , InputGridSize
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , InputCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , AddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , ChooseSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , AssertCrosswordOnlyOneSuggestWordExists
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputInvalidGridSize , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , InputGridSize
+len(lcs) = 1
+len(result) = 1
+lcs = [ClickButtonOK , ]
+
+ClickOKonErrorSizeDialog , InputCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , AddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , ChooseSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , AssertCrosswordOnlyOneSuggestWordExists
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickOKonErrorSizeDialog , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , InputCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , AddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , ChooseSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , AssertCrosswordOnlyOneSuggestWordExists
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputGridSize , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputCrosswordCell , AddWord
+len(lcs) = 1
+len(result) = 1
+lcs = [ClickCrosswordCell , ]
+
+InputCrosswordCell , ChooseSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputCrosswordCell , AssertCrosswordOnlyOneSuggestWordExists
+len(lcs) = 1
+len(result) = 1
+lcs = [ClickCrosswordCell , ]
+
+InputCrosswordCell , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputCrosswordCell , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputCrosswordCell , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputCrosswordCell , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputCrosswordCell , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+InputCrosswordCell , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AddWord , ChooseSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AddWord , AssertCrosswordOnlyOneSuggestWordExists
+len(lcs) = 1
+len(result) = 1
+lcs = [ClickCrosswordCell , ]
+
+AddWord , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AddWord , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AddWord , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AddWord , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AddWord , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AddWord , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists
+len(lcs) = 1
+len(result) = 1
+lcs = [ClickButtonSuggestWord , ]
+
+ChooseSuggestWord , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ChooseSuggestWord , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ChooseSuggestWord , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ChooseSuggestWord , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ChooseSuggestWord , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ChooseSuggestWord , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertCrosswordOnlyOneSuggestWordExists , SaveFileWithAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertCrosswordOnlyOneSuggestWordExists , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertCrosswordOnlyOneSuggestWordExists , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertCrosswordOnlyOneSuggestWordExists , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertCrosswordOnlyOneSuggestWordExists , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertCrosswordOnlyOneSuggestWordExists , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SaveFileWithAssert , DeleteFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SaveFileWithAssert , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SaveFileWithAssert , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SaveFileWithAssert , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SaveFileWithAssert , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DeleteFile , LoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DeleteFile , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DeleteFile , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DeleteFile , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LoadFile , FindPossibleWordByPattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LoadFile , FindPossibleWordByAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LoadFile , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FindPossibleWordByPattern , FindPossibleWordByAnagram
+len(lcs) = 2
+len(result) = 1
+lcs = [ClickButtonFindMatch , AssertFindMatchResult , ]
+
+FindPossibleWordByPattern , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FindPossibleWordByAnagram , SaveFileWithoutAssert
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertButtonAddWordNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertButtonSuggestWordExist
+len(lcs) = 1
+len(result) = 1
+lcs = [Button Should Exist , ]
+
+AssertButtonAddWordExist , AssertButtonFindMatchExist
+len(lcs) = 1
+len(result) = 1
+lcs = [Button Should Exist , ]
+
+AssertButtonAddWordExist , AssertFileExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertFileNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertFindMatchResult
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertMenuLoadCrosswordEditEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertMenuLoadCrosswordSolveEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertMenuNewCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertMenuSaveCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertButtonGetClueExist
+len(lcs) = 1
+len(result) = 1
+lcs = [Button Should Exist , ]
+
+AssertButtonAddWordExist , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertButtonSuggestWordExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertButtonFindMatchExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertFileExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertFileNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertFindMatchResult
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertMenuLoadCrosswordEditEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertMenuLoadCrosswordSolveEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertMenuNewCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertMenuSaveCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertButtonGetClueNotExist
+len(lcs) = 1
+len(result) = 1
+lcs = [Button Should Not Exist , ]
+
+AssertButtonAddWordNotExist , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonAddWordNotExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertButtonFindMatchExist
+len(lcs) = 1
+len(result) = 1
+lcs = [Button Should Exist , ]
+
+AssertButtonSuggestWordExist , AssertFileExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertFileNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertFindMatchResult
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertMenuLoadCrosswordEditEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertMenuLoadCrosswordSolveEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertMenuNewCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertMenuSaveCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertButtonGetClueExist
+len(lcs) = 1
+len(result) = 1
+lcs = [Button Should Exist , ]
+
+AssertButtonSuggestWordExist , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonSuggestWordExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertFileExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertFileNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertFindMatchResult
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertMenuLoadCrosswordEditEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertMenuLoadCrosswordSolveEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertMenuNewCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertMenuSaveCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertButtonGetClueExist
+len(lcs) = 1
+len(result) = 1
+lcs = [Button Should Exist , ]
+
+AssertButtonFindMatchExist , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonFindMatchExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertFileNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertFindMatchResult
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertMenuLoadCrosswordEditEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertMenuLoadCrosswordSolveEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertMenuNewCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertMenuSaveCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertFindMatchResult
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertMenuLoadCrosswordEditEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertMenuLoadCrosswordSolveEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertMenuNewCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertMenuSaveCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFileNotExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertMenuLoadCrosswordEditEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertMenuLoadCrosswordSolveEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertMenuNewCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertMenuSaveCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertFindMatchResult , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , AssertMenuLoadCrosswordSolveEnabled
+len(lcs) = 1
+len(result) = 1
+lcs = [Menu Item Should Be Enabled , ]
+
+AssertMenuLoadCrosswordEditEnabled , AssertMenuNewCrosswordEnabled
+len(lcs) = 1
+len(result) = 1
+lcs = [Menu Item Should Be Enabled , ]
+
+AssertMenuLoadCrosswordEditEnabled , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , AssertMenuSaveCrosswordEnabled
+len(lcs) = 1
+len(result) = 1
+lcs = [Menu Item Should Be Enabled , ]
+
+AssertMenuLoadCrosswordEditEnabled , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordEditEnabled , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , AssertMenuNewCrosswordEnabled
+len(lcs) = 1
+len(result) = 1
+lcs = [Menu Item Should Be Enabled , ]
+
+AssertMenuLoadCrosswordSolveEnabled , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , AssertMenuSaveCrosswordEnabled
+len(lcs) = 1
+len(result) = 1
+lcs = [Menu Item Should Be Enabled , ]
+
+AssertMenuLoadCrosswordSolveEnabled , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuLoadCrosswordSolveEnabled , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , AssertMenuSaveCrosswordNotEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , AssertMenuSaveCrosswordEnabled
+len(lcs) = 1
+len(result) = 1
+lcs = [Menu Item Should Be Enabled , ]
+
+AssertMenuNewCrosswordEnabled , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuNewCrosswordEnabled , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , AssertMenuSaveCrosswordEnabled
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordNotEnabled , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , AssertSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertMenuSaveCrosswordEnabled , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClearAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClearPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertSuggestListItem , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , ClearPatternTextField
+len(lcs) = 1
+len(result) = 1
+lcs = [Clear Text Field , ]
+
+ClearAnagramTextField , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearAnagramTextField , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , ClickButtonAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , ClickButtonFindMatch
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClearPatternTextField , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , ClickButtonFindMatch
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickButtonAddWord , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , ClickButtonSuggestWord
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickButtonAddWord , ClickCrosswordCell
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickButtonAddWord , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonAddWord , DoubleClickCrosswordCell
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickButtonAddWord , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , ClickButtonOK
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , ClickButtonSuggestWord
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickButtonFindMatch , ClickCrosswordCell
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickButtonFindMatch , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonFindMatch , DoubleClickCrosswordCell
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickButtonFindMatch , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , ClickButtonSuggestWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , ClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonOK , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , ClickCrosswordCell
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickButtonSuggestWord , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickButtonSuggestWord , DoubleClickCrosswordCell
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickButtonSuggestWord , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , ClickMenuLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , ClickMenuNewCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , ClickMenuSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , ClickMenuSolveNewWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickCrosswordCell , DoubleClickCrosswordCell
+len(lcs) = 1
+len(result) = 1
+lcs = [Click On Component , ]
+
+ClickCrosswordCell , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , ClickMenuNewCrossword
+len(lcs) = 1
+len(result) = 1
+lcs = [Select From Menu , ]
+
+ClickMenuLoadCrosswordToEdit , ClickMenuSaveCrossword
+len(lcs) = 1
+len(result) = 1
+lcs = [Select From Menu , ]
+
+ClickMenuLoadCrosswordToEdit , ClickMenuSolveNewWord
+len(lcs) = 1
+len(result) = 1
+lcs = [Select From Menu , ]
+
+ClickMenuLoadCrosswordToEdit , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuLoadCrosswordToEdit , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , ClickMenuSaveCrossword
+len(lcs) = 1
+len(result) = 1
+lcs = [Select From Menu , ]
+
+ClickMenuNewCrossword , ClickMenuSolveNewWord
+len(lcs) = 1
+len(result) = 1
+lcs = [Select From Menu , ]
+
+ClickMenuNewCrossword , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuNewCrossword , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , ClickMenuSolveNewWord
+len(lcs) = 1
+len(result) = 1
+lcs = [Select From Menu , ]
+
+ClickMenuSaveCrossword , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSaveCrossword , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , DoubleClickSuggestListItem
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+ClickMenuSolveNewWord , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , FileChooserLoadFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , FileChooserSaveFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickSuggestListItem , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , FileChooserSaveFile
+len(lcs) = 1
+len(result) = 1
+lcs = [Choose From File Chooser , ]
+
+FileChooserLoadFile , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserLoadFile , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , LaunchCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+FileChooserSaveFile , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , RemoveTestFile
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+LaunchCrossword , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , SelectCrosswordSageWindow
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+RemoveTestFile , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , SelectErrorSizeDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , SelectInputDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , SelectMessageDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , SelectOpenDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , SelectSaveDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectCrosswordSageWindow , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectErrorSizeDialog , SelectInputDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectErrorSizeDialog , SelectMessageDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectErrorSizeDialog , SelectOpenDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectErrorSizeDialog , SelectSaveDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectErrorSizeDialog , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectErrorSizeDialog , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectErrorSizeDialog , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectErrorSizeDialog , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectErrorSizeDialog , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectErrorSizeDialog , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectErrorSizeDialog , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectErrorSizeDialog , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectErrorSizeDialog , SelectAddWordTipsDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectInputDialog , SelectMessageDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectInputDialog , SelectOpenDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectInputDialog , SelectSaveDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectInputDialog , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectInputDialog , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectInputDialog , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectInputDialog , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectInputDialog , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectInputDialog , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectInputDialog , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectInputDialog , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectInputDialog , SelectAddWordTipsDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectMessageDialog , SelectOpenDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectMessageDialog , SelectSaveDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectMessageDialog , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectMessageDialog , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectMessageDialog , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectMessageDialog , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectMessageDialog , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectMessageDialog , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectMessageDialog , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectMessageDialog , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectMessageDialog , SelectAddWordTipsDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectOpenDialog , SelectSaveDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectOpenDialog , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectOpenDialog , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectOpenDialog , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectOpenDialog , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectOpenDialog , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectOpenDialog , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectOpenDialog , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectOpenDialog , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectOpenDialog , SelectAddWordTipsDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+SelectSaveDialog , TypeInAnagramTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectSaveDialog , TypeInGridSizeTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectSaveDialog , TypeInPatternTextField
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectSaveDialog , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectSaveDialog , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectSaveDialog , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectSaveDialog , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectSaveDialog , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+SelectSaveDialog , SelectAddWordTipsDialog
+len(lcs) = 1
+len(result) = 1
+lcs = [Select Dialog , ]
+
+TypeInAnagramTextField , TypeInGridSizeTextField
+len(lcs) = 1
+len(result) = 1
+lcs = [Type Into Text Field , ]
+
+TypeInAnagramTextField , TypeInPatternTextField
+len(lcs) = 1
+len(result) = 1
+lcs = [Type Into Text Field , ]
+
+TypeInAnagramTextField , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInAnagramTextField , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInAnagramTextField , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInAnagramTextField , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInAnagramTextField , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInAnagramTextField , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInGridSizeTextField , TypeInPatternTextField
+len(lcs) = 1
+len(result) = 1
+lcs = [Type Into Text Field , ]
+
+TypeInGridSizeTextField , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInGridSizeTextField , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInGridSizeTextField , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInGridSizeTextField , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInGridSizeTextField , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInGridSizeTextField , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInPatternTextField , AssertButtonGetClueExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInPatternTextField , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInPatternTextField , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInPatternTextField , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInPatternTextField , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TypeInPatternTextField , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonGetClueExist , AssertButtonGetClueNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonGetClueExist , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonGetClueExist , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonGetClueExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonGetClueExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonGetClueNotExist , AssertPatternTextFieldExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonGetClueNotExist , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonGetClueNotExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertButtonGetClueNotExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertPatternTextFieldExist , AssertPatternTextFieldNotExist
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertPatternTextFieldExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertPatternTextFieldExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertPatternTextFieldNotExist , DoubleClickCrosswordCell
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+AssertPatternTextFieldNotExist , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+DoubleClickCrosswordCell , SelectAddWordTipsDialog
+len(lcs) = 0
+len(result) = 1
+lcs = []
+

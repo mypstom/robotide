@@ -1,0 +1,237 @@
+OpenCrosswordSage , TestValidCrosswordSize
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+OpenCrosswordSage , TestInvalidCrosswordSize
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+OpenCrosswordSage , TestAddWord
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+OpenCrosswordSage , TestSaveCrossword
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+OpenCrosswordSage , TestLoadCrosswordToEdit
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+OpenCrosswordSage , TestSolvePattern
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+OpenCrosswordSage , TestSolveAnagram
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+OpenCrosswordSage , TC-01
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+OpenCrosswordSage , TC-02
+len(lcs) = 0
+len(result) = 1
+lcs = []
+
+TestValidCrosswordSize , TestInvalidCrosswordSize
+len(lcs) = 3
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ClickMenuNewCrossword , InputValidCrosswordSize , ]
+
+TestValidCrosswordSize , TestAddWord
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestValidCrosswordSize , TestSaveCrossword
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestValidCrosswordSize , TestLoadCrosswordToEdit
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestValidCrosswordSize , TestSolvePattern
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestValidCrosswordSize , TestSolveAnagram
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestValidCrosswordSize , TC-01
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestValidCrosswordSize , TC-02
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestInvalidCrosswordSize , TestAddWord
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestInvalidCrosswordSize , TestSaveCrossword
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestInvalidCrosswordSize , TestLoadCrosswordToEdit
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestInvalidCrosswordSize , TestSolvePattern
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestInvalidCrosswordSize , TestSolveAnagram
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestInvalidCrosswordSize , TC-01
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestInvalidCrosswordSize , TC-02
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestAddWord , TestSaveCrossword
+len(lcs) = 5
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , InputValidGridSize , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , ]
+
+TestAddWord , TestLoadCrosswordToEdit
+len(lcs) = 3
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , ]
+
+TestAddWord , TestSolvePattern
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestAddWord , TestSolveAnagram
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestAddWord , TC-01
+len(lcs) = 30
+len(result) = 2
+lcs = [SelectCrosswordSageWindow , InputValidGridSize , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , AddWord , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ChooseSuggestWord , AddWord , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , AssertCrosswordOnlyOneSuggestWordExists , ]
+
+lcs = [SelectCrosswordSageWindow , InputValidGridSize , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , AssertButtonSuggestWordExist , ChooseSuggestWord , AddWord , ClickCrosswordCell , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , ]
+
+TestAddWord , TC-02
+len(lcs) = 24
+len(result) = 5
+lcs = [SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , AddWord , AssertButtonAddWordExist , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ChooseSuggestWord , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , ]
+
+lcs = [SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , AddWord , ClickCrosswordCell , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ]
+
+lcs = [SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , AssertButtonAddWordExist , ClickCrosswordCell , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ]
+
+lcs = [SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , AssertButtonSuggestWordExist , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ]
+
+lcs = [SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AssertButtonAddWordExist , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , AssertButtonSuggestWordExist , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ]
+
+TestSaveCrossword , TestLoadCrosswordToEdit
+len(lcs) = 6
+len(result) = 1
+lcs = [AssertFileNotExist , SelectCrosswordSageWindow , SelectCrosswordSageWindow , SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , ]
+
+TestSaveCrossword , TestSolvePattern
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestSaveCrossword , TestSolveAnagram
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestSaveCrossword , TC-01
+len(lcs) = 8
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , InputValidGridSize , SelectCrosswordSageWindow , SaveFileWithAssert , SelectCrosswordSageWindow , SelectCrosswordSageWindow , AddWord , SaveFileWithAssert , ]
+
+TestSaveCrossword , TC-02
+len(lcs) = 7
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , SelectCrosswordSageWindow , SelectCrosswordSageWindow , SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , ]
+
+TestLoadCrosswordToEdit , TestSolvePattern
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestLoadCrosswordToEdit , TestSolveAnagram
+len(lcs) = 1
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ]
+
+TestLoadCrosswordToEdit , TC-01
+len(lcs) = 5
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , SelectCrosswordSageWindow , SelectCrosswordSageWindow , LoadFile , SelectCrosswordSageWindow , ]
+
+TestLoadCrosswordToEdit , TC-02
+len(lcs) = 6
+len(result) = 2
+lcs = [SelectCrosswordSageWindow , AssertFileExist , SelectCrosswordSageWindow , LoadFile , SelectCrosswordSageWindow , AssertButtonAddWordExist , ]
+
+lcs = [SelectCrosswordSageWindow , LoadFile , SelectCrosswordSageWindow , SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , ]
+
+TestSolvePattern , TestSolveAnagram
+len(lcs) = 3
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ClickMenuSolveNewWord , AssertButtonFindMatchExist , ]
+
+TestSolvePattern , TC-01
+len(lcs) = 3
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ClickMenuSolveNewWord , AssertButtonFindMatchExist , ]
+
+TestSolvePattern , TC-02
+len(lcs) = 3
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ClickMenuSolveNewWord , FindPossibleWordByPattern , ]
+
+TestSolveAnagram , TC-01
+len(lcs) = 3
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ClickMenuSolveNewWord , AssertButtonFindMatchExist , ]
+
+TestSolveAnagram , TC-02
+len(lcs) = 4
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , ClickMenuSolveNewWord , FindPossibleWordByAnagram , ClearAnagramTextField , ]
+
+TC-01 , TC-02
+len(lcs) = 31
+len(result) = 1
+lcs = [SelectCrosswordSageWindow , SelectCrosswordSageWindow , AssertButtonAddWordExist , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , ChooseSuggestWord , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ClickCrosswordCell , AssertButtonSuggestWordExist , ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists , SelectCrosswordSageWindow , AddWord , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , InputCrosswordCell , ]
+

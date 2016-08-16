@@ -7,65 +7,18 @@ from operator import itemgetter, attrgetter
 import graphviz
 from graphviz import Graph
 from robot.parsing.model import Step
-# from robotide.controller.stepcontrollers import StepController
+from duplicatedactiondetection import LongestCommonSubsequence, LongestRepeatedSubstring
 
 from shutil import copyfile
 
-def lcs_mat(list1, list2):
-        m = len(list1)
-        n = len(list2)
-        # construct the matrix, of all zeroes
-        mat = [[0] * (n+1) for row in range(m+1)]
-        # populate the matrix, iteratively
-        for row in range(1, m+1):
-            for col in range(1, n+1):
-                if list1[row - 1] == list2[col - 1]:
-                    # if it's the same element, it's one longer than the LCS of the truncated lists
-                    mat[row][col] = mat[row - 1][col - 1] + 1
-                else:
-                    # they're not the same, so it's the the maximum of the lengths of the LCSs of the two options (different list truncated in each case)
-                    mat[row][col] = max(mat[row][col - 1], mat[row - 1][col])
-        # the matrix is complete
-        return mat
-
-def all_lcs(lcs_dict, mat, list1, list2, index1, index2):
-    # if we've calculated it already, just return that
-    if (lcs_dict.has_key((index1, index2))): return lcs_dict[(index1, index2)]
-    # otherwise, calculate it recursively
-    if (index1 == 0) or (index2 == 0): # base case
-        return [[]]
-    elif list1[index1 - 1] == list2[index2 - 1]:
-        # elements are equal! Add it to all LCSs that pass through these indices
-        lcs_dict[(index1, index2)] = [prevs + [list1[index1 - 1]] for prevs in all_lcs(lcs_dict, mat, list1, list2, index1 - 1, index2 - 1)]
-        return lcs_dict[(index1, index2)]
-    else:
-        lcs_list = [] # set of sets of LCSs from here
-        # not the same, so follow longer path recursively
-        if mat[index1][index2 - 1] >= mat[index1 - 1][index2]:
-            before = all_lcs(lcs_dict, mat, list1, list2, index1, index2 - 1)
-            for series in before: # iterate through all those before
-                if not series in lcs_list: lcs_list.append(series) # and if it's not already been found, append to lcs_list
-        if mat[index1 - 1][index2] >= mat[index1][index2 - 1]:
-            before = all_lcs(lcs_dict, mat, list1, list2, index1 - 1, index2)
-            for series in before:
-                if not series in lcs_list: lcs_list.append(series)
-        lcs_dict[(index1, index2)] = lcs_list
-        return lcs_list
-
-def LCS(list1, list2):
-    # mapping of indices to list of LCSs, so we can cut down recursive calls enormously
-    mapping = dict()
-    # start the process...
-    return all_lcs(mapping, lcs_mat(list1, list2), list1, list2, len(list1), len(list2));
-
-
 class KTV:
-    
     def __init__(self):
         self.datafiles = None
 
     def setDataFiles(self, datafiles):
         self.datafiles = datafiles
+        #self.duplicatedactiondetection = LongestCommonSubsequence()
+        self.duplicatedactiondetection = LongestRepeatedSubstring()
 
     """def OnInsertScreenshotKeywordIntoScript(self):
         wx.MessageBox('Yoo', 'Info',
@@ -335,8 +288,8 @@ class KTV:
 
         for node in userKeywordObject:
             for step in node.steps:
-                #print 'step = %r' %(step)
-                #print(step.name)
+                # print 'step = %r' %(step)
+                # print(step.name)
                 """if str(step.keyword) in user_def_keyword:
                     graphUK2LK.node(str(step.keyword), color="coral", shape="box", style="filled")
                 else:
@@ -460,8 +413,8 @@ class KTV:
                 graphC.edge(node[0] in checkSameList and checkSameList[node[0]] or node[0],
                             node[1] in checkSameList and checkSameList[node[1]] or node[1], minlen="30.0",
                             label=str(tempEdge.count(node)))
-            # graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)), penwidth=(tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
-            # graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
+                # graphC.edge(node[0], node[1], minlen="30.0", label=str(tempEdge.count(node)), penwidth=(tempEdge.count(node)*5 > 50) and "50" or str(tempEdge.count(node)*5))
+                # graphC.edge(node[0], node[1], minlen="1", label=str(tempEdge.count(node)),penwidth=str(math.log(tempEdge.count(node),2)+1))
         # len(tempEdgeSet)-tempCount means we should sub the ghost edges
         unWeightedCoupling = str(round((len(tempEdgeSet) - tempCount) / float(len(tempNode) - (1 + 7)),
                                        2))  # 8 is coupling node and six unused Component
@@ -484,7 +437,7 @@ class KTV:
         # calculate the changing impact(full size)
         ukChangeImpact = dict()
         for uk in user_def_keyword:
-            ukChangeImpact[uk] = [False, 0, list()]    #[whether calculate is finish, CI, children list]
+            ukChangeImpact[uk] = [False, 0, list()]  # [whether calculate is finish, CI, children list]
         for edge in tempNoGhostNodeEdgeSet:
             if str(edge[1]) in user_def_keyword:
                 ukChangeImpact[edge[1]][2].append(str(edge[0]))
@@ -506,7 +459,7 @@ class KTV:
                 else:
                     ukChangeImpact[uk][0] = True
 
-        #calculate components' change impact
+        # calculate components' change impact
         componentChangeImpact = dict()
         for c in tempComponentList:
             componentChangeImpact[c] = 0
@@ -580,7 +533,7 @@ class KTV:
         try:  # add user defined keyword into userKeywordObject and add user_def_keyword dict
             for keywordObject in df.data.keywords:
                 userKeywordObject.append(keywordObject)
-                #print 'df.data.keyword = %r' % (keywordObject)
+                # print 'df.data.keyword = %r' % (keywordObject)
                 temp_name = keywordObject.name.encode('ascii', 'ignore')
                 # print 'keyword.name = %r' %(temp_name)
                 user_def_keyword[temp_name] = str(df.display_name)
@@ -606,7 +559,8 @@ class KTV:
         tempComponentList = list()
         try:
             for df in self.datafiles:
-                if type(df) is robotide.controller.filecontrollers.ResourceFileController:  # if TC has resourceFile, add all keywords
+                if type(
+                        df) is robotide.controller.filecontrollers.ResourceFileController:  # if TC has resourceFile, add all keywords
                     for item in df.keywords:
                         tempComponentList.append(item.name.encode('ascii', 'ignore'))
                 if len(df.tests._items) > 0:
@@ -767,45 +721,59 @@ class KTV:
         copyfile('objects.json', 'C:/wamp64/www/TSVisual/process_map/data/component01/objects.json')
         print jsonOutput
 
+    def checkHadInsertedScreenShotCommand(self):
+        for df in self.datafiles:
+            if type(df) is robotide.controller.filecontrollers.TestCaseFileController:
+                if len(df.tests._items) > 0:
+                    for testCase in df.tests:
+                        for step in testCase.steps:
+                            if (step._get_comment(step.as_list()) == 'KTV'):
+                                return True
+        return False
+
     def insertScreenShot(self):
         screenShotPath = './/selenium-screenshot/'
-        try:
-            for df in self.datafiles:
-                if type(df) is robotide.controller.filecontrollers.TestCaseFileController:
-                    print 'TS = %r' % (str(df.display_name))
-                    TestSuiteScreenShotPath = str(df.display_name)
-                    TestSuiteScreenShotPath += '/'
-                    if len(df.tests._items) > 0:
-                        try:
-                            for testCase in df.tests:
-                                print 'TC = %r' % (str(testCase.display_name))
-                                TestCaseScreenShotPath = str(testCase.display_name)
-                                TestCaseScreenShotPath += '/'
-                                try:
-                                    #testCase.steps[0].insert_before(Step(['Set Selenium Speed', '0.6'], 'KTV'))
-                                    testCase.steps[0].insert_after(Step(['Set Screenshot Directory', screenShotPath], 'KTV'))
-                                    index = 2
-                                    screenShotCount = 1
-                                    while index < len(testCase.steps):
-                                        newStep = Step(['Capture Page Screenshot',
-                                                        TestSuiteScreenShotPath + TestCaseScreenShotPath + str(
-                                                            screenShotCount) + '.png'], 'KTV')
-                                        testCase.steps[index].insert_after(newStep)
-                                        index += 2
-                                        screenShotCount += 1
-                                except Exception, e:
-                                    print str(e)
-                        except Exception, e:
-                            print str(e)
-        except Exception, e:
-            print str(e)
-
-        """print('testCase.steps')
         for df in self.datafiles:
-            if len(df.tests._items) > 0:
-                for testCase in df.tests:
-                    for step in testCase.steps:
-                        print 'keyword = %r args = %r comment = %r' %(step.keyword, step.args, step._get_comment(step.as_list()))"""
+            if type(df) is robotide.controller.filecontrollers.TestCaseFileController:
+                # print 'TS = %r' % (str(df.display_name))
+                TestSuiteScreenShotPath = str(df.display_name)
+                TestSuiteScreenShotPath += '/'
+                if len(df.tests._items) > 0:
+                    for testCase in df.tests:
+                        # print 'TC = %r' % (str(testCase.display_name))
+                        TestCaseScreenShotPath = str(testCase.display_name)
+                        TestCaseScreenShotPath += '/'
+                        # testCase.steps[0].insert_before(Step(['Set Selenium Speed', '0.6'], 'KTV'))
+                        testCase.steps[0].insert_after(Step(['Set Screenshot Directory', screenShotPath], 'KTV'))
+                        index = 2
+                        screenShotCount = 1
+                        while index < len(testCase.steps):
+                            # if (testCase.steps[index] is self.user_def_keyword):
+                            # self.insertScreenShotIntoUK(testCase.steps[index])
+                            # pass
+                            # else:
+                            newStep = Step(['Capture Page Screenshot',
+                                            TestSuiteScreenShotPath + TestCaseScreenShotPath + str(
+                                                screenShotCount) + '.png'], 'KTV')
+                            testCase.steps[index].insert_after(newStep)
+                            index += 2
+                            screenShotCount += 1
+
+
+    """print('testCase.steps')
+    for df in self.datafiles:
+        if len(df.tests._items) > 0:
+            for testCase in df.tests:
+                for step in testCase.steps:
+                    print 'keyword = %r args = %r comment = %r' %(step.keyword, step.args, step._get_comment(step.as_list()))"""
+
+    """def insertScreenShotIntoUK(self, userKeyword):
+        for object in self.userKeywordObject:
+            if object.name == userKeyword.display_name:
+                for step in object.steps:
+                    newStep = Step(['Capture Page Screenshot', TestSuiteScreenShotPath + TestCaseScreenShotPath + str(
+                                        screenShotCount) + '.png'], 'KTV')"""
+
 
     def removeScreenShot(self):
         for df in self.datafiles:
@@ -815,116 +783,15 @@ class KTV:
                         if (step._get_comment(step.as_list()) == 'KTV'):
                             step.remove()
 
-        """print('remove')
-        print('testCase.steps')
-        for df in self.datafiles:
-            if len(df.tests._items) > 0:
-                for testCase in df.tests:
-                    for step in testCase.steps:
-                        print 'keyword = %r args = %r comment = %r' %(step.keyword, step.args, step._get_comment(step.as_list()))"""
+    """print('remove')
+    print('testCase.steps')
+    for df in self.datafiles:
+        if len(df.tests._items) > 0:
+            for testCase in df.tests:
+                for step in testCase.steps:
+                    print 'keyword = %r args = %r comment = %r' %(step.keyword, step.args, step._get_comment(step.as_list()))"""
 
-    def duplicatedActionDetectionBetweenUKandUK(self):
-        f = open('UK2UKduplicated.txt', 'w+')
-        for df in self.datafiles:
-            i = 0
-            length = len(df.keywords)
-            while i < length -1:
-                userKeywordsListFirstList =  list()
-                for step in df.keywords[i].steps:
-                    #print(step.keyword)
-                    #print(step)
-                    if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
-                        userKeywordsListFirstList.append('Loop')
-                    else:
-                        userKeywordsListFirstList.append(step.keyword)
-                j = i + 1
-                while j < length:
-                    userKeywordsListSecondList = list()
-                    for step in df.keywords[j].steps:
-                        #print(step)
-                        #print 'userkeyword = %r' %(df.keywords[j].display_name)
-                        #print 'keyword = %r' %(step.keyword)
-                        if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
-                            userKeywordsListSecondList.append('Loop')
-                        else:
-                            userKeywordsListSecondList.append(step.keyword)
-                    result = list()
-                    result = LCS(userKeywordsListFirstList, userKeywordsListSecondList)
-                    #print '%r , %r' %(df.keywords[i].display_name, df.keywords[j].display_name)
-                    f.write(df.keywords[i].display_name)
-                    f.write(' , ')
-                    f.write(df.keywords[j].display_name)
-                    f.write('\n')
-                    #print 'len(result) = %r' %(len(result))
-                    f.write('len(lcs) = ')
-                    f.write(str(len(result[0])))
-                    f.write('\n')
-                    f.write('len(result) = ')
-                    f.write(str(len(result)))
-                    f.write('\n')
-                    for lcs in result:
-                        #print 'len(lcs) = %r' %(len(lcs))
-                        #print 'lcs = %r' %(lcs)
-                        #f.write('len(lcs) = ')
-                        #f.write(str(len(lcs)))
-                        f.write('lcs = ')
-                        f.write(str(lcs))
-                        f.write('\n\n')
-                    j += 1
-                i += 1
 
-        f.close()
-        self.ShowMessage('UK to UK Finish')
-
-    def duplicatedActionDetectionBetweenTCandTC(self):
-        f = open('TC2TCduplicated.txt', 'w+')
-        for df in self.datafiles:
-            i = 0
-            length = len(df.tests)
-            while i < length -1:
-                testCaseListFirstList = list()
-                for step in df.tests[i].steps:
-                    #print(step.keyword)
-                    #print(step)
-                    if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
-                        testCaseListFirstList.append('Loop')
-                    else:
-                        testCaseListFirstList.append(step.keyword)
-                j = i + 1
-                while j < length:
-                    testCaseListSecondList = list()
-                    for step in df.tests[j].steps:
-                        #print(step)
-                        #print 'userkeyword = %r' %(df.tests[j].display_name)
-                        #print 'keyword = %r' %(step.keyword)
-                        if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
-                            testCaseListSecondList.append('Loop')
-                        else:
-                            testCaseListSecondList.append(step.keyword)
-                    result = list()
-                    result = LCS(testCaseListFirstList, testCaseListSecondList)
-                    #print '%r , %r' %(df.tests[i].display_name, df.tests[j].display_name)
-                    f.write(df.tests[i].display_name)
-                    f.write(' , ')
-                    f.write(df.tests[j].display_name)
-                    f.write('\n')
-                    #print 'len(result) = %r' %(len(result))
-                    f.write('len(lcs) = ')
-                    f.write(str(len(result[0])))
-                    f.write('\n')
-                    f.write('len(result) = ')
-                    f.write(str(len(result)))
-                    f.write('\n')
-                    for lcs in result:
-                        #print 'len(lcs) = %r' %(len(lcs))
-                        #print 'lcs = %r' %(lcs)
-                        #f.write('len(lcs) = ')
-                        #f.write(str(len(lcs)))
-                        f.write('lcs = ')
-                        f.write(str(lcs))
-                        f.write('\n\n')
-                    j += 1
-                i += 1
-
-        f.close()
-        self.ShowMessage('TC to TC Finish')
+    def duplicatedActionDetection(self):
+        self.duplicatedactiondetection.Excute(self.datafiles)
+        self.ShowMessage('Duplicated Action Detection Finish')

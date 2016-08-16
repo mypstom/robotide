@@ -1,0 +1,3198 @@
+Keyword01 , InputValidCrosswordSize
+lrs = 
+
+Keyword01 , InputValidGridSize
+lrs = 
+
+Keyword01 , InputInvalidGridSize
+lrs = 
+
+Keyword01 , ClickOKonErrorSizeDialog
+lrs = 
+
+Keyword01 , InputGridSize
+lrs = 
+
+Keyword01 , InputCrosswordCell
+lrs = 
+
+Keyword01 , AddWord
+lrs = 
+
+Keyword01 , ChooseSuggestWord
+lrs = 
+
+Keyword01 , AssertCrosswordOnlyOneSuggestWordExists
+lrs = 
+
+Keyword01 , SaveFileWithAssert
+lrs = 
+
+Keyword01 , DeleteFile
+lrs = 
+
+Keyword01 , LoadFile
+lrs = 
+
+Keyword01 , FindPossibleWordByPattern
+lrs = 
+
+Keyword01 , FindPossibleWordByAnagram
+lrs = 
+
+Keyword01 , SaveFileWithoutAssert
+lrs = 
+
+InputValidCrosswordSize , InputValidGridSize
+lrs = InputGridSize
+
+InputValidCrosswordSize , InputInvalidGridSize
+lrs = InputGridSize,
+
+InputValidCrosswordSize , ClickOKonErrorSizeDialog
+lrs = Select
+
+InputValidCrosswordSize , InputGridSize
+lrs = GridSize
+
+InputValidCrosswordSize , InputCrosswordCell
+lrs = Crossword
+
+InputValidCrosswordSize , AddWord
+lrs = ButtonAddWord
+
+InputValidCrosswordSize , ChooseSuggestWord
+lrs = Button
+
+InputValidCrosswordSize , AssertCrosswordOnlyOneSuggestWordExists
+lrs = ,AssertButton
+
+InputValidCrosswordSize , SaveFileWithAssert
+lrs = t,Assert
+
+InputValidCrosswordSize , DeleteFile
+lrs = ,Assert
+
+InputValidCrosswordSize , LoadFile
+lrs = Crossword
+
+InputValidCrosswordSize , FindPossibleWordByPattern
+lrs = ,Assert
+
+InputValidCrosswordSize , FindPossibleWordByAnagram
+lrs = ,Assert
+
+InputValidCrosswordSize , SaveFileWithoutAssert
+lrs = MenuSaveCrossword
+
+InputValidGridSize , InputInvalidGridSize
+lrs = InputGridSize
+
+InputValidGridSize , ClickOKonErrorSizeDialog
+lrs = Click
+
+InputValidGridSize , InputGridSize
+lrs = GridSize
+
+InputValidGridSize , InputCrosswordCell
+lrs = Crossword
+
+InputValidGridSize , AddWord
+lrs = Crossword
+
+InputValidGridSize , ChooseSuggestWord
+lrs = Click
+
+InputValidGridSize , AssertCrosswordOnlyOneSuggestWordExists
+lrs = Crossword
+
+InputValidGridSize , SaveFileWithAssert
+lrs = ss
+
+InputValidGridSize , DeleteFile
+lrs = ss
+
+InputValidGridSize , LoadFile
+lrs = ClickMenu
+
+InputValidGridSize , FindPossibleWordByPattern
+lrs = Click
+
+InputValidGridSize , FindPossibleWordByAnagram
+lrs = Click
+
+InputValidGridSize , SaveFileWithoutAssert
+lrs = Crossword,
+
+InputInvalidGridSize , ClickOKonErrorSizeDialog
+lrs = ErrorSizeDialog
+
+InputInvalidGridSize , InputGridSize
+lrs = GridSize
+
+InputInvalidGridSize , InputCrosswordCell
+lrs = Click
+
+InputInvalidGridSize , AddWord
+lrs = ,Click
+
+InputInvalidGridSize , ChooseSuggestWord
+lrs = Click
+
+InputInvalidGridSize , AssertCrosswordOnlyOneSuggestWordExists
+lrs = ,Click
+
+InputInvalidGridSize , SaveFileWithAssert
+lrs = ut
+
+InputInvalidGridSize , DeleteFile
+lrs = e,
+
+InputInvalidGridSize , LoadFile
+lrs = Dialog
+
+InputInvalidGridSize , FindPossibleWordByPattern
+lrs = ,Click
+
+InputInvalidGridSize , FindPossibleWordByAnagram
+lrs = ,Click
+
+InputInvalidGridSize , SaveFileWithoutAssert
+lrs = eDialog
+
+ClickOKonErrorSizeDialog , InputGridSize
+lrs = ,ClickButtonOK
+
+ClickOKonErrorSizeDialog , InputCrosswordCell
+lrs = Click
+
+ClickOKonErrorSizeDialog , AddWord
+lrs = ClickButton
+
+ClickOKonErrorSizeDialog , ChooseSuggestWord
+lrs = ClickButton
+
+ClickOKonErrorSizeDialog , AssertCrosswordOnlyOneSuggestWordExists
+lrs = ,ClickButton
+
+ClickOKonErrorSizeDialog , SaveFileWithAssert
+lrs = le
+
+ClickOKonErrorSizeDialog , DeleteFile
+lrs = le
+
+ClickOKonErrorSizeDialog , LoadFile
+lrs = Dialog,
+
+ClickOKonErrorSizeDialog , FindPossibleWordByPattern
+lrs = ,ClickButton
+
+ClickOKonErrorSizeDialog , FindPossibleWordByAnagram
+lrs = ,ClickButton
+
+ClickOKonErrorSizeDialog , SaveFileWithoutAssert
+lrs = eDialog,
+
+InputGridSize , InputCrosswordCell
+lrs = Click
+
+InputGridSize , AddWord
+lrs = ClickButton
+
+InputGridSize , ChooseSuggestWord
+lrs = ClickButton
+
+InputGridSize , AssertCrosswordOnlyOneSuggestWordExists
+lrs = ,ClickButton
+
+InputGridSize , SaveFileWithAssert
+lrs = tFi
+
+InputGridSize , DeleteFile
+lrs = eTe
+
+InputGridSize , LoadFile
+lrs = Dialog,
+
+InputGridSize , FindPossibleWordByPattern
+lrs = TextField,ClickButton
+
+InputGridSize , FindPossibleWordByAnagram
+lrs = TextField,ClickButton
+
+InputGridSize , SaveFileWithoutAssert
+lrs = Dialog,
+
+InputCrosswordCell , AddWord
+lrs = ClickCrosswordCell,
+
+InputCrosswordCell , ChooseSuggestWord
+lrs = Click
+
+InputCrosswordCell , AssertCrosswordOnlyOneSuggestWordExists
+lrs = ClickCrosswordCell,
+
+InputCrosswordCell , SaveFileWithAssert
+lrs = ss
+
+InputCrosswordCell , DeleteFile
+lrs = ss
+
+InputCrosswordCell , LoadFile
+lrs = Crossword
+
+InputCrosswordCell , FindPossibleWordByPattern
+lrs = Click
+
+InputCrosswordCell , FindPossibleWordByAnagram
+lrs = Click
+
+InputCrosswordCell , SaveFileWithoutAssert
+lrs = Crossword
+
+AddWord , ChooseSuggestWord
+lrs = ClickButton
+
+AddWord , AssertCrosswordOnlyOneSuggestWordExists
+lrs = ClickCrosswordCell,
+
+AddWord , SaveFileWithAssert
+lrs = ut
+
+AddWord , DeleteFile
+lrs = ss
+
+AddWord , LoadFile
+lrs = Crossword
+
+AddWord , FindPossibleWordByPattern
+lrs = ClickButton
+
+AddWord , FindPossibleWordByAnagram
+lrs = ClickButton
+
+AddWord , SaveFileWithoutAssert
+lrs = Crossword
+
+ChooseSuggestWord , AssertCrosswordOnlyOneSuggestWordExists
+lrs = ClickButtonSuggestWord,
+
+ChooseSuggestWord , SaveFileWithAssert
+lrs = ist
+
+ChooseSuggestWord , DeleteFile
+lrs = est
+
+ChooseSuggestWord , LoadFile
+lrs = Click
+
+ChooseSuggestWord , FindPossibleWordByPattern
+lrs = ClickButton
+
+ChooseSuggestWord , FindPossibleWordByAnagram
+lrs = ClickButton
+
+ChooseSuggestWord , SaveFileWithoutAssert
+lrs = Click
+
+AssertCrosswordOnlyOneSuggestWordExists , SaveFileWithAssert
+lrs = ,Assert
+
+AssertCrosswordOnlyOneSuggestWordExists , DeleteFile
+lrs = ,Assert
+
+AssertCrosswordOnlyOneSuggestWordExists , LoadFile
+lrs = Crossword
+
+AssertCrosswordOnlyOneSuggestWordExists , FindPossibleWordByPattern
+lrs = ,ClickButton
+
+AssertCrosswordOnlyOneSuggestWordExists , FindPossibleWordByAnagram
+lrs = ,ClickButton
+
+AssertCrosswordOnlyOneSuggestWordExists , SaveFileWithoutAssert
+lrs = Crossword
+
+SaveFileWithAssert , DeleteFile
+lrs = ,AssertFile
+
+SaveFileWithAssert , LoadFile
+lrs = File
+
+SaveFileWithAssert , FindPossibleWordByPattern
+lrs = ,AssertFi
+
+SaveFileWithAssert , FindPossibleWordByAnagram
+lrs = ,AssertFi
+
+SaveFileWithAssert , SaveFileWithoutAssert
+lrs = SaveFile
+
+DeleteFile , LoadFile
+lrs = File
+
+DeleteFile , FindPossibleWordByPattern
+lrs = ,AssertFi
+
+DeleteFile , FindPossibleWordByAnagram
+lrs = ,AssertFi
+
+DeleteFile , SaveFileWithoutAssert
+lrs = File
+
+LoadFile , FindPossibleWordByPattern
+lrs = Click
+
+LoadFile , FindPossibleWordByAnagram
+lrs = Click
+
+LoadFile , SaveFileWithoutAssert
+lrs = Dialog,FileChooser
+
+FindPossibleWordByPattern , FindPossibleWordByAnagram
+lrs = TextField,ClickButtonFindMatch,AssertFindMatchResult
+
+FindPossibleWordByPattern , SaveFileWithoutAssert
+lrs = Click
+
+FindPossibleWordByAnagram , SaveFileWithoutAssert
+lrs = Click
+
+AssertButtonAddWordExist , AssertButtonAddWordNotExist
+lrs = Button Should 
+
+AssertButtonAddWordExist , AssertButtonSuggestWordExist
+lrs = Button Should Exist
+
+AssertButtonAddWordExist , AssertButtonFindMatchExist
+lrs = Button Should Exist
+
+AssertButtonAddWordExist , AssertFileExist
+lrs =  Should Exist
+
+AssertButtonAddWordExist , AssertFileNotExist
+lrs =  Should 
+
+AssertButtonAddWordExist , AssertFindMatchResult
+lrs = Should 
+
+AssertButtonAddWordExist , AssertMenuLoadCrosswordEditEnabled
+lrs =  Should 
+
+AssertButtonAddWordExist , AssertMenuLoadCrosswordSolveEnabled
+lrs =  Should 
+
+AssertButtonAddWordExist , AssertMenuNewCrosswordEnabled
+lrs =  Should 
+
+AssertButtonAddWordExist , AssertMenuSaveCrosswordNotEnabled
+lrs =  Should 
+
+AssertButtonAddWordExist , AssertMenuSaveCrosswordEnabled
+lrs =  Should 
+
+AssertButtonAddWordExist , AssertSuggestListItem
+lrs = Should 
+
+AssertButtonAddWordExist , ClearAnagramTextField
+lrs = ld
+
+AssertButtonAddWordExist , ClearPatternTextField
+lrs = ld
+
+AssertButtonAddWordExist , ClickButtonAddWord
+lrs = on
+
+AssertButtonAddWordExist , ClickButtonFindMatch
+lrs = on
+
+AssertButtonAddWordExist , ClickButtonOK
+lrs = Button
+
+AssertButtonAddWordExist , ClickButtonSuggestWord
+lrs = on
+
+AssertButtonAddWordExist , ClickCrosswordCell
+lrs = on
+
+AssertButtonAddWordExist , ClickMenuLoadCrosswordToEdit
+lrs = u
+
+AssertButtonAddWordExist , ClickMenuNewCrossword
+lrs = u
+
+AssertButtonAddWordExist , ClickMenuSaveCrossword
+lrs = u
+
+AssertButtonAddWordExist , ClickMenuSolveNewWord
+lrs = u
+
+AssertButtonAddWordExist , DoubleClickSuggestListItem
+lrs = ist
+
+AssertButtonAddWordExist , FileChooserLoadFile
+lrs = ho
+
+AssertButtonAddWordExist , FileChooserSaveFile
+lrs = ho
+
+AssertButtonAddWordExist , LaunchCrossword
+lrs = on
+
+AssertButtonAddWordExist , RemoveTestFile
+lrs = o
+
+AssertButtonAddWordExist , SelectCrosswordSageWindow
+lrs = t
+
+AssertButtonAddWordExist , SelectErrorSizeDialog
+lrs = t
+
+AssertButtonAddWordExist , SelectInputDialog
+lrs = t
+
+AssertButtonAddWordExist , SelectMessageDialog
+lrs = t
+
+AssertButtonAddWordExist , SelectOpenDialog
+lrs = t
+
+AssertButtonAddWordExist , SelectSaveDialog
+lrs = t
+
+AssertButtonAddWordExist , TypeInAnagramTextField
+lrs = to
+
+AssertButtonAddWordExist , TypeInGridSizeTextField
+lrs = to
+
+AssertButtonAddWordExist , TypeInPatternTextField
+lrs = to
+
+AssertButtonAddWordExist , AssertButtonGetClueExist
+lrs = Button Should Exist
+
+AssertButtonAddWordExist , AssertButtonGetClueNotExist
+lrs = Button Should 
+
+AssertButtonAddWordExist , AssertPatternTextFieldExist
+lrs =  Should Exist
+
+AssertButtonAddWordExist , AssertPatternTextFieldNotExist
+lrs =  Should 
+
+AssertButtonAddWordExist , DoubleClickCrosswordCell
+lrs = on
+
+AssertButtonAddWordExist , SelectAddWordTipsDialog
+lrs = t
+
+AssertButtonAddWordNotExist , AssertButtonSuggestWordExist
+lrs = Button Should 
+
+AssertButtonAddWordNotExist , AssertButtonFindMatchExist
+lrs = Button Should 
+
+AssertButtonAddWordNotExist , AssertFileExist
+lrs =  Should 
+
+AssertButtonAddWordNotExist , AssertFileNotExist
+lrs =  Should Not Exist
+
+AssertButtonAddWordNotExist , AssertFindMatchResult
+lrs = Should 
+
+AssertButtonAddWordNotExist , AssertMenuLoadCrosswordEditEnabled
+lrs =  Should 
+
+AssertButtonAddWordNotExist , AssertMenuLoadCrosswordSolveEnabled
+lrs =  Should 
+
+AssertButtonAddWordNotExist , AssertMenuNewCrosswordEnabled
+lrs =  Should 
+
+AssertButtonAddWordNotExist , AssertMenuSaveCrosswordNotEnabled
+lrs =  Should Not 
+
+AssertButtonAddWordNotExist , AssertMenuSaveCrosswordEnabled
+lrs =  Should 
+
+AssertButtonAddWordNotExist , AssertSuggestListItem
+lrs = Should 
+
+AssertButtonAddWordNotExist , ClearAnagramTextField
+lrs = ld
+
+AssertButtonAddWordNotExist , ClearPatternTextField
+lrs = ld
+
+AssertButtonAddWordNotExist , ClickButtonAddWord
+lrs = on
+
+AssertButtonAddWordNotExist , ClickButtonFindMatch
+lrs = on
+
+AssertButtonAddWordNotExist , ClickButtonOK
+lrs = Button
+
+AssertButtonAddWordNotExist , ClickButtonSuggestWord
+lrs = on
+
+AssertButtonAddWordNotExist , ClickCrosswordCell
+lrs = on
+
+AssertButtonAddWordNotExist , ClickMenuLoadCrosswordToEdit
+lrs = t 
+
+AssertButtonAddWordNotExist , ClickMenuNewCrossword
+lrs = t 
+
+AssertButtonAddWordNotExist , ClickMenuSaveCrossword
+lrs = t 
+
+AssertButtonAddWordNotExist , ClickMenuSolveNewWord
+lrs = t 
+
+AssertButtonAddWordNotExist , DoubleClickSuggestListItem
+lrs = ist
+
+AssertButtonAddWordNotExist , FileChooserLoadFile
+lrs = ho
+
+AssertButtonAddWordNotExist , FileChooserSaveFile
+lrs = ho
+
+AssertButtonAddWordNotExist , LaunchCrossword
+lrs = on
+
+AssertButtonAddWordNotExist , RemoveTestFile
+lrs = o
+
+AssertButtonAddWordNotExist , SelectCrosswordSageWindow
+lrs = t 
+
+AssertButtonAddWordNotExist , SelectErrorSizeDialog
+lrs = t 
+
+AssertButtonAddWordNotExist , SelectInputDialog
+lrs = t 
+
+AssertButtonAddWordNotExist , SelectMessageDialog
+lrs = t 
+
+AssertButtonAddWordNotExist , SelectOpenDialog
+lrs = t 
+
+AssertButtonAddWordNotExist , SelectSaveDialog
+lrs = t 
+
+AssertButtonAddWordNotExist , TypeInAnagramTextField
+lrs = to
+
+AssertButtonAddWordNotExist , TypeInGridSizeTextField
+lrs = to
+
+AssertButtonAddWordNotExist , TypeInPatternTextField
+lrs = to
+
+AssertButtonAddWordNotExist , AssertButtonGetClueExist
+lrs = Button Should 
+
+AssertButtonAddWordNotExist , AssertButtonGetClueNotExist
+lrs = Button Should Not Exist
+
+AssertButtonAddWordNotExist , AssertPatternTextFieldExist
+lrs =  Should 
+
+AssertButtonAddWordNotExist , AssertPatternTextFieldNotExist
+lrs =  Should Not Exist
+
+AssertButtonAddWordNotExist , DoubleClickCrosswordCell
+lrs = on
+
+AssertButtonAddWordNotExist , SelectAddWordTipsDialog
+lrs = t 
+
+AssertButtonSuggestWordExist , AssertButtonFindMatchExist
+lrs = Button Should Exist
+
+AssertButtonSuggestWordExist , AssertFileExist
+lrs =  Should Exist
+
+AssertButtonSuggestWordExist , AssertFileNotExist
+lrs =  Should 
+
+AssertButtonSuggestWordExist , AssertFindMatchResult
+lrs = Should 
+
+AssertButtonSuggestWordExist , AssertMenuLoadCrosswordEditEnabled
+lrs =  Should 
+
+AssertButtonSuggestWordExist , AssertMenuLoadCrosswordSolveEnabled
+lrs =  Should 
+
+AssertButtonSuggestWordExist , AssertMenuNewCrosswordEnabled
+lrs =  Should 
+
+AssertButtonSuggestWordExist , AssertMenuSaveCrosswordNotEnabled
+lrs =  Should 
+
+AssertButtonSuggestWordExist , AssertMenuSaveCrosswordEnabled
+lrs =  Should 
+
+AssertButtonSuggestWordExist , AssertSuggestListItem
+lrs = Should 
+
+AssertButtonSuggestWordExist , ClearAnagramTextField
+lrs = ld
+
+AssertButtonSuggestWordExist , ClearPatternTextField
+lrs = ld
+
+AssertButtonSuggestWordExist , ClickButtonAddWord
+lrs = on
+
+AssertButtonSuggestWordExist , ClickButtonFindMatch
+lrs = on
+
+AssertButtonSuggestWordExist , ClickButtonOK
+lrs = Button
+
+AssertButtonSuggestWordExist , ClickButtonSuggestWord
+lrs = on
+
+AssertButtonSuggestWordExist , ClickCrosswordCell
+lrs = on
+
+AssertButtonSuggestWordExist , ClickMenuLoadCrosswordToEdit
+lrs = u
+
+AssertButtonSuggestWordExist , ClickMenuNewCrossword
+lrs = u
+
+AssertButtonSuggestWordExist , ClickMenuSaveCrossword
+lrs = u
+
+AssertButtonSuggestWordExist , ClickMenuSolveNewWord
+lrs = u
+
+AssertButtonSuggestWordExist , DoubleClickSuggestListItem
+lrs = ist
+
+AssertButtonSuggestWordExist , FileChooserLoadFile
+lrs = ho
+
+AssertButtonSuggestWordExist , FileChooserSaveFile
+lrs = ho
+
+AssertButtonSuggestWordExist , LaunchCrossword
+lrs = on
+
+AssertButtonSuggestWordExist , RemoveTestFile
+lrs = o
+
+AssertButtonSuggestWordExist , SelectCrosswordSageWindow
+lrs = t
+
+AssertButtonSuggestWordExist , SelectErrorSizeDialog
+lrs = t
+
+AssertButtonSuggestWordExist , SelectInputDialog
+lrs = t
+
+AssertButtonSuggestWordExist , SelectMessageDialog
+lrs = t
+
+AssertButtonSuggestWordExist , SelectOpenDialog
+lrs = t
+
+AssertButtonSuggestWordExist , SelectSaveDialog
+lrs = t
+
+AssertButtonSuggestWordExist , TypeInAnagramTextField
+lrs = to
+
+AssertButtonSuggestWordExist , TypeInGridSizeTextField
+lrs = to
+
+AssertButtonSuggestWordExist , TypeInPatternTextField
+lrs = to
+
+AssertButtonSuggestWordExist , AssertButtonGetClueExist
+lrs = Button Should Exist
+
+AssertButtonSuggestWordExist , AssertButtonGetClueNotExist
+lrs = Button Should 
+
+AssertButtonSuggestWordExist , AssertPatternTextFieldExist
+lrs =  Should Exist
+
+AssertButtonSuggestWordExist , AssertPatternTextFieldNotExist
+lrs =  Should 
+
+AssertButtonSuggestWordExist , DoubleClickCrosswordCell
+lrs = on
+
+AssertButtonSuggestWordExist , SelectAddWordTipsDialog
+lrs = t
+
+AssertButtonFindMatchExist , AssertFileExist
+lrs =  Should Exist
+
+AssertButtonFindMatchExist , AssertFileNotExist
+lrs =  Should 
+
+AssertButtonFindMatchExist , AssertFindMatchResult
+lrs = Should 
+
+AssertButtonFindMatchExist , AssertMenuLoadCrosswordEditEnabled
+lrs =  Should 
+
+AssertButtonFindMatchExist , AssertMenuLoadCrosswordSolveEnabled
+lrs =  Should 
+
+AssertButtonFindMatchExist , AssertMenuNewCrosswordEnabled
+lrs =  Should 
+
+AssertButtonFindMatchExist , AssertMenuSaveCrosswordNotEnabled
+lrs =  Should 
+
+AssertButtonFindMatchExist , AssertMenuSaveCrosswordEnabled
+lrs =  Should 
+
+AssertButtonFindMatchExist , AssertSuggestListItem
+lrs = Should 
+
+AssertButtonFindMatchExist , ClearAnagramTextField
+lrs = ld
+
+AssertButtonFindMatchExist , ClearPatternTextField
+lrs = ld
+
+AssertButtonFindMatchExist , ClickButtonAddWord
+lrs = on
+
+AssertButtonFindMatchExist , ClickButtonFindMatch
+lrs = on
+
+AssertButtonFindMatchExist , ClickButtonOK
+lrs = Button
+
+AssertButtonFindMatchExist , ClickButtonSuggestWord
+lrs = on
+
+AssertButtonFindMatchExist , ClickCrosswordCell
+lrs = on
+
+AssertButtonFindMatchExist , ClickMenuLoadCrosswordToEdit
+lrs = u
+
+AssertButtonFindMatchExist , ClickMenuNewCrossword
+lrs = u
+
+AssertButtonFindMatchExist , ClickMenuSaveCrossword
+lrs = u
+
+AssertButtonFindMatchExist , ClickMenuSolveNewWord
+lrs = u
+
+AssertButtonFindMatchExist , DoubleClickSuggestListItem
+lrs = ist
+
+AssertButtonFindMatchExist , FileChooserLoadFile
+lrs = ho
+
+AssertButtonFindMatchExist , FileChooserSaveFile
+lrs = ho
+
+AssertButtonFindMatchExist , LaunchCrossword
+lrs = on
+
+AssertButtonFindMatchExist , RemoveTestFile
+lrs = o
+
+AssertButtonFindMatchExist , SelectCrosswordSageWindow
+lrs = t
+
+AssertButtonFindMatchExist , SelectErrorSizeDialog
+lrs = t
+
+AssertButtonFindMatchExist , SelectInputDialog
+lrs = t
+
+AssertButtonFindMatchExist , SelectMessageDialog
+lrs = t
+
+AssertButtonFindMatchExist , SelectOpenDialog
+lrs = t
+
+AssertButtonFindMatchExist , SelectSaveDialog
+lrs = t
+
+AssertButtonFindMatchExist , TypeInAnagramTextField
+lrs = to
+
+AssertButtonFindMatchExist , TypeInGridSizeTextField
+lrs = to
+
+AssertButtonFindMatchExist , TypeInPatternTextField
+lrs = to
+
+AssertButtonFindMatchExist , AssertButtonGetClueExist
+lrs = Button Should Exist
+
+AssertButtonFindMatchExist , AssertButtonGetClueNotExist
+lrs = Button Should 
+
+AssertButtonFindMatchExist , AssertPatternTextFieldExist
+lrs =  Should Exist
+
+AssertButtonFindMatchExist , AssertPatternTextFieldNotExist
+lrs =  Should 
+
+AssertButtonFindMatchExist , DoubleClickCrosswordCell
+lrs = on
+
+AssertButtonFindMatchExist , SelectAddWordTipsDialog
+lrs = t
+
+AssertFileExist , AssertFileNotExist
+lrs = File Should 
+
+AssertFileExist , AssertFindMatchResult
+lrs = Should 
+
+AssertFileExist , AssertMenuLoadCrosswordEditEnabled
+lrs =  Should 
+
+AssertFileExist , AssertMenuLoadCrosswordSolveEnabled
+lrs =  Should 
+
+AssertFileExist , AssertMenuNewCrosswordEnabled
+lrs =  Should 
+
+AssertFileExist , AssertMenuSaveCrosswordNotEnabled
+lrs =  Should 
+
+AssertFileExist , AssertMenuSaveCrosswordEnabled
+lrs =  Should 
+
+AssertFileExist , AssertSuggestListItem
+lrs = Should 
+
+AssertFileExist , ClearAnagramTextField
+lrs = Fi
+
+AssertFileExist , ClearPatternTextField
+lrs = Fi
+
+AssertFileExist , ClickButtonAddWord
+lrs = i
+
+AssertFileExist , ClickButtonFindMatch
+lrs = i
+
+AssertFileExist , ClickButtonOK
+lrs =  
+
+AssertFileExist , ClickButtonSuggestWord
+lrs = i
+
+AssertFileExist , ClickCrosswordCell
+lrs = i
+
+AssertFileExist , ClickMenuLoadCrosswordToEdit
+lrs = le
+
+AssertFileExist , ClickMenuNewCrossword
+lrs = le
+
+AssertFileExist , ClickMenuSaveCrossword
+lrs = le
+
+AssertFileExist , ClickMenuSolveNewWord
+lrs = le
+
+AssertFileExist , DoubleClickSuggestListItem
+lrs = ist
+
+AssertFileExist , FileChooserLoadFile
+lrs = File 
+
+AssertFileExist , FileChooserSaveFile
+lrs = File 
+
+AssertFileExist , LaunchCrossword
+lrs = i
+
+AssertFileExist , RemoveTestFile
+lrs = File
+
+AssertFileExist , SelectCrosswordSageWindow
+lrs = le
+
+AssertFileExist , SelectErrorSizeDialog
+lrs = le
+
+AssertFileExist , SelectInputDialog
+lrs = le
+
+AssertFileExist , SelectMessageDialog
+lrs = le
+
+AssertFileExist , SelectOpenDialog
+lrs = le
+
+AssertFileExist , SelectSaveDialog
+lrs = le
+
+AssertFileExist , TypeInAnagramTextField
+lrs = Fi
+
+AssertFileExist , TypeInGridSizeTextField
+lrs = Fi
+
+AssertFileExist , TypeInPatternTextField
+lrs = Fi
+
+AssertFileExist , AssertButtonGetClueExist
+lrs =  Should Exist
+
+AssertFileExist , AssertButtonGetClueNotExist
+lrs =  Should 
+
+AssertFileExist , AssertPatternTextFieldExist
+lrs =  Should Exist
+
+AssertFileExist , AssertPatternTextFieldNotExist
+lrs =  Should 
+
+AssertFileExist , DoubleClickCrosswordCell
+lrs = i
+
+AssertFileExist , SelectAddWordTipsDialog
+lrs = le
+
+AssertFileNotExist , AssertFindMatchResult
+lrs = Should 
+
+AssertFileNotExist , AssertMenuLoadCrosswordEditEnabled
+lrs =  Should 
+
+AssertFileNotExist , AssertMenuLoadCrosswordSolveEnabled
+lrs =  Should 
+
+AssertFileNotExist , AssertMenuNewCrosswordEnabled
+lrs =  Should 
+
+AssertFileNotExist , AssertMenuSaveCrosswordNotEnabled
+lrs =  Should Not 
+
+AssertFileNotExist , AssertMenuSaveCrosswordEnabled
+lrs =  Should 
+
+AssertFileNotExist , AssertSuggestListItem
+lrs = Should 
+
+AssertFileNotExist , ClearAnagramTextField
+lrs = Fi
+
+AssertFileNotExist , ClearPatternTextField
+lrs = Fi
+
+AssertFileNotExist , ClickButtonAddWord
+lrs = i
+
+AssertFileNotExist , ClickButtonFindMatch
+lrs = i
+
+AssertFileNotExist , ClickButtonOK
+lrs =  
+
+AssertFileNotExist , ClickButtonSuggestWord
+lrs = i
+
+AssertFileNotExist , ClickCrosswordCell
+lrs = i
+
+AssertFileNotExist , ClickMenuLoadCrosswordToEdit
+lrs = le
+
+AssertFileNotExist , ClickMenuNewCrossword
+lrs = le
+
+AssertFileNotExist , ClickMenuSaveCrossword
+lrs = le
+
+AssertFileNotExist , ClickMenuSolveNewWord
+lrs = le
+
+AssertFileNotExist , DoubleClickSuggestListItem
+lrs = ist
+
+AssertFileNotExist , FileChooserLoadFile
+lrs = File 
+
+AssertFileNotExist , FileChooserSaveFile
+lrs = File 
+
+AssertFileNotExist , LaunchCrossword
+lrs = i
+
+AssertFileNotExist , RemoveTestFile
+lrs = File
+
+AssertFileNotExist , SelectCrosswordSageWindow
+lrs = le
+
+AssertFileNotExist , SelectErrorSizeDialog
+lrs = le
+
+AssertFileNotExist , SelectInputDialog
+lrs = le
+
+AssertFileNotExist , SelectMessageDialog
+lrs = le
+
+AssertFileNotExist , SelectOpenDialog
+lrs = le
+
+AssertFileNotExist , SelectSaveDialog
+lrs = le
+
+AssertFileNotExist , TypeInAnagramTextField
+lrs = Fi
+
+AssertFileNotExist , TypeInGridSizeTextField
+lrs = Fi
+
+AssertFileNotExist , TypeInPatternTextField
+lrs = Fi
+
+AssertFileNotExist , AssertButtonGetClueExist
+lrs =  Should 
+
+AssertFileNotExist , AssertButtonGetClueNotExist
+lrs =  Should Not Exist
+
+AssertFileNotExist , AssertPatternTextFieldExist
+lrs =  Should 
+
+AssertFileNotExist , AssertPatternTextFieldNotExist
+lrs =  Should Not Exist
+
+AssertFileNotExist , DoubleClickCrosswordCell
+lrs = i
+
+AssertFileNotExist , SelectAddWordTipsDialog
+lrs = le
+
+AssertFindMatchResult , AssertMenuLoadCrosswordEditEnabled
+lrs = Should Be E
+
+AssertFindMatchResult , AssertMenuLoadCrosswordSolveEnabled
+lrs = Should Be E
+
+AssertFindMatchResult , AssertMenuNewCrosswordEnabled
+lrs = Should Be E
+
+AssertFindMatchResult , AssertMenuSaveCrosswordNotEnabled
+lrs = Should 
+
+AssertFindMatchResult , AssertMenuSaveCrosswordEnabled
+lrs = Should Be E
+
+AssertFindMatchResult , AssertSuggestListItem
+lrs = ,Should Be Equal
+
+AssertFindMatchResult , ClearAnagramTextField
+lrs =  Text
+
+AssertFindMatchResult , ClearPatternTextField
+lrs =  Text
+
+AssertFindMatchResult , ClickButtonAddWord
+lrs = e
+
+AssertFindMatchResult , ClickButtonFindMatch
+lrs = e
+
+AssertFindMatchResult , ClickButtonOK
+lrs =  B
+
+AssertFindMatchResult , ClickButtonSuggestWord
+lrs = e
+
+AssertFindMatchResult , ClickCrosswordCell
+lrs = e
+
+AssertFindMatchResult , ClickMenuLoadCrosswordToEdit
+lrs = t 
+
+AssertFindMatchResult , ClickMenuNewCrossword
+lrs = t 
+
+AssertFindMatchResult , ClickMenuSaveCrossword
+lrs = t 
+
+AssertFindMatchResult , ClickMenuSolveNewWord
+lrs = t 
+
+AssertFindMatchResult , DoubleClickSuggestListItem
+lrs = t 
+
+AssertFindMatchResult , FileChooserLoadFile
+lrs = ho
+
+AssertFindMatchResult , FileChooserSaveFile
+lrs = ho
+
+AssertFindMatchResult , LaunchCrossword
+lrs = t
+
+AssertFindMatchResult , RemoveTestFile
+lrs = e 
+
+AssertFindMatchResult , SelectCrosswordSageWindow
+lrs = t 
+
+AssertFindMatchResult , SelectErrorSizeDialog
+lrs = t 
+
+AssertFindMatchResult , SelectInputDialog
+lrs = t 
+
+AssertFindMatchResult , SelectMessageDialog
+lrs = t 
+
+AssertFindMatchResult , SelectOpenDialog
+lrs = t 
+
+AssertFindMatchResult , SelectSaveDialog
+lrs = t 
+
+AssertFindMatchResult , TypeInAnagramTextField
+lrs =  Text
+
+AssertFindMatchResult , TypeInGridSizeTextField
+lrs =  Text
+
+AssertFindMatchResult , TypeInPatternTextField
+lrs =  Text
+
+AssertFindMatchResult , AssertButtonGetClueExist
+lrs = Should 
+
+AssertFindMatchResult , AssertButtonGetClueNotExist
+lrs = Should 
+
+AssertFindMatchResult , AssertPatternTextFieldExist
+lrs = Should 
+
+AssertFindMatchResult , AssertPatternTextFieldNotExist
+lrs = Should 
+
+AssertFindMatchResult , DoubleClickCrosswordCell
+lrs = e
+
+AssertFindMatchResult , SelectAddWordTipsDialog
+lrs = t 
+
+AssertMenuLoadCrosswordEditEnabled , AssertMenuLoadCrosswordSolveEnabled
+lrs = Menu Item Should Be Enabled
+
+AssertMenuLoadCrosswordEditEnabled , AssertMenuNewCrosswordEnabled
+lrs = Menu Item Should Be Enabled
+
+AssertMenuLoadCrosswordEditEnabled , AssertMenuSaveCrosswordNotEnabled
+lrs = Menu Item Should 
+
+AssertMenuLoadCrosswordEditEnabled , AssertMenuSaveCrosswordEnabled
+lrs = Menu Item Should Be Enabled
+
+AssertMenuLoadCrosswordEditEnabled , AssertSuggestListItem
+lrs = Should Be E
+
+AssertMenuLoadCrosswordEditEnabled , ClearAnagramTextField
+lrs = ld
+
+AssertMenuLoadCrosswordEditEnabled , ClearPatternTextField
+lrs = ld
+
+AssertMenuLoadCrosswordEditEnabled , ClickButtonAddWord
+lrs = en
+
+AssertMenuLoadCrosswordEditEnabled , ClickButtonFindMatch
+lrs = en
+
+AssertMenuLoadCrosswordEditEnabled , ClickButtonOK
+lrs =  B
+
+AssertMenuLoadCrosswordEditEnabled , ClickButtonSuggestWord
+lrs = en
+
+AssertMenuLoadCrosswordEditEnabled , ClickCrosswordCell
+lrs = en
+
+AssertMenuLoadCrosswordEditEnabled , ClickMenuLoadCrosswordToEdit
+lrs = Menu
+
+AssertMenuLoadCrosswordEditEnabled , ClickMenuNewCrossword
+lrs = Menu
+
+AssertMenuLoadCrosswordEditEnabled , ClickMenuSaveCrossword
+lrs = Menu
+
+AssertMenuLoadCrosswordEditEnabled , ClickMenuSolveNewWord
+lrs = Menu
+
+AssertMenuLoadCrosswordEditEnabled , DoubleClickSuggestListItem
+lrs =  Item
+
+AssertMenuLoadCrosswordEditEnabled , FileChooserLoadFile
+lrs = m 
+
+AssertMenuLoadCrosswordEditEnabled , FileChooserSaveFile
+lrs = m 
+
+AssertMenuLoadCrosswordEditEnabled , LaunchCrossword
+lrs = n
+
+AssertMenuLoadCrosswordEditEnabled , RemoveTestFile
+lrs = em
+
+AssertMenuLoadCrosswordEditEnabled , SelectCrosswordSageWindow
+lrs = le
+
+AssertMenuLoadCrosswordEditEnabled , SelectErrorSizeDialog
+lrs = le
+
+AssertMenuLoadCrosswordEditEnabled , SelectInputDialog
+lrs = le
+
+AssertMenuLoadCrosswordEditEnabled , SelectMessageDialog
+lrs = le
+
+AssertMenuLoadCrosswordEditEnabled , SelectOpenDialog
+lrs = le
+
+AssertMenuLoadCrosswordEditEnabled , SelectSaveDialog
+lrs = le
+
+AssertMenuLoadCrosswordEditEnabled , TypeInAnagramTextField
+lrs =  I
+
+AssertMenuLoadCrosswordEditEnabled , TypeInGridSizeTextField
+lrs =  I
+
+AssertMenuLoadCrosswordEditEnabled , TypeInPatternTextField
+lrs =  I
+
+AssertMenuLoadCrosswordEditEnabled , AssertButtonGetClueExist
+lrs =  Should 
+
+AssertMenuLoadCrosswordEditEnabled , AssertButtonGetClueNotExist
+lrs =  Should 
+
+AssertMenuLoadCrosswordEditEnabled , AssertPatternTextFieldExist
+lrs =  Should 
+
+AssertMenuLoadCrosswordEditEnabled , AssertPatternTextFieldNotExist
+lrs =  Should 
+
+AssertMenuLoadCrosswordEditEnabled , DoubleClickCrosswordCell
+lrs = en
+
+AssertMenuLoadCrosswordEditEnabled , SelectAddWordTipsDialog
+lrs = le
+
+AssertMenuLoadCrosswordSolveEnabled , AssertMenuNewCrosswordEnabled
+lrs = Menu Item Should Be Enabled
+
+AssertMenuLoadCrosswordSolveEnabled , AssertMenuSaveCrosswordNotEnabled
+lrs = Menu Item Should 
+
+AssertMenuLoadCrosswordSolveEnabled , AssertMenuSaveCrosswordEnabled
+lrs = Menu Item Should Be Enabled
+
+AssertMenuLoadCrosswordSolveEnabled , AssertSuggestListItem
+lrs = Should Be E
+
+AssertMenuLoadCrosswordSolveEnabled , ClearAnagramTextField
+lrs = ld
+
+AssertMenuLoadCrosswordSolveEnabled , ClearPatternTextField
+lrs = ld
+
+AssertMenuLoadCrosswordSolveEnabled , ClickButtonAddWord
+lrs = en
+
+AssertMenuLoadCrosswordSolveEnabled , ClickButtonFindMatch
+lrs = en
+
+AssertMenuLoadCrosswordSolveEnabled , ClickButtonOK
+lrs =  B
+
+AssertMenuLoadCrosswordSolveEnabled , ClickButtonSuggestWord
+lrs = en
+
+AssertMenuLoadCrosswordSolveEnabled , ClickCrosswordCell
+lrs = en
+
+AssertMenuLoadCrosswordSolveEnabled , ClickMenuLoadCrosswordToEdit
+lrs = Menu
+
+AssertMenuLoadCrosswordSolveEnabled , ClickMenuNewCrossword
+lrs = Menu
+
+AssertMenuLoadCrosswordSolveEnabled , ClickMenuSaveCrossword
+lrs = Menu
+
+AssertMenuLoadCrosswordSolveEnabled , ClickMenuSolveNewWord
+lrs = Menu
+
+AssertMenuLoadCrosswordSolveEnabled , DoubleClickSuggestListItem
+lrs =  Item
+
+AssertMenuLoadCrosswordSolveEnabled , FileChooserLoadFile
+lrs = m 
+
+AssertMenuLoadCrosswordSolveEnabled , FileChooserSaveFile
+lrs = m 
+
+AssertMenuLoadCrosswordSolveEnabled , LaunchCrossword
+lrs = n
+
+AssertMenuLoadCrosswordSolveEnabled , RemoveTestFile
+lrs = em
+
+AssertMenuLoadCrosswordSolveEnabled , SelectCrosswordSageWindow
+lrs = le
+
+AssertMenuLoadCrosswordSolveEnabled , SelectErrorSizeDialog
+lrs = le
+
+AssertMenuLoadCrosswordSolveEnabled , SelectInputDialog
+lrs = le
+
+AssertMenuLoadCrosswordSolveEnabled , SelectMessageDialog
+lrs = le
+
+AssertMenuLoadCrosswordSolveEnabled , SelectOpenDialog
+lrs = le
+
+AssertMenuLoadCrosswordSolveEnabled , SelectSaveDialog
+lrs = le
+
+AssertMenuLoadCrosswordSolveEnabled , TypeInAnagramTextField
+lrs =  I
+
+AssertMenuLoadCrosswordSolveEnabled , TypeInGridSizeTextField
+lrs =  I
+
+AssertMenuLoadCrosswordSolveEnabled , TypeInPatternTextField
+lrs =  I
+
+AssertMenuLoadCrosswordSolveEnabled , AssertButtonGetClueExist
+lrs =  Should 
+
+AssertMenuLoadCrosswordSolveEnabled , AssertButtonGetClueNotExist
+lrs =  Should 
+
+AssertMenuLoadCrosswordSolveEnabled , AssertPatternTextFieldExist
+lrs =  Should 
+
+AssertMenuLoadCrosswordSolveEnabled , AssertPatternTextFieldNotExist
+lrs =  Should 
+
+AssertMenuLoadCrosswordSolveEnabled , DoubleClickCrosswordCell
+lrs = en
+
+AssertMenuLoadCrosswordSolveEnabled , SelectAddWordTipsDialog
+lrs = le
+
+AssertMenuNewCrosswordEnabled , AssertMenuSaveCrosswordNotEnabled
+lrs = Menu Item Should 
+
+AssertMenuNewCrosswordEnabled , AssertMenuSaveCrosswordEnabled
+lrs = Menu Item Should Be Enabled
+
+AssertMenuNewCrosswordEnabled , AssertSuggestListItem
+lrs = Should Be E
+
+AssertMenuNewCrosswordEnabled , ClearAnagramTextField
+lrs = ld
+
+AssertMenuNewCrosswordEnabled , ClearPatternTextField
+lrs = ld
+
+AssertMenuNewCrosswordEnabled , ClickButtonAddWord
+lrs = en
+
+AssertMenuNewCrosswordEnabled , ClickButtonFindMatch
+lrs = en
+
+AssertMenuNewCrosswordEnabled , ClickButtonOK
+lrs =  B
+
+AssertMenuNewCrosswordEnabled , ClickButtonSuggestWord
+lrs = en
+
+AssertMenuNewCrosswordEnabled , ClickCrosswordCell
+lrs = en
+
+AssertMenuNewCrosswordEnabled , ClickMenuLoadCrosswordToEdit
+lrs = Menu
+
+AssertMenuNewCrosswordEnabled , ClickMenuNewCrossword
+lrs = Menu
+
+AssertMenuNewCrosswordEnabled , ClickMenuSaveCrossword
+lrs = Menu
+
+AssertMenuNewCrosswordEnabled , ClickMenuSolveNewWord
+lrs = Menu
+
+AssertMenuNewCrosswordEnabled , DoubleClickSuggestListItem
+lrs =  Item
+
+AssertMenuNewCrosswordEnabled , FileChooserLoadFile
+lrs = m 
+
+AssertMenuNewCrosswordEnabled , FileChooserSaveFile
+lrs = m 
+
+AssertMenuNewCrosswordEnabled , LaunchCrossword
+lrs = n
+
+AssertMenuNewCrosswordEnabled , RemoveTestFile
+lrs = em
+
+AssertMenuNewCrosswordEnabled , SelectCrosswordSageWindow
+lrs = le
+
+AssertMenuNewCrosswordEnabled , SelectErrorSizeDialog
+lrs = le
+
+AssertMenuNewCrosswordEnabled , SelectInputDialog
+lrs = le
+
+AssertMenuNewCrosswordEnabled , SelectMessageDialog
+lrs = le
+
+AssertMenuNewCrosswordEnabled , SelectOpenDialog
+lrs = le
+
+AssertMenuNewCrosswordEnabled , SelectSaveDialog
+lrs = le
+
+AssertMenuNewCrosswordEnabled , TypeInAnagramTextField
+lrs =  I
+
+AssertMenuNewCrosswordEnabled , TypeInGridSizeTextField
+lrs =  I
+
+AssertMenuNewCrosswordEnabled , TypeInPatternTextField
+lrs =  I
+
+AssertMenuNewCrosswordEnabled , AssertButtonGetClueExist
+lrs =  Should 
+
+AssertMenuNewCrosswordEnabled , AssertButtonGetClueNotExist
+lrs =  Should 
+
+AssertMenuNewCrosswordEnabled , AssertPatternTextFieldExist
+lrs =  Should 
+
+AssertMenuNewCrosswordEnabled , AssertPatternTextFieldNotExist
+lrs =  Should 
+
+AssertMenuNewCrosswordEnabled , DoubleClickCrosswordCell
+lrs = en
+
+AssertMenuNewCrosswordEnabled , SelectAddWordTipsDialog
+lrs = le
+
+AssertMenuSaveCrosswordNotEnabled , AssertMenuSaveCrosswordEnabled
+lrs = Menu Item Should 
+
+AssertMenuSaveCrosswordNotEnabled , AssertSuggestListItem
+lrs = Should 
+
+AssertMenuSaveCrosswordNotEnabled , ClearAnagramTextField
+lrs = ld
+
+AssertMenuSaveCrosswordNotEnabled , ClearPatternTextField
+lrs = ld
+
+AssertMenuSaveCrosswordNotEnabled , ClickButtonAddWord
+lrs = en
+
+AssertMenuSaveCrosswordNotEnabled , ClickButtonFindMatch
+lrs = en
+
+AssertMenuSaveCrosswordNotEnabled , ClickButtonOK
+lrs =  B
+
+AssertMenuSaveCrosswordNotEnabled , ClickButtonSuggestWord
+lrs = en
+
+AssertMenuSaveCrosswordNotEnabled , ClickCrosswordCell
+lrs = en
+
+AssertMenuSaveCrosswordNotEnabled , ClickMenuLoadCrosswordToEdit
+lrs = Menu
+
+AssertMenuSaveCrosswordNotEnabled , ClickMenuNewCrossword
+lrs = Menu
+
+AssertMenuSaveCrosswordNotEnabled , ClickMenuSaveCrossword
+lrs = Menu
+
+AssertMenuSaveCrosswordNotEnabled , ClickMenuSolveNewWord
+lrs = Menu
+
+AssertMenuSaveCrosswordNotEnabled , DoubleClickSuggestListItem
+lrs =  Item
+
+AssertMenuSaveCrosswordNotEnabled , FileChooserLoadFile
+lrs = m 
+
+AssertMenuSaveCrosswordNotEnabled , FileChooserSaveFile
+lrs = m 
+
+AssertMenuSaveCrosswordNotEnabled , LaunchCrossword
+lrs = n
+
+AssertMenuSaveCrosswordNotEnabled , RemoveTestFile
+lrs = em
+
+AssertMenuSaveCrosswordNotEnabled , SelectCrosswordSageWindow
+lrs = t 
+
+AssertMenuSaveCrosswordNotEnabled , SelectErrorSizeDialog
+lrs = t 
+
+AssertMenuSaveCrosswordNotEnabled , SelectInputDialog
+lrs = t 
+
+AssertMenuSaveCrosswordNotEnabled , SelectMessageDialog
+lrs = t 
+
+AssertMenuSaveCrosswordNotEnabled , SelectOpenDialog
+lrs = t 
+
+AssertMenuSaveCrosswordNotEnabled , SelectSaveDialog
+lrs = t 
+
+AssertMenuSaveCrosswordNotEnabled , TypeInAnagramTextField
+lrs =  I
+
+AssertMenuSaveCrosswordNotEnabled , TypeInGridSizeTextField
+lrs =  I
+
+AssertMenuSaveCrosswordNotEnabled , TypeInPatternTextField
+lrs =  I
+
+AssertMenuSaveCrosswordNotEnabled , AssertButtonGetClueExist
+lrs =  Should 
+
+AssertMenuSaveCrosswordNotEnabled , AssertButtonGetClueNotExist
+lrs =  Should Not 
+
+AssertMenuSaveCrosswordNotEnabled , AssertPatternTextFieldExist
+lrs =  Should 
+
+AssertMenuSaveCrosswordNotEnabled , AssertPatternTextFieldNotExist
+lrs =  Should Not 
+
+AssertMenuSaveCrosswordNotEnabled , DoubleClickCrosswordCell
+lrs = en
+
+AssertMenuSaveCrosswordNotEnabled , SelectAddWordTipsDialog
+lrs = t 
+
+AssertMenuSaveCrosswordEnabled , AssertSuggestListItem
+lrs = Should Be E
+
+AssertMenuSaveCrosswordEnabled , ClearAnagramTextField
+lrs = ld
+
+AssertMenuSaveCrosswordEnabled , ClearPatternTextField
+lrs = ld
+
+AssertMenuSaveCrosswordEnabled , ClickButtonAddWord
+lrs = en
+
+AssertMenuSaveCrosswordEnabled , ClickButtonFindMatch
+lrs = en
+
+AssertMenuSaveCrosswordEnabled , ClickButtonOK
+lrs =  B
+
+AssertMenuSaveCrosswordEnabled , ClickButtonSuggestWord
+lrs = en
+
+AssertMenuSaveCrosswordEnabled , ClickCrosswordCell
+lrs = en
+
+AssertMenuSaveCrosswordEnabled , ClickMenuLoadCrosswordToEdit
+lrs = Menu
+
+AssertMenuSaveCrosswordEnabled , ClickMenuNewCrossword
+lrs = Menu
+
+AssertMenuSaveCrosswordEnabled , ClickMenuSaveCrossword
+lrs = Menu
+
+AssertMenuSaveCrosswordEnabled , ClickMenuSolveNewWord
+lrs = Menu
+
+AssertMenuSaveCrosswordEnabled , DoubleClickSuggestListItem
+lrs =  Item
+
+AssertMenuSaveCrosswordEnabled , FileChooserLoadFile
+lrs = m 
+
+AssertMenuSaveCrosswordEnabled , FileChooserSaveFile
+lrs = m 
+
+AssertMenuSaveCrosswordEnabled , LaunchCrossword
+lrs = n
+
+AssertMenuSaveCrosswordEnabled , RemoveTestFile
+lrs = em
+
+AssertMenuSaveCrosswordEnabled , SelectCrosswordSageWindow
+lrs = le
+
+AssertMenuSaveCrosswordEnabled , SelectErrorSizeDialog
+lrs = le
+
+AssertMenuSaveCrosswordEnabled , SelectInputDialog
+lrs = le
+
+AssertMenuSaveCrosswordEnabled , SelectMessageDialog
+lrs = le
+
+AssertMenuSaveCrosswordEnabled , SelectOpenDialog
+lrs = le
+
+AssertMenuSaveCrosswordEnabled , SelectSaveDialog
+lrs = le
+
+AssertMenuSaveCrosswordEnabled , TypeInAnagramTextField
+lrs =  I
+
+AssertMenuSaveCrosswordEnabled , TypeInGridSizeTextField
+lrs =  I
+
+AssertMenuSaveCrosswordEnabled , TypeInPatternTextField
+lrs =  I
+
+AssertMenuSaveCrosswordEnabled , AssertButtonGetClueExist
+lrs =  Should 
+
+AssertMenuSaveCrosswordEnabled , AssertButtonGetClueNotExist
+lrs =  Should 
+
+AssertMenuSaveCrosswordEnabled , AssertPatternTextFieldExist
+lrs =  Should 
+
+AssertMenuSaveCrosswordEnabled , AssertPatternTextFieldNotExist
+lrs =  Should 
+
+AssertMenuSaveCrosswordEnabled , DoubleClickCrosswordCell
+lrs = en
+
+AssertMenuSaveCrosswordEnabled , SelectAddWordTipsDialog
+lrs = le
+
+AssertSuggestListItem , ClearAnagramTextField
+lrs = t 
+
+AssertSuggestListItem , ClearPatternTextField
+lrs = t 
+
+AssertSuggestListItem , ClickButtonAddWord
+lrs =  Co
+
+AssertSuggestListItem , ClickButtonFindMatch
+lrs =  Co
+
+AssertSuggestListItem , ClickButtonOK
+lrs =  B
+
+AssertSuggestListItem , ClickButtonSuggestWord
+lrs =  Co
+
+AssertSuggestListItem , ClickCrosswordCell
+lrs =  Co
+
+AssertSuggestListItem , ClickMenuLoadCrosswordToEdit
+lrs = t 
+
+AssertSuggestListItem , ClickMenuNewCrossword
+lrs = t 
+
+AssertSuggestListItem , ClickMenuSaveCrossword
+lrs = t 
+
+AssertSuggestListItem , ClickMenuSolveNewWord
+lrs = t 
+
+AssertSuggestListItem , DoubleClickSuggestListItem
+lrs =  List Item
+
+AssertSuggestListItem , FileChooserLoadFile
+lrs = m 
+
+AssertSuggestListItem , FileChooserSaveFile
+lrs = m 
+
+AssertSuggestListItem , LaunchCrossword
+lrs = un
+
+AssertSuggestListItem , RemoveTestFile
+lrs = em
+
+AssertSuggestListItem , SelectCrosswordSageWindow
+lrs = t 
+
+AssertSuggestListItem , SelectErrorSizeDialog
+lrs = t 
+
+AssertSuggestListItem , SelectInputDialog
+lrs = t 
+
+AssertSuggestListItem , SelectMessageDialog
+lrs = t 
+
+AssertSuggestListItem , SelectOpenDialog
+lrs = t 
+
+AssertSuggestListItem , SelectSaveDialog
+lrs = t 
+
+AssertSuggestListItem , TypeInAnagramTextField
+lrs =  Int
+
+AssertSuggestListItem , TypeInGridSizeTextField
+lrs =  Int
+
+AssertSuggestListItem , TypeInPatternTextField
+lrs =  Int
+
+AssertSuggestListItem , AssertButtonGetClueExist
+lrs = Should 
+
+AssertSuggestListItem , AssertButtonGetClueNotExist
+lrs = Should 
+
+AssertSuggestListItem , AssertPatternTextFieldExist
+lrs = Should 
+
+AssertSuggestListItem , AssertPatternTextFieldNotExist
+lrs = Should 
+
+AssertSuggestListItem , DoubleClickCrosswordCell
+lrs =  Co
+
+AssertSuggestListItem , SelectAddWordTipsDialog
+lrs = t 
+
+ClearAnagramTextField , ClearPatternTextField
+lrs = Clear Text Field
+
+ClearAnagramTextField , ClickButtonAddWord
+lrs = Cl
+
+ClearAnagramTextField , ClickButtonFindMatch
+lrs = Cl
+
+ClearAnagramTextField , ClickButtonOK
+lrs =  
+
+ClearAnagramTextField , ClickButtonSuggestWord
+lrs = Cl
+
+ClearAnagramTextField , ClickCrosswordCell
+lrs = Cl
+
+ClearAnagramTextField , ClickMenuLoadCrosswordToEdit
+lrs = t F
+
+ClearAnagramTextField , ClickMenuNewCrossword
+lrs = t F
+
+ClearAnagramTextField , ClickMenuSaveCrossword
+lrs = t F
+
+ClearAnagramTextField , ClickMenuSolveNewWord
+lrs = t F
+
+ClearAnagramTextField , DoubleClickSuggestListItem
+lrs = Cl
+
+ClearAnagramTextField , FileChooserLoadFile
+lrs =  Fi
+
+ClearAnagramTextField , FileChooserSaveFile
+lrs =  Fi
+
+ClearAnagramTextField , LaunchCrossword
+lrs = l
+
+ClearAnagramTextField , RemoveTestFile
+lrs =  Fi
+
+ClearAnagramTextField , SelectCrosswordSageWindow
+lrs = le
+
+ClearAnagramTextField , SelectErrorSizeDialog
+lrs = le
+
+ClearAnagramTextField , SelectInputDialog
+lrs = le
+
+ClearAnagramTextField , SelectMessageDialog
+lrs = le
+
+ClearAnagramTextField , SelectOpenDialog
+lrs = le
+
+ClearAnagramTextField , SelectSaveDialog
+lrs = le
+
+ClearAnagramTextField , TypeInAnagramTextField
+lrs =  Text Field
+
+ClearAnagramTextField , TypeInGridSizeTextField
+lrs =  Text Field
+
+ClearAnagramTextField , TypeInPatternTextField
+lrs =  Text Field
+
+ClearAnagramTextField , AssertButtonGetClueExist
+lrs = ld
+
+ClearAnagramTextField , AssertButtonGetClueNotExist
+lrs = t 
+
+ClearAnagramTextField , AssertPatternTextFieldExist
+lrs = t 
+
+ClearAnagramTextField , AssertPatternTextFieldNotExist
+lrs = t 
+
+ClearAnagramTextField , DoubleClickCrosswordCell
+lrs = Cl
+
+ClearAnagramTextField , SelectAddWordTipsDialog
+lrs = le
+
+ClearPatternTextField , ClickButtonAddWord
+lrs = Cl
+
+ClearPatternTextField , ClickButtonFindMatch
+lrs = Cl
+
+ClearPatternTextField , ClickButtonOK
+lrs =  
+
+ClearPatternTextField , ClickButtonSuggestWord
+lrs = Cl
+
+ClearPatternTextField , ClickCrosswordCell
+lrs = Cl
+
+ClearPatternTextField , ClickMenuLoadCrosswordToEdit
+lrs = t F
+
+ClearPatternTextField , ClickMenuNewCrossword
+lrs = t F
+
+ClearPatternTextField , ClickMenuSaveCrossword
+lrs = t F
+
+ClearPatternTextField , ClickMenuSolveNewWord
+lrs = t F
+
+ClearPatternTextField , DoubleClickSuggestListItem
+lrs = Cl
+
+ClearPatternTextField , FileChooserLoadFile
+lrs =  Fi
+
+ClearPatternTextField , FileChooserSaveFile
+lrs =  Fi
+
+ClearPatternTextField , LaunchCrossword
+lrs = l
+
+ClearPatternTextField , RemoveTestFile
+lrs =  Fi
+
+ClearPatternTextField , SelectCrosswordSageWindow
+lrs = le
+
+ClearPatternTextField , SelectErrorSizeDialog
+lrs = le
+
+ClearPatternTextField , SelectInputDialog
+lrs = le
+
+ClearPatternTextField , SelectMessageDialog
+lrs = le
+
+ClearPatternTextField , SelectOpenDialog
+lrs = le
+
+ClearPatternTextField , SelectSaveDialog
+lrs = le
+
+ClearPatternTextField , TypeInAnagramTextField
+lrs =  Text Field
+
+ClearPatternTextField , TypeInGridSizeTextField
+lrs =  Text Field
+
+ClearPatternTextField , TypeInPatternTextField
+lrs =  Text Field
+
+ClearPatternTextField , AssertButtonGetClueExist
+lrs = ld
+
+ClearPatternTextField , AssertButtonGetClueNotExist
+lrs = t 
+
+ClearPatternTextField , AssertPatternTextFieldExist
+lrs = t 
+
+ClearPatternTextField , AssertPatternTextFieldNotExist
+lrs = t 
+
+ClearPatternTextField , DoubleClickCrosswordCell
+lrs = Cl
+
+ClearPatternTextField , SelectAddWordTipsDialog
+lrs = le
+
+ClickButtonAddWord , ClickButtonFindMatch
+lrs = Click On Component
+
+ClickButtonAddWord , ClickButtonOK
+lrs = on
+
+ClickButtonAddWord , ClickButtonSuggestWord
+lrs = Click On Component
+
+ClickButtonAddWord , ClickCrosswordCell
+lrs = Click On Component
+
+ClickButtonAddWord , ClickMenuLoadCrosswordToEdit
+lrs = om
+
+ClickButtonAddWord , ClickMenuNewCrossword
+lrs = om
+
+ClickButtonAddWord , ClickMenuSaveCrossword
+lrs = om
+
+ClickButtonAddWord , ClickMenuSolveNewWord
+lrs = om
+
+ClickButtonAddWord , DoubleClickSuggestListItem
+lrs = Click On 
+
+ClickButtonAddWord , FileChooserLoadFile
+lrs =  C
+
+ClickButtonAddWord , FileChooserSaveFile
+lrs =  C
+
+ClickButtonAddWord , LaunchCrossword
+lrs = lic
+
+ClickButtonAddWord , RemoveTestFile
+lrs = l
+
+ClickButtonAddWord , SelectCrosswordSageWindow
+lrs = l
+
+ClickButtonAddWord , SelectErrorSizeDialog
+lrs = l
+
+ClickButtonAddWord , SelectInputDialog
+lrs = l
+
+ClickButtonAddWord , SelectMessageDialog
+lrs = l
+
+ClickButtonAddWord , SelectOpenDialog
+lrs = l
+
+ClickButtonAddWord , SelectSaveDialog
+lrs = l
+
+ClickButtonAddWord , TypeInAnagramTextField
+lrs = nt
+
+ClickButtonAddWord , TypeInGridSizeTextField
+lrs = nt
+
+ClickButtonAddWord , TypeInPatternTextField
+lrs = nt
+
+ClickButtonAddWord , AssertButtonGetClueExist
+lrs = n 
+
+ClickButtonAddWord , AssertButtonGetClueNotExist
+lrs = n 
+
+ClickButtonAddWord , AssertPatternTextFieldExist
+lrs = Component
+
+ClickButtonAddWord , AssertPatternTextFieldNotExist
+lrs = Component
+
+ClickButtonAddWord , DoubleClickCrosswordCell
+lrs = Click On Component
+
+ClickButtonAddWord , SelectAddWordTipsDialog
+lrs = l
+
+ClickButtonFindMatch , ClickButtonOK
+lrs = on
+
+ClickButtonFindMatch , ClickButtonSuggestWord
+lrs = Click On Component
+
+ClickButtonFindMatch , ClickCrosswordCell
+lrs = Click On Component
+
+ClickButtonFindMatch , ClickMenuLoadCrosswordToEdit
+lrs = om
+
+ClickButtonFindMatch , ClickMenuNewCrossword
+lrs = om
+
+ClickButtonFindMatch , ClickMenuSaveCrossword
+lrs = om
+
+ClickButtonFindMatch , ClickMenuSolveNewWord
+lrs = om
+
+ClickButtonFindMatch , DoubleClickSuggestListItem
+lrs = Click On 
+
+ClickButtonFindMatch , FileChooserLoadFile
+lrs =  C
+
+ClickButtonFindMatch , FileChooserSaveFile
+lrs =  C
+
+ClickButtonFindMatch , LaunchCrossword
+lrs = lic
+
+ClickButtonFindMatch , RemoveTestFile
+lrs = l
+
+ClickButtonFindMatch , SelectCrosswordSageWindow
+lrs = l
+
+ClickButtonFindMatch , SelectErrorSizeDialog
+lrs = l
+
+ClickButtonFindMatch , SelectInputDialog
+lrs = l
+
+ClickButtonFindMatch , SelectMessageDialog
+lrs = l
+
+ClickButtonFindMatch , SelectOpenDialog
+lrs = l
+
+ClickButtonFindMatch , SelectSaveDialog
+lrs = l
+
+ClickButtonFindMatch , TypeInAnagramTextField
+lrs = nt
+
+ClickButtonFindMatch , TypeInGridSizeTextField
+lrs = nt
+
+ClickButtonFindMatch , TypeInPatternTextField
+lrs = nt
+
+ClickButtonFindMatch , AssertButtonGetClueExist
+lrs = n 
+
+ClickButtonFindMatch , AssertButtonGetClueNotExist
+lrs = n 
+
+ClickButtonFindMatch , AssertPatternTextFieldExist
+lrs = Component
+
+ClickButtonFindMatch , AssertPatternTextFieldNotExist
+lrs = Component
+
+ClickButtonFindMatch , DoubleClickCrosswordCell
+lrs = Click On Component
+
+ClickButtonFindMatch , SelectAddWordTipsDialog
+lrs = l
+
+ClickButtonOK , ClickButtonSuggestWord
+lrs = on
+
+ClickButtonOK , ClickCrosswordCell
+lrs = on
+
+ClickButtonOK , ClickMenuLoadCrosswordToEdit
+lrs = u
+
+ClickButtonOK , ClickMenuNewCrossword
+lrs = u
+
+ClickButtonOK , ClickMenuSaveCrossword
+lrs = u
+
+ClickButtonOK , ClickMenuSolveNewWord
+lrs = u
+
+ClickButtonOK , DoubleClickSuggestListItem
+lrs = s
+
+ClickButtonOK , FileChooserLoadFile
+lrs = s
+
+ClickButtonOK , FileChooserSaveFile
+lrs = s
+
+ClickButtonOK , LaunchCrossword
+lrs = h 
+
+ClickButtonOK , RemoveTestFile
+lrs =  
+
+ClickButtonOK , SelectCrosswordSageWindow
+lrs =  
+
+ClickButtonOK , SelectErrorSizeDialog
+lrs =  
+
+ClickButtonOK , SelectInputDialog
+lrs =  
+
+ClickButtonOK , SelectMessageDialog
+lrs =  
+
+ClickButtonOK , SelectOpenDialog
+lrs =  
+
+ClickButtonOK , SelectSaveDialog
+lrs =  
+
+ClickButtonOK , TypeInAnagramTextField
+lrs = to
+
+ClickButtonOK , TypeInGridSizeTextField
+lrs = to
+
+ClickButtonOK , TypeInPatternTextField
+lrs = to
+
+ClickButtonOK , AssertButtonGetClueExist
+lrs = Button
+
+ClickButtonOK , AssertButtonGetClueNotExist
+lrs = Button
+
+ClickButtonOK , AssertPatternTextFieldExist
+lrs = on
+
+ClickButtonOK , AssertPatternTextFieldNotExist
+lrs = on
+
+ClickButtonOK , DoubleClickCrosswordCell
+lrs = on
+
+ClickButtonOK , SelectAddWordTipsDialog
+lrs =  
+
+ClickButtonSuggestWord , ClickCrosswordCell
+lrs = Click On Component
+
+ClickButtonSuggestWord , ClickMenuLoadCrosswordToEdit
+lrs = om
+
+ClickButtonSuggestWord , ClickMenuNewCrossword
+lrs = om
+
+ClickButtonSuggestWord , ClickMenuSaveCrossword
+lrs = om
+
+ClickButtonSuggestWord , ClickMenuSolveNewWord
+lrs = om
+
+ClickButtonSuggestWord , DoubleClickSuggestListItem
+lrs = Click On 
+
+ClickButtonSuggestWord , FileChooserLoadFile
+lrs =  C
+
+ClickButtonSuggestWord , FileChooserSaveFile
+lrs =  C
+
+ClickButtonSuggestWord , LaunchCrossword
+lrs = lic
+
+ClickButtonSuggestWord , RemoveTestFile
+lrs = l
+
+ClickButtonSuggestWord , SelectCrosswordSageWindow
+lrs = l
+
+ClickButtonSuggestWord , SelectErrorSizeDialog
+lrs = l
+
+ClickButtonSuggestWord , SelectInputDialog
+lrs = l
+
+ClickButtonSuggestWord , SelectMessageDialog
+lrs = l
+
+ClickButtonSuggestWord , SelectOpenDialog
+lrs = l
+
+ClickButtonSuggestWord , SelectSaveDialog
+lrs = l
+
+ClickButtonSuggestWord , TypeInAnagramTextField
+lrs = nt
+
+ClickButtonSuggestWord , TypeInGridSizeTextField
+lrs = nt
+
+ClickButtonSuggestWord , TypeInPatternTextField
+lrs = nt
+
+ClickButtonSuggestWord , AssertButtonGetClueExist
+lrs = n 
+
+ClickButtonSuggestWord , AssertButtonGetClueNotExist
+lrs = n 
+
+ClickButtonSuggestWord , AssertPatternTextFieldExist
+lrs = Component
+
+ClickButtonSuggestWord , AssertPatternTextFieldNotExist
+lrs = Component
+
+ClickButtonSuggestWord , DoubleClickCrosswordCell
+lrs = Click On Component
+
+ClickButtonSuggestWord , SelectAddWordTipsDialog
+lrs = l
+
+ClickCrosswordCell , ClickMenuLoadCrosswordToEdit
+lrs = om
+
+ClickCrosswordCell , ClickMenuNewCrossword
+lrs = om
+
+ClickCrosswordCell , ClickMenuSaveCrossword
+lrs = om
+
+ClickCrosswordCell , ClickMenuSolveNewWord
+lrs = om
+
+ClickCrosswordCell , DoubleClickSuggestListItem
+lrs = Click On 
+
+ClickCrosswordCell , FileChooserLoadFile
+lrs =  C
+
+ClickCrosswordCell , FileChooserSaveFile
+lrs =  C
+
+ClickCrosswordCell , LaunchCrossword
+lrs = lic
+
+ClickCrosswordCell , RemoveTestFile
+lrs = l
+
+ClickCrosswordCell , SelectCrosswordSageWindow
+lrs = l
+
+ClickCrosswordCell , SelectErrorSizeDialog
+lrs = l
+
+ClickCrosswordCell , SelectInputDialog
+lrs = l
+
+ClickCrosswordCell , SelectMessageDialog
+lrs = l
+
+ClickCrosswordCell , SelectOpenDialog
+lrs = l
+
+ClickCrosswordCell , SelectSaveDialog
+lrs = l
+
+ClickCrosswordCell , TypeInAnagramTextField
+lrs = nt
+
+ClickCrosswordCell , TypeInGridSizeTextField
+lrs = nt
+
+ClickCrosswordCell , TypeInPatternTextField
+lrs = nt
+
+ClickCrosswordCell , AssertButtonGetClueExist
+lrs = n 
+
+ClickCrosswordCell , AssertButtonGetClueNotExist
+lrs = n 
+
+ClickCrosswordCell , AssertPatternTextFieldExist
+lrs = Component
+
+ClickCrosswordCell , AssertPatternTextFieldNotExist
+lrs = Component
+
+ClickCrosswordCell , DoubleClickCrosswordCell
+lrs = Click On Component
+
+ClickCrosswordCell , SelectAddWordTipsDialog
+lrs = l
+
+ClickMenuLoadCrosswordToEdit , ClickMenuNewCrossword
+lrs = Select From Menu
+
+ClickMenuLoadCrosswordToEdit , ClickMenuSaveCrossword
+lrs = Select From Menu
+
+ClickMenuLoadCrosswordToEdit , ClickMenuSolveNewWord
+lrs = Select From Menu
+
+ClickMenuLoadCrosswordToEdit , DoubleClickSuggestListItem
+lrs = t 
+
+ClickMenuLoadCrosswordToEdit , FileChooserLoadFile
+lrs =  From 
+
+ClickMenuLoadCrosswordToEdit , FileChooserSaveFile
+lrs =  From 
+
+ClickMenuLoadCrosswordToEdit , LaunchCrossword
+lrs = l
+
+ClickMenuLoadCrosswordToEdit , RemoveTestFile
+lrs = le
+
+ClickMenuLoadCrosswordToEdit , SelectCrosswordSageWindow
+lrs = Select 
+
+ClickMenuLoadCrosswordToEdit , SelectErrorSizeDialog
+lrs = Select 
+
+ClickMenuLoadCrosswordToEdit , SelectInputDialog
+lrs = Select 
+
+ClickMenuLoadCrosswordToEdit , SelectMessageDialog
+lrs = Select 
+
+ClickMenuLoadCrosswordToEdit , SelectOpenDialog
+lrs = Select 
+
+ClickMenuLoadCrosswordToEdit , SelectSaveDialog
+lrs = Select 
+
+ClickMenuLoadCrosswordToEdit , TypeInAnagramTextField
+lrs = t F
+
+ClickMenuLoadCrosswordToEdit , TypeInGridSizeTextField
+lrs = t F
+
+ClickMenuLoadCrosswordToEdit , TypeInPatternTextField
+lrs = t F
+
+ClickMenuLoadCrosswordToEdit , AssertButtonGetClueExist
+lrs = S
+
+ClickMenuLoadCrosswordToEdit , AssertButtonGetClueNotExist
+lrs = t 
+
+ClickMenuLoadCrosswordToEdit , AssertPatternTextFieldExist
+lrs = t 
+
+ClickMenuLoadCrosswordToEdit , AssertPatternTextFieldNotExist
+lrs = t 
+
+ClickMenuLoadCrosswordToEdit , DoubleClickCrosswordCell
+lrs = om
+
+ClickMenuLoadCrosswordToEdit , SelectAddWordTipsDialog
+lrs = Select 
+
+ClickMenuNewCrossword , ClickMenuSaveCrossword
+lrs = Select From Menu
+
+ClickMenuNewCrossword , ClickMenuSolveNewWord
+lrs = Select From Menu
+
+ClickMenuNewCrossword , DoubleClickSuggestListItem
+lrs = t 
+
+ClickMenuNewCrossword , FileChooserLoadFile
+lrs =  From 
+
+ClickMenuNewCrossword , FileChooserSaveFile
+lrs =  From 
+
+ClickMenuNewCrossword , LaunchCrossword
+lrs = l
+
+ClickMenuNewCrossword , RemoveTestFile
+lrs = le
+
+ClickMenuNewCrossword , SelectCrosswordSageWindow
+lrs = Select 
+
+ClickMenuNewCrossword , SelectErrorSizeDialog
+lrs = Select 
+
+ClickMenuNewCrossword , SelectInputDialog
+lrs = Select 
+
+ClickMenuNewCrossword , SelectMessageDialog
+lrs = Select 
+
+ClickMenuNewCrossword , SelectOpenDialog
+lrs = Select 
+
+ClickMenuNewCrossword , SelectSaveDialog
+lrs = Select 
+
+ClickMenuNewCrossword , TypeInAnagramTextField
+lrs = t F
+
+ClickMenuNewCrossword , TypeInGridSizeTextField
+lrs = t F
+
+ClickMenuNewCrossword , TypeInPatternTextField
+lrs = t F
+
+ClickMenuNewCrossword , AssertButtonGetClueExist
+lrs = S
+
+ClickMenuNewCrossword , AssertButtonGetClueNotExist
+lrs = t 
+
+ClickMenuNewCrossword , AssertPatternTextFieldExist
+lrs = t 
+
+ClickMenuNewCrossword , AssertPatternTextFieldNotExist
+lrs = t 
+
+ClickMenuNewCrossword , DoubleClickCrosswordCell
+lrs = om
+
+ClickMenuNewCrossword , SelectAddWordTipsDialog
+lrs = Select 
+
+ClickMenuSaveCrossword , ClickMenuSolveNewWord
+lrs = Select From Menu
+
+ClickMenuSaveCrossword , DoubleClickSuggestListItem
+lrs = t 
+
+ClickMenuSaveCrossword , FileChooserLoadFile
+lrs =  From 
+
+ClickMenuSaveCrossword , FileChooserSaveFile
+lrs =  From 
+
+ClickMenuSaveCrossword , LaunchCrossword
+lrs = l
+
+ClickMenuSaveCrossword , RemoveTestFile
+lrs = le
+
+ClickMenuSaveCrossword , SelectCrosswordSageWindow
+lrs = Select 
+
+ClickMenuSaveCrossword , SelectErrorSizeDialog
+lrs = Select 
+
+ClickMenuSaveCrossword , SelectInputDialog
+lrs = Select 
+
+ClickMenuSaveCrossword , SelectMessageDialog
+lrs = Select 
+
+ClickMenuSaveCrossword , SelectOpenDialog
+lrs = Select 
+
+ClickMenuSaveCrossword , SelectSaveDialog
+lrs = Select 
+
+ClickMenuSaveCrossword , TypeInAnagramTextField
+lrs = t F
+
+ClickMenuSaveCrossword , TypeInGridSizeTextField
+lrs = t F
+
+ClickMenuSaveCrossword , TypeInPatternTextField
+lrs = t F
+
+ClickMenuSaveCrossword , AssertButtonGetClueExist
+lrs = S
+
+ClickMenuSaveCrossword , AssertButtonGetClueNotExist
+lrs = t 
+
+ClickMenuSaveCrossword , AssertPatternTextFieldExist
+lrs = t 
+
+ClickMenuSaveCrossword , AssertPatternTextFieldNotExist
+lrs = t 
+
+ClickMenuSaveCrossword , DoubleClickCrosswordCell
+lrs = om
+
+ClickMenuSaveCrossword , SelectAddWordTipsDialog
+lrs = Select 
+
+ClickMenuSolveNewWord , DoubleClickSuggestListItem
+lrs = t 
+
+ClickMenuSolveNewWord , FileChooserLoadFile
+lrs =  From 
+
+ClickMenuSolveNewWord , FileChooserSaveFile
+lrs =  From 
+
+ClickMenuSolveNewWord , LaunchCrossword
+lrs = l
+
+ClickMenuSolveNewWord , RemoveTestFile
+lrs = le
+
+ClickMenuSolveNewWord , SelectCrosswordSageWindow
+lrs = Select 
+
+ClickMenuSolveNewWord , SelectErrorSizeDialog
+lrs = Select 
+
+ClickMenuSolveNewWord , SelectInputDialog
+lrs = Select 
+
+ClickMenuSolveNewWord , SelectMessageDialog
+lrs = Select 
+
+ClickMenuSolveNewWord , SelectOpenDialog
+lrs = Select 
+
+ClickMenuSolveNewWord , SelectSaveDialog
+lrs = Select 
+
+ClickMenuSolveNewWord , TypeInAnagramTextField
+lrs = t F
+
+ClickMenuSolveNewWord , TypeInGridSizeTextField
+lrs = t F
+
+ClickMenuSolveNewWord , TypeInPatternTextField
+lrs = t F
+
+ClickMenuSolveNewWord , AssertButtonGetClueExist
+lrs = S
+
+ClickMenuSolveNewWord , AssertButtonGetClueNotExist
+lrs = t 
+
+ClickMenuSolveNewWord , AssertPatternTextFieldExist
+lrs = t 
+
+ClickMenuSolveNewWord , AssertPatternTextFieldNotExist
+lrs = t 
+
+ClickMenuSolveNewWord , DoubleClickCrosswordCell
+lrs = om
+
+ClickMenuSolveNewWord , SelectAddWordTipsDialog
+lrs = Select 
+
+DoubleClickSuggestListItem , FileChooserLoadFile
+lrs = C
+
+DoubleClickSuggestListItem , FileChooserSaveFile
+lrs = C
+
+DoubleClickSuggestListItem , LaunchCrossword
+lrs = lic
+
+DoubleClickSuggestListItem , RemoveTestFile
+lrs = em
+
+DoubleClickSuggestListItem , SelectCrosswordSageWindow
+lrs = t 
+
+DoubleClickSuggestListItem , SelectErrorSizeDialog
+lrs = t 
+
+DoubleClickSuggestListItem , SelectInputDialog
+lrs = t 
+
+DoubleClickSuggestListItem , SelectMessageDialog
+lrs = t 
+
+DoubleClickSuggestListItem , SelectOpenDialog
+lrs = t 
+
+DoubleClickSuggestListItem , SelectSaveDialog
+lrs = t 
+
+DoubleClickSuggestListItem , TypeInAnagramTextField
+lrs = t 
+
+DoubleClickSuggestListItem , TypeInGridSizeTextField
+lrs = t 
+
+DoubleClickSuggestListItem , TypeInPatternTextField
+lrs = t 
+
+DoubleClickSuggestListItem , AssertButtonGetClueExist
+lrs = ist
+
+DoubleClickSuggestListItem , AssertButtonGetClueNotExist
+lrs = ist
+
+DoubleClickSuggestListItem , AssertPatternTextFieldExist
+lrs = ist
+
+DoubleClickSuggestListItem , AssertPatternTextFieldNotExist
+lrs = ist
+
+DoubleClickSuggestListItem , DoubleClickCrosswordCell
+lrs = Click On 
+
+DoubleClickSuggestListItem , SelectAddWordTipsDialog
+lrs = t 
+
+FileChooserLoadFile , FileChooserSaveFile
+lrs = Choose From File Chooser
+
+FileChooserLoadFile , LaunchCrossword
+lrs = h
+
+FileChooserLoadFile , RemoveTestFile
+lrs =  File
+
+FileChooserLoadFile , SelectCrosswordSageWindow
+lrs = le
+
+FileChooserLoadFile , SelectErrorSizeDialog
+lrs = le
+
+FileChooserLoadFile , SelectInputDialog
+lrs = le
+
+FileChooserLoadFile , SelectMessageDialog
+lrs = le
+
+FileChooserLoadFile , SelectOpenDialog
+lrs = le
+
+FileChooserLoadFile , SelectSaveDialog
+lrs = le
+
+FileChooserLoadFile , TypeInAnagramTextField
+lrs =  Fi
+
+FileChooserLoadFile , TypeInGridSizeTextField
+lrs =  Fi
+
+FileChooserLoadFile , TypeInPatternTextField
+lrs =  Fi
+
+FileChooserLoadFile , AssertButtonGetClueExist
+lrs = ho
+
+FileChooserLoadFile , AssertButtonGetClueNotExist
+lrs = ho
+
+FileChooserLoadFile , AssertPatternTextFieldExist
+lrs = ho
+
+FileChooserLoadFile , AssertPatternTextFieldNotExist
+lrs = ho
+
+FileChooserLoadFile , DoubleClickCrosswordCell
+lrs = om
+
+FileChooserLoadFile , SelectAddWordTipsDialog
+lrs = le
+
+FileChooserSaveFile , LaunchCrossword
+lrs = h
+
+FileChooserSaveFile , RemoveTestFile
+lrs =  File
+
+FileChooserSaveFile , SelectCrosswordSageWindow
+lrs = le
+
+FileChooserSaveFile , SelectErrorSizeDialog
+lrs = le
+
+FileChooserSaveFile , SelectInputDialog
+lrs = le
+
+FileChooserSaveFile , SelectMessageDialog
+lrs = le
+
+FileChooserSaveFile , SelectOpenDialog
+lrs = le
+
+FileChooserSaveFile , SelectSaveDialog
+lrs = le
+
+FileChooserSaveFile , TypeInAnagramTextField
+lrs =  Fi
+
+FileChooserSaveFile , TypeInGridSizeTextField
+lrs =  Fi
+
+FileChooserSaveFile , TypeInPatternTextField
+lrs =  Fi
+
+FileChooserSaveFile , AssertButtonGetClueExist
+lrs = ho
+
+FileChooserSaveFile , AssertButtonGetClueNotExist
+lrs = ho
+
+FileChooserSaveFile , AssertPatternTextFieldExist
+lrs = ho
+
+FileChooserSaveFile , AssertPatternTextFieldNotExist
+lrs = ho
+
+FileChooserSaveFile , DoubleClickCrosswordCell
+lrs = om
+
+FileChooserSaveFile , SelectAddWordTipsDialog
+lrs = le
+
+LaunchCrossword , RemoveTestFile
+lrs =  
+
+LaunchCrossword , SelectCrosswordSageWindow
+lrs = n
+
+LaunchCrossword , SelectErrorSizeDialog
+lrs = a
+
+LaunchCrossword , SelectInputDialog
+lrs = a
+
+LaunchCrossword , SelectMessageDialog
+lrs = a
+
+LaunchCrossword , SelectOpenDialog
+lrs = a
+
+LaunchCrossword , SelectSaveDialog
+lrs = a
+
+LaunchCrossword , TypeInAnagramTextField
+lrs = n
+
+LaunchCrossword , TypeInGridSizeTextField
+lrs = n
+
+LaunchCrossword , TypeInPatternTextField
+lrs = n
+
+LaunchCrossword , AssertButtonGetClueExist
+lrs = on
+
+LaunchCrossword , AssertButtonGetClueNotExist
+lrs = on
+
+LaunchCrossword , AssertPatternTextFieldExist
+lrs = on
+
+LaunchCrossword , AssertPatternTextFieldNotExist
+lrs = on
+
+LaunchCrossword , DoubleClickCrosswordCell
+lrs = lic
+
+LaunchCrossword , SelectAddWordTipsDialog
+lrs = a
+
+RemoveTestFile , SelectCrosswordSageWindow
+lrs = le
+
+RemoveTestFile , SelectErrorSizeDialog
+lrs = le
+
+RemoveTestFile , SelectInputDialog
+lrs = le
+
+RemoveTestFile , SelectMessageDialog
+lrs = le
+
+RemoveTestFile , SelectOpenDialog
+lrs = le
+
+RemoveTestFile , SelectSaveDialog
+lrs = le
+
+RemoveTestFile , TypeInAnagramTextField
+lrs =  Fi
+
+RemoveTestFile , TypeInGridSizeTextField
+lrs =  Fi
+
+RemoveTestFile , TypeInPatternTextField
+lrs =  Fi
+
+RemoveTestFile , AssertButtonGetClueExist
+lrs = o
+
+RemoveTestFile , AssertButtonGetClueNotExist
+lrs = o
+
+RemoveTestFile , AssertPatternTextFieldExist
+lrs = e
+
+RemoveTestFile , AssertPatternTextFieldNotExist
+lrs = e
+
+RemoveTestFile , DoubleClickCrosswordCell
+lrs = e
+
+RemoveTestFile , SelectAddWordTipsDialog
+lrs = le
+
+SelectCrosswordSageWindow , SelectErrorSizeDialog
+lrs = Select 
+
+SelectCrosswordSageWindow , SelectInputDialog
+lrs = Select 
+
+SelectCrosswordSageWindow , SelectMessageDialog
+lrs = Select 
+
+SelectCrosswordSageWindow , SelectOpenDialog
+lrs = Select 
+
+SelectCrosswordSageWindow , SelectSaveDialog
+lrs = Select 
+
+SelectCrosswordSageWindow , TypeInAnagramTextField
+lrs = el
+
+SelectCrosswordSageWindow , TypeInGridSizeTextField
+lrs = el
+
+SelectCrosswordSageWindow , TypeInPatternTextField
+lrs = el
+
+SelectCrosswordSageWindow , AssertButtonGetClueExist
+lrs = S
+
+SelectCrosswordSageWindow , AssertButtonGetClueNotExist
+lrs = t 
+
+SelectCrosswordSageWindow , AssertPatternTextFieldExist
+lrs = t 
+
+SelectCrosswordSageWindow , AssertPatternTextFieldNotExist
+lrs = t 
+
+SelectCrosswordSageWindow , DoubleClickCrosswordCell
+lrs = e
+
+SelectCrosswordSageWindow , SelectAddWordTipsDialog
+lrs = Select 
+
+SelectErrorSizeDialog , SelectInputDialog
+lrs = Select Dialog
+
+SelectErrorSizeDialog , SelectMessageDialog
+lrs = Select Dialog
+
+SelectErrorSizeDialog , SelectOpenDialog
+lrs = Select Dialog
+
+SelectErrorSizeDialog , SelectSaveDialog
+lrs = Select Dialog
+
+SelectErrorSizeDialog , TypeInAnagramTextField
+lrs = el
+
+SelectErrorSizeDialog , TypeInGridSizeTextField
+lrs = el
+
+SelectErrorSizeDialog , TypeInPatternTextField
+lrs = el
+
+SelectErrorSizeDialog , AssertButtonGetClueExist
+lrs = S
+
+SelectErrorSizeDialog , AssertButtonGetClueNotExist
+lrs = t 
+
+SelectErrorSizeDialog , AssertPatternTextFieldExist
+lrs = t 
+
+SelectErrorSizeDialog , AssertPatternTextFieldNotExist
+lrs = t 
+
+SelectErrorSizeDialog , DoubleClickCrosswordCell
+lrs = e
+
+SelectErrorSizeDialog , SelectAddWordTipsDialog
+lrs = Select Dialog
+
+SelectInputDialog , SelectMessageDialog
+lrs = Select Dialog
+
+SelectInputDialog , SelectOpenDialog
+lrs = Select Dialog
+
+SelectInputDialog , SelectSaveDialog
+lrs = Select Dialog
+
+SelectInputDialog , TypeInAnagramTextField
+lrs = el
+
+SelectInputDialog , TypeInGridSizeTextField
+lrs = el
+
+SelectInputDialog , TypeInPatternTextField
+lrs = el
+
+SelectInputDialog , AssertButtonGetClueExist
+lrs = S
+
+SelectInputDialog , AssertButtonGetClueNotExist
+lrs = t 
+
+SelectInputDialog , AssertPatternTextFieldExist
+lrs = t 
+
+SelectInputDialog , AssertPatternTextFieldNotExist
+lrs = t 
+
+SelectInputDialog , DoubleClickCrosswordCell
+lrs = e
+
+SelectInputDialog , SelectAddWordTipsDialog
+lrs = Select Dialog
+
+SelectMessageDialog , SelectOpenDialog
+lrs = Select Dialog
+
+SelectMessageDialog , SelectSaveDialog
+lrs = Select Dialog
+
+SelectMessageDialog , TypeInAnagramTextField
+lrs = el
+
+SelectMessageDialog , TypeInGridSizeTextField
+lrs = el
+
+SelectMessageDialog , TypeInPatternTextField
+lrs = el
+
+SelectMessageDialog , AssertButtonGetClueExist
+lrs = S
+
+SelectMessageDialog , AssertButtonGetClueNotExist
+lrs = t 
+
+SelectMessageDialog , AssertPatternTextFieldExist
+lrs = t 
+
+SelectMessageDialog , AssertPatternTextFieldNotExist
+lrs = t 
+
+SelectMessageDialog , DoubleClickCrosswordCell
+lrs = e
+
+SelectMessageDialog , SelectAddWordTipsDialog
+lrs = Select Dialog
+
+SelectOpenDialog , SelectSaveDialog
+lrs = Select Dialog
+
+SelectOpenDialog , TypeInAnagramTextField
+lrs = el
+
+SelectOpenDialog , TypeInGridSizeTextField
+lrs = el
+
+SelectOpenDialog , TypeInPatternTextField
+lrs = el
+
+SelectOpenDialog , AssertButtonGetClueExist
+lrs = S
+
+SelectOpenDialog , AssertButtonGetClueNotExist
+lrs = t 
+
+SelectOpenDialog , AssertPatternTextFieldExist
+lrs = t 
+
+SelectOpenDialog , AssertPatternTextFieldNotExist
+lrs = t 
+
+SelectOpenDialog , DoubleClickCrosswordCell
+lrs = e
+
+SelectOpenDialog , SelectAddWordTipsDialog
+lrs = Select Dialog
+
+SelectSaveDialog , TypeInAnagramTextField
+lrs = el
+
+SelectSaveDialog , TypeInGridSizeTextField
+lrs = el
+
+SelectSaveDialog , TypeInPatternTextField
+lrs = el
+
+SelectSaveDialog , AssertButtonGetClueExist
+lrs = S
+
+SelectSaveDialog , AssertButtonGetClueNotExist
+lrs = t 
+
+SelectSaveDialog , AssertPatternTextFieldExist
+lrs = t 
+
+SelectSaveDialog , AssertPatternTextFieldNotExist
+lrs = t 
+
+SelectSaveDialog , DoubleClickCrosswordCell
+lrs = e
+
+SelectSaveDialog , SelectAddWordTipsDialog
+lrs = Select Dialog
+
+TypeInAnagramTextField , TypeInGridSizeTextField
+lrs = Type Into Text Field
+
+TypeInAnagramTextField , TypeInPatternTextField
+lrs = Type Into Text Field
+
+TypeInAnagramTextField , AssertButtonGetClueExist
+lrs = to
+
+TypeInAnagramTextField , AssertButtonGetClueNotExist
+lrs = to
+
+TypeInAnagramTextField , AssertPatternTextFieldExist
+lrs = nt
+
+TypeInAnagramTextField , AssertPatternTextFieldNotExist
+lrs = nt
+
+TypeInAnagramTextField , DoubleClickCrosswordCell
+lrs = nt
+
+TypeInAnagramTextField , SelectAddWordTipsDialog
+lrs = t 
+
+TypeInGridSizeTextField , TypeInPatternTextField
+lrs = Type Into Text Field
+
+TypeInGridSizeTextField , AssertButtonGetClueExist
+lrs = to
+
+TypeInGridSizeTextField , AssertButtonGetClueNotExist
+lrs = to
+
+TypeInGridSizeTextField , AssertPatternTextFieldExist
+lrs = nt
+
+TypeInGridSizeTextField , AssertPatternTextFieldNotExist
+lrs = nt
+
+TypeInGridSizeTextField , DoubleClickCrosswordCell
+lrs = nt
+
+TypeInGridSizeTextField , SelectAddWordTipsDialog
+lrs = t 
+
+TypeInPatternTextField , AssertButtonGetClueExist
+lrs = to
+
+TypeInPatternTextField , AssertButtonGetClueNotExist
+lrs = to
+
+TypeInPatternTextField , AssertPatternTextFieldExist
+lrs = nt
+
+TypeInPatternTextField , AssertPatternTextFieldNotExist
+lrs = nt
+
+TypeInPatternTextField , DoubleClickCrosswordCell
+lrs = nt
+
+TypeInPatternTextField , SelectAddWordTipsDialog
+lrs = t 
+
+AssertButtonGetClueExist , AssertButtonGetClueNotExist
+lrs = Button Should 
+
+AssertButtonGetClueExist , AssertPatternTextFieldExist
+lrs =  Should Exist
+
+AssertButtonGetClueExist , AssertPatternTextFieldNotExist
+lrs =  Should 
+
+AssertButtonGetClueExist , DoubleClickCrosswordCell
+lrs = on
+
+AssertButtonGetClueExist , SelectAddWordTipsDialog
+lrs = t
+
+AssertButtonGetClueNotExist , AssertPatternTextFieldExist
+lrs =  Should 
+
+AssertButtonGetClueNotExist , AssertPatternTextFieldNotExist
+lrs =  Should Not Exist
+
+AssertButtonGetClueNotExist , DoubleClickCrosswordCell
+lrs = on
+
+AssertButtonGetClueNotExist , SelectAddWordTipsDialog
+lrs = t 
+
+AssertPatternTextFieldExist , AssertPatternTextFieldNotExist
+lrs = Component Should 
+
+AssertPatternTextFieldExist , DoubleClickCrosswordCell
+lrs = Component
+
+AssertPatternTextFieldExist , SelectAddWordTipsDialog
+lrs = t 
+
+AssertPatternTextFieldNotExist , DoubleClickCrosswordCell
+lrs = Component
+
+AssertPatternTextFieldNotExist , SelectAddWordTipsDialog
+lrs = t 
+
+DoubleClickCrosswordCell , SelectAddWordTipsDialog
+lrs = l
+

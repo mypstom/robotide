@@ -94,6 +94,9 @@ class RideFrame(wx.Frame, RideEventHandler):
 
         self.KTV = KTV()
 
+    def ShowMessage(self, Info):
+        wx.MessageBox(Info, 'Info', wx.ICON_INFORMATION | wx.OK)
+
     def _subscribe_messages(self):
         for listener, topic in [
             (lambda msg: self.SetStatusText('Saved %s' % msg.path), RideSaved),
@@ -302,8 +305,11 @@ class RideFrame(wx.Frame, RideEventHandler):
 
     def OnInsertScreenShot(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())
-        self.KTV.insertScreenShot()
-        self.save()
+        if not self.KTV.checkHadInsertedScreenShotCommand():
+            self.KTV.insertScreenShot()
+            self.save()
+        else:
+            self.ShowMessage('the script haven insert screenShot command')
 
         """plugin = self._application._plugin_loader.getPluginByName('Test Runner')._plugin
         plugin.OnRun(None)
@@ -318,8 +324,7 @@ class RideFrame(wx.Frame, RideEventHandler):
 
     def OnDuplicatedActionDetection(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())
-        self.KTV.duplicatedActionDetectionBetweenUKandUK()
-        self.KTV.duplicatedActionDetectionBetweenTCandTC()
+        self.KTV.duplicatedActionDetection()
 
     def _get_datafile_list(self):
         return [df for df in self._controller.datafiles]
