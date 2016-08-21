@@ -258,61 +258,48 @@ class TestRunner(object):
 
     def command_ended(self):
         self._process = None
+        self.generate_excuteTable()
 
-        print('command_ended')
+    def generate_excuteTable(self):
         source = os.path.abspath(self._project.suite.source)
-        # print(source)
-        # print(isinstance(source, unicode))
-
         TS_list = list()
         TC_list = list()
         UK_list = list()
         LK_list = list()
         Assignment = list()
+        C_dict = dict()
         with open(source + '\Excute.txt', 'r+') as f:
             for line in f:
-                # print line
                 dataList = line.split('\t')
                 if dataList[0].split('=')[0] == 'TS':
                     TS_list.append(dataList[0].split('=')[1].strip('\n'))
                 elif dataList[0].split('=')[0] == 'TC':  # TC_list = [parent , TC_name]
                     TC_list.append([dataList[1].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n')])
-                elif dataList[0].split('=')[0] == 'UK':  # UK_list = [parent , UK_name, args]
+                else:
                     args = ''
-                    if len(dataList[1].split('=')) > 2:
+                    if len(dataList[1].split('=')) > 2:  # if arg has '=', append all arg
                         for index in range(1, len(dataList[1].split('='))):
                             args += dataList[1].split('=')[index]
                             args += '='
-                        args = args[:len(args) - 1]
+                        args = args[1:len(args) - 2]  # remove '[' and ']'
                     else:
                         args = dataList[1].split('=')[1].strip('\n')
-                    UK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
-                                    args])
-                    if len(dataList) == 4:  # Assignment=[parent, assignment , value]
+                        args = args[1:len(args) - 1]  # remove '[' and ']'
+                    if len(dataList) == 4:  # Assignment = [parent, assignment , value]
                         Assignment.append(
                             [dataList[2].split('=')[1].strip('\n'), dataList[3].split('=')[0].strip('\n'),
                              dataList[3].split('=')[1].strip('\n')])
-                elif dataList[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
-                    args = ''
-                    if len(dataList[1].split('=')) > 2:
-                        for index in range(1, len(dataList[1].split('='))):
-                            args += dataList[1].split('=')[index]
-                            args += '='
-                        args = args[:len(args) - 1]
-                    else:
-                        args = dataList[1].split('=')[1].strip('\n')
-                    LK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
-                                    args])
-                    if len(dataList) == 4:  # Assignment=[parent, assignment , value]
-                        Assignment.append(
-                            [dataList[2].split('=')[1].strip('\n'), dataList[3].split('=')[0].strip('\n'),
-                             dataList[3].split('=')[1].strip('\n')])
+                    if dataList[0].split('=')[0] == 'UK':  # UK_list = [parent , UK_name, args]
+                        UK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
+                                        args])
+                    elif dataList[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
+                        LK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
+                                        args])
 
         with open(source + '\ExcuteTable.txt', 'w+') as f:
             f.write('TS : ')
             for testsuite in TS_list:
                 f.write(str(testsuite) + '[')
-                # f.write('[')
                 for testcase in TC_list:
                     if testcase[0] == testsuite:
                         f.write(str(testcase[1]) + ',')
@@ -322,7 +309,6 @@ class TestRunner(object):
             f.write('\nTC : ')
             for testcase in TC_list:
                 f.write(str(testcase[1]) + '[')
-                # f.write('[')
                 for LK in LK_list:
                     if LK[0] == testcase[1]:
                         f.write(str(LK[1]) + ',')
@@ -336,11 +322,25 @@ class TestRunner(object):
             f.seek(-1, 1)
             f.write('\nLK : ')
             for LK in LK_list:
-                f.write(str(LK[1]) + str(LK[2]) + ',')
+                f.write(str(LK[1]) + '[')
+                for arg in LK[2].split(','):
+                    for assign in Assignment:
+                        if arg == assign[1] and LK[0] == assign[0]:
+                            arg = assign[2]
+                    f.write(str(arg) + ',')
+                f.seek(-1, 1)
+                f.write('],')
             f.seek(-1, 1)
             f.write('\nUK : ')
             for UK in UK_list:
-                f.write(str(UK[1]) + str(UK[2]) + ',')
+                f.write(str(UK[1]) + '[')
+                for arg in UK[2].split(','):
+                    for assign in Assignment:
+                        if arg == assign[1] and UK[0] == assign[0]:
+                            arg = assign[2]
+                    f.write(str(arg) + ',')
+                f.seek(-1, 1)
+                f.write('],')
             f.seek(-1, 1)
             f.write('\n')
 

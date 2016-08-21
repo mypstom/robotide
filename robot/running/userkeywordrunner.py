@@ -54,9 +54,9 @@ class UserKeywordRunner(object):
             f.write('\targs=')
             string = '['
             for arg in kw.args:
-                string += '\''
+                #string += '\''
                 string += str(arg)
-                string += '\','
+                string += ','
             if len(string) > 1:
                 string = string[:len(string) - 1] + ']'
             else:

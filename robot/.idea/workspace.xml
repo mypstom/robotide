@@ -72,11 +72,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="librarykeywordrunner.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="librarykeywordrunner.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/running/librarykeywordrunner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="754">
-              <caret line="86" column="59" selection-start-line="86" selection-start-column="44" selection-end-line="86" selection-end-column="59" />
+            <state relative-caret-position="442">
+              <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
               <folding>
                 <element signature="e#608#642#0" expanded="true" />
               </folding>
@@ -84,11 +84,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="userkeywordrunner.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="userkeywordrunner.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/running/userkeywordrunner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="86" column="38" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="38" />
+            <state relative-caret-position="338">
+              <caret line="58" column="27" selection-start-line="58" selection-start-column="27" selection-end-line="58" selection-end-column="27" />
               <folding>
                 <element signature="e#608#807#0" expanded="true" />
               </folding>
@@ -687,16 +687,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/running/librarykeywordrunner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="754">
-          <caret line="86" column="59" selection-start-line="86" selection-start-column="44" selection-end-line="86" selection-end-column="59" />
-          <folding>
-            <element signature="e#608#642#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/running/steprunner.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-546">
@@ -717,10 +707,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/running/userkeywordrunner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="86" column="38" selection-start-line="86" selection-start-column="24" selection-end-line="86" selection-end-column="38" />
+        <state relative-caret-position="338">
+          <caret line="58" column="27" selection-start-line="58" selection-start-column="27" selection-end-line="58" selection-end-column="27" />
           <folding>
             <element signature="e#608#807#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/running/librarykeywordrunner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="62" column="27" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+          <folding>
+            <element signature="e#608#642#0" expanded="true" />
           </folding>
         </state>
       </provider>
