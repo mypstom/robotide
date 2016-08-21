@@ -1,0 +1,47 @@
+1 time LRS	elapsed_time = 403.687999964
+,SelectCrosswordSageWindow,AssertButtonAddWordExist,ClickButtonAddWord,ClickCrosswordCell,ClickCrosswordCell,ClickCrosswordCell,Send Keyboard Event,ClickCrosswordCell,Send Keyboard Event,ClickCrosswordCell,Send Keyboard Event,ClickCrosswordCell,Send Keyboard Event,ClickCrosswordCell,ClickButtonSuggestWord,DoubleClickSuggestListItem,ClickButtonAddWord,ClickCrosswordCell,ClickCrosswordCell,ClickCrosswordCell,Send Keyboard Event,ClickCrosswordCell,Send Keyboard Event,ClickCrosswordCell,Send Keyboard Event,ClickCrosswordCell,Send Keyboard Event,Click
+
+2 time LRS	elapsed_time = 44.7590000629
+Enabled,ClickMenuNewCrossword,SelectInputDialog,TypeInGridSizeTextField,ClickButtonOK,AssertMenuSaveCrosswordEnabled,ClickMenuNewCrossword,SelectInputDialog,TypeInGridSizeTextField,ClickButtonOK,AssertMenuSaveCrosswordEnabled,ClickMenuNewCrossword,SelectInputDialog,TypeInGridSizeTextField,ClickButtonOK,
+
+3 time LRS	elapsed_time = 22.6779999733
+,TypeInPatternTextField,ClickButtonFindMatch,AssertFindMatchResult,ClearPatternTextField,TypeInPatternTextField,ClickButtonFindMatch,AssertFindMatchResult,ClearPatternTextField,TypeInPatternTextField,ClickButtonFindMatch,AssertFindMatchResult,Cl
+
+4 time LRS	elapsed_time = 13.8919999599
+,AssertButtonSuggestWordExist,AssertButtonSuggestWordExist,AssertSuggestListItem,ClickMenuSaveCrossword,SelectSaveDialog,FileChooserSaveFile,AssertFileExist,ClickMenuSolveNewWord,
+
+5 time LRS	elapsed_time = 2.66300010681
+NotExist,ClickMenuLoadCrosswordToEdit,SelectOpenDialog,FileChooserLoadFile,AssertButton
+
+6 time LRS	elapsed_time = 1.6740000248
+,Menu Item Should Be Enabled,Menu Item Should Be Enabled,Menu Item Should 
+
+7 time LRS	elapsed_time = 1.35800004005
+,AssertButtonFindMatchExist,TypeInAnagramTextField,ClearAnagramTextField,
+
+8 time LRS	elapsed_time = 0.793999910355
+,Select Dialog,Select Dialog,Select Dialog,Select Dialog,
+
+9 time LRS	elapsed_time = 0.644999980927
+,AssertFileNotExist,RemoveTestFile,AssertFileNotExist,
+
+10 time LRS	elapsed_time = 0.486999988556
+,Select From Menu,Select From Menu,Select From Menu,
+
+11 time LRS	elapsed_time = 0.396000146866
+,SelectErrorSizeDialog,SelectErrorSizeDialog,
+
+12 time LRS	elapsed_time = 0.325999975204
+,Button Should Exist,Button Should Not Exist,
+
+13 time LRS	elapsed_time = 0.206000089645
+,Type Into Text Field,Type Into Text Field,
+
+14 time LRS	elapsed_time = 0.164000034332
+,Click On Component,Click On Component,
+
+15 time LRS	elapsed_time = 0.105000019073
+Enabled,AssertMenuLoadCrossword
+
+len(leave step) = 25
+leave step = [LaunchCrossword,SelectMessageDialog,AssertMenuNewCrosswordEnabled,AssertMenuLoadCrosswordSolveEnabled,AssertMenuLoadCrosswordEditEnabled,AssertMenuSaveCrosswordNotEnabled,AssertButtonAddWordNotExist,File Should Exist,File Should Not Exist,Get Textfield Value,Should Be Equal,Menu Item Should Not Be Enabled,Get List Item Count,Should Be Equal As Integers,Clear Text Field,Clear Text Field,Push Button,Click On List Item,Choose From File Chooser,Choose From File Chooser,Launch Application,Remove File,Select Window,Component Should Exist,Component Should Not Exist]

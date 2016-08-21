@@ -24,7 +24,7 @@ from .outputcapture import OutputCapturer
 from .signalhandler import STOP_SIGNAL_MONITOR
 from .statusreporter import StatusReporter
 
-#import codecs
+import robot
 
 
 class LibraryKeywordRunner(object):
@@ -51,23 +51,41 @@ class LibraryKeywordRunner(object):
     def run(self, kw, context):
         #print('LibraryKeywordRunner.run')
         assignment = VariableAssignment(kw.assign)
+
+        with open('Excute.txt', 'a') as f:
+            f.write('LK=')
+            f.write(kw.name)
+            f.write('\targs=')
+            string = '['
+            for arg in kw.args:
+                string += '\''
+                string += str(arg)
+                string += '\','
+            if len(string) > 1:
+                string = string[:len(string) - 1] + ']'
+            else:
+                string += ']'
+            f.write(string)
+            f.write('\t')
+            f.write('parent=')
+            if type(kw.parent) is robot.running.model.UserKeyword:
+                f.write(str(kw.parent.name))
+            else:
+                f.write(str(kw.parent))
+
         for assign in kw.assign:
-            #print 'assign = %s' %(assign)
             with open('Excute.txt', 'a') as f:
-                #f.write('assign = ')
+                f.write('\t')
                 f.write(str(assign))
-                #f.write('\n')
 
         with StatusReporter(context, self._get_result(kw, assignment)):
             with assignment.assigner(context) as assigner:
                 return_value = self._run(context, kw.args)
                 assigner.assign(return_value)
-                #print 'return_value = %s\n' %(return_value)
-                if len(kw.assign) > 0:
-                    with open('Excute.txt', 'a') as f:
-                        #f.write('return_value = ')
+                with open('Excute.txt', 'a') as f:
+                    if len(kw.assign) > 0:
                         f.write(return_value.encode('utf8'))
-                        f.write('\n')
+                    f.write('\n')
 
                 return return_value
 
@@ -82,9 +100,6 @@ class LibraryKeywordRunner(object):
                              type=kw.type)
 
     def _run(self, context, args):
-        #print('LibraryKeywordRunner._run')
-        #print 'args = %s' %(args)
-        #print(self._handler)
         if self.pre_run_messages:
             for message in self.pre_run_messages:
                 context.output.message(message)

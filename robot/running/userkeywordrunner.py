@@ -24,9 +24,10 @@ from .statusreporter import StatusReporter
 from .steprunner import StepRunner
 from .timeouts import KeywordTimeout
 
+import robot
+
 
 class UserKeywordRunner(object):
-
     def __init__(self, handler, name=None):
         self._handler = handler
         self.name = name or handler.name
@@ -46,11 +47,75 @@ class UserKeywordRunner(object):
 
     def run(self, kw, context):
         assignment = VariableAssignment(kw.assign)
+
+        with open('Excute.txt', 'a') as f:
+            f.write('UK=')
+            f.write(kw.name)
+            f.write('\targs=')
+            string = '['
+            for arg in kw.args:
+                string += '\''
+                string += str(arg)
+                string += '\','
+            if len(string) > 1:
+                string = string[:len(string) - 1] + ']'
+            else:
+                string += ']'
+            f.write(string)
+            f.write('\t')
+            f.write('parent=')
+            if type(kw.parent) is robot.running.model.UserKeyword:
+                f.write(str(kw.parent.name))
+            else:
+                f.write(str(kw.parent))
+
+        for assign in kw.assign:
+            with open('Excute.txt', 'a') as f:
+                f.write('\t')
+                f.write(str(assign))
+
         result = self._get_result(kw, assignment, context.variables)
         with StatusReporter(context, result):
             with assignment.assigner(context) as assigner:
                 return_value = self._run(context, kw.args, result)
                 assigner.assign(return_value)
+                if len(kw.assign) > 0:
+                    string1 = ''
+                    string2 = ''
+                    flag = False
+                    with open('Excute.txt', 'r+') as f:
+                        for line in f:
+                            dataList = line.split('\t')
+                            if len(dataList) > 4:
+                                tempList = dataList[3].split('=')
+                                for index in range(0, len(dataList)):
+                                    if index < 3:
+                                        string1 += dataList[index]
+                                        string1 += '\t'
+                                    elif index == 3:
+                                        string1 += tempList[0]
+                                        string1 += '='
+                                        string2 += tempList[1]
+                                        string2 += '='
+                                        string2 += tempList[2]
+                                        string2 += '\t'
+                                    else:
+                                        string2 += dataList[index]
+                                        string2 += '\t'
+                                string2 = string2[:len(string2) - 2]
+                                string2 += '\n'
+                                flag = True
+                            elif flag:
+                                string2 += line
+                            else:
+                                string1 += line
+
+                    with open('Excute.txt', 'w+') as f:
+                        f.write(string1)
+                        f.write(return_value.encode('utf8'))
+                        f.write('\n')
+                        f.write(string2)
+
                 return return_value
 
     def _get_result(self, kw, assignment, variables):
@@ -201,7 +266,6 @@ class UserKeywordRunner(object):
 
 
 class EmbeddedArgumentsRunner(UserKeywordRunner):
-
     def __init__(self, handler, name):
         UserKeywordRunner.__init__(self, handler, name)
         match = handler.embedded_name.match(name)

@@ -1,10 +1,13 @@
-import difflib
 import robotide
+
+import time
+import os
 
 
 class DuplicatedActionDetection:
     def Excute(self, datafiles):
         pass
+
 
 class LongestCommonSubsequence(DuplicatedActionDetection):
     def lcs_mat(self, list1, list2):
@@ -146,10 +149,86 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
 
         f.close()
 
+
 class LongestRepeatedSubstring(DuplicatedActionDetection):
     def Excute(self, datafiles):
-        self.DetectionBetweenUKandUK(datafiles)
-        self.DetectionBetweenTCandTC(datafiles)
+        # self.DetectionBetweenUKandUK(datafiles)
+        # self.DetectionBetweenTCandTC(datafiles)
+        self.DetectionAllScript(datafiles)
+
+    def DetectionAllScript(self, datafiles):
+        f = open('ScriptDuplicated-LRS.txt', 'w+')
+        count = 1
+        allStepList = list()
+        for df in datafiles:
+            for testcase in df.tests:
+                for step in testcase.steps:
+                    if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
+                        allStepList.append('Loop')
+                    else:
+                        allStepList.append(str(step.keyword))
+            for userKeyword in df.keywords:
+                for step in userKeyword.steps:
+                    if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
+                        allStepList.append('Loop')
+                    else:
+                        allStepList.append(str(step.keyword))
+        """string = '['
+        for item in lst:
+            string += str(item)
+            string += ','
+        string = string[:len(string) - 1] + ']'
+        f.write(string)
+        f.write('\n\n')"""
+        while len(allStepList) > 0:
+            print 'len(allStepList)= %s ' % (len(allStepList))
+            string = ''
+            for item in allStepList:
+                string += item
+                string += ','
+            string = string[:len(string) - 1]
+            # print 'string = %s' % (string)
+            # tempList = list()
+            # tempList.append(string)
+            start_time = time.time()
+            result = self.maxRepeatedSubstring(string)
+            elapsed_time = time.time() - start_time
+            print 'LRS elapsed_time = %s' % elapsed_time
+            print '%s times' % count
+            f.write(str(count))
+            f.write(' time LRS\t')
+            f.write('elapsed_time = ')
+            f.write(str(elapsed_time))
+            f.write('\n')
+            if result is not None:
+                print 'result = %s' % result
+                f.write(result)
+                f.write('\n\n')
+
+                lrsList = result.split(',')
+                isKeyword = False
+                for lrs in lrsList:
+                    print 'lrs = %s' % lrs
+                    for item in allStepList:
+                        if item == lrs:
+                            isKeyword = True
+
+                    allStepList = [item for item in allStepList if item != lrs]
+                print 'len(allStepList)= %s' % len(allStepList)
+                if not isKeyword:
+                    break
+            else:
+                break
+            count += 1
+        f.write('len(leave step) = ')
+        f.write(str(len(allStepList)))
+        f.write('\nleave step = [')
+        for item in allStepList:
+            f.write(item)
+            f.write(',')
+        f.seek(-1, os.SEEK_CUR)
+        f.write(']')
+        f.close()
 
     def DetectionBetweenUKandUK(self, datafiles):
         f = open('UK2UKduplicated-LRS.txt', 'w+')
@@ -219,7 +298,19 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
 
         f.close()
 
-    def longest_substr(self, lst):
+    def maxRepeatedSubstring(self, repeatedString):  # get longestSubString from string
+        maxSubstringLength = len(repeatedString) - 1
+        while maxSubstringLength > 0:
+            startPoint = 0
+            while startPoint + maxSubstringLength <= len(repeatedString):
+                substringToMatch = repeatedString[startPoint:startPoint + maxSubstringLength]
+                if substringToMatch in repeatedString[startPoint + 1:]:
+                    return substringToMatch
+                startPoint += 1
+            maxSubstringLength -= 1
+        return None
+
+    def longest_substr(self, lst):  # find longestSubString from item in list
         longest = None
         for word in lst:
             for i in range(len(word)):
@@ -230,8 +321,8 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
         return longest
 
     def LongestRepeatedSubstring(self, list1, list2):
-        #string1 = ''.join(list1)
-        #string2 = ''.join(list2)
+        # string1 = ''.join(list1)
+        # string2 = ''.join(list2)
         string1 = ''
         for item in list1:
             string1 += item
@@ -242,14 +333,10 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
             string2 += item
             string2 += ','
         string2 = string2[:len(string2) - 1]
-        #print 'string1 = %s , string2 = %s' % (string1, string2)
+        # print 'string1 = %s , string2 = %s' % (string1, string2)
         lst = list()
         lst.append(string1)
         lst.append(string2)
         lrs = self.longest_substr(lst)
-        #print '\nlrs = %s\n' %(lrs)
+        # print '\nlrs = %s\n' %(lrs)
         return lrs
-
-
-
-

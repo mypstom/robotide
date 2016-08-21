@@ -47,8 +47,8 @@ from robotide.controller.testexecutionresults import TestExecutionResults
 
 ATEXIT_LOCK = threading.RLock()
 
-class TestRunner(object):
 
+class TestRunner(object):
     def __init__(self, project):
         self._output_dir = None
         self._process = None
@@ -93,6 +93,7 @@ class TestRunner(object):
         def handle(*args):
             self._result_handler(*args)
             result_handler(*args)
+
         self._server = RideListenerServer(RideListenerHandler, handle)
         self._server_thread = threading.Thread(
             target=self._server.serve_forever)
@@ -120,7 +121,7 @@ class TestRunner(object):
                 self._results.set_failed(self._get_test_controller(longname,
                                                                    testname))
 
-    def _get_test_controller(self, longname, testname = None):
+    def _get_test_controller(self, longname, testname=None):
         ret = self._project.find_controller_by_longname(longname, testname)
         return ret
 
@@ -194,7 +195,7 @@ class TestRunner(object):
         i = command.index(switch)
         if len(command) == i:
             return
-        level = command[i+1].upper().split(':')[0]
+        level = command[i + 1].upper().split(':')[0]
         return LOG_LEVELS.get(level, min_log_level_number)
 
     def _get_listener_to_cmd(self):
@@ -219,8 +220,8 @@ class TestRunner(object):
             command, standard_args, pythonpath)
         # Have to use short options, because of long option was changed in
         # RF 2.8 -> 2.9, and we don't necessarily know the installed version.
-        standard_args.extend(["-C", "off"]) # --consolecolor
-        standard_args.extend(["-W", console_width]) # --consolewidth
+        standard_args.extend(["-C", "off"])  # --consolecolor
+        standard_args.extend(["-W", console_width])  # --consolewidth
         for suite, test in names_to_run:
             standard_args += ['--suite', suite, '--test', test]
         return standard_args
@@ -248,7 +249,7 @@ class TestRunner(object):
 
     def get_output_and_errors(self, profile):
         stdout, stderr, returncode = self._process.get_output(), \
-            self._process.get_errors(), self._process.get_returncode()
+                                     self._process.get_errors(), self._process.get_returncode()
         error, log_message = profile.format_error(stderr, returncode)
         return stdout, error, log_message
 
@@ -258,9 +259,93 @@ class TestRunner(object):
     def command_ended(self):
         self._process = None
 
+        print('command_ended')
+        source = os.path.abspath(self._project.suite.source)
+        # print(source)
+        # print(isinstance(source, unicode))
+
+        TS_list = list()
+        TC_list = list()
+        UK_list = list()
+        LK_list = list()
+        Assignment = list()
+        with open(source + '\Excute.txt', 'r+') as f:
+            for line in f:
+                # print line
+                dataList = line.split('\t')
+                if dataList[0].split('=')[0] == 'TS':
+                    TS_list.append(dataList[0].split('=')[1].strip('\n'))
+                elif dataList[0].split('=')[0] == 'TC':  # TC_list = [parent , TC_name]
+                    TC_list.append([dataList[1].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n')])
+                elif dataList[0].split('=')[0] == 'UK':  # UK_list = [parent , UK_name, args]
+                    args = ''
+                    if len(dataList[1].split('=')) > 2:
+                        for index in range(1, len(dataList[1].split('='))):
+                            args += dataList[1].split('=')[index]
+                            args += '='
+                        args = args[:len(args) - 1]
+                    else:
+                        args = dataList[1].split('=')[1].strip('\n')
+                    UK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
+                                    args])
+                    if len(dataList) == 4:  # Assignment=[parent, assignment , value]
+                        Assignment.append(
+                            [dataList[2].split('=')[1].strip('\n'), dataList[3].split('=')[0].strip('\n'),
+                             dataList[3].split('=')[1].strip('\n')])
+                elif dataList[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
+                    args = ''
+                    if len(dataList[1].split('=')) > 2:
+                        for index in range(1, len(dataList[1].split('='))):
+                            args += dataList[1].split('=')[index]
+                            args += '='
+                        args = args[:len(args) - 1]
+                    else:
+                        args = dataList[1].split('=')[1].strip('\n')
+                    LK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
+                                    args])
+                    if len(dataList) == 4:  # Assignment=[parent, assignment , value]
+                        Assignment.append(
+                            [dataList[2].split('=')[1].strip('\n'), dataList[3].split('=')[0].strip('\n'),
+                             dataList[3].split('=')[1].strip('\n')])
+
+        with open(source + '\ExcuteTable.txt', 'w+') as f:
+            f.write('TS : ')
+            for testsuite in TS_list:
+                f.write(str(testsuite) + '[')
+                # f.write('[')
+                for testcase in TC_list:
+                    if testcase[0] == testsuite:
+                        f.write(str(testcase[1]) + ',')
+                f.seek(-1, 1)
+                f.write('],')
+            f.seek(-1, 1)
+            f.write('\nTC : ')
+            for testcase in TC_list:
+                f.write(str(testcase[1]) + '[')
+                # f.write('[')
+                for LK in LK_list:
+                    if LK[0] == testcase[1]:
+                        f.write(str(LK[1]) + ',')
+                if not len(UK_list) > 0:
+                    f.seek(-1, 1)
+                for UK in UK_list:
+                    if UK[0] == testcase[1]:
+                        f.write(str(UK[1]) + ',')
+                f.seek(-1, 1)
+                f.write('],')
+            f.seek(-1, 1)
+            f.write('\nLK : ')
+            for LK in LK_list:
+                f.write(str(LK[1]) + str(LK[2]) + ',')
+            f.seek(-1, 1)
+            f.write('\nUK : ')
+            for UK in UK_list:
+                f.write(str(UK[1]) + str(UK[2]) + ',')
+            f.seek(-1, 1)
+            f.write('\n')
+
 
 class Process(object):
-
     def __init__(self, cwd):
         self._process = None
         self._error_stream = None
@@ -274,10 +359,10 @@ class Process(object):
         # We need to supply stdin for subprocess, because otherways in pythonw
         # subprocess will try using sys.stdin which causes an error in windows
         subprocess_args = dict(bufsize=0,
-                        stdout=subprocess.PIPE,
-                        stderr=subprocess.PIPE,
-                        stdin=subprocess.PIPE,
-                        cwd=self._cwd.encode(utils.SYSTEM_ENCODING))
+                               stdout=subprocess.PIPE,
+                               stderr=subprocess.PIPE,
+                               stdin=subprocess.PIPE,
+                               cwd=self._cwd.encode(utils.SYSTEM_ENCODING))
         if IS_WINDOWS:
             startupinfo = subprocess.STARTUPINFO()
             try:
@@ -321,7 +406,7 @@ class Process(object):
             return
         if force:
             self._process.kill()
-        self.resume() # Send so that RF is not blocked
+        self.resume()  # Send so that RF is not blocked
         if IS_WINDOWS and not self._kill_called and self._port is not None:
             self._signal_kill_with_listener_server()
             self._kill_called = True
@@ -363,7 +448,7 @@ class Process(object):
     def _kill(self, pid):
         if pid:
             try:
-                if os.name == 'nt' and sys.version_info < (2,7):
+                if os.name == 'nt' and sys.version_info < (2, 7):
                     import ctypes
                     ctypes.windll.kernel32.TerminateProcess(
                         int(self._process._handle), -1)
@@ -374,7 +459,6 @@ class Process(object):
 
 
 class StreamReaderThread(object):
-
     def __init__(self, stream):
         self._queue = Queue()
         self._thread = None
@@ -407,9 +491,11 @@ class StreamReaderThread(object):
 class RideListenerServer(SocketServer.TCPServer):
     """Implements a simple line-buffered socket server"""
     allow_reuse_address = True
+
     def __init__(self, RequestHandlerClass, callback):
-        SocketServer.TCPServer.__init__(self, ("",0), RequestHandlerClass)
+        SocketServer.TCPServer.__init__(self, ("", 0), RequestHandlerClass)
         self.callback = callback
+
 
 class RideListenerHandler(SocketServer.StreamRequestHandler):
     def handle(self):

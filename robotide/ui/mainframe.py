@@ -309,7 +309,7 @@ class RideFrame(wx.Frame, RideEventHandler):
             self.KTV.insertScreenShot()
             self.save()
         else:
-            self.ShowMessage('the script haven insert screenShot command')
+            self.ShowMessage('The script has already inserted screenshot commands')
 
         """plugin = self._application._plugin_loader.getPluginByName('Test Runner')._plugin
         plugin.OnRun(None)

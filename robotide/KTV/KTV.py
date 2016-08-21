@@ -11,6 +11,9 @@ from duplicatedactiondetection import LongestCommonSubsequence, LongestRepeatedS
 
 from shutil import copyfile
 
+import time
+
+
 class KTV:
     def __init__(self):
         self.datafiles = None
@@ -341,7 +344,8 @@ class KTV:
                             nodesWithType[str(testCase.name)] = "Test Case"
                             try:
                                 for testStep in testCase.steps:
-                                    if str(testStep.keyword) in self.user_def_keyword:  # add userkeyword into node and edge
+                                    if str(
+                                            testStep.keyword) in self.user_def_keyword:  # add userkeyword into node and edge
                                         tempNode.add(str(testStep.keyword))
                                         tempEdge.append((str(testCase.name), str(testStep.keyword)))
                                     else:  # if and only if the component is appear in our components list
@@ -465,13 +469,14 @@ class KTV:
                     ukChangeImpact[uk][0] = True
 
         # calculate components' change impact
-        #componentChangeImpact = dict()
+        # componentChangeImpact = dict()
         for c in tempComponentList:
             self.componentChangeImpact[c] = 0
             for node in tempNoGhostNodeEdgeSet:
                 if node[1] == "C_" + c:
                     if node[0] in self.user_def_keyword:
-                        self.componentChangeImpact[c] += ukChangeImpact[node[0]][1] + tempEdgeWithoutGhostNode.count(node)
+                        self.componentChangeImpact[c] += ukChangeImpact[node[0]][1] + tempEdgeWithoutGhostNode.count(
+                            node)
                     else:
                         self.componentChangeImpact[c] += tempEdgeWithoutGhostNode.count(node)
 
@@ -559,8 +564,6 @@ class KTV:
         dot_testSuiteLevel.node('Root')
         nodeCount += 1
         testSuites = list()
-        #user_def_keyword = dict()
-        #userKeywordObject = list()
         tempComponentList = list()
         try:
             for df in self.datafiles:
@@ -736,33 +739,51 @@ class KTV:
         return False
 
     def insertScreenShot(self):
+        self.insertScreenShotIntoTC()
+        self.insertScreenShotIntoUK()
+
+    def insertScreenShotIntoTC(self):
         screenShotPath = './/selenium-screenshot/'
         for df in self.datafiles:
             if type(df) is robotide.controller.filecontrollers.TestCaseFileController:
                 # print 'TS = %r' % (str(df.display_name))
-                TestSuiteScreenShotPath = str(df.display_name)
-                TestSuiteScreenShotPath += '/'
+                # TestSuiteScreenShotPath = str(df.display_name)
+                # TestSuiteScreenShotPath += '/'
+                screenShotPath += str(df.display_name)
+                screenShotPath += '/'
                 if len(df.tests._items) > 0:
                     for testCase in df.tests:
                         # print 'TC = %r' % (str(testCase.display_name))
-                        TestCaseScreenShotPath = str(testCase.display_name)
-                        TestCaseScreenShotPath += '/'
+                        # TestCaseScreenShotPath = str(testCase.display_name)
+                        # TestCaseScreenShotPath += '/'
+                        screenShotPath += str(testCase.display_name)
+                        screenShotPath += '/'
                         # testCase.steps[0].insert_before(Step(['Set Selenium Speed', '0.6'], 'KTV'))
                         testCase.steps[0].insert_after(Step(['Set Screenshot Directory', screenShotPath], 'KTV'))
                         index = 2
                         screenShotCount = 1
                         while index < len(testCase.steps):
-                            # if (testCase.steps[index] is self.user_def_keyword):
-                            # self.insertScreenShotIntoUK(testCase.steps[index])
-                            # pass
                             # else:
-                            newStep = Step(['Capture Page Screenshot',
+                            """newStep = Step(['Capture Page Screenshot',
                                             TestSuiteScreenShotPath + TestCaseScreenShotPath + str(
-                                                screenShotCount) + '.png'], 'KTV')
+                                                screenShotCount) + '.png'], 'KTV')"""
+                            newStep = Step(['Capture Page Screenshot'], 'KTV')
                             testCase.steps[index].insert_after(newStep)
                             index += 2
                             screenShotCount += 1
 
+    def insertScreenShotIntoUK(self):
+        for df in self.datafiles:
+            if type(df) is robotide.controller.filecontrollers.TestCaseFileController:
+                # print 'TS = %r' % (str(df.display_name))
+                if len(df.keywords._items) > 0:
+                    for userkeyword in df.keywords:
+                        # print 'TC = %r' % (str(testCase.display_name))
+                        index = 0
+                        while index < len(userkeyword.steps) - 1:
+                            newStep = Step(['Capture Page Screenshot'], 'KTV')
+                            userkeyword.steps[index].insert_after(newStep)
+                            index += 2
 
     """print('testCase.steps')
     for df in self.datafiles:
@@ -778,12 +799,16 @@ class KTV:
                     newStep = Step(['Capture Page Screenshot', TestSuiteScreenShotPath + TestCaseScreenShotPath + str(
                                         screenShotCount) + '.png'], 'KTV')"""
 
-
     def removeScreenShot(self):
         for df in self.datafiles:
             if len(df.tests._items) > 0:
                 for testCase in df.tests:
                     for step in testCase.steps:
+                        if (step._get_comment(step.as_list()) == 'KTV'):
+                            step.remove()
+            if len(df.keywords._items) > 0:
+                for userkeyword in df.keywords:
+                    for step in userkeyword.steps:
                         if (step._get_comment(step.as_list()) == 'KTV'):
                             step.remove()
 
@@ -795,7 +820,9 @@ class KTV:
                 for step in testCase.steps:
                     print 'keyword = %r args = %r comment = %r' %(step.keyword, step.args, step._get_comment(step.as_list()))"""
 
-
     def duplicatedActionDetection(self):
+        start_time = time.time()
         self.duplicatedactiondetection.Excute(self.datafiles)
+        elapsed_time = time.time() - start_time
+        print(elapsed_time)
         self.ShowMessage('Duplicated Action Detection Finish')

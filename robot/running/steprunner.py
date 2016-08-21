@@ -21,6 +21,7 @@ from robot.variables import is_scalar_var
 
 from .statusreporter import StatusReporter
 
+import robot
 
 class StepRunner(object):
 
@@ -33,8 +34,8 @@ class StepRunner(object):
         for step in steps:
             try:
                 self.run_step(step)
-                with open('Excute.txt', 'a') as f:
-                    f.write('\n')
+                #with open('Excute.txt', 'a') as f:
+                    #f.write('\n')
             except ExecutionPassed as exception:
                 exception.set_earlier_failures(errors)
                 raise exception
@@ -56,10 +57,18 @@ class StepRunner(object):
             return runner.run(step)
         #print 'Keyword = %s    args = %s' %(name or step.name, step.args)
         #print 'parent = %s' %(step.parent)
-        with open('Excute.txt', 'a') as f:
-            f.write('Keyword = ')
+
+        runner = context.get_runner(name or step.name)
+
+        """with open('Excute.txt', 'a') as f:
+            if type(runner) is robot.running.userkeywordrunner.UserKeywordRunner:
+                f.write('UK=')
+                #print 'UK = %s' %step.name
+            else:
+                f.write('LK=')
+                #rint 'LK = %s' %step.name
             f.write(name or step.name)
-            f.write('\targs = ')
+            f.write('\targs=')
             string = '['
             for arg in step.args:
                 string += '\''
@@ -71,13 +80,16 @@ class StepRunner(object):
                 string += ']'
             f.write(string)
             #f.write(str(step.args))
-            f.write('\n')
-            f.write('parent = ')
-            f.write(str(step.parent))
-            f.write('\n')
+            f.write('\t')
+            f.write('parent=')
+            if type(step.parent) is robot.running.model.UserKeyword:
+                f.write(str(step.parent.name))
+            else:
+                f.write(str(step.parent))"""
+            #if type(runner) is robot.running.userkeywordrunner.UserKeywordRunner:
+                #f.write('\n')
+            #f.write('\n')
 
-        runner = context.get_runner(name or step.name)
-        #print 'runner = %s' %(runner)
         if context.dry_run:
             return runner.dry_run(step, context)
         return runner.run(step, context)

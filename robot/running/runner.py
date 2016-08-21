@@ -45,6 +45,9 @@ class Runner(SuiteVisitor):
 
     def start_suite(self, suite):
         with open('Excute.txt', 'w') as f:
+            f.write('TS=')
+            f.write(str(suite.name))
+            f.write('\n')
             pass
 
         self._output.library_listeners.new_suite_scope()
@@ -114,9 +117,9 @@ class Runner(SuiteVisitor):
     def visit_test(self, test):
         #print 'TestCase = %s    parent = %s' % (test.name, test.parent)
         with open('Excute.txt', 'a') as f:
-            f.write('TestCase = ')
+            f.write('TC=')
             f.write(test.name)
-            f.write('\tparent = ')
+            f.write('\tparent=')
             f.write(str(test.parent))
             f.write('\n')
 
