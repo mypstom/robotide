@@ -285,6 +285,10 @@ class TestRunner(object):
                     else:
                         args = dataList[1].split('=')[1].strip('\n')
                         args = args[1:len(args) - 1]  # remove '[' and ']'
+                    if len(args) != 0:
+                        if args.split(',')[0] not in C_dict:  # C_dict [ component ] = parentList
+                            C_dict[args.split(',')[0]] = list()
+                        C_dict[args.split(',')[0]].append(dataList[0].split('=')[1].strip('\n'))
                     if len(dataList) == 4:  # Assignment = [parent, assignment , value]
                         Assignment.append(
                             [dataList[2].split('=')[1].strip('\n'), dataList[3].split('=')[0].strip('\n'),
@@ -339,6 +343,14 @@ class TestRunner(object):
                         if arg == assign[1] and UK[0] == assign[0]:
                             arg = assign[2]
                     f.write(str(arg) + ',')
+                f.seek(-1, 1)
+                f.write('],')
+            f.seek(-1, 1)
+            f.write('\nC : ')
+            for C in C_dict.keys():
+                f.write(str(C) + '[')
+                for parent in C_dict[C]:
+                    f.write(str(parent) + ',')
                 f.seek(-1, 1)
                 f.write('],')
             f.seek(-1, 1)
