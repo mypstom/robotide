@@ -12,6 +12,7 @@ from duplicatedactiondetection import LongestCommonSubsequence, LongestRepeatedS
 from shutil import copyfile
 
 import time
+import os
 
 
 class KTV:
@@ -550,7 +551,7 @@ class KTV:
         except Exception, e:
             print str(e)
 
-    def OnGenerateGraph(self):
+    def OnStaticGenerateGraph(self):
         # self.insertScreenShot()
         f = open('node_display_config.txt')
         blacklist = f.read().splitlines()  # read what the node should not be display
@@ -826,3 +827,158 @@ class KTV:
         elapsed_time = time.time() - start_time
         print(elapsed_time)
         self.ShowMessage('Duplicated Action Detection Finish')
+
+    def OnDynamicGenerateGraph(self, filepath):
+        jsonOutput = []
+        edgeSet = set()
+
+        nodes = list()
+        edges = list()
+        nodesWithType = dict()
+        self.generate_excuteTable(filepath, nodes, edges, nodesWithType)
+        for item in edges:
+            edgeSet.add(item)
+
+        for node in nodes:
+            tempDepend = list()
+            for item in edgeSet:
+                if item[0] == node:
+                    tempDepend.append(item[1])
+            """print tempDepend
+            print node
+            print nodesWithType[node]
+            print '\n'"""
+            jsonOutput.append({
+                "depends": tempDepend,
+                "type": nodesWithType[node],
+                "name": node
+            })
+        with open('objects.json', 'w+') as f:
+            json.dump(jsonOutput, f)
+
+        copyfile('objects.json', 'C:/wamp64/www/TSVisual/process_map/data/component01/objects.json')
+        print jsonOutput
+        webbrowser.open('http://localhost/TSVisual/index.html')
+
+    def generate_excuteTable(self, filepath, nodes, edges, nodesWithType):
+        source = os.path.abspath(filepath)
+        TS_list = list()
+        TC_list = list()
+        UK_list = list()
+        LK_list = list()
+        Assignment = list()
+        C_dict = dict()
+        with open(source + '\Excute.txt', 'r+') as f:
+            for line in f:
+                dataList = line.split('\t')
+                if dataList[0].split('=')[0] == 'TS':
+                    TS_list.append(dataList[0].split('=')[1].strip('\n'))
+                elif dataList[0].split('=')[0] == 'TC':  # TC_list = [parent , TC_name]
+                    TC_list.append([dataList[1].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n')])
+                else:
+                    args = ''
+                    if len(dataList[1].split('=')) > 2:  # if arg has '=', append all arg
+                        for index in range(1, len(dataList[1].split('='))):
+                            args += dataList[1].split('=')[index]
+                            args += '='
+                        args = args[1:len(args) - 2]  # remove '[' and ']'
+                    else:
+                        args = dataList[1].split('=')[1].strip('\n')
+                        args = args[1:len(args) - 1]  # remove '[' and ']'
+                    if len(dataList) == 4:  # Assignment = [parent, assignment , value]
+                        Assignment.append(
+                            [dataList[2].split('=')[1].strip('\n'), dataList[3].split('=')[0].strip('\n'),
+                             dataList[3].split('=')[1].strip('\n')])
+                    if dataList[0].split('=')[0] == 'UK':  # UK_list = [parent , UK_name, args]
+                        UK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
+                                        args])
+                    elif dataList[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
+                        LK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
+                                        args])
+                        if len(args) != 0:
+                            if args.split(',')[0] not in C_dict:  # C_dict [ component ] = parentList
+                                C_dict[args.split(',')[0]] = list()
+                            C_dict[args.split(',')[0]].append(dataList[0].split('=')[1].strip('\n'))
+
+        with open(source + '\ExcuteTable.txt', 'w+') as f:
+            f.write('TS : ')
+            for testsuite in TS_list:
+                f.write(str(testsuite) + '[')
+                for testcase in TC_list:
+                    if testcase[0] == testsuite:
+                        f.write(str(testcase[1]) + ',')
+                        edges.append((testsuite, testcase[1]))  # add TS to TC edgs
+                f.seek(-1, 1)
+                f.write('],')
+            f.seek(-1, 1)
+            f.write('\nTC : ')
+            for testcase in TC_list:
+                f.write(str(testcase[1]) + '[')
+                for LK in LK_list:
+                    if LK[0] == testcase[1]:
+                        f.write(str(LK[1]) + ',')
+                        edges.append((testcase[1], LK[1]))  # add TC to LK edgs
+                if not len(UK_list) > 0:
+                    f.seek(-1, 1)
+                for UK in UK_list:
+                    if UK[0] == testcase[1]:
+                        f.write(str(UK[1]) + ',')
+                        edges.append((testcase[1], UK[1]))  # add TC to UK edgs
+                f.seek(-1, 1)
+                f.write('],')
+            f.seek(-1, 1)
+            f.write('\nLK : ')
+            for LK in LK_list:
+                f.write(str(LK[1]) + '(')
+                for arg in LK[2].split(','):
+                    for assign in Assignment:
+                        if arg == assign[1] and LK[0] == assign[0]:
+                            arg = assign[2]
+                    f.write(str(arg) + ',')
+                if len(LK[2].split(',')[0]) != 0:
+                    edges.append((LK[1], LK[2].split(',')[0]))  # add LK to C edgs
+                f.seek(-1, 1)
+                f.write('),')
+            f.seek(-1, 1)
+            f.write('\nUK : ')
+            for UK in UK_list:
+                f.write(str(UK[1]) + '(')
+                for arg in UK[2].split(','):
+                    for assign in Assignment:
+                        if arg == assign[1] and UK[0] == assign[0]:
+                            arg = assign[2]
+                    f.write(str(arg) + ',')
+                f.seek(-1, 1)
+                f.write(')[')
+                for LK in LK_list:  # add UK to LK edgs
+                    if UK[1] == LK[0]:
+                        f.write(str(LK[1]) + ',')
+                        edges.append((UK[1], LK[1]))
+                f.seek(-1, 1)
+                f.write('],')
+            f.seek(-1, 1)
+            f.write('\nC : ')
+            for C in C_dict.keys():
+                f.write(str(C) + '[')
+                for parent in C_dict[C]:
+                    f.write(str(parent) + ',')
+                f.seek(-1, 1)
+                f.write('],')
+            f.seek(-1, 1)
+            f.write('\n')
+
+        for TS in TS_list:
+            nodes.append(TS)
+            nodesWithType[TS] = 'TestSuite'
+        for TC in TC_list:
+            nodes.append(TC[1])
+            nodesWithType[TC[1]] = 'TestCase'
+        for UK in UK_list:
+            nodes.append(UK[1])
+            nodesWithType[UK[1]] = 'Userkeyword'
+        for LK in LK_list:
+            nodes.append(LK[1])
+            nodesWithType[LK[1]] = 'Librarykeyword'
+        for C in C_dict.keys():
+            nodes.append(C)
+            nodesWithType[C] = 'Component'

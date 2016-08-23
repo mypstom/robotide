@@ -62,7 +62,8 @@ _menudata = """
 !About | Information about RIDE
 
 [KTV]
-!Generate Graph | Generate the Hierarchical Graph
+!Static Generate Graph | Generate the Hierarchical Graph
+!Dynamic Generate Graph | Generate the Hierarchical Graph
 !Insert ScreenShot | Insert ScreenShot 
 !Remove ScreenShot | Remove ScreenShot
 !Duplicated Action Detection | Duplicated Action Detection
@@ -299,9 +300,13 @@ class RideFrame(wx.Frame, RideEventHandler):
     def OnUserGuide(self, event):
         wx.LaunchDefaultBrowser('http://robotframework.org/robotframework/#user-guide')
 
-    def OnGenerateGraph(self, event):
+    def OnStaticGenerateGraph(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())
-        self.KTV.OnGenerateGraph()
+        self.KTV.OnStaticGenerateGraph()
+
+    def OnDynamicGenerateGraph(self, event):
+        self.KTV.setDataFiles(self._get_datafile_list())
+        self.KTV.OnDynamicGenerateGraph(self._controller.suite.source)
 
     def OnInsertScreenShot(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())

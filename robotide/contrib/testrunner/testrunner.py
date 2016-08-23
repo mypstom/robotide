@@ -258,9 +258,9 @@ class TestRunner(object):
 
     def command_ended(self):
         self._process = None
-        self.generate_excuteTable()
+        #self.generate_excuteTable()
 
-    def generate_excuteTable(self):
+    """def generate_excuteTable(self):
         source = os.path.abspath(self._project.suite.source)
         TS_list = list()
         TC_list = list()
@@ -301,7 +301,7 @@ class TestRunner(object):
                                         args])
 
         with open(source + '\ExcuteTable.txt', 'w+') as f:
-            f.write('TS : ')
+            f.write('TS\t')
             for testsuite in TS_list:
                 f.write(str(testsuite) + '[')
                 for testcase in TC_list:
@@ -310,7 +310,7 @@ class TestRunner(object):
                 f.seek(-1, 1)
                 f.write('],')
             f.seek(-1, 1)
-            f.write('\nTC : ')
+            f.write('\nTC\t')
             for testcase in TC_list:
                 f.write(str(testcase[1]) + '[')
                 for LK in LK_list:
@@ -324,7 +324,7 @@ class TestRunner(object):
                 f.seek(-1, 1)
                 f.write('],')
             f.seek(-1, 1)
-            f.write('\nLK : ')
+            f.write('\nLK\t')
             for LK in LK_list:
                 f.write(str(LK[1]) + '[')
                 for arg in LK[2].split(','):
@@ -335,7 +335,7 @@ class TestRunner(object):
                 f.seek(-1, 1)
                 f.write('],')
             f.seek(-1, 1)
-            f.write('\nUK : ')
+            f.write('\nUK\t')
             for UK in UK_list:
                 f.write(str(UK[1]) + '[')
                 for arg in UK[2].split(','):
@@ -346,7 +346,7 @@ class TestRunner(object):
                 f.seek(-1, 1)
                 f.write('],')
             f.seek(-1, 1)
-            f.write('\nC : ')
+            f.write('\nC\t')
             for C in C_dict.keys():
                 f.write(str(C) + '[')
                 for parent in C_dict[C]:
@@ -354,7 +354,7 @@ class TestRunner(object):
                 f.seek(-1, 1)
                 f.write('],')
             f.seek(-1, 1)
-            f.write('\n')
+            f.write('\n')"""
 
 
 class Process(object):
