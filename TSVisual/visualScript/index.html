@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  circle {
+      cursor: pointer;
+      stroke: #000;
+      stroke-width: .5px;
+  }
+  line.link {
+      fill: none;
+      stroke: #9ecae1;
+      stroke-width: 1.5px;
+  }
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<div class="barchart"></div>
+<script>
+    var source = {
+        "name": "Brasil",
+            "children": [{
+            name: "Norte",
+            children: [{
+                name: "Acre",
+                    "size": 20
+            }, {
+                name: "Amapá",
+                    "size": 20
+            }, {
+                name: "Amazonas",
+                    "size": 251
+            }, {
+                name: "Pará",
+                    "size": 107
+            }, {
+                name: "Rondônia",
+                    "size": 33
+            }, {
+                name: "Roraima",
+                    "size": 7
+            }, {
+                name: "Tocantins",
+                    "size": 39
+            }]
+        }, {
+            name: "Nordeste",
+            children: [{
+                name: "Alagoas",
+                    "size": 60
+            }, {
+                name: "Bahia",
+                    "size": 512
+            }, {
+                name: "Ceará",
+                    "size": 553
+            }, {
+                name: "Maranhão",
+                    "size": 80
+            }, {
+                name: "Paraíba",
+                    "size": 89
+            }, {
+                name: "Pernambuco",
+                    "size": 671
+            }, {
+                name: "Piauí",
+                    "size": 36
+            }, {
+                name: "Rio Grande do Norte",
+                    "size": 263
+            }, {
+                name: "Sergipe",
+                    "size": 54
+            }]
+        }, {
+            name: "Centro Oeste",
+            children: [{
+                name: "Distrito Federal",
+                    "size": 484
+            }, {
+                name: "Goiás",
+                    "size": 332
+            }, {
+                name: "Mato Grosso",
+                    "size": 126
+            }, {
+                name: "Mato Grosso do Sul",
+                    "size": 91
+            }]
+        }, {
+            name: "Sudeste",
+            children: [{
+                name: "Espírito Santo",
+                    "size": 201
+            }, {
+                name: "Minas Gerais",
+                    "size": 935
+            }, {
+                name: "Rio de Janeiro",
+                    "size": 1059
+            }, {
+                name: "São Paulo",
+                    "size": 4447
+            }]
+        }, {
+            name: "Sul",
+            children: [{
+                name: "Paraná",
+                    "size": 704
+            }, {
+                name: "Rio Grande do Sul",
+                    "size": 742
+            }, {
+                name: "Santa Catarina",
+                    "size": 372
+            }]
+        }]
+    };
+</script>
+<script>
+var w = 1400,
+    h = 640,
+    node,
+    link,
+    root;
+
+var force = d3.layout.force().on("tick", tick).charge(function (d) {
+    return d.children ? -120 : -60 * Math.sqrt(d.size);
+}).linkDistance(function (d) {
+    return 80;
+}).size([w, h - 160]);
+
+var vis = d3.select("body").append("svg").attr("width", "100%").attr("height", h);
+
+root = source;
+root.fixed = true;
+root.x = w / 2;
+root.y = h / 2;
+update();
+
+function update() {
+    nodes = flatten(root);
+    links = d3.layout.tree().links(nodes);
+    updateLinks();
+    updateNodes();
+}
+
+function updateLinks() {
+
+    force.links(links).start();
+
+    link = vis.selectAll("line.link").data(links, function (d) {
+        return d.target.id;
+    });
+
+    // Enter any new links.
+    link.enter().insert("line", ".node")
+        .attr("class", "link")
+        .attr("x1", function (d) {
+        return d.source.x;
+    }).attr("y1", function (d) {
+        return d.source.y;
+    }).attr("x2", function (d) {
+        return d.target.x;
+    }).attr("y2", function (d) {
+        return d.target.y;
+    });
+
+    link.exit().remove();
+
+}
+
+function updateNodes() {
+
+    force.nodes(nodes).start();
+
+    node = vis.selectAll(".node").data(nodes, function (d) {
+        return d.id;
+    });
+
+    // Enter any new elements.
+    var container = node.enter().append("g").attr("class", "node")
+    .attr("transform", function (d) {
+        return "translate(" + d.x + "," + d.y + ")";
+    }).call(force.drag);
+    container.append("circle").attr("r", radius).style("fill", color).on("click", click);
+    container.append("text").style("text-anchor", "middle");
+
+    // update radius and text
+    node.selectAll("circle").transition().attr("r", radius).style("fill", color);
+    node.selectAll("text").text(function (d) {
+        return !d.children ? d.name : null;
+    });
+
+    node.exit().remove();
+}
+
+function tick() {
+    link.attr("x1", function (d) {
+        return d.source.x;
+    }).attr("y1", function (d) {
+        return d.source.y;
+    }).attr("x2", function (d) {
+        return d.target.x;
+    }).attr("y2", function (d) {
+        return d.target.y;
+    });
+
+    node.attr("transform", function (d) {
+        return "translate(" + d.x + "," + d.y + ")";
+    });
+}
+
+function radius(d) {
+    return d.children ? 8 : Math.max(15, Math.sqrt(d.size));
+}
+
+// Color leaf nodes orange, and packages white or blue.
+function color(d) {
+    return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
+}
+
+// Toggle children on click.
+function click(d) {
+    if (d.children) {
+        d._children = d.children;
+        d.children = null;
+    } else {
+        d.children = d._children;
+        d._children = null;
+    }
+    update();
+}
+
+// Returns a list of all nodes under the root.
+function flatten(root) {
+    var nodes = [],
+        i = 0;
+
+    function recurse(node) {
+        if (node.children) node.size = node.children.reduce(function (p, v) {
+            return p + recurse(v);
+        }, 0);
+        if (!node.id) node.id = ++i;
+        nodes.push(node);
+        return node.size;
+    }
+
+    root.size = recurse(root);
+    return nodes;
+}
+</script>
