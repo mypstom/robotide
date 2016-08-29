@@ -191,6 +191,7 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
             # tempList = list()
             # tempList.append(string)
             start_time = time.time()
+            print len(string)
             result = self.maxRepeatedSubstring(string)
             elapsed_time = time.time() - start_time
             print 'LRS elapsed_time = %s' % elapsed_time

@@ -857,8 +857,35 @@ class KTV:
             json.dump(jsonOutput, f)
 
         copyfile('objects.json', 'C:/wamp64/www/TSVisual/process_map/data/component01/objects.json')
-        print jsonOutput
+        #print jsonOutput
         webbrowser.open('http://localhost/TSVisual/index.html')
+
+    def OnDynamicGenerateTreeGraph(self, nodes, edges, nodesWithType):
+        jsonOutput = []
+        edgeSet = set()
+
+        for item in edges:
+            edgeSet.add(item)
+
+        for node in nodes:
+            tempDepend = list()
+            for item in edgeSet:
+                if item[0] == node:
+                    tempDepend.append(item[1])
+            """print tempDepend
+            print node
+            print nodesWithType[node]
+            print '\n'"""
+            jsonOutput.append({
+                "name": node,
+                "children": tempDepend,
+                "type": nodesWithType[node]
+
+            })
+        with open('objects.json', 'w+') as f:
+            json.dump(jsonOutput, f)
+
+        copyfile('objects.json', 'C:/wamp64/www/TSVisual/datavistree/data/data.json')
 
     def generate_excuteTable(self, filepath, nodes, edges, nodesWithType):
         source = os.path.abspath(filepath)
