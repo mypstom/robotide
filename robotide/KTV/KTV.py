@@ -857,7 +857,7 @@ class KTV:
             json.dump(jsonOutput, f)
 
         copyfile('objects.json', 'C:/wamp64/www/TSVisual/process_map/data/component01/objects.json')
-        #print jsonOutput
+        # print jsonOutput
         webbrowser.open('http://localhost/TSVisual/index.html')
 
     def OnDynamicGenerateTreeGraph(self, nodes, edges, nodesWithType):

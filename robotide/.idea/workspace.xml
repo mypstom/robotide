@@ -23,18 +23,18 @@
       <file leaf-file-name="mainframe.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/mainframe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7436">
-              <caret line="308" column="56" selection-start-line="308" selection-start-column="56" selection-end-line="308" selection-end-column="56" />
+            <state relative-caret-position="1300">
+              <caret line="72" column="13" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KTV.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="KTV.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KTV/KTV.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="1010" column="41" selection-start-line="1010" selection-start-column="32" selection-end-line="1010" selection-end-column="41" />
+            <state relative-caret-position="25714">
+              <caret line="1003" column="31" selection-start-line="1003" selection-start-column="31" selection-end-line="1003" selection-end-column="31" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -52,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="duplicatedactiondetection.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="duplicatedactiondetection.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/KTV/duplicatedactiondetection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4940">
-              <caret line="193" column="28" selection-start-line="193" selection-start-column="28" selection-end-line="193" selection-end-column="28" />
+            <state relative-caret-position="409">
+              <caret line="187" column="36" selection-start-line="187" selection-start-column="12" selection-end-line="187" selection-end-column="36" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
               </folding>
@@ -98,8 +98,8 @@
         <option value="$PROJECT_DIR$/contrib/testrunner/TestRunnerAgent.py" />
         <option value="$PROJECT_DIR$/ui/mainframe.py" />
         <option value="$PROJECT_DIR$/contrib/testrunner/testrunner.py" />
-        <option value="$PROJECT_DIR$/KTV/duplicatedactiondetection.py" />
         <option value="$PROJECT_DIR$/KTV/KTV.py" />
+        <option value="$PROJECT_DIR$/KTV/duplicatedactiondetection.py" />
       </list>
     </option>
   </component>
@@ -134,7 +134,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -229,7 +229,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -743,17 +743,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/application.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="721">
-          <caret line="73" column="31" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/controller/project.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="84" column="31" selection-start-line="84" selection-start-column="20" selection-end-line="84" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../webbrowser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8502">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -765,37 +765,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ui/mainframe.py">
+    <entry file="file://$PROJECT_DIR$/KTV/KTV.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7436">
-          <caret line="308" column="56" selection-start-line="308" selection-start-column="56" selection-end-line="308" selection-end-column="56" />
-          <folding />
+        <state relative-caret-position="25714">
+          <caret line="1003" column="31" selection-start-line="1003" selection-start-column="31" selection-end-line="1003" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../webbrowser.py">
+    <entry file="file://$PROJECT_DIR$/application/application.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8502">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="279">
+          <caret line="50" column="34" selection-start-line="50" selection-start-column="27" selection-end-line="50" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/mainframe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1300">
+          <caret line="72" column="13" selection-start-line="72" selection-start-column="13" selection-end-line="72" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/KTV/duplicatedactiondetection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4940">
-          <caret line="193" column="28" selection-start-line="193" selection-start-column="28" selection-end-line="193" selection-end-column="28" />
+        <state relative-caret-position="409">
+          <caret line="187" column="36" selection-start-line="187" selection-start-column="12" selection-end-line="187" selection-end-column="36" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KTV/KTV.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="1010" column="41" selection-start-line="1010" selection-start-column="32" selection-end-line="1010" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
