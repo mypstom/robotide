@@ -1,14 +1,31 @@
-1 time LRS	elapsed_time = 98.7479999065
-result = e,SelectCrosswordSageWindow,AssertButtonAddWordExist,AddWord,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell,ClickCrosswordCell,ChooseSuggestWord,AddWord,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell,
-
+1 time LRS	elapsed_time = 137.549999952
+resultList = [SelectCrosswordSageWindow,AssertButtonAddWordExist,AddWord,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell,ClickCrosswordCell,ChooseSuggestWord,AddWord,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell]
 TC:TC-01
 3 ~ 16 action duplicated
 TC:TC-02
 9 ~ 22 action duplicated
 
-2 time LRS	elapsed_time = 74.9749999046
-result = ,InputCrosswordCell,InputCrosswordCell,ClickCrosswordCell,AssertButtonSuggestWordExist,ChooseSuggestWord,AssertCrosswordOnlyOneSuggestWordExists,SaveFileWithAssert,SelectCrosswordSageWindow,ClickMenuSolveNewWord,
+FindLRSResultPosition elapsed_time = 0.0
 
+2 time LRS	elapsed_time = 110.140000105
+resultList = [AddWord,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell,InputCrosswordCell,ClickCrosswordCell,AssertButtonSuggestWordExist,ChooseSuggestWord,AssertCrosswordOnlyOneSuggestWordExists]
+TC:TestAddWord
+5 ~ 13 action duplicated
 TC:TC-01
-31 ~ 39 action duplicated
+45 ~ 53 action duplicated
+
+FindLRSResultPosition elapsed_time = 0.0
+
+3 time LRS	elapsed_time = 92.385999918
+resultList = [InputCrosswordCell,InputCrosswordCell,ClickCrosswordCell,AssertButtonSuggestWordExist,ChooseSuggestWord,AssertCrosswordOnlyOneSuggestWordExists]
+TC:TestAddWord
+8 ~ 13 action duplicated
+TC:TC-01
+31 ~ 36 action duplicated
+TC:TC-01
+48 ~ 53 action duplicated
+TC:TC-02
+32 ~ 37 action duplicated
+
+FindLRSResultPosition elapsed_time = 0.00100016593933
 

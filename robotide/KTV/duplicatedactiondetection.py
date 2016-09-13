@@ -157,6 +157,8 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
         self.DetectionAllScript(datafiles)
 
     def DetectionAllScript(self, datafiles):
+        token = '%$&*$#@'
+        tokencount = 1
         f = open('ScriptDuplicated-LRS.txt', 'w+')
         count = 1
         allStepList = list()
@@ -167,14 +169,18 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                         allStepList.append('Loop')
                     else:
                         allStepList.append(str(step.keyword))
+                allStepList.append(token + str(tokencount))
+                tokencount += 1
             for userKeyword in df.keywords:
                 for step in userKeyword.steps:
                     if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
                         allStepList.append('Loop')
                     else:
                         allStepList.append(str(step.keyword))
+                allStepList.append(token + str(tokencount))
+                tokencount += 1
 
-        for i in range(0, 2):
+        for i in range(0, 3):
             # while len(allStepList) > 0:
             print 'len(allStepList)= %s ' % (len(allStepList))
             string = ''
@@ -197,10 +203,15 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
             f.write(str(elapsed_time))
             f.write('\n')
             if result is not None:
-                print 'result = %s' % result
+                """print 'result = %s' % result
                 f.write('result = ' + result)
-                f.write('\n\n')
+                f.write('\n\n')"""
+                start_time = time.time()
                 allStepList = self.FindLRSResultPosition(result, allStepList, datafiles, f)
+                elapsed_time = time.time() - start_time
+                f.write('FindLRSResultPosition elapsed_time = ')
+                f.write(str(elapsed_time))
+                f.write('\n\n')
             else:
                 break
             count += 1
@@ -226,74 +237,100 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                     break
         # print string[:len(string) - 1] + ']'
 
+        string = 'resultList = ['
+        for item in result:
+            string += item
+            string += ','
+        string = string[:len(string) - 1] + ']'
+        f.write(string)
+        f.write('\n')
+
         for df in datafiles:
             for testcase in df.tests:
+                #print str(testcase.name)
                 start = 0
                 end = 0
                 match = False
                 index1 = 0
-                for index2 in range(0, len(testcase.steps)):
+                index2 = 0
+                # for index2 in range(0, len(testcase.steps)):
+                while index2 < len(testcase.steps):
                     if result[index1] == testcase.steps[index2].keyword:
-                        # print 'match'
+                        #print 'index = ' + str(index2) + result[index1] + ' match ' + str(testcase.steps[index2].keyword)
                         if not match:
                             start = index2
                         match = True
                         index1 += 1
-                        if index1 == len(result):
+                        if index1 == len(result):  # match the result
+                            #print str(testcase.name) + ' match the result'
                             end = index2
-                            break
+                            f.write('TC:' + str(testcase.name) + '\n')
+                            f.write(str(start + 1) + ' ~ ' + str(end + 1) + ' action duplicated\n')
+                            allStepList = self.rebuild_all_step_list(result, allStepList)
+                            start = 0
+                            end = 0
+                            match = False
+                            index1 = 0
                     else:
+                        #print 'index = ' + str(index2) + result[index1] + ' not match ' + str(testcase.steps[index2].keyword)
                         if match:
-                            if index2 - 1 - start == len(result):
-                                end = index2 - 1
-                                break
-                            else:
-                                index1 = 0
-                                match = False
-                if match and index1 == len(result):
+                            index1 = 0
+                            index2 = start
+                            start = 0
+                            match = False
+                    index2 += 1
+                """if match and index1 == len(result):
                     f.write('TC:' + str(testcase.name) + '\n')
                     f.write(str(start + 1) + ' ~ ' + str(end + 1) + ' action duplicated\n')
-                    allStepList = self.rebuildallsteplist(result, allStepList)
+                    allStepList = self.rebuildallsteplist(result, allStepList)"""
 
-                    """temp = 'allStepList = ['
-                    f.write('allStepList = [')
-                    for item in allStepList:
-                        temp += item + ','
-                        f.write(str(item) + ',')
-                    print temp[:len(temp) - 1] + ']'
-                    f.seek(-1, 1)
-                    f.write(']\n')"""
+                """temp = 'allStepList = ['
+                f.write(str(testcase.name))
+                f.write('\nallStepList = [')
+                for item in allStepList:
+                    temp += item + ','
+                    f.write(str(item) + ',')
+                print temp[:len(temp) - 1] + ']'
+                f.seek(-1, 1)
+                f.write(']\n')"""
 
         f.write('\n')
 
         return allStepList
 
-    def rebuildallsteplist(self, result, allStepList):
-        temp = [item for item in allStepList]
-        newsteplist = list()
-        while True:
+    def rebuild_all_step_list(self, result, all_step_list):
+        temp = [item for item in all_step_list]
+
+        """temp_list = 'allStepList = ['
+        for item in all_step_list:
+            temp_list += item + ','
+        print temp_list[:len(temp_list) - 1] + ']'"""
+
+        new_step_list = list()
+        while result[0] in temp:
             index1 = temp.index(result[0])
             if index1 + len(result) < len(temp):
-                ismatch = True
+                is_match = True
                 index2 = index1
                 for item in result:
                     if temp[index2] != item:
-                        ismatch = False
+                        is_match = False
                         break
                     index2 += 1
-                if not ismatch:
+                if not is_match:
                     for item in temp[:index1 + 1]:
-                        newsteplist.append(item)
+                        new_step_list.append(item)
                     temp = temp[index1 + 1:]
                 else:
                     for item in temp[:index1]:
-                        newsteplist.append(item)
+                        new_step_list.append(item)
                     for item in temp[index1 + len(result):]:
-                        newsteplist.append(item)
-                    return newsteplist
+                        new_step_list.append(item)
+                    return new_step_list
             else:
-                print'not found'
-                return allStepList
+                print 'not found'
+                return all_step_list
+        return all_step_list
 
     def DetectionBetweenUKandUK(self, datafiles):
         f = open('UK2UKduplicated-LRS.txt', 'w+')
