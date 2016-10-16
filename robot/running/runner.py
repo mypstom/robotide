@@ -48,7 +48,6 @@ class Runner(SuiteVisitor):
             f.write('TS=')
             f.write(str(suite.name))
             f.write('\n')
-            pass
 
         self._output.library_listeners.new_suite_scope()
         result = TestSuite(source=suite.source,
@@ -172,6 +171,9 @@ class Runner(SuiteVisitor):
         result.endtime = get_timestamp()
         self._output.end_test(ModelCombiner(test, result))
         self._context.end_test(result)
+
+        with open('Excute.txt', 'a') as f:
+            f.write('\n')
 
     def _add_exit_combine(self):
         exit_combine = ('NOT robot-exit', '')

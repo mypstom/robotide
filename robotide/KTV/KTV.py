@@ -872,10 +872,6 @@ class KTV:
             for item in edgeSet:
                 if item[0] == node:
                     tempDepend.append(item[1])
-            """print tempDepend
-            print node
-            print nodesWithType[node]
-            print '\n'"""
             jsonOutput.append({
                 "name": node,
                 "children": tempDepend,
@@ -887,45 +883,50 @@ class KTV:
 
         copyfile('objects.json', 'C:/wamp64/www/TSVisual/datavistree/data/data.json')
 
+    """def set_variable_dict(self, V_dict):
+        for df in self.datafiles:
+            for v in df.variables:
+                V_dict[v.name] = v.value"""
+
     def generate_excuteTable(self, filepath, nodes, edges, nodesWithType):
         source = os.path.abspath(filepath)
         TS_list = list()
         TC_list = list()
         UK_list = list()
         LK_list = list()
-        Assignment = list()
+        #Assignment = list()
+        #V_dict = dict()
         C_dict = dict()
+        #self.set_variable_dict(V_dict)
         with open(source + '\Excute.txt', 'r+') as f:
             for line in f:
-                dataList = line.split('\t')
-                if dataList[0].split('=')[0] == 'TS':
-                    TS_list.append(dataList[0].split('=')[1].strip('\n'))
-                elif dataList[0].split('=')[0] == 'TC':  # TC_list = [parent , TC_name]
-                    TC_list.append([dataList[1].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n')])
-                else:
-                    args = ''
-                    if len(dataList[1].split('=')) > 2:  # if arg has '=', append all arg
-                        for index in range(1, len(dataList[1].split('='))):
-                            args += dataList[1].split('=')[index]
-                            args += '='
-                        args = args[1:len(args) - 2]  # remove '[' and ']'
+                if line != '\n':
+                    dataList = line.split('\t')
+                    if dataList[0].split('=')[0] == 'TS':
+                        TS_list.append(dataList[0].split('=')[1].strip('\n'))
+                    elif dataList[0].split('=')[0] == 'TC':  # TC_list = [parent , TC_name]
+                        TC_list.append([dataList[1].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n')])
                     else:
-                        args = dataList[1].split('=')[1].strip('\n')
-                        args = args[1:len(args) - 1]  # remove '[' and ']'
-                    if len(dataList) == 4:  # Assignment = [parent, assignment , value]
-                        Assignment.append(
-                            [dataList[2].split('=')[1].strip('\n'), dataList[3].split('=')[0].strip('\n'),
-                             dataList[3].split('=')[1].strip('\n')])
-                    if dataList[0].split('=')[0] == 'UK':  # UK_list = [parent , UK_name, args]
-                        UK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
-                                        args])
-                    elif dataList[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
-                        LK_list.append([dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'),
-                                        args])
-                        if len(args) != 0:
-                            if args.split(',')[0] not in C_dict:  # C_dict [ component ] = parentList
-                                C_dict[args.split(',')[0]] = list()
-                            C_dict[args.split(',')[0]].append(dataList[0].split('=')[1].strip('\n'))
+                        args = ''
+                        if len(dataList[1].split('=')) > 2:  # if arg has '=', append all arg
+                            for index in range(1, len(dataList[1].split('='))):
+                                args += dataList[1].split('=')[index]
+                                args += '='
+                            args = args[1:len(args) - 2]  # remove '[' and ']'
+                        else:
+                            args = dataList[1].split('=')[1].strip('\n')
+                            args = args[1:len(args) - 1]  # remove '[' and ']'
+                        """if len(dataList) == 4:  # Assignment = [parent, assignment , value]
+                            Assignment.append(
+                                [dataList[2].split('=')[1].strip('\n'), dataList[3].split('=')[0].strip('\n'),
+                                 dataList[3].split('=')[1].strip('\n')])"""
+                        if dataList[0].split('=')[0] == 'UK':  # UK_list = [parent , UK_name, args]
+                            UK_list.append(
+                                [dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'), args])
+                        elif dataList[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
+                            print line
+                            LK_list.append(
+                                [dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'), args])
 
         with open(source + '\ExcuteTable.txt', 'w+') as f:
             f.write('TS : ')
@@ -958,12 +959,18 @@ class KTV:
             for LK in LK_list:
                 f.write(str(LK[1]) + '(')
                 for arg in LK[2].split(','):
-                    for assign in Assignment:
-                        if arg == assign[1] and LK[0] == assign[0]:
-                            arg = assign[2]
+                    """for assign in Assignment:
+                        if arg.__contains__(assign[1]) and LK[0] == assign[0]:
+                            arg = arg.replace(assign[1], assign[2])
+                    for variable in V_dict.keys():
+                        if arg.__contains__(variable):
+                            arg = arg.replace(variable, V_dict[variable][0])"""
                     f.write(str(arg) + ',')
-                if len(LK[2].split(',')[0]) != 0:
-                    edges.append((LK[1], LK[2].split(',')[0]))  # add LK to C edgs
+                    if len(LK[2]) > 0 and arg == LK[2].split(',')[0]:
+                        if arg not in C_dict:  # C_dict [ component ] = parentList
+                            C_dict[arg] = list()
+                        C_dict[arg].append(str(LK[1]))
+                        edges.append((LK[1], arg))  # add LK to C edgs
                 f.seek(-1, 1)
                 f.write('),')
             f.seek(-1, 1)
@@ -971,12 +978,19 @@ class KTV:
             for UK in UK_list:
                 f.write(str(UK[1]) + '(')
                 for arg in UK[2].split(','):
-                    for assign in Assignment:
-                        if arg == assign[1] and UK[0] == assign[0]:
-                            arg = assign[2]
+                    """for assign in Assignment:
+                        if arg.__contains__(assign[1]) and UK[0] == assign[0]:
+                            arg = arg.replace(assign[1], assign[2])
+                    for variable in V_dict.keys():
+                        if arg.__contains__(variable):
+                            arg = arg.replace(variable, V_dict[variable][0])"""
                     f.write(str(arg) + ',')
                 f.seek(-1, 1)
                 f.write(')[')
+                for UK2 in UK_list:  # add UK to UK edgs
+                    if UK[1] == UK2[0]:
+                        f.write(str(UK2[1]) + ',')
+                        edges.append((UK[1], UK2[1]))
                 for LK in LK_list:  # add UK to LK edgs
                     if UK[1] == LK[0]:
                         f.write(str(LK[1]) + ',')

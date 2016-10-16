@@ -58,8 +58,19 @@ class LibraryKeywordRunner(object):
             f.write('\targs=')
             string = '['
             for arg in kw.args:
-                # string += '\''
-                string += str(arg)
+                if type(kw.parent) is robot.running.model.UserKeyword:  # and arg in context.variables.as_dict():
+                    temp = arg
+                    for var in context.variables.as_dict():
+                        if var in arg:
+                            #print 'replace ' + var + ' to ' + str(context.variables[var]).replace('\n', '\\n')
+                            """if isinstance(context.variables[var], unicode):
+                                string += arg.replace(var, context.variables[var].encode('utf-8').replace('\n', '\\n'))
+                            else:
+                                string += arg.replace(var, str(context.variables[var]).replace('\n', '\\n'))"""
+                            temp = temp.replace(var, str(context.variables[var]).replace('\n', '\\n'))
+                    string += temp
+                else:
+                    string += str(arg).replace('\n', '\\n')
                 string += ','
             if len(string) > 1:
                 string = string[:len(string) - 1] + ']'
@@ -84,7 +95,11 @@ class LibraryKeywordRunner(object):
                 assigner.assign(return_value)
                 with open('Excute.txt', 'a') as f:
                     if len(kw.assign) > 0:
-                        f.write(return_value.encode('utf8'))
+                        """if isinstance(return_value, unicode):
+                            f.write(return_value.encode('utf-8').replace('\n', '\\n'))
+                        else:
+                            f.write(str(return_value).replace('\n', '\\n'))"""
+                        f.write(str(return_value).replace('\n', '\\n'))
                     f.write('\n')
 
                 return return_value

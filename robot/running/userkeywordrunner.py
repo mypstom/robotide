@@ -47,15 +47,15 @@ class UserKeywordRunner(object):
 
     def run(self, kw, context):
         assignment = VariableAssignment(kw.assign)
-
+        # print 'kw = %s arguments = %s' %(kw.name, self._handler.arguments)
         with open('Excute.txt', 'a') as f:
             f.write('UK=')
             f.write(kw.name)
             f.write('\targs=')
             string = '['
             for arg in kw.args:
-                #string += '\''
-                string += str(arg)
+                # string += '\''
+                string += str(arg).replace('\n', '\\n')
                 string += ','
             if len(string) > 1:
                 string = string[:len(string) - 1] + ']'
@@ -73,6 +73,9 @@ class UserKeywordRunner(object):
             with open('Excute.txt', 'a') as f:
                 f.write('\t')
                 f.write(str(assign))
+        if len(kw.assign) == 0:
+            with open('Excute.txt', 'a') as f:
+                f.write('\n')
 
         result = self._get_result(kw, assignment, context.variables)
         with StatusReporter(context, result):
@@ -112,9 +115,15 @@ class UserKeywordRunner(object):
 
                     with open('Excute.txt', 'w+') as f:
                         f.write(string1)
-                        f.write(return_value.encode('utf8'))
+                        #print 'string1\n' + string1 + '\n'
+                        """if isinstance(return_value, unicode):
+                            f.write(return_value.encode('utf-8').replace('\n', '\\n'))
+                        else:
+                            f.write(str(return_value).encode('utf8').replace('\n', '\\n'))"""
+                        f.write(str(return_value).encode('utf8').replace('\n', '\\n'))
                         f.write('\n')
                         f.write(string2)
+                        print 'string2\n' + string2 + '\n'
 
                 return return_value
 
