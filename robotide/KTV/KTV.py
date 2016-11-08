@@ -331,7 +331,7 @@ class KTV:
             tempNode.add("C_" + str(node))
             nodesWithType["C_" + str(node)] = "Component"
         for node in self.user_def_keyword:
-            nodesWithType[node] = "User Keyword"
+            nodesWithType[node] = "UserKeyword"
             tempNode.add(node)
             graphC.node(node, color="coral", shape="box", style="filled")
 
@@ -342,7 +342,7 @@ class KTV:
                         for testCase in df.tests:
                             graphC.node(str(testCase.name), color="darkolivegreen2", shape="box", style="filled")
                             tempNode.add(str(testCase.name))  # use dict make symbol for what the node is
-                            nodesWithType[str(testCase.name)] = "Test Case"
+                            nodesWithType[str(testCase.name)] = "TestCase"
                             try:
                                 for testStep in testCase.steps:
                                     if str(
@@ -553,6 +553,7 @@ class KTV:
 
     def OnStaticGenerateGraph(self):
         # self.insertScreenShot()
+        print os.getcwd()
         f = open('node_display_config.txt')
         blacklist = f.read().splitlines()  # read what the node should not be display
         nodeCount = 0.0
@@ -713,7 +714,10 @@ class KTV:
         for item in edges:
             edgeSet.add(item)
 
+        # temp = ''
         for node in nodes:
+            # temp += node
+            # temp += '\n'
             tempDepend = list()
             for item in edgeSet:
                 if item[0] == node:
@@ -725,6 +729,8 @@ class KTV:
             })
         with open('objects.json', 'w+') as f:
             json.dump(jsonOutput, f)
+        """with open('temp.txt', 'w+') as f:
+            f.write(temp)"""
 
         copyfile('objects.json', 'C:/wamp64/www/TSVisual/process_map/data/component01/objects.json')
         print jsonOutput
@@ -831,6 +837,7 @@ class KTV:
     def OnDynamicGenerateGraph(self, filepath):
         jsonOutput = []
         edgeSet = set()
+        nodes_set = set()
 
         nodes = list()
         edges = list()
@@ -838,16 +845,15 @@ class KTV:
         self.generate_excuteTable(filepath, nodes, edges, nodesWithType)
         for item in edges:
             edgeSet.add(item)
+        for item in nodes:
+            nodes_set.add(item)
 
-        for node in nodes:
+        for node in nodes_set:
             tempDepend = list()
             for item in edgeSet:
                 if item[0] == node:
                     tempDepend.append(item[1])
-            """print tempDepend
-            print node
-            print nodesWithType[node]
-            print '\n'"""
+            tempDepend.sort()
             jsonOutput.append({
                 "depends": tempDepend,
                 "type": nodesWithType[node],
@@ -860,33 +866,41 @@ class KTV:
         # print jsonOutput
         webbrowser.open('http://localhost/TSVisual/index.html')
 
-    def OnDynamicGenerateTreeGraph(self, nodes, edges, nodesWithType):
-        jsonOutput = []
-        edgeSet = set()
+    def set_change_impact_node(self, nodes, edges, nodesWithType, change_list, change_impact, level):
+        # change = change_list[0]
+        # print 'level = %r' % level
+        if level >= 7:
+            return change_impact
+        for change in change_list:
+            new_change_list = list()
+            """print change_list"""
+            # print 'change = %r' % change
+            if nodesWithType[change] == 'TestSuite':
+                continue
+            else:
+                index = 0
+                while index < len(edges):
+                    edge = edges[index]
+                    # print item[0] + '\t' + item[1]
+                    """if item[0] == node:
+                        change_list.append(item[1])"""
+                    if edge[1] == change:  # and nodesWithType[item[0]] != 'Changed':
+                        if edge[0] not in change_list:
+                            new_change_list.append(edge[0])
+                        change_impact += 1
+                        # print 'change_impact = %r' % change_impact
+                        edges.remove(edge)
+                        index -= 1
+                        """while node in change_list:
+                            change_list.remove(node)"""
+                    index += 1
 
-        for item in edges:
-            edgeSet.add(item)
-
-        for node in nodes:
-            tempDepend = list()
-            for item in edgeSet:
-                if item[0] == node:
-                    tempDepend.append(item[1])
-            jsonOutput.append({
-                "name": node,
-                "children": tempDepend,
-                "type": nodesWithType[node]
-
-            })
-        with open('objects.json', 'w+') as f:
-            json.dump(jsonOutput, f)
-
-        copyfile('objects.json', 'C:/wamp64/www/TSVisual/datavistree/data/data.json')
-
-    """def set_variable_dict(self, V_dict):
-        for df in self.datafiles:
-            for v in df.variables:
-                V_dict[v.name] = v.value"""
+            if len(new_change_list) > 0:
+                change_impact = self.set_change_impact_node(nodes, edges, nodesWithType, new_change_list, change_impact,
+                                                            level + 1)
+        return change_impact
+        """if len(change_list) > 0:
+            self.set_change_impact_node(nodes, edges, nodesWithType, change_list)"""
 
     def generate_excuteTable(self, filepath, nodes, edges, nodesWithType):
         source = os.path.abspath(filepath)
@@ -894,39 +908,31 @@ class KTV:
         TC_list = list()
         UK_list = list()
         LK_list = list()
-        #Assignment = list()
-        #V_dict = dict()
         C_dict = dict()
-        #self.set_variable_dict(V_dict)
         with open(source + '\Excute.txt', 'r+') as f:
             for line in f:
                 if line != '\n':
-                    dataList = line.split('\t')
-                    if dataList[0].split('=')[0] == 'TS':
-                        TS_list.append(dataList[0].split('=')[1].strip('\n'))
-                    elif dataList[0].split('=')[0] == 'TC':  # TC_list = [parent , TC_name]
-                        TC_list.append([dataList[1].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n')])
+                    data_list = line.split('\t')
+                    if data_list[0].split('=')[0] == 'TS':
+                        TS_list.append(data_list[0].split('=')[1].strip('\n'))
+                    elif data_list[0].split('=')[0] == 'TC':  # TC_list = [parent , TC_name]
+                        TC_list.append([data_list[1].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n')])
                     else:
                         args = ''
-                        if len(dataList[1].split('=')) > 2:  # if arg has '=', append all arg
-                            for index in range(1, len(dataList[1].split('='))):
-                                args += dataList[1].split('=')[index]
+                        if len(data_list[1].split('=')) > 2:  # if arg has '=', append all arg
+                            for index in range(1, len(data_list[1].split('='))):
+                                args += data_list[1].split('=')[index]
                                 args += '='
                             args = args[1:len(args) - 2]  # remove '[' and ']'
                         else:
-                            args = dataList[1].split('=')[1].strip('\n')
+                            args = data_list[1].split('=')[1].strip('\n')
                             args = args[1:len(args) - 1]  # remove '[' and ']'
-                        """if len(dataList) == 4:  # Assignment = [parent, assignment , value]
-                            Assignment.append(
-                                [dataList[2].split('=')[1].strip('\n'), dataList[3].split('=')[0].strip('\n'),
-                                 dataList[3].split('=')[1].strip('\n')])"""
-                        if dataList[0].split('=')[0] == 'UK':  # UK_list = [parent , UK_name, args]
+                        if data_list[0].split('=')[0] == 'UK':  # UK_list = [parent , UK_name, args]
                             UK_list.append(
-                                [dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'), args])
-                        elif dataList[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
-                            print line
+                                [data_list[2].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n'), args])
+                        elif data_list[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
                             LK_list.append(
-                                [dataList[2].split('=')[1].strip('\n'), dataList[0].split('=')[1].strip('\n'), args])
+                                [data_list[2].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n'), args])
 
         with open(source + '\ExcuteTable.txt', 'w+') as f:
             f.write('TS : ')
@@ -956,34 +962,21 @@ class KTV:
                 f.write('],')
             f.seek(-1, 1)
             f.write('\nLK : ')
-            for LK in LK_list:
-                f.write(str(LK[1]) + '(')
-                for arg in LK[2].split(','):
-                    """for assign in Assignment:
-                        if arg.__contains__(assign[1]) and LK[0] == assign[0]:
-                            arg = arg.replace(assign[1], assign[2])
-                    for variable in V_dict.keys():
-                        if arg.__contains__(variable):
-                            arg = arg.replace(variable, V_dict[variable][0])"""
-                    f.write(str(arg) + ',')
-                    if len(LK[2]) > 0 and arg == LK[2].split(',')[0]:
-                        if arg not in C_dict:  # C_dict [ component ] = parentList
-                            C_dict[arg] = list()
-                        C_dict[arg].append(str(LK[1]))
-                        edges.append((LK[1], arg))  # add LK to C edgs
-                f.seek(-1, 1)
-                f.write('),')
-            f.seek(-1, 1)
-            f.write('\nUK : ')
+            # print 'UK_list size = %r' % len(UK_list)
+            temp = list()
+            for UK in UK_list:
+                contain = False
+                for item in temp:
+                    if UK[1] == item[1]:
+                        contain = True
+                        break
+                if not contain:
+                    temp.append(UK)
+            UK_list = list(temp)
+            # print 'UK_list size = %r' % len(UK_list)
             for UK in UK_list:
                 f.write(str(UK[1]) + '(')
                 for arg in UK[2].split(','):
-                    """for assign in Assignment:
-                        if arg.__contains__(assign[1]) and UK[0] == assign[0]:
-                            arg = arg.replace(assign[1], assign[2])
-                    for variable in V_dict.keys():
-                        if arg.__contains__(variable):
-                            arg = arg.replace(variable, V_dict[variable][0])"""
                     f.write(str(arg) + ',')
                 f.seek(-1, 1)
                 f.write(')[')
@@ -999,6 +992,26 @@ class KTV:
                 f.write('],')
             f.seek(-1, 1)
             f.write('\nC : ')
+            # print 'LK_list size = %r' % len(LK_list)
+            del temp[:]
+            for UK in LK_list:
+                if UK not in temp:
+                    temp.append(UK)
+            LK_list = list(temp)
+            # print 'LK_list size = %r' % len(LK_list)
+            for LK in LK_list:
+                f.write(str(LK[1]) + '(')
+                for arg in LK[2].split(','):
+                    f.write(str(arg) + ',')
+                    if len(LK[2]) > 0 and arg == LK[2].split(',')[0]:
+                        if arg not in C_dict:  # C_dict [ component ] = parentList
+                            C_dict[arg] = list()
+                        C_dict[arg].append(str(LK[1]))
+                        edges.append((LK[1], arg))  # add LK to C edgs
+                f.seek(-1, 1)
+                f.write('),')
+            f.seek(-1, 1)
+            f.write('\nUK : ')
             for C in C_dict.keys():
                 f.write(str(C) + '[')
                 for parent in C_dict[C]:
@@ -1023,3 +1036,45 @@ class KTV:
         for C in C_dict.keys():
             nodes.append(C)
             nodesWithType[C] = 'Component'
+
+        """TS_set = set(TS_list)
+        print 'TS:%r' % len(TS_set)
+        TC_set = set()
+        for item in TC_list:
+            TC_set.add(item[1])
+        print 'TC:%r' % len(TC_set)
+        UK_set = set()
+        for item in UK_list:
+            UK_set.add(item[1])
+        print 'UK:%r' % len(UK_set)
+        LK_set = set()
+        for item in LK_list:
+            LK_set.add(item[1])
+        print 'LK:%r' % len(LK_set)
+        print 'C:%r' % len(C_dict)"""
+        # Click On Component    Button Should Exist
+        """temp = 0
+        for edge in edges:
+            if edge[1] == 'Button Should Exist':
+                temp += 1
+        print 'temp = %r' % temp"""
+
+        change_impact = self.set_change_impact_node(nodes, list(edges), nodesWithType, ['btnSuggestWords'], 0, 0)
+        print 'change_impact = %r' % change_impact
+        nodesWithType['btnSuggestWords'] = 'Changed'
+        """change_impact = self.set_change_impact_node(nodes, list(edges), nodesWithType, ['//*[@id="_eEe"]/a'], 0, 0)
+        print 'change_impact = %r' % change_impact
+        nodesWithType['//*[@id="_eEe"]/a'] = 'Changed'"""
+
+        self.calculate_coupling(nodes, edges)
+
+    def calculate_coupling(self, nodes, edges):
+        nodes_set = set()
+        edges_set = set()
+        for item in nodes:
+            nodes_set.add(item)
+        for item in edges:
+            edges_set.add(item)
+        unweighted_coupling = float(len(edges_set)) / (len(nodes_set) - 1)
+        print 'unweighted coupling = %r' % unweighted_coupling
+        print 'weighted coupling = %r' % len(edges)

@@ -51,7 +51,6 @@ import wx
 import wx.stc
 from wx.lib.embeddedimage import PyEmbeddedImage
 
-
 from robotide.action.shortcut import localize_shortcuts
 from robotide.context import IS_WINDOWS, IS_MAC
 from robotide.contrib.testrunner.testrunner import TestRunner
@@ -61,7 +60,6 @@ from robotide.pluginapi import Plugin, ActionInfo
 from robotide.widgets import Label, ImageProvider
 from robotide.robotapi import LOG_LEVELS
 from robotide.utils import robottime
-
 
 ID_RUN = wx.NewId()
 ID_STOP = wx.NewId()
@@ -148,7 +146,7 @@ class TestRunnerPlugin(Plugin):
                                      "F8", ImageProvider().TOOLBAR_PLAY, "Run the selected tests", position=10)
         self._run_action = self.register_action(run_action_info)
         stop_action_info = ActionInfo("Tools", "Stop Test Run", self.OnStop, None,
-                                      "CtrlCmd-F8", ImageProvider().TOOLBAR_STOP, "Stop a running test",position=11)
+                                      "CtrlCmd-F8", ImageProvider().TOOLBAR_STOP, "Stop a running test", position=11)
         self._stop_action = self.register_action(stop_action_info)
 
     def _read_run_profiles(self):
@@ -156,7 +154,7 @@ class TestRunnerPlugin(Plugin):
         self._read_run_profiles_from_classes()
 
     def _read_run_profiles_from_config(self):
-        #Have to keep reference so that these classes are not garbage collected
+        # Have to keep reference so that these classes are not garbage collected
         self._profile_classes_from_config = [_RunProfile(name, run_prefix)
                                              for name, run_prefix in self.runprofiles]
 
@@ -251,7 +249,7 @@ class TestRunnerPlugin(Plugin):
         try:
             self._test_runner.run_command(
                 command, self._get_current_working_dir())
-            self._process_timer.Start(41) # roughly 24fps
+            self._process_timer.Start(41)  # roughly 24fps
             self._set_running()
             self._progress_bar.Start()
         except Exception, e:
@@ -294,7 +292,7 @@ class TestRunnerPlugin(Plugin):
         ret = wx.MessageBox('There are unsaved modifications.\n'
                             'Do you want to save all changes and run the tests?',
                             'Unsaved Modifications',
-                            wx.ICON_QUESTION|wx.YES_NO)
+                            wx.ICON_QUESTION | wx.YES_NO)
         return ret == wx.YES
 
     def _initialize_ui_for_running(self):
@@ -366,7 +364,7 @@ class TestRunnerPlugin(Plugin):
         if not self._test_runner.is_running():
             self.OnProcessEnded(None)
             return
-        out_buffer, err_buffer, log_message =\
+        out_buffer, err_buffer, log_message = \
             self._test_runner.get_output_and_errors(self.get_current_profile())
         if len(out_buffer) > 0:
             self._output(out_buffer, source="stdout")
@@ -383,7 +381,7 @@ class TestRunnerPlugin(Plugin):
             texts = []
             while not self._messages_log_texts.empty():
                 texts += [self._messages_log_texts.get()]
-            self._AppendText(self.message_log, '\n'+'\n'.join(texts))
+            self._AppendText(self.message_log, '\n' + '\n'.join(texts))
 
     def GetLastOutputChar(self):
         '''Return the last character in the output window'''
@@ -430,7 +428,7 @@ class TestRunnerPlugin(Plugin):
         textctrl.SetReadOnly(False)
         try:
             textctrl.AppendText(string)
-        except UnicodeDecodeError,e:
+        except UnicodeDecodeError, e:
             # I'm not sure why I sometimes get this, and I don't know what I can
             # do other than to ignore it.
             pass
@@ -439,10 +437,10 @@ class TestRunnerPlugin(Plugin):
 
         textctrl.StartStyling(new_text_start, 0x1f)
         if source == "stderr":
-            textctrl.SetStyling(new_text_end-new_text_start, STYLE_STDERR)
+            textctrl.SetStyling(new_text_end - new_text_start, STYLE_STDERR)
 
         textctrl.SetReadOnly(True)
-        if lastVisibleLine >= linecount-4:
+        if lastVisibleLine >= linecount - 4:
             linecount = textctrl.GetLineCount()
             textctrl.ScrollToLine(linecount)
 
@@ -452,7 +450,7 @@ class TestRunnerPlugin(Plugin):
         # little is subtracted just to make sure there's a little margin
         out_width, _ = self.out.GetSizeTuple()
         char_width = self.out.GetCharWidth()
-        return str(int(out_width/char_width)-10)
+        return str(int(out_width / char_width) - 10)
 
     def _build_ui(self):
         """Creates the UI for this plugin"""
@@ -466,7 +464,7 @@ class TestRunnerPlugin(Plugin):
 
     def _build_config_panel(self, parent):
         """Builds the configuration panel for this plugin"""
-        panel = wx.Panel(parent, wx.ID_ANY, style=wx.BORDER_NONE|wx.TAB_TRAVERSAL)
+        panel = wx.Panel(parent, wx.ID_ANY, style=wx.BORDER_NONE | wx.TAB_TRAVERSAL)
         self.config_sizer = wx.BoxSizer(wx.VERTICAL)
         panel.SetSizer(self.config_sizer)
         self.config_panel = panel
@@ -477,36 +475,36 @@ class TestRunnerPlugin(Plugin):
         self._AppendText(self.out, string, source)
 
     def _build_runner_toolbar(self):
-        toolbar = wx.ToolBar(self.panel, wx.ID_ANY, style=wx.TB_HORIZONTAL|wx.TB_HORZ_TEXT)
-        toolbar.AddLabelTool(ID_RUN,"Start", ImageProvider().TOOLBAR_PLAY, shortHelp="Start robot",
+        toolbar = wx.ToolBar(self.panel, wx.ID_ANY, style=wx.TB_HORIZONTAL | wx.TB_HORZ_TEXT)
+        toolbar.AddLabelTool(ID_RUN, "Start", ImageProvider().TOOLBAR_PLAY, shortHelp="Start robot",
                              longHelp="Start running the robot test suite")
-        toolbar.AddLabelTool(ID_STOP,"Stop", ImageProvider().TOOLBAR_STOP,
+        toolbar.AddLabelTool(ID_STOP, "Stop", ImageProvider().TOOLBAR_STOP,
                              shortHelp="Stop a running test",
                              longHelp="Stop a running test")
         toolbar.AddLabelTool(ID_PAUSE, "Pause", ImageProvider().TOOLBAR_PAUSE,
-            shortHelp="Pause test execution", longHelp="Pause test execution")
+                             shortHelp="Pause test execution", longHelp="Pause test execution")
         toolbar.AddLabelTool(ID_CONTINUE, "Continue", ImageProvider().TOOLBAR_CONTINUE,
-            shortHelp="Continue test execution", longHelp="Continue test execution")
+                             shortHelp="Continue test execution", longHelp="Continue test execution")
         toolbar.AddLabelTool(ID_STEP_NEXT, "Next", ImageProvider().TOOLBAR_NEXT,
-                    shortHelp="Step next", longHelp="Step next")
+                             shortHelp="Step next", longHelp="Step next")
         toolbar.AddLabelTool(ID_STEP_OVER, "Step over", ImageProvider().TOOLBAR_NEXT,
-                    shortHelp="Step over", longHelp="Step over")
+                             shortHelp="Step over", longHelp="Step over")
         toolbar.Realize()
         self._bind_runner_toolbar_events(toolbar)
         return toolbar
 
     def _bind_runner_toolbar_events(self, toolbar):
         for event, callback, id in (
-            (wx.EVT_TOOL, self.OnRun, ID_RUN),
-            (wx.EVT_TOOL, self.OnStop, ID_STOP),
-            (wx.EVT_TOOL, self.OnPause, ID_PAUSE),
-            (wx.EVT_TOOL, self.OnContinue, ID_CONTINUE),
-            (wx.EVT_TOOL, self.OnStepNext, ID_STEP_NEXT),
-            (wx.EVT_TOOL, self.OnStepOver, ID_STEP_OVER)):
+                (wx.EVT_TOOL, self.OnRun, ID_RUN),
+                (wx.EVT_TOOL, self.OnStop, ID_STOP),
+                (wx.EVT_TOOL, self.OnPause, ID_PAUSE),
+                (wx.EVT_TOOL, self.OnContinue, ID_CONTINUE),
+                (wx.EVT_TOOL, self.OnStepNext, ID_STEP_NEXT),
+                (wx.EVT_TOOL, self.OnStepOver, ID_STEP_OVER)):
             toolbar.Bind(event, callback, id=id)
 
     def _build_local_toolbar(self):
-        toolbar = wx.ToolBar(self.panel, wx.ID_ANY, style=wx.TB_HORIZONTAL|wx.TB_HORZ_TEXT)
+        toolbar = wx.ToolBar(self.panel, wx.ID_ANY, style=wx.TB_HORIZONTAL | wx.TB_HORZ_TEXT)
         profileLabel = Label(toolbar, label="Execution Profile:  ")
         choices = self._test_runner.get_profile_names()
         self.choice = wx.Choice(toolbar, wx.ID_ANY, choices=choices)
@@ -517,9 +515,9 @@ class TestRunnerPlugin(Plugin):
         reportImage = getReportIconBitmap()
         logImage = getLogIconBitmap()
         toolbar.AddLabelTool(ID_SHOW_REPORT, " Report", reportImage,
-                             shortHelp = localize_shortcuts("View Robot Report in Browser (CtrlCmd-R)"))
+                             shortHelp=localize_shortcuts("View Robot Report in Browser (CtrlCmd-R)"))
         toolbar.AddLabelTool(ID_SHOW_LOG, " Log", logImage,
-                             shortHelp = localize_shortcuts("View Robot Log in Browser (CtrlCmd-L)"))
+                             shortHelp=localize_shortcuts("View Robot Log in Browser (CtrlCmd-L)"))
         toolbar.AddSeparator()
         # the toolbar API doesn't give us a way to specify padding which
         # is why the label has a couple spaces after the colon. gross,
@@ -546,8 +544,8 @@ class TestRunnerPlugin(Plugin):
 
     def _bind_toolbar_events(self, toolbar):
         for event, callback, id in (
-            (wx.EVT_TOOL, self.OnShowReport, ID_SHOW_REPORT),
-            (wx.EVT_TOOL, self.OnShowLog, ID_SHOW_LOG)):
+                (wx.EVT_TOOL, self.OnShowReport, ID_SHOW_REPORT),
+                (wx.EVT_TOOL, self.OnShowLog, ID_SHOW_LOG)):
             toolbar.Bind(event, callback, id=id)
         toolbar.Bind(wx.EVT_CHECKBOX, self.OnAutoSaveCheckbox, self.savecb)
         toolbar.Bind(wx.EVT_CHECKBOX, self.OnShowHideMessageLog, self.show_log_messages_checkbox)
@@ -605,10 +603,10 @@ class TestRunnerPlugin(Plugin):
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(self.local_toolbar, 0, wx.EXPAND)
         sizer.Add(self.runner_toolbar, 0, wx.EXPAND)
-        sizer.Add(self.configPanel, 0, wx.EXPAND|wx.TOP|wx.RIGHT, 4)
-        sizer.Add(wx.StaticLine(self.panel), 0, wx.EXPAND|wx.BOTTOM|wx.TOP, 2)
-        sizer.Add(self.header_panel, 0, wx.EXPAND|wx.RIGHT, 10)
-        sizer.Add(self._right_panel, 1, wx.EXPAND|wx.RIGHT, 8)
+        sizer.Add(self.configPanel, 0, wx.EXPAND | wx.TOP | wx.RIGHT, 4)
+        sizer.Add(wx.StaticLine(self.panel), 0, wx.EXPAND | wx.BOTTOM | wx.TOP, 2)
+        sizer.Add(self.header_panel, 0, wx.EXPAND | wx.RIGHT, 10)
+        sizer.Add(self._right_panel, 1, wx.EXPAND | wx.RIGHT, 8)
         panel.SetSizer(sizer)
 
         self._process_timer = wx.Timer(self.panel)
@@ -624,8 +622,8 @@ class TestRunnerPlugin(Plugin):
         face = font.GetFaceName()
         size = font.GetPointSize()
         textctrl.SetFont(font)
-        textctrl.StyleSetSpec(wx.stc.STC_STYLE_DEFAULT,"face:%s,size:%d" % (face, size))
-        textctrl.StyleSetSpec(STYLE_STDERR, "fore:#b22222") # firebrick
+        textctrl.StyleSetSpec(wx.stc.STC_STYLE_DEFAULT, "face:%s,size:%d" % (face, size))
+        textctrl.StyleSetSpec(STYLE_STDERR, "fore:#b22222")  # firebrick
         textctrl.SetScrollWidth(100)
         self._set_margins(textctrl)
         textctrl.SetReadOnly(True)
@@ -633,17 +631,17 @@ class TestRunnerPlugin(Plugin):
 
     def _set_margins(self, out):
         out.SetMarginLeft(10)
-        out.SetMarginWidth(0,0)
-        out.SetMarginWidth(1,0)
-        out.SetMarginWidth(2,0)
-        out.SetMarginWidth(3,0)
+        out.SetMarginWidth(0, 0)
+        out.SetMarginWidth(1, 0)
+        out.SetMarginWidth(2, 0)
+        out.SetMarginWidth(3, 0)
 
     def _create_font(self):
-        font=wx.SystemSettings.GetFont(wx.SYS_ANSI_FIXED_FONT)
+        font = wx.SystemSettings.GetFont(wx.SYS_ANSI_FIXED_FONT)
         if not font.IsFixedWidth():
             # fixed width fonts are typically a little bigger than their variable width
             # peers so subtract one from the point size.
-            font = wx.Font(font.GetPointSize()-1, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL)
+            font = wx.Font(font.GetPointSize() - 1, wx.FONTFAMILY_MODERN, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL)
         return font
 
     def _post_result(self, event, *args):
@@ -714,8 +712,8 @@ class TestRunnerPlugin(Plugin):
             prefix = '%s : %s : ' % (a['timestamp'], a['level'].rjust(5))
             message = a['message']
             if '\n' in message:
-                message = '\n'+message
-            self._messages_log_texts.put(prefix+message)
+                message = '\n' + message
+            self._messages_log_texts.put(prefix + message)
 
     def _set_running(self):
         self._run_action.disable()
@@ -754,13 +752,14 @@ class TestRunnerPlugin(Plugin):
 
 class ProgressBar(wx.Panel):
     '''A progress bar for the test runner plugin'''
+
     def __init__(self, parent):
         wx.Panel.__init__(self, parent, wx.ID_ANY)
         self._sizer = wx.BoxSizer(wx.HORIZONTAL)
         self._gauge = wx.Gauge(self, size=(100, 10))
         self._label = Label(self)
-        self._sizer.Add(self._label, 1, wx.EXPAND|wx.LEFT, 10)
-        self._sizer.Add(self._gauge, 0, wx.ALIGN_CENTER_VERTICAL|wx.RIGHT, 10)
+        self._sizer.Add(self._label, 1, wx.EXPAND | wx.LEFT, 10)
+        self._sizer.Add(self._gauge, 0, wx.ALIGN_CENTER_VERTICAL | wx.RIGHT, 10)
         self._sizer.Layout()
         self.SetSizer(self._sizer)
         self._gauge.Hide()
@@ -811,7 +810,7 @@ class ProgressBar(wx.Panel):
 
     def _update_message(self):
         '''Update the displayed elapsed time, passed and failed counts'''
-        elapsed = time.time()-self._start_time
+        elapsed = time.time() - self._start_time
         message = "elapsed time: %s     pass: %s     fail: %s" % (
             secondsToString(elapsed), self._pass, self._fail)
         message += self._get_current_keyword_text()
@@ -827,16 +826,15 @@ class ProgressBar(wx.Panel):
     def _get_current_keyword_text(self):
         if not self._current_keywords:
             return ''
-        return '     current keyword: '+self._fix_size(' -> '.join(self._current_keywords), 50)
+        return '     current keyword: ' + self._fix_size(' -> '.join(self._current_keywords), 50)
 
     def _fix_size(self, text, max_length):
         if len(text) <= max_length:
             return text
-        return '...'+text[3-max_length:]
+        return '...' + text[3 - max_length:]
 
 
 class OutputStyledTextCtrl(wx.stc.StyledTextCtrl):
-
     def __init__(self, parent):
         wx.stc.StyledTextCtrl.__init__(self, parent, wx.ID_ANY, style=wx.SUNKEN_BORDER)
         self._max_row_len = 0
@@ -858,9 +856,8 @@ class OutputStyledTextCtrl(wx.stc.StyledTextCtrl):
 def secondsToString(t):
     '''Convert a number of seconds to a string of the form HH:MM:SS'''
     return "%d:%02d:%02d" % \
-        reduce(lambda ll,b : divmod(ll[0],b) + ll[1:],
-            [(t,),60, 60])
-
+           reduce(lambda ll, b: divmod(ll[0], b) + ll[1:],
+                  [(t,), 60, 60])
 
 
 Robot = PyEmbeddedImage(
@@ -879,7 +876,6 @@ Robot = PyEmbeddedImage(
     "hTiCKMFtpsmoLHl7Ga8fRATHEcRRrCxnGBocIR6L8Qu2hlAKJu0L3QAAAABJRU5ErkJggg==")
 getRobotBitmap = Robot.GetBitmap
 
-
 MenuButton = PyEmbeddedImage(
     "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABHNCSVQICAgIfAhkiAAAAKxJ"
     "REFUOI3t0jEKg0AUBNAxhmXX9QD2adLnJt7E2luIeB/PkCoQCG5lK8ifdZtNHyQRLGwy5Yd5"
@@ -887,7 +883,6 @@ MenuButton = PyEmbeddedImage(
     "Ppjn+ULyqZSyxhiM44hhGEiyXAOStSG1bVuIyMtaq51zJHltmsZtBgCgruuC5N17f+u6brX8"
     "Fdia43dwPPAGncZYbvceeuMAAAAASUVORK5CYII=")
 getMenuButtonBitmap = MenuButton.GetBitmap
-
 
 ProcessStop = PyEmbeddedImage(
     "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0"

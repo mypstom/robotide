@@ -1,0 +1,44 @@
+C_FileChooserLoadFile	使用一個LK  Choose From File Chooser  將所有檔案定義為同一個C
+C_FileChooserSaveFile	使用一個LK  Choose From File Chooser  將所有檔案定義為同一個C
+C_DoubleClickSuggestListItem	使用一個LK  Click On List Item  對應到suggestList
+C_AssertButtonGetClueNotExist	無人使用阿...........	應該是UI變更後使用到
+C_AssertButtonGetClueExist		無人使用阿...........	應該是UI變更後使用到
+C_AssertButtonSuggestWordExist	使用一個LK  Button Should Exist  對應到btnSuggestWords
+C_AssertButtonAddWordNotExist	使用一個LK  Button Should Not Exist  對應到btnAddWord
+C_AssertButtonAddWordExist		使用一個LK  Button Should Exist  對應到btnAddWord
+C_AssertButtonFindMatchExist	使用一個LK  Button Should Exist  對應到btnFind
+C_ClearAnagramTextField			使用一個LK  Clear Text Field  對應到anagramTextField
+C_ClearPatternTextField			使用一個LK  Clear Text Field  對應到patternTextField
+C_AssertMenuSaveCrosswordEnabled		使用一個LK  Menu Item Should Be Enabled  對應到SaveCrossword
+C_AssertMenuSaveCrosswordNotEnabled		使用一個LK  Menu Item Should Not Be Enabled  對應到SaveCrossword
+C_AssertMenuNewCrosswordEnabled			使用一個LK  Menu Item Should Be Enabled  對應到NewCrossword
+C_AssertMenuLoadCrosswordSolveEnabled	使用一個LK  Menu Item Should Be Enabled  對應到LoadCrosswordSolve
+C_AssertMenuLoadCrosswordEditEnabled	使用一個LK  Menu Item Should Be Enabled  對應到LoadCrosswordEdit
+C_LaunchCrossword		使用一個LK  Launch Application  對應到crosswordsage.MainScreen
+C_ClickCrosswordCell	使用一個LK  Click On Component  把全部的CrosswordCell定義為同一個C
+C_RemoveTestFile		使用一個LK  Remove File  把全部的FilePath定義為同一個C  (2個FilePath)
+C_SelectCrosswordSageWindow		使用一個LK  Select Window  對應到Crossword Sage
+C_ClickMenuNewCrossword			使用一個LK  Select From Menu  對應到NewCrossword
+C_ClickMenuSaveCrossword		使用一個LK  Select From Menu  對應到SaveCrossword
+C_ClickMenuLoadCrosswordToEdit	使用一個LK  Select From Menu  對應到LoadCrosswordEdit
+C_ClickMenuSolveNewWord			使用一個LK  Select From Menu  對應到LoadCrosswordSolve
+C_SelectOpenDialog			使用一個LK  Select Dialog  對應到Open
+C_SelectMessageDialog		使用一個LK  Select Dialog  對應到Message
+C_SelectErrorSizeDialog		使用一個LK  Select Dialog  對應到Error Size
+C_SelectSaveDialog			使用一個LK  Select Dialog  對應到Save
+C_SelectInputDialog			使用一個LK  Select Dialog  對應到Input
+C_SelectAddWordTipsDialog	使用一個LK  Select Dialog  對應到AddWordTips	在第4次UI使用到
+C_AssertPatternTextFieldNotExist	無人使用阿...........	應該是UI變更後使用到
+C_AssertPatternTextFieldExist		無人使用阿...........	應該是UI變更後使用到
+C_AssertFileExist			使用一個LK  File Should Exist  把全部的FilePath定義為同一個C  (7個FilePath)
+C_AssertFileNotExist		使用一個LK  File Should Not Exist  把全部的FilePath定義為同一個C  (2個FilePath)
+C_AssertFindMatchResult		使用LK  Get Textfield Value、Should Be Equal  對應到resultTextArea、那些#####
+C_TypeInGridSizeTextField	使用一個LK  Type Into Text Field  對應到OptionPane.textField
+C_TypeInAnagramTextField	使用一個LK  Type Into Text Field  對應到anagramTextField
+C_TypeInPatternTextField	使用一個LK  Type Into Text Field  對應到patternTextField
+C_AssertSuggestListItem		使用Get List Item Count、Should Be Equal As Integers  對應到suggestList、1
+C_ClickButtonAddWord		使用一個LK  Click On Component  對應到btnAddWord
+C_ClickButtonFindMatch		使用一個LK  Click On Component  對應到btnAddFind
+C_ClickButtonSuggestWord	使用一個LK  Click On Component  對應到btnbtnSuggestWords 
+C_ClickButtonOK				使用一個LK  Push Button  對應到OK
+C_DoubleClickCrosswordCell		無人使用阿...........	應該是UI變更後使用到

@@ -27,10 +27,10 @@ digraph {
 		Root -> TestAddWord
 	TestSaveCrossword [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSaveCrossword
-	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
-		Root -> TestLoadCrosswordToEdit
 	TestSolvePattern [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolvePattern
+	TestLoadCrosswordToEdit [color=darkolivegreen2 shape=box style=filled]
+		Root -> TestLoadCrosswordToEdit
 	TestSolveAnagram [color=darkolivegreen2 shape=box style=filled]
 		Root -> TestSolveAnagram
 	"TC-01" [color=darkolivegreen2 shape=box style=filled]

@@ -24,6 +24,9 @@ def get_core_plugins():
     from robotide.searchtests.searchtests import TestSearchPlugin
     from robotide.spec.specimporter import SpecImporterPlugin
 
+    from robotide.KTV.duplicatedviewplugin import DuplicatedViewPlugin
+
     return [RunAnything, RecentFilesPlugin, PreviewPlugin, SpecImporterPlugin,
-            EditorPlugin, TextEditorPlugin, KeywordSearch, LogPlugin, TestSearchPlugin]
+            EditorPlugin, TextEditorPlugin, KeywordSearch, LogPlugin, TestSearchPlugin,
+            DuplicatedViewPlugin]
 
