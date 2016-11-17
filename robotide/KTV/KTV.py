@@ -839,10 +839,10 @@ class KTV:
         edgeSet = set()
         nodes_set = set()
 
-        nodes = list()
+        nodes = set()
         edges = list()
         nodesWithType = dict()
-        self.generate_excuteTable(filepath, nodes, edges, nodesWithType)
+        self.build_model(filepath, nodes, edges, nodesWithType)
         for item in edges:
             edgeSet.add(item)
         for item in nodes:
@@ -866,14 +866,34 @@ class KTV:
         # print jsonOutput
         webbrowser.open('http://localhost/TSVisual/index.html')
 
-    def set_change_impact_node(self, nodes, edges, nodesWithType, change_list, change_impact, level):
+    def get_change_impact_dict(self, nodes, edges, nodesWithType, change_list):
+        change_impact_dict = dict()
+        limit_level = 1
+        while True:
+            # print limit_level
+            change_impact = self.set_change_impact_node(nodes, list(edges), nodesWithType, change_list, 0, 0,
+                                                        limit_level)
+            if limit_level - 1 in change_impact_dict.keys():
+                if change_impact_dict[limit_level - 1] == change_impact:
+                    break
+            if limit_level not in change_impact_dict.keys():
+                change_impact_dict[limit_level] = 0
+            change_impact_dict[limit_level] += change_impact
+            limit_level += 1
+        # if nodesWithType[change] == 'Component':
+        for key in change_impact_dict.keys():  # remove LK~C response relation
+            if key == 1:
+                continue
+            change_impact_dict[key] -= change_impact_dict[1]
+        return change_impact_dict
+
+    def set_change_impact_node(self, nodes, edges, nodesWithType, change_list, change_impact, level, limit_level):
         # change = change_list[0]
         # print 'level = %r' % level
-        if level >= 7:
+        if level >= limit_level:
             return change_impact
         for change in change_list:
             new_change_list = list()
-            """print change_list"""
             # print 'change = %r' % change
             if nodesWithType[change] == 'TestSuite':
                 continue
@@ -882,33 +902,29 @@ class KTV:
                 while index < len(edges):
                     edge = edges[index]
                     # print item[0] + '\t' + item[1]
-                    """if item[0] == node:
-                        change_list.append(item[1])"""
                     if edge[1] == change:  # and nodesWithType[item[0]] != 'Changed':
                         if edge[0] not in change_list:
                             new_change_list.append(edge[0])
                         change_impact += 1
                         # print 'change_impact = %r' % change_impact
+                        # print edge
                         edges.remove(edge)
                         index -= 1
-                        """while node in change_list:
-                            change_list.remove(node)"""
                     index += 1
 
             if len(new_change_list) > 0:
                 change_impact = self.set_change_impact_node(nodes, edges, nodesWithType, new_change_list, change_impact,
-                                                            level + 1)
+                                                            level + 1, limit_level)
         return change_impact
-        """if len(change_list) > 0:
-            self.set_change_impact_node(nodes, edges, nodesWithType, change_list)"""
 
-    def generate_excuteTable(self, filepath, nodes, edges, nodesWithType):
+    def build_model(self, filepath, nodes, edges, nodesWithType):
         source = os.path.abspath(filepath)
         TS_list = list()
         TC_list = list()
         UK_list = list()
         LK_list = list()
-        C_dict = dict()
+        C_set = set()
+        node_level = dict()
         with open(source + '\Excute.txt', 'r+') as f:
             for line in f:
                 if line != '\n':
@@ -931,113 +947,102 @@ class KTV:
                             UK_list.append(
                                 [data_list[2].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n'), args])
                         elif data_list[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
-                            LK_list.append(
-                                [data_list[2].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n'), args])
+                            if not data_list[0].split('=')[1].strip('\n').startswith('Should Be'):
+                                LK_list.append(
+                                    [data_list[2].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n'),
+                                     args])
+                                if len(args) > 0:
+                                    C_set.add(args.split(',')[0])
 
-        with open(source + '\ExcuteTable.txt', 'w+') as f:
-            f.write('TS : ')
-            for testsuite in TS_list:
-                f.write(str(testsuite) + '[')
-                for testcase in TC_list:
-                    if testcase[0] == testsuite:
-                        f.write(str(testcase[1]) + ',')
-                        edges.append((testsuite, testcase[1]))  # add TS to TC edgs
-                f.seek(-1, 1)
-                f.write('],')
-            f.seek(-1, 1)
-            f.write('\nTC : ')
+        print 'LK:%r' % len(LK_list)
+        action_count = len(LK_list)
+
+        """
+        for testsuite in TS_list:
             for testcase in TC_list:
-                f.write(str(testcase[1]) + '[')
-                for LK in LK_list:
-                    if LK[0] == testcase[1]:
-                        f.write(str(LK[1]) + ',')
-                        edges.append((testcase[1], LK[1]))  # add TC to LK edgs
-                if not len(UK_list) > 0:
-                    f.seek(-1, 1)
-                for UK in UK_list:
-                    if UK[0] == testcase[1]:
-                        f.write(str(UK[1]) + ',')
-                        edges.append((testcase[1], UK[1]))  # add TC to UK edgs
-                f.seek(-1, 1)
-                f.write('],')
-            f.seek(-1, 1)
-            f.write('\nLK : ')
-            # print 'UK_list size = %r' % len(UK_list)
-            temp = list()
-            for UK in UK_list:
-                contain = False
-                for item in temp:
-                    if UK[1] == item[1]:
-                        contain = True
-                        break
-                if not contain:
-                    temp.append(UK)
-            UK_list = list(temp)
-            # print 'UK_list size = %r' % len(UK_list)
-            for UK in UK_list:
-                f.write(str(UK[1]) + '(')
-                for arg in UK[2].split(','):
-                    f.write(str(arg) + ',')
-                f.seek(-1, 1)
-                f.write(')[')
-                for UK2 in UK_list:  # add UK to UK edgs
-                    if UK[1] == UK2[0]:
-                        f.write(str(UK2[1]) + ',')
-                        edges.append((UK[1], UK2[1]))
-                for LK in LK_list:  # add UK to LK edgs
-                    if UK[1] == LK[0]:
-                        f.write(str(LK[1]) + ',')
-                        edges.append((UK[1], LK[1]))
-                f.seek(-1, 1)
-                f.write('],')
-            f.seek(-1, 1)
-            f.write('\nC : ')
-            # print 'LK_list size = %r' % len(LK_list)
-            del temp[:]
-            for UK in LK_list:
-                if UK not in temp:
-                    temp.append(UK)
-            LK_list = list(temp)
-            # print 'LK_list size = %r' % len(LK_list)
-            for LK in LK_list:
-                f.write(str(LK[1]) + '(')
-                for arg in LK[2].split(','):
-                    f.write(str(arg) + ',')
-                    if len(LK[2]) > 0 and arg == LK[2].split(',')[0]:
-                        if arg not in C_dict:  # C_dict [ component ] = parentList
-                            C_dict[arg] = list()
-                        C_dict[arg].append(str(LK[1]))
-                        edges.append((LK[1], arg))  # add LK to C edgs
-                f.seek(-1, 1)
-                f.write('),')
-            f.seek(-1, 1)
-            f.write('\nUK : ')
-            for C in C_dict.keys():
-                f.write(str(C) + '[')
-                for parent in C_dict[C]:
-                    f.write(str(parent) + ',')
-                f.seek(-1, 1)
-                f.write('],')
-            f.seek(-1, 1)
-            f.write('\n')
+                if testcase[0] == testsuite:
+                    edges.append((testsuite, testcase[1]))  # add TS to TC edgs
 
+        for testcase in TC_list:
+            for LK in LK_list:
+                if LK[0] == testcase[1]:
+                    edges.append((testcase[1], LK[1]))  # add TC to LK edgs
+            for LK in UK_list:
+                if LK[0] == testcase[1]:
+                    edges.append((testcase[1], LK[1]))  # add TC to UK edgs
+        # print 'UK_list size = %r' % len(UK_list)
+        temp = list()
+        for LK in UK_list:
+            contain = False
+            for item in temp:
+                if LK[1] == item[1] and LK[0] == item[0]:
+                    contain = True
+                    break
+            if not contain:
+                temp.append(LK)
+        UK_list = list(temp)
+        # print 'UK_list size = %r' % len(UK_list)
+        for LK in UK_list:
+            for UK2 in UK_list:  # add UK to UK edges
+                if LK[1] == UK2[0]:
+                    edges.append((LK[1], UK2[1]))
+        del temp[:]
+        for LK in UK_list:
+            contain = False
+            for item in temp:
+                if LK[1] == item[1]:
+                    contain = True
+                    break
+            if not contain:
+                temp.append(LK)
+        UK_list = list(temp)
+        for LK in UK_list:
+            for LK in LK_list:  # add UK to LK edges
+                if LK[1] == LK[0]:
+                    edges.append((LK[1], LK[1]))
+        # print 'LK_list size = %r' % len(LK_list)
+        del temp[:]
+        for LK in LK_list:
+            if LK not in temp:
+                temp.append(LK)
+        LK_list = list(temp)
+        # print 'LK_list size = %r' % len(LK_list)
+        for LK in LK_list:
+            for arg in LK[2].split(','):
+                if len(LK[2]) > 0 and arg == LK[2].split(',')[0]:
+                    if arg not in C_dict:  # C_dict [ component ] = parentList
+                        C_dict[arg] = list()
+                    if LK[1] not in C_dict[arg]:  # remove repeated LK~C edges
+                        C_dict[arg].append(LK[1])
+                        edges.append((LK[1], arg))  # add LK to C edges
+        del temp[:]
+        for LK in LK_list:
+            contain = False
+            for item in temp:
+                if LK[1] == item[1]:
+                    contain = True
+                    break
+            if not contain:
+                temp.append(LK)
+        LK_list = list(temp)
+        """
         for TS in TS_list:
-            nodes.append(TS)
+            nodes.add(TS)
             nodesWithType[TS] = 'TestSuite'
         for TC in TC_list:
-            nodes.append(TC[1])
+            nodes.add(TC[1])
             nodesWithType[TC[1]] = 'TestCase'
-        for UK in UK_list:
-            nodes.append(UK[1])
-            nodesWithType[UK[1]] = 'Userkeyword'
+        for LK in UK_list:
+            nodes.add(LK[1])
+            nodesWithType[LK[1]] = 'Userkeyword'
         for LK in LK_list:
-            nodes.append(LK[1])
+            nodes.add(LK[1])
             nodesWithType[LK[1]] = 'Librarykeyword'
-        for C in C_dict.keys():
-            nodes.append(C)
+        for C in C_set:
+            nodes.add(C)
             nodesWithType[C] = 'Component'
 
-        """TS_set = set(TS_list)
+        TS_set = set(TS_list)
         print 'TS:%r' % len(TS_set)
         TC_set = set()
         for item in TC_list:
@@ -1051,30 +1056,147 @@ class KTV:
         for item in LK_list:
             LK_set.add(item[1])
         print 'LK:%r' % len(LK_set)
-        print 'C:%r' % len(C_dict)"""
-        # Click On Component    Button Should Exist
+        print 'C:%r' % len(C_set)
+        # print 'node:%r' % len(nodes)
+
+        for TS in TS_list:
+            self.set_level(TC_list, UK_list, LK_list, C_set, nodesWithType, node_level, TS, 0)
+        print node_level
+        self.build_edges(node_level, edges, TC_list, UK_list, LK_list, C_set, nodesWithType)
+
         """temp = 0
         for edge in edges:
-            if edge[1] == 'Button Should Exist':
+            if edge[0] == 'inputSearchText' and edge[1] == 'Input Text':
                 temp += 1
         print 'temp = %r' % temp"""
 
-        change_impact = self.set_change_impact_node(nodes, list(edges), nodesWithType, ['btnSuggestWords'], 0, 0)
-        print 'change_impact = %r' % change_impact
+        """change_list = list()
+        change_list.append('btnSuggestWords')
+        #change_list.append('btnFind')
+        #change_list.append('btnAddWord')
+        #change_list.append('File|New Crossword')
+        change_impact_dict = self.get_change_impact_dict(nodes, edges, nodesWithType, change_list)
         nodesWithType['btnSuggestWords'] = 'Changed'
-        """change_impact = self.set_change_impact_node(nodes, list(edges), nodesWithType, ['//*[@id="_eEe"]/a'], 0, 0)
-        print 'change_impact = %r' % change_impact
-        nodesWithType['//*[@id="_eEe"]/a'] = 'Changed'"""
+        print change_impact_dict"""
+        """change_impact_dict = self.get_change_impact_dict(nodes, edges, nodesWithType,
+                                                         [
+                                                             '//*[@id=\"Dyn_head\"]/div/div/div/div/table/tbody/tr[2]/td/table/tbody/tr[2]/td/div/form/table/tbody/tr/td[2]/label/input[1]'])
+        nodesWithType[
+            '//*[@id=\"Dyn_head\"]/div/div/div/div/table/tbody/tr[2]/td/table/tbody/tr[2]/td/div/form/table/tbody/tr/td[2]/label/input[1]'] = 'Changed'
+        print change_impact_dict"""
 
-        self.calculate_coupling(nodes, edges)
+        self.calculate_coupling(nodes, edges, action_count)
 
-    def calculate_coupling(self, nodes, edges):
+    def set_level(self, TC_list, UK_list, LK_list, C_set, nodesWithType, node_level, current, current_level):
+        type = nodesWithType[current]
+        print current
+        if current not in node_level.keys():
+            node_level[current] = current_level
+        else:
+            print str(node_level[current]) + '\t' + str(current_level)
+            node_level[current] = max(node_level[current], current_level)
+            print node_level[current]
+        child_node_set = set()
+        if type == 'TestSuite':
+            for TC in TC_list:
+                if TC[0] == current:
+                    child_node_set.add(TC[1])
+        elif type == 'TestCase' or type == 'Userkeyword':
+            index = 0
+            while index < len(UK_list):
+                UK = UK_list[index]
+                if UK[0] == current:
+                    if UK[1] not in child_node_set:
+                        child_node_set.add(UK[1])
+                index += 1
+            index = 0
+            while index < len(LK_list):
+                LK = LK_list[index]
+                if LK[0] == current:
+                    if LK[1] not in child_node_set:
+                        child_node_set.add(LK[1])
+                index += 1
+        elif type == 'Librarykeyword':
+            for LK in LK_list:
+                if LK[1] == current:
+                    for C in C_set:
+                        if LK[2].split(',')[0] == C:
+                            child_node_set.add(C)
+
+        for node in child_node_set:
+            self.set_level(TC_list, UK_list, LK_list, C_set, nodesWithType, node_level, node, current_level + 1)
+
+    def build_edges(self, node_level, edges, TC_list, UK_list, LK_list, C_set, nodesWithType):
+        current_level_list = list()
+        current_level = 0
+
+        for LK in LK_list:
+            for C in C_set:
+                if LK[2].split(',')[0] == C and (LK[1], C) not in edges:
+                    edges.append((LK[1], C))
+                    break
+
+        for key in node_level.keys():
+            if node_level[key] == current_level:
+                current_level_list.append(key)
+        while len(current_level_list) > 0:
+            for current in current_level_list:
+                #print current
+                type = nodesWithType[current]
+                if type == 'TestSuite':
+                    for TC in TC_list:
+                        if TC[0] == current:
+                            edges.append((current, TC[1]))
+                elif type == 'TestCase' or type == 'Userkeyword':
+                    index = 0
+                    child_node_set = set()
+                    while index < len(UK_list):
+                        UK = UK_list[index]
+                        if UK[0] == current:
+                            #print 'addUK'
+                            #print UK
+                            edges.append((current, UK[1]))
+                            if UK[1] not in child_node_set:
+                                child_node_set.add(UK[1])
+                            else:
+                                del UK_list[index]
+                                index -= 1
+                        index += 1
+                    index = 0
+                    child_node_set.clear()
+                    while index < len(LK_list):
+                        LK = LK_list[index]
+                        if LK[0] == current:
+                            edges.append((current, LK[1]))
+                            if LK[1] not in child_node_set:
+                                child_node_set.add(LK[1])
+                            else:
+                                del LK_list[index]
+                                index -= 1
+                        index += 1
+                """elif type == 'Librarykeyword':
+                    for LK in LK_list:
+                        if LK[1] == current:
+                            for C in C_set:
+                                if LK[2].split(',')[0] == C:
+                                    edges.append((current, C))
+                                    C_set.remove(C)
+                                    break
+                            break"""
+            current_level += 1
+            del current_level_list[:]
+            for key in node_level.keys():
+                if node_level[key] == current_level:
+                    current_level_list.append(key)
+
+    def calculate_coupling(self, nodes, edges, action_count):
         nodes_set = set()
         edges_set = set()
         for item in nodes:
             nodes_set.add(item)
         for item in edges:
             edges_set.add(item)
-        unweighted_coupling = float(len(edges_set)) / (len(nodes_set) - 1)
+        unweighted_coupling = float(len(edges_set)) / (len(nodes_set) * (len(nodes_set) - 1))
         print 'unweighted coupling = %r' % unweighted_coupling
+        print 'weighted coupling = %r' % (float(len(edges)) / action_count)
         print 'weighted coupling = %r' % len(edges)
