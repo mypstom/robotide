@@ -840,10 +840,10 @@ class KTV:
         nodes_set = set()
 
         nodes = set()
-        edges = list()
+        edges = dict()
         nodesWithType = dict()
         self.build_model(filepath, nodes, edges, nodesWithType)
-        for item in edges:
+        for item in edges.keys():
             edgeSet.add(item)
         for item in nodes:
             nodes_set.add(item)
@@ -871,7 +871,7 @@ class KTV:
         limit_level = 1
         while True:
             # print limit_level
-            change_impact = self.set_change_impact_node(nodes, list(edges), nodesWithType, change_list, 0, 0,
+            change_impact = self.set_change_impact_node(nodes, dict(edges), nodesWithType, change_list, 0, 0,
                                                         limit_level)
             if limit_level - 1 in change_impact_dict.keys():
                 if change_impact_dict[limit_level - 1] == change_impact:
@@ -899,16 +899,16 @@ class KTV:
                 continue
             else:
                 index = 0
-                while index < len(edges):
-                    edge = edges[index]
+                while index < len(edges.keys()):
+                    edge = edges.keys()[index]
                     # print item[0] + '\t' + item[1]
                     if edge[1] == change:  # and nodesWithType[item[0]] != 'Changed':
                         if edge[0] not in change_list:
                             new_change_list.append(edge[0])
-                        change_impact += 1
+                        change_impact += edges[edge]
                         # print 'change_impact = %r' % change_impact
                         # print edge
-                        edges.remove(edge)
+                        edges.pop(edge, None)
                         index -= 1
                     index += 1
 
@@ -918,6 +918,11 @@ class KTV:
         return change_impact
 
     def build_model(self, filepath, nodes, edges, nodesWithType):
+        excluded_library_keyword = set()
+        with open('ExcludedLibraryKeyword.txt', 'r+') as f:
+            for line in f:
+                if line != '\n':
+                    excluded_library_keyword.add(line.strip('\n'))
         source = os.path.abspath(filepath)
         TS_list = list()
         TC_list = list()
@@ -947,7 +952,7 @@ class KTV:
                             UK_list.append(
                                 [data_list[2].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n'), args])
                         elif data_list[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
-                            if not data_list[0].split('=')[1].strip('\n').startswith('Should Be'):
+                            if data_list[0].split('=')[1].strip('\n') not in excluded_library_keyword:
                                 LK_list.append(
                                     [data_list[2].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n'),
                                      args])
@@ -1061,41 +1066,61 @@ class KTV:
 
         for TS in TS_list:
             self.set_level(TC_list, UK_list, LK_list, C_set, nodesWithType, node_level, TS, 0)
-        print node_level
+        # print node_level
         self.build_edges(node_level, edges, TC_list, UK_list, LK_list, C_set, nodesWithType)
+        print 'weighted coupling = %r\n--------------------' % self.get_weighted(None, None, edges)
+        self.remove_redundant_edges(edges, node_level, nodesWithType, UK_list, LK_list)
+        # print 'temp = %r' % self.get_weighted('NewCrosswordByValidGridSize', 'SelectCrosswordSageWindow', edges)
+        # print edges
 
-        """temp = 0
-        for edge in edges:
-            if edge[0] == 'inputSearchText' and edge[1] == 'Input Text':
-                temp += 1
-        print 'temp = %r' % temp"""
+        """nodes_dict = dict()
+        for node in nodes:
+            nodes_dict[node] = set()
+            if nodesWithType[node] == 'TestSuite':
+                pass
+            elif nodesWithType[node] == 'TestCase':
+                for TC in TC_list:
+                    if TC[1] == node:
+                        nodes_dict[node].add(TC[0])
+            elif nodesWithType[node] == 'UserKeyword':
+                for UK in UK_list:
+                    if UK[1] == node:
+                        nodes_dict[node].add(UK[0])
+            elif nodesWithType[node] == 'LibraryKeyword':
+                for LK in LK_list:
+                    if LK[1] == node:
+                        nodes_dict[node].add(LK[0])
+        for LK in LK_list:
+            if len(LK[2]) > 0:
+                nodes_dict[node].add(LK[2].split(',')[0])"""
 
         """change_list = list()
         change_list.append('btnSuggestWords')
-        #change_list.append('btnFind')
-        #change_list.append('btnAddWord')
-        #change_list.append('File|New Crossword')
+        # change_list.append('btnFind')
+        # change_list.append('btnAddWord')
+        # change_list.append('File|New Crossword')
         change_impact_dict = self.get_change_impact_dict(nodes, edges, nodesWithType, change_list)
-        nodesWithType['btnSuggestWords'] = 'Changed'
+        #nodesWithType['btnSuggestWords'] = 'Changed'
+        print change_impact_dict
+        change_impact_dict = self.get_change_impact_by_formula(edges, change_list)
         print change_impact_dict"""
-        """change_impact_dict = self.get_change_impact_dict(nodes, edges, nodesWithType,
-                                                         [
-                                                             '//*[@id=\"Dyn_head\"]/div/div/div/div/table/tbody/tr[2]/td/table/tbody/tr[2]/td/div/form/table/tbody/tr/td[2]/label/input[1]'])
-        nodesWithType[
-            '//*[@id=\"Dyn_head\"]/div/div/div/div/table/tbody/tr[2]/td/table/tbody/tr[2]/td/div/form/table/tbody/tr/td[2]/label/input[1]'] = 'Changed'
+        """change_impact_dict = self.get_change_impact_dict(nodes, edges, nodesWithType, ['File|New Crossword'])
+        #nodesWithType['File|New Crossword'] = 'Changed'
+        print change_impact_dict
+        change_impact_dict = self.get_change_impact_by_formula(edges, ['File|New Crossword'])
         print change_impact_dict"""
 
         self.calculate_coupling(nodes, edges, action_count)
 
     def set_level(self, TC_list, UK_list, LK_list, C_set, nodesWithType, node_level, current, current_level):
         type = nodesWithType[current]
-        print current
+        # print current
         if current not in node_level.keys():
             node_level[current] = current_level
         else:
-            print str(node_level[current]) + '\t' + str(current_level)
+            # print str(node_level[current]) + '\t' + str(current_level)
             node_level[current] = max(node_level[current], current_level)
-            print node_level[current]
+            # print node_level[current]
         child_node_set = set()
         if type == 'TestSuite':
             for TC in TC_list:
@@ -1132,8 +1157,8 @@ class KTV:
 
         for LK in LK_list:
             for C in C_set:
-                if LK[2].split(',')[0] == C and (LK[1], C) not in edges:
-                    edges.append((LK[1], C))
+                if LK[2].split(',')[0] == C and (LK[1], C) not in edges.keys():
+                    edges[(LK[1], C)] = 1
                     break
 
         for key in node_level.keys():
@@ -1141,21 +1166,24 @@ class KTV:
                 current_level_list.append(key)
         while len(current_level_list) > 0:
             for current in current_level_list:
-                #print current
-                type = nodesWithType[current]
-                if type == 'TestSuite':
+                # print current
+                node_type = nodesWithType[current]
+                if node_type == 'TestSuite':
                     for TC in TC_list:
                         if TC[0] == current:
-                            edges.append((current, TC[1]))
-                elif type == 'TestCase' or type == 'Userkeyword':
+                            edges[(current, TC[1])] = 1
+                elif node_type == 'TestCase' or node_type == 'Userkeyword':
                     index = 0
                     child_node_set = set()
                     while index < len(UK_list):
                         UK = UK_list[index]
                         if UK[0] == current:
-                            #print 'addUK'
-                            #print UK
-                            edges.append((current, UK[1]))
+                            # print 'addUK'
+                            # print UK
+                            if (current, UK[1]) not in edges.keys():
+                                edges[(current, UK[1])] = 1
+                            else:
+                                edges[(current, UK[1])] += 1
                             if UK[1] not in child_node_set:
                                 child_node_set.add(UK[1])
                             else:
@@ -1167,7 +1195,10 @@ class KTV:
                     while index < len(LK_list):
                         LK = LK_list[index]
                         if LK[0] == current:
-                            edges.append((current, LK[1]))
+                            if (current, LK[1]) not in edges.keys():
+                                edges[(current, LK[1])] = 1
+                            else:
+                                edges[(current, LK[1])] += 1
                             if LK[1] not in child_node_set:
                                 child_node_set.add(LK[1])
                             else:
@@ -1189,14 +1220,105 @@ class KTV:
                 if node_level[key] == current_level:
                     current_level_list.append(key)
 
+    def remove_redundant_edges(self, edges, node_level, nodesWithType, UK_list, LK_list):
+        change_list = list()
+        max_level = 0
+        for level in node_level.values():
+            max_level = max(max_level, level)
+        for level in range(max_level, 1, -1):
+            del change_list[:]
+            for key in node_level.keys():
+                if node_level[key] == level:
+                    change_list.append(key)
+            for change in change_list:
+                parent_list = list()
+                if nodesWithType[change] == 'Librarykeyword':
+                    for LK in LK_list:
+                        if LK[1] == change:
+                            parent_list.append(LK[0])
+                elif nodesWithType[change] == 'Userkeyword':
+                    for UK in UK_list:
+                        if UK[1] == change:
+                            parent_list.append(UK[0])
+                else:
+                    continue
+                for parent in parent_list:
+                    scale = self.get_weighted(None, parent, edges)
+                    if scale == 1:
+                        continue
+                    weight = self.get_weighted(parent, change, edges)
+                    edges[(parent, change)] = weight / scale
+
+    def get_weighted(self, node1, node2, edges):
+        count = 0
+        for edge in edges.keys():
+            if node1 is None and node2 is None:
+                count += edges[edge]
+            elif node1 is None:
+                if edge[1] == node2:
+                    count += edges[edge]
+            else:
+                if edge[0] == node1 and edge[1] == node2:
+                    count += edges[edge]
+        return count
+
     def calculate_coupling(self, nodes, edges, action_count):
         nodes_set = set()
-        edges_set = set()
         for item in nodes:
             nodes_set.add(item)
-        for item in edges:
-            edges_set.add(item)
-        unweighted_coupling = float(len(edges_set)) / (len(nodes_set) * (len(nodes_set) - 1))
+        unweighted_coupling = float(len(edges.keys())) / (len(nodes_set) * (len(nodes_set) - 1))
         print 'unweighted coupling = %r' % unweighted_coupling
-        print 'weighted coupling = %r' % (float(len(edges)) / action_count)
-        print 'weighted coupling = %r' % len(edges)
+        #print 'weighted coupling = %r' % (float(self.get_weighted(None, None, edges)) / action_count)
+        print 'weighted coupling = %r' % self.get_weighted(None, None, edges)
+
+    def get_change_impact_by_formula(self, edges, change_list):
+        change_impact_dict = dict()
+        edges_set = set()
+        limit_level = 1
+        while True:
+            edges_set = self.calculate_change_impact_by_formula(edges, edges_set, change_list, change_impact_dict, limit_level)
+            if limit_level - 1 in change_impact_dict.keys():
+                if change_impact_dict[limit_level] == change_impact_dict[limit_level - 1]:
+                    break
+            limit_level += 1
+        change_impact_dict.pop(limit_level)
+        for key in change_impact_dict.keys():  # remove LK~C response relation
+            if key == 1:
+                continue
+            change_impact_dict[key] -= change_impact_dict[1]
+        return change_impact_dict
+
+    def calculate_change_impact_by_formula(self, edges, edges_set, change_list, change_impact_dict, level):
+        for change in change_list:
+            temp_set = self.get_edges(change, edges)
+            edges_set = edges_set.union(temp_set)
+        weight = 0
+        del change_list[:]
+        for edge in edges_set:
+            change_list.append(edge[0])
+            weight += edges[(edge[0], edge[1])]
+        change_impact_dict[level] = weight
+        return edges_set
+
+    def get_nodes(self, change, nodes_dict, level):
+        result = set()
+        node_list = list()
+        for parent in nodes_dict[change]:
+            result.add(parent)
+            node_list.append(parent)
+        for index in range(1, level):
+            new_node_list = list()
+            for node in node_list:
+                for parent in nodes_dict[node]:
+                    result.add(parent)
+                    new_node_list.append(parent)
+            node_list = list(new_node_list)
+            del new_node_list[:]
+        return result
+
+    def get_edges(self, node, edges):
+        result = set()
+        for edge in edges.keys():
+            if edge[1] == node:
+                result.add(edge)
+        return result
