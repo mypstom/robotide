@@ -1,3 +1,4 @@
+#以下都不顯示node
 Keyword Should Exist
 Length Should Be
 Should Be Empty
@@ -25,3 +26,6 @@ Should Not Start With
 Should Start With
 Variable Should Exist
 Variable Should Not Exist
+
+#以下只顯示此Node
+Send Keyboard Event, ShowNode=True		#因為無法特定操作元件，故只顯示此node不顯使其子孫

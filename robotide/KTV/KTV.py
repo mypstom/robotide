@@ -842,7 +842,11 @@ class KTV:
         nodes = set()
         edges = dict()
         nodesWithType = dict()
-        self.build_model(filepath, nodes, edges, nodesWithType)
+        try:
+            self.build_model(filepath, nodes, edges, nodesWithType)
+        except Exception as e:
+            print e
+            return
         for item in edges.keys():
             edgeSet.add(item)
         for item in nodes:
@@ -918,11 +922,20 @@ class KTV:
         return change_impact
 
     def build_model(self, filepath, nodes, edges, nodesWithType):
-        excluded_library_keyword = set()
+        excluded_node_not_show = set()
+        excluded_node_show = set()
         with open('ExcludedLibraryKeyword.txt', 'r+') as f:
             for line in f:
+                if '#' in line:
+                    line = line[:line.index('#')]
                 if line != '\n':
-                    excluded_library_keyword.add(line.strip('\n'))
+                    if ', ShowNode=' in line:
+                        line = line[:line.index(', ShowNode=')]
+                        excluded_node_show.add(line.strip('\n'))
+                    elif ',' in line:
+                        raise Exception('ExcludedLibraryKeyword.txt format error!')
+                    else:
+                        excluded_node_not_show.add(line.strip('\n'))
         source = os.path.abspath(filepath)
         TS_list = list()
         TC_list = list()
@@ -952,11 +965,11 @@ class KTV:
                             UK_list.append(
                                 [data_list[2].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n'), args])
                         elif data_list[0].split('=')[0] == 'LK':  # LK_list = [parent , LK_name, args]
-                            if data_list[0].split('=')[1].strip('\n') not in excluded_library_keyword:
+                            if data_list[0].split('=')[1].strip('\n') not in excluded_node_not_show:
                                 LK_list.append(
                                     [data_list[2].split('=')[1].strip('\n'), data_list[0].split('=')[1].strip('\n'),
                                      args])
-                                if len(args) > 0:
+                                if len(args) > 0 and data_list[0].split('=')[1].strip('\n') not in excluded_node_show:
                                     C_set.add(args.split(',')[0])
 
         print 'LK:%r' % len(LK_list)
@@ -1268,7 +1281,7 @@ class KTV:
             nodes_set.add(item)
         unweighted_coupling = float(len(edges.keys())) / (len(nodes_set) * (len(nodes_set) - 1))
         print 'unweighted coupling = %r' % unweighted_coupling
-        #print 'weighted coupling = %r' % (float(self.get_weighted(None, None, edges)) / action_count)
+        # print 'weighted coupling = %r' % (float(self.get_weighted(None, None, edges)) / action_count)
         print 'weighted coupling = %r' % self.get_weighted(None, None, edges)
 
     def get_change_impact_by_formula(self, edges, change_list):
@@ -1276,7 +1289,8 @@ class KTV:
         edges_set = set()
         limit_level = 1
         while True:
-            edges_set = self.calculate_change_impact_by_formula(edges, edges_set, change_list, change_impact_dict, limit_level)
+            edges_set = self.calculate_change_impact_by_formula(edges, edges_set, change_list, change_impact_dict,
+                                                                limit_level)
             if limit_level - 1 in change_impact_dict.keys():
                 if change_impact_dict[limit_level] == change_impact_dict[limit_level - 1]:
                     break
