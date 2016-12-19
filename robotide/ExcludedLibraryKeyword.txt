@@ -1,3 +1,11 @@
+#檔案格式：
+#keyword之名稱[, option]
+#
+#keyword之名稱可以是任何不含','之字串
+#option可以是(注意大小寫及空格)
+#	ShowNode=True，代表顯示此node但不顯示其子孫
+#	ShowNode=False(預設值)，代表不顯示此node也不顯示其子孫
+#
 #以下都不顯示node
 Keyword Should Exist
 Length Should Be
