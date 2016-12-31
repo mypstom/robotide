@@ -27,6 +27,8 @@ class KTV:
         # self.duplicatedactiondetection = LongestCommonSubsequence()
         self.duplicatedactiondetection = LongestRepeatedSubstring()
 
+        self.serial_number_flag = True
+
     def setDataFiles(self, datafiles):
         self.datafiles = datafiles
 
@@ -794,20 +796,6 @@ class KTV:
                             userkeyword.steps[index].insert_after(newStep)
                             index += 2
 
-    """print('testCase.steps')
-    for df in self.datafiles:
-        if len(df.tests._items) > 0:
-            for testCase in df.tests:
-                for step in testCase.steps:
-                    print 'keyword = %r args = %r comment = %r' %(step.keyword, step.args, step._get_comment(step.as_list()))"""
-
-    """def insertScreenShotIntoUK(self, userKeyword):
-        for object in self.userKeywordObject:
-            if object.name == userKeyword.display_name:
-                for step in object.steps:
-                    newStep = Step(['Capture Page Screenshot', TestSuiteScreenShotPath + TestCaseScreenShotPath + str(
-                                        screenShotCount) + '.png'], 'KTV')"""
-
     def removeScreenShot(self):
         for df in self.datafiles:
             if len(df.tests._items) > 0:
@@ -820,14 +808,6 @@ class KTV:
                     for step in userkeyword.steps:
                         if (step._get_comment(step.as_list()) == 'KTV'):
                             step.remove()
-
-    """print('remove')
-    print('testCase.steps')
-    for df in self.datafiles:
-        if len(df.tests._items) > 0:
-            for testCase in df.tests:
-                for step in testCase.steps:
-                    print 'keyword = %r args = %r comment = %r' %(step.keyword, step.args, step._get_comment(step.as_list()))"""
 
     def duplicatedActionDetection(self):
         start_time = time.time()
@@ -850,13 +830,13 @@ class KTV:
             print e
             self.ShowMessage(str(e))
             raise e"""
-        self.build_model(filepath, nodes, edges, nodesWithType)
+        nodes = self.build_model(filepath, nodes, edges, nodesWithType)
         for item in edges.keys():
             edgeSet.add(item)
-        for item in nodes:
-            nodes_set.add(item)
+        """for item in nodes:
+            nodes_set.add(item)"""
 
-        for node in nodes_set:
+        for node in nodes:
             tempDepend = list()
             for item in edgeSet:
                 if item[0] == node:
@@ -981,78 +961,48 @@ class KTV:
                                 if len(args) > 0 and data_list[0].split('=')[1].strip('\n') not in excluded_node_show:
                                     C_set.add(args.split(',')[0])
 
-        print 'LK:%r' % len(LK_list)
+        print 'EVENT : %r' % len(LK_list)
         action_count = len(LK_list)
 
-        """
-        for testsuite in TS_list:
-            for testcase in TC_list:
-                if testcase[0] == testsuite:
-                    edges.append((testsuite, testcase[1]))  # add TS to TC edgs
+        serial_number = dict()
+        if self.serial_number_flag:
+            for index in range(len(TS_list)):
+                serial_number[TS_list[index]] = 'S' + '{:02d}'.format(index)
+                TS_list[index] = serial_number[TS_list[index]]
+            for index in range(len(TC_list)):
+                serial_number[TC_list[index][1]] = 'T' + '{:02d}'.format(index)
+                if TC_list[index][0] in serial_number:
+                    TC_list[index][0] = serial_number[TC_list[index][0]]
+                TC_list[index][1] = serial_number[TC_list[index][1]]
+            count = 0
+            for index in range(len(UK_list)):
+                if UK_list[index][1] not in serial_number:
+                    serial_number[UK_list[index][1]] = 'U' + '{:02d}'.format(count)
+                    count += 1
+                UK_list[index][1] = serial_number[UK_list[index][1]]
+            for index in range(len(UK_list)):
+                if UK_list[index][0] in serial_number:
+                    UK_list[index][0] = serial_number[UK_list[index][0]]
+            C_list = list(C_set)
+            for index in range(len(C_list)):
+                serial_number[C_list[index]] = 'C' + '{:03d}'.format(index)
+                C_list[index] = serial_number[C_list[index]]
+            C_set = set(C_list)
+            for node in nodesWithType:
+                node = serial_number[node]
+            count = 0
+            for index in range(len(LK_list)):
+                if LK_list[index][1] not in serial_number:
+                    serial_number[LK_list[index][1]] = 'L' + '{:02d}'.format(count)
+                    count += 1
+                if LK_list[index][0] in serial_number:
+                    LK_list[index][0] = serial_number[LK_list[index][0]]
+                args = LK_list[index][2].split(',')
+                for arg in args:
+                    if arg in serial_number:
+                        LK_list[index][2] = LK_list[index][2].replace(arg, serial_number[arg])
+                LK_list[index][1] = serial_number[LK_list[index][1]]
 
-        for testcase in TC_list:
-            for LK in LK_list:
-                if LK[0] == testcase[1]:
-                    edges.append((testcase[1], LK[1]))  # add TC to LK edgs
-            for LK in UK_list:
-                if LK[0] == testcase[1]:
-                    edges.append((testcase[1], LK[1]))  # add TC to UK edgs
-        # print 'UK_list size = %r' % len(UK_list)
-        temp = list()
-        for LK in UK_list:
-            contain = False
-            for item in temp:
-                if LK[1] == item[1] and LK[0] == item[0]:
-                    contain = True
-                    break
-            if not contain:
-                temp.append(LK)
-        UK_list = list(temp)
-        # print 'UK_list size = %r' % len(UK_list)
-        for LK in UK_list:
-            for UK2 in UK_list:  # add UK to UK edges
-                if LK[1] == UK2[0]:
-                    edges.append((LK[1], UK2[1]))
-        del temp[:]
-        for LK in UK_list:
-            contain = False
-            for item in temp:
-                if LK[1] == item[1]:
-                    contain = True
-                    break
-            if not contain:
-                temp.append(LK)
-        UK_list = list(temp)
-        for LK in UK_list:
-            for LK in LK_list:  # add UK to LK edges
-                if LK[1] == LK[0]:
-                    edges.append((LK[1], LK[1]))
-        # print 'LK_list size = %r' % len(LK_list)
-        del temp[:]
-        for LK in LK_list:
-            if LK not in temp:
-                temp.append(LK)
-        LK_list = list(temp)
-        # print 'LK_list size = %r' % len(LK_list)
-        for LK in LK_list:
-            for arg in LK[2].split(','):
-                if len(LK[2]) > 0 and arg == LK[2].split(',')[0]:
-                    if arg not in C_dict:  # C_dict [ component ] = parentList
-                        C_dict[arg] = list()
-                    if LK[1] not in C_dict[arg]:  # remove repeated LK~C edges
-                        C_dict[arg].append(LK[1])
-                        edges.append((LK[1], arg))  # add LK to C edges
-        del temp[:]
-        for LK in LK_list:
-            contain = False
-            for item in temp:
-                if LK[1] == item[1]:
-                    contain = True
-                    break
-            if not contain:
-                temp.append(LK)
-        LK_list = list(temp)
-        """
         for TS in TS_list:
             nodes.add(TS)
             nodesWithType[TS] = 'TestSuite'
@@ -1090,7 +1040,7 @@ class KTV:
             self.set_level(TC_list, UK_list, LK_list, C_set, nodesWithType, node_level, TS, 0)
         # print node_level
         self.build_edges(node_level, edges, TC_list, UK_list, LK_list, C_set, nodesWithType)
-        print 'weighted coupling = %r\n--------------------' % self.get_weighted(None, None, edges)
+        # print 'weighted coupling = %r\n--------------------' % self.get_weighted(None, None, edges)
         self.remove_redundant_edges(edges, node_level, nodesWithType, UK_list, LK_list)
         # print 'temp = %r' % self.get_weighted('NewCrosswordByValidGridSize', 'SelectCrosswordSageWindow', edges)
         # print edges
@@ -1132,16 +1082,18 @@ class KTV:
         change_impact_dict = self.get_change_impact_by_formula(edges, ['File|New Crossword'])
         print change_impact_dict"""
 
-        # print (self.get_decendant('NewCrosswordByGridSize', edges, 4, 8))
-        self.tree_layout(node_level, edges,nodesWithType)
-        # print node_level['crosswordCell_0']
-
+        # print self.get_descendant('U12', edges, 2, 7)
+        level_node = self.tree_layout(node_level, edges)
+        node_list = []
+        for value in level_node.values():
+            node_list.extend(value)
+        print 'count = ' + str(len(node_list))
         self.calculate_coupling(nodes, edges, action_count)
-        # self.test()
+        self.test()
+        return node_list
 
     def set_level(self, TC_list, UK_list, LK_list, C_set, nodesWithType, node_level, current, current_level):
         type = nodesWithType[current]
-        # print current
         if current not in node_level.keys():
             node_level[current] = current_level
         else:
@@ -1351,45 +1303,108 @@ class KTV:
                 result.add(edge)
         return result
 
-    def tree_layout(self, node_level, edges, nodesWithType):
+    def build_node_parent_dict(self, max_level, node_level, edges):
+        node_parent_dict = dict()
+        for level in range(max_level + 1):
+            node_list = [node for node in node_level if node_level[node] == level]
+            for node in node_list:
+                for edge in edges:
+                    if edge[1] == node:
+                        if node not in node_parent_dict:
+                            node_parent_dict[node] = []
+                        node_parent_dict[node].append((edge[0], node_level[edge[0]]))
+        return node_parent_dict
+
+    def build_node_parent_dict_list(self, node_parent_dict):
+        node_parent_dict_list = []
+        common = {}
+        temp = []
+        temp_key = []
+        for key in node_parent_dict:
+            if len(node_parent_dict[key]) == 1:
+                common[key] = node_parent_dict[key][0]
+            else:
+                temp_key.append(key)
+                temp.append(node_parent_dict[key])
+        permutations = list(itertools.product(*temp))
+        for permutation in permutations:
+            d = common.copy()
+            for index in range(len(temp_key)):
+                d[temp_key[index]] = permutation[index]
+            node_parent_dict_list.append(d)
+        return node_parent_dict_list
+
+    def tree_layout(self, node_level, edges):
         level_node = dict()
-        node_x_position = dict()
+        node_descendant = dict()
         max_level = 0
         for level in node_level.values():
             max_level = max(max_level, level)
+        node_parent_dict = self.build_node_parent_dict(max_level, node_level, edges)
+        node_parent_dict_list = self.build_node_parent_dict_list(node_parent_dict)
+        # print 'len(node_parent_dict_list) = ' + str(len(node_parent_dict_list))
+        # print node_parent_dict
+        # print node_level
         for level in range(max_level + 1):
-            node_list = [node for node in node_level if node_level[node] == level and nodesWithType[node]!='Component']
+            if level - 1 not in level_node:
+                node_list = [node for node in node_level if node_level[node] == level]
+            else:
+                node_list = []
+                for parent in level_node[level - 1]:
+                    for node in self.get_descendant(parent, edges, level - 1, level):
+                        if node_level[node] == level:
+                            node_list.append(node)
+            level_node[level] = node_list[:]
+            """print '~~~~~~~~~~~~~~~~~~~~'
+            # print node_list
+            print 'level = ' + str(level) + ' count = ' + str(len(level_node[level]))
+            print level_node[level]
+            print '~~~~~~~~~~~~~~~~~~~~'"""
+        # print level_node
+        for level in range(max_level + 1):
+            """print '~~~~~~~~~~~~~~~~~~~~'
+            # print node_list
+            print 'level = ' + str(level)
+            print level_node[level]
+            print '~~~~~~~~~~~~~~~~~~~~'"""
             if level - 1 in level_node and len(level_node[level - 1]) > 1:
-                level_node[level] = []
                 for parent in level_node[level - 1]:
                     temp = []
-                    for node in node_list:
+                    for node in level_node[level]:
                         if node in self.get_descendant(parent, edges, level - 1, level):
                             temp.append(node)
-                    new_node_list = self.switch_node_order(temp, node_level, edges, max_level)
+                    if len(temp) == 0:
+                        continue
+                    new_node_list = self.switch_node_order(temp, node_level, edges, max_level, node_descendant,
+                                                           node_parent_dict_list, level_node)
+                    if len(temp) == 1:
+                        continue
+                    start = 999
+                    for node in new_node_list:
+                        start = min(start, level_node[level].index(node))
+                    end = start + len(temp)
+                    # print 'start = ' + str(start) + ' end = ' + str(end)
+                    temp = level_node[level][end:]
+                    level_node[level] = level_node[level][:start]
                     level_node[level].extend(new_node_list)
-                    size = len(new_node_list)
-                    if size == 0 or size == 1:
-                        for node in new_node_list:
-                            node_x_position[node] = node_x_position[parent]
-                    else:
-                        duration = node_x_position[level_node[level - 1][1]] - node_x_position[level_node[level - 1][0]]
-                        x_step = float("{0:.2f}".format(duration / size))
-                        x_start_position = node_x_position[parent] - duration / 2
-                        for node in new_node_list:
-                            node_x_position[node] = x_start_position
-                            x_start_position += x_step
+                    level_node[level].extend(temp)
+                    """print '!!!!!!!!!!!!!!!!!!!!!'
+                    print new_node_list
+                    print 'level = ' + str(level) + ' count = ' + str(len(level_node[level]))
+                    print level_node[level]
+                    print '!!!!!!!!!!!!!!!!!!!!!'"""
             else:
-                level_node[level] = self.switch_node_order(node_list, node_level, edges, max_level)
-                size = len(level_node[level])
-                x_step = float("{0:.2f}".format(1.0 / size))
-                x_start_position = 1.0 / (size + 1)
-                for node in level_node[level]:
-                    node_x_position[node] = x_start_position
-                    x_start_position += x_step
-            seen = set()
+                level_node[level] = self.switch_node_order(level_node[level], node_level, edges, max_level,
+                                                           node_descendant, node_parent_dict_list, level_node)
+            """seen = set()
             seen_add = seen.add
-            level_node[level] = [x for x in level_node[level] if not (x in seen or seen_add(x))]
+            level_node[level] = [x for x in level_node[level] if not (x in seen or seen_add(x))]"""
+            """print '!!!!!!!!!!!!!!!!!!!!!'
+            print 'level = ' + str(level) + ' count = ' + str(len(level_node[level]))
+            print level_node[level]
+            print '!!!!!!!!!!!!!!!!!!!!!'"""
+
+        node_x_position = self.tree_layout_x(level_node, node_descendant)
         string = ''
         with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'r+') as f:
             for line in f:
@@ -1400,58 +1415,110 @@ class KTV:
             f.write(string)
             # {"has":{"name":"doKeywordSearch"},"type":"position","x":0.7,"y":0.2,"weight":0.6},
             temp = ''
-            y_step = float("{0:.2f}".format(1.0 / (max_level + 1)))
+            y_step = float("{0:.4f}".format(1.0 / (max_level + 1)))
             y_start_position = 1.0 / (max_level + 2)
             for level in range(max_level + 1):
-                """size = len(level_node[level])
-                x_step = float("{0:.2f}".format(1.0 / size))
-                x_start_position = 1.0 / (size + 1)"""
                 for node in level_node[level]:
-                    """line = '\t\t{"has":{"name":"%s"},"type":"position","x":%.2f,"y":%.2f,"weight":0.9},' % (
-                        node, x_start_position, y_start_position)"""
                     if node in node_x_position:
-                        line = '\t\t{"has":{"name":"%s"},"type":"position","x":%.2f,"y":%.2f,"weight":0.9},' % (
+                        line = '\t\t{"has":{"name":"%s"},"type":"position","x":%.4f,"y":%.4f,"weight":0.6},' % (
                             node, node_x_position[node], y_start_position)
                     else:
-                        line = '\t\t{"has":{"name":"%s"},"type":"position","y":%.2f,"weight":0.9},' % (
+                        line = '\t\t{"has":{"name":"%s"},"type":"position","y":%.4f,"weight":0.6},' % (
                             node, y_start_position)
-                    # print line
-                    # x_start_position += x_step
                     temp += line + '\n'
                 y_start_position += y_step
             f.write(temp)
             f.seek(-3, 1)
             f.write('\n\t]\n}')
+        return level_node
 
-    def switch_node_order(self, node_list, node_level, edges, max_level):
+    def tree_layout_x(self, level_node, node_descendant):
+        node_x_position = dict()
+        root = level_node[0][0]
+        node_x_position[root] = 0.5
+        node_x_position = self.tree_layout_x_recursive(root, 1, level_node, (0.0, 1.0), node_descendant,
+                                                       node_x_position)
+        return node_x_position
+
+    def tree_layout_x_recursive(self, root, level, level_node, duration, node_descendant, node_x_position):
+        width = dict()
+        current_level_nodes = [node for node in level_node[level] if node in node_descendant[root]]
+        duration_list = []
+        total = 0
+        for node in current_level_nodes:
+            width[node] = len(node_descendant[node]) if len(node_descendant[node]) > 0 else 1
+            total += width[node]
+        left, right = duration[0], duration[1]
+        for node in current_level_nodes:
+            right = float("{0:.4f}".format(left + float(width[node]) / total * (duration[1] - duration[0])))
+            duration_list.append((left, right))
+            node_x_position[node] = float("{0:.4f}".format((right + left) / 2))
+            left = right
+        for node in current_level_nodes:
+            if len(node_descendant[node]) > 0:
+                node_x_position = self.tree_layout_x_recursive(node, level + 1, level_node,
+                                                               duration_list[current_level_nodes.index(node)],
+                                                               node_descendant, node_x_position)
+        return node_x_position
+
+    def switch_node_order(self, node_list, node_level, edges, max_level, node_descendant, node_parent_dict_list,
+                          level_node):
         current_level_descendant_list = dict()
         for node in node_list:
             current_level_descendant_list[node] = self.get_descendant(node, edges, node_level[node], max_level)
+            node_descendant[node] = current_level_descendant_list[node]
+            # print node
+        """print 'level = ' + str(node_level[node_list[0]])
+        print 'node_list = ' + str(node_list)"""
         total_cross = 0
         for node in node_list:
-            total_cross += self.calculate_cross(node, node_list, current_level_descendant_list, edges)
-        """print 'old node_list = '
-        print node_list"""
-        redo = True
-        while redo:
-            swap = False
-            for combinations in itertools.combinations(node_list, 2):
-                new_node_list = node_list[:]
-                index1, index2 = node_list.index(combinations[0]), node_list.index(combinations[1])
-                new_node_list[index1], new_node_list[index2] = node_list[index2], node_list[index1]
-                new_total_cross = 0
-                for node in node_list:
-                    new_total_cross += self.calculate_cross(node, new_node_list, current_level_descendant_list, edges)
-                if new_total_cross < total_cross:
+            total_cross += self.calculate_cross(node, node_list, current_level_descendant_list, edges,
+                                                node_parent_dict_list[0], node_level, level_node)
+        # print 'total_cross = ' + str(total_cross)
+        # print 'old node_list = ' + str(node_list)
+        for index in range(len(node_parent_dict_list)):
+            redo = True
+            while redo:
+                swap = False
+                for combinations in itertools.combinations(node_list, 2):
+                    level = node_level[node_list[0]]
+                    # print 'level = ' + str(level)
+                    new_node_list = node_list[:]
+                    new_level_node = {}
+                    for key in level_node:
+                        new_level_node[key] = level_node[key][:]
+                    index1, index2 = node_list.index(combinations[0]), node_list.index(combinations[1])
+                    new_node_list[index1], new_node_list[index2] = node_list[index2], node_list[index1]
+                    index1, index2 = new_level_node[level].index(combinations[0]), new_level_node[level].index(
+                        combinations[1])
+                    new_level_node[level][index1], new_level_node[level][index2] = level_node[level][index2], \
+                                                                                   level_node[level][index1]
+                    new_total_cross = 0
+                    for node in node_list:
+                        new_total_cross += self.calculate_cross(node, new_node_list, current_level_descendant_list,
+                                                                edges, node_parent_dict_list[index], node_level,
+                                                                new_level_node)
+                    """print node_list
+                    print new_node_list
+                    print 'new_total_cross = ' + str(new_total_cross)"""
                     """print 'total cross = %d\tnew total cross = %d' % (total_cross, new_total_cross)
                     print combinations"""
-                    total_cross = new_total_cross
-                    node_list = new_node_list[:]
-                    del new_node_list[:]
-                    swap = True
-                    break
-            if not swap:
-                redo = False
+                    if new_total_cross < total_cross:
+                        # print 'change!!!!!!!!!'
+                        """if level == 2:
+                            print 'new node_list = ' + str(new_node_list)
+                            print 'old level_node[level] = ' + str(level_node[level])"""
+                        total_cross = new_total_cross
+                        node_list = new_node_list[:]
+                        level_node[level] = new_level_node[level][:]
+                        """if level == 2:
+                            print 'new level_node[level] = ' + str(level_node[level])"""
+                        del new_node_list[:]
+                        new_level_node.clear()
+                        swap = True
+                        break
+                if not swap:
+                    redo = False
         """print 'new node_list = '
         print node_list"""
         return node_list
@@ -1473,30 +1540,74 @@ class KTV:
             del temp[:]
         return result
 
-    def calculate_cross(self, current_node, current_level_node_list, current_level_descendant_list, edges):
+    def calculate_cross(self, current_node, current_level_node_list, current_level_descendant_list, edges,
+                        node_parent_dict, node_level, level_node):
         cross = 0
         descendant = current_level_descendant_list[current_node]
+        parent_list = []
         for node in descendant:
-            parent_list = []
             for edge in edges:
-                if edge[1] == node:
+                if edge[1] == node and edge[0] not in parent_list:
+                    parent_list.append((edge[0], node_level[edge[0]]))
+                    # print 'parent_list = ' + str(parent_list)
+        """print '-------------------'
+        print level_node
+        print '-------------------'"""
+        for node in parent_list:
+            temp = (current_node, node_level[current_node])
+            parent = node
+            while True:
+                if parent[1] == temp[1]:
+                    break
+                elif parent[1] > temp[1]:
+                    parent = node_parent_dict[parent[0]]
+                else:
+                    temp = node_parent_dict[temp[0]]
+            level = temp[1]
+            """if node_level[current_node] == 2:
+                print 'current level = ' + str(level)
+                print 'level_node[level] = ' + str(level_node[level])
+                print 'parent[0] = ' + parent[0] + '\ttemp[0] = ' + temp[0]"""
+            cross += math.fabs(level_node[level].index(parent[0]) - level_node[level].index(temp[0]))
+        """for node in descendant:
+            for edge in edges:
+                if edge[1] == node and edge[0] not in parent_list:
                     parent_list.append(edge[0])
-            # print parent_list
-            for parent in parent_list:
-                if parent not in descendant and parent != current_node:
-                    for current_level_node in current_level_node_list:
-                        if current_level_node == current_node:
-                            continue
-                        # print current_level_node
-                        if parent in current_level_descendant_list[current_level_node] or parent == current_level_node:
-                            cross += current_level_node_list.index(current_level_node)
+        # print 'parent_list = ' + str(parent_list)
+        # cross_level_list = []
+        for parent in parent_list:
+            if parent not in descendant and parent != current_node:
+                for current_level_node in current_level_node_list:
+                    if current_level_node == current_node:
+                        continue
+                    # print current_level_node
+                    if parent in current_level_descendant_list[current_level_node] or parent == current_level_node:
+                        cross += current_level_node_list.index(current_level_node)
+                        # print 'cross !!! %r' % (parent)
+                    else:
+                        cross_level_list.append(parent)
+                        # for parent in cross_level_list:"""
+
         return cross
 
     def test(self):
-        a = ['A', 'B', 'C']
+        """a = ['A', 'B', 'C']
         e = [('A', 'D'), ('D', 'E'), ('C', 'F'), ('C', 'E')]
         d = {'A': set(['D', 'E']), 'B': set(), 'C': set(['E', 'F'])}
+        npd = {'D': ('A', 0), 'E': ('A', 0), 'F': ('C', 0)}
+        nl = {'A': 0, 'B': 0, 'C': 0, 'D': 1, 'E': 1, 'F': 1}
+        ln = {0: ['A', 'B', 'C'], 1: ['D', 'E', 'F']}
         print self.get_descendant('A', e, 0, 2)
         print self.get_descendant('B', e, 0, 2)
         print self.get_descendant('C', e, 0, 2)
-        print self.calculate_cross('A', a, d, e)
+        print self.calculate_cross('A', a, d, e, npd, nl, ln)
+
+        print ln
+        # nln = ln.copy()
+        nln = {}
+        for key in ln:
+            nln[key] = ln[key][:]
+        i1, i2 = ln[0].index('A'), ln[0].index('C')
+        nln[0][i1], nln[0][i2] = ln[0][i2], ln[0][i1]
+        print ln
+        print nln"""
