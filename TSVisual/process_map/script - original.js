@@ -59,8 +59,6 @@ function drawGraph() {
         var obj = graph.data[name];
         obj.positionConstraints = [];
         obj.linkStrength        = 1;
-		
-		obj.fixed = true; // fixed node position
 
         config.constraints.forEach(function(c) {
             for (var k in c.has) {
@@ -71,13 +69,11 @@ function drawGraph() {
 
             switch (c.type) {
                 case 'position':
-					obj.x = c.x * graph.width;
-					obj.y = c.y * graph.height;
-                    /*obj.positionConstraints.push({
+                    obj.positionConstraints.push({
                         weight : c.weight,
                         x      : c.x * graph.width,
                         y      : c.y * graph.height
-                    });*/
+                    });
                     break;
 
                 case 'linkStrength':
