@@ -35,6 +35,7 @@ from .notebook import NoteBook
 from .progress import LoadProgressObserver
 
 from robotide.KTV.KTV import KTV
+import time
 
 _menudata = """
 [File]
@@ -306,7 +307,10 @@ class RideFrame(wx.Frame, RideEventHandler):
 
     def OnDynamicGenerateGraph(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())
+        start_time = time.time()
         self.KTV.OnDynamicGenerateGraph(self._controller.suite.source)
+        elapsed_time = time.time() - start_time
+        print 'DynamicGenerateGraph elapsed_time = %s' % elapsed_time
 
     def OnInsertScreenShot(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())

@@ -1316,10 +1316,9 @@ class KTV:
                         if node not in node_parent_dict:
                             node_parent_dict[node] = []
                         node_parent_dict[node].append((edge[0], node_level[edge[0]]))
-        # print node_parent_dict
         for key in node_parent_dict:
-            node_parent_dict[key] = sorted(node_parent_dict[key], key=lambda x: abs(node_level[key] - node_level[x[0]]))
-        # print node_parent_dict
+            node_parent_dict[key] = sorted(node_parent_dict[key],
+                                           key=lambda x: (abs(node_level[key] - node_level[x[0]]), x[0]))
         return node_parent_dict
 
     def build_node_parent_dict_list(self, node_parent_dict):
@@ -1341,7 +1340,7 @@ class KTV:
             node_parent_dict_list.append(d)
         return node_parent_dict_list
 
-    def build_level_node(self, max_level, node_level, level_node, edges, node_descendant):
+    def build_level_node(self, max_level, node_level, level_node, edges, node_descendant, node_parent_dict):
         for level in range(max_level + 1):
             if level - 1 not in level_node:
                 node_list = [node for node in node_level if node_level[node] == level]
@@ -1349,7 +1348,8 @@ class KTV:
                 node_list = []
                 for parent in level_node[level - 1]:
                     for node in self.get_descendant(parent, edges, level - 1, level):
-                        if node_level[node] == level and node not in node_list:
+                        if node_level[node] == level and node not in node_list \
+                                and parent == node_parent_dict[node][0][0]:
                             node_list.append(node)
             level_node[level] = node_list[:]
             """seen = set()
@@ -1359,13 +1359,14 @@ class KTV:
                 node_descendant[node] = self.get_descendant(node, edges, node_level[node], max_level)
             del node_list[:]
 
-    def rebuild_level_node(self, start_level, max_level, node_level, level_node, edges):
+    def rebuild_level_node(self, start_level, max_level, node_level, level_node, edges, node_parent_dict):
         for level in range(start_level, max_level + 1):
             level_node_list = []
             for parent in level_node[level - 1]:
                 node_list = []
                 for node in self.get_descendant(parent, edges, level - 1, level):
-                    if node_level[node] == level and node not in level_node_list:
+                    if node_level[node] == level and node not in level_node_list and parent == \
+                            node_parent_dict[node][0][0]:
                         node_list.append(node)
                 for index in range(len(level_node[level])):
                     temp = level_node[level][index:index + len(node_list)]
@@ -1382,33 +1383,34 @@ class KTV:
         for level in node_level.values():
             max_level = max(max_level, level)
         node_parent_dict = self.build_node_parent_dict(max_level, node_level, edges)
-        self.build_level_node(max_level, node_level, level_node, edges, node_descendant)
+        self.build_level_node(max_level, node_level, level_node, edges, node_descendant, node_parent_dict)
         for level in range(max_level + 1):
             if len(level_node[level]) > 1:
                 top_node = level_node[level - 1][0]
                 break
-        redo = True
-        while redo:
-            for level in range(1, max_level + 1):
-                level_node_list = []
-                for parent in level_node[level - 1]:
-                    temp = []
-                    for node in level_node[level]:
-                        if node in self.get_descendant(parent, edges, level - 1, level) and node not in level_node_list:
-                            temp.append(node)
-                    if len(temp) == 0:
-                        continue
-                    level_node_list.extend(temp)
-                    change = self.switch_node_order(temp, node_level, edges, max_level, node_parent_dict, level_node,
-                                                    top_node)
-                if change:
+        # redo = True
+        # while redo:
+        for level in range(1, max_level + 1):
+            level_node_list = []
+            for parent in level_node[level - 1]:
+                temp = []
+                for node in level_node[level]:
+                    if node in self.get_descendant(parent, edges, level - 1, level) and node not in level_node_list \
+                            and parent == node_parent_dict[node][0][0]:
+                        temp.append(node)
+                if len(temp) == 0:
+                    continue
+                level_node_list.extend(temp)
+                change = self.switch_node_order(temp, node_level, edges, max_level, node_parent_dict, level_node,
+                                                top_node)
+                """if change:
                     break
             if change:
                 change = False
             else:
-                redo = False
+                redo = False"""
 
-        node_x_position = self.tree_layout_x(level_node, node_descendant, edges)
+        node_x_position = self.tree_layout_x(level_node, node_descendant, edges, node_parent_dict)
         string = ''
         leaf_number = len([node for node in node_level if len(node_descendant[node]) == 0])
         print 'leaf_number = ' + str(leaf_number)
@@ -1457,17 +1459,19 @@ class KTV:
                 count += 1
         return count
 
-    def tree_layout_x(self, level_node, node_descendant, edges):
+    def tree_layout_x(self, level_node, node_descendant, edges, node_parent_dict):
         node_x_position = dict()
         root = level_node[0][0]
         node_x_position[root] = 0.5
         node_x_position = self.tree_layout_x_recursive(root, 1, level_node, (0.0, 1.0), node_descendant,
-                                                       node_x_position, edges)
+                                                       node_x_position, edges, node_parent_dict)
         return node_x_position
 
-    def tree_layout_x_recursive(self, root, level, level_node, duration, node_descendant, node_x_position, edges):
+    def tree_layout_x_recursive(self, root, level, level_node, duration, node_descendant, node_x_position, edges,
+                                node_parent_dict):
         width = dict()
-        current_level_nodes = [node for node in level_node[level] if node in node_descendant[root]]
+        current_level_nodes = [node for node in level_node[level] if
+                               node in node_descendant[root] and root == node_parent_dict[node][0][0]]
         duration_list = []
         total = 0
         for node in current_level_nodes:
@@ -1481,9 +1485,10 @@ class KTV:
             left = right
         for node in current_level_nodes:
             if len(node_descendant[node]) > 0:
-                node_x_position = self.tree_layout_x_recursive(node, level + 1, level_node,
+                node_x_position = self.tree_layout_x_recursive(node, level + 1, level_node,  # (0.0, 1.0),
                                                                duration_list[current_level_nodes.index(node)],
-                                                               node_descendant, node_x_position, edges)
+                                                               node_descendant, node_x_position, edges,
+                                                               node_parent_dict)
         return node_x_position
 
     def switch_node_order(self, node_list, node_level, edges, max_level, node_parent_dict, level_node, top_node):
@@ -1495,26 +1500,33 @@ class KTV:
             swap = False
             for combinations in itertools.combinations(node_list, 2):
                 level = node_level[node_list[0]]
-                new_node_list = node_list[:]
                 new_level_node = {}
                 for key in level_node:
                     new_level_node[key] = level_node[key][:]
-                index1, index2 = node_list.index(combinations[0]), node_list.index(combinations[1])
-                new_node_list[index1], new_node_list[index2] = node_list[index2], node_list[index1]
-                index1, index2 = new_level_node[level].index(combinations[0]), new_level_node[level].index(
+                # index1, index2 = node_list.index(combinations[0]), node_list.index(combinations[1])
+                index1, index2 = level_node[level].index(combinations[0]), level_node[level].index(
                     combinations[1])
                 new_level_node[level][index1], new_level_node[level][index2] = level_node[level][index2], \
                                                                                level_node[level][index1]
-                self.rebuild_level_node(level + 1, max_level, node_level, new_level_node, edges)
+                """print '---------------------------'
+                print 'level = ' + str(level)
+                print 'old level_node'
+                print level_node[level]
+                print 'new_level_node'
+                print new_level_node[level]
+                print '---------------------------'
+                print 'enter new_level_node'"""
+                self.rebuild_level_node(level + 1, max_level, node_level, new_level_node, edges, node_parent_dict)
+                # print 'leave new_level_node'
                 new_total_cross = 0
                 new_total_cross += self.calculate_cross(top_node, edges, max_level, node_parent_dict, node_level,
                                                         new_level_node)
                 if new_total_cross < total_cross:
                     total_cross = new_total_cross
-                    node_list = new_node_list[:]
                     level_node[level] = new_level_node[level][:]
-                    self.rebuild_level_node(level + 1, max_level, node_level, level_node, edges)
-                    del new_node_list[:]
+                    # print 'enter level_node'
+                    self.rebuild_level_node(level + 1, max_level, node_level, level_node, edges, node_parent_dict)
+                    # print 'leave level_node'
                     new_level_node.clear()
                     swap = True
                     change = True
@@ -1547,7 +1559,8 @@ class KTV:
             for parent in level_node[level - 1]:
                 node_list = []
                 for node in level_node[level]:
-                    if node in self.get_descendant(parent, edges, level - 1, level) and node not in level_node_list:
+                    if node in self.get_descendant(parent, edges, level - 1, level) and node not in level_node_list \
+                            and parent == node_parent_dict[node][0][0]:
                         node_list.append(node)
                 cross_list = []
                 for node in node_list:
@@ -1567,7 +1580,6 @@ class KTV:
         return cross
 
     def calculate_subcross(self, node_list, cross_list, node_level, level_node, node_parent_dict):
-        print node_list
         size = len(node_list)
         if size == 1 or len(cross_list) == 0:
             return 0

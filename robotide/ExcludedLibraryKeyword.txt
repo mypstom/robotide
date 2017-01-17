@@ -35,7 +35,6 @@ Should Start With
 Variable Should Exist
 Variable Should Not Exist
 
-#測試用
 
 
 
