@@ -32,7 +32,7 @@ class PreviewPlugin(Plugin, TreeAwarePluginMixin):
         self._panel = None
 
     def enable(self):
-        self.register_action(ActionInfo('Tools','Preview', self.OnShowPreview,
+        self.register_action(ActionInfo('Tools', 'Preview', self.OnShowPreview,
                                         shortcut='F6',
                                         doc='Show preview of the current file',
                                         position=71))
@@ -53,7 +53,9 @@ class PreviewPlugin(Plugin, TreeAwarePluginMixin):
         return self.tab_is_visible(self._panel)
 
     def OnShowPreview(self, event):
+        # print 'OnShowPreview'
         if not self._panel:
+            # print 'new PreviewPanel'
             self._panel = PreviewPanel(self, self.notebook)
         self.show_tab(self._panel)
         self._update_preview()
@@ -66,6 +68,7 @@ class PreviewPlugin(Plugin, TreeAwarePluginMixin):
         self._update_preview()
 
     def _update_preview(self, event=None):
+        # print '_update_preview'
         if self.is_focused() and self.datafile:
             self._panel.update_preview()
 
@@ -125,7 +128,7 @@ class PreviewPanel(wx.Panel):
 
     def _create_view(self, view_class):
         view = view_class(self)
-        self.Sizer.Add(view, 1, wx.EXPAND|wx.ALL, border=8)
+        self.Sizer.Add(view, 1, wx.EXPAND | wx.ALL, border=8)
         self.Sizer.Layout()
         return view
 
@@ -160,7 +163,6 @@ class PreviewPanel(wx.Panel):
 
 
 class HtmlView(wx.html.HtmlWindow):
-
     def __init__(self, parent):
         wx.html.HtmlWindow.__init__(self, parent)
         self.SetStandardFonts()
@@ -174,7 +176,7 @@ class HtmlView(wx.html.HtmlWindow):
             self.ScrollToAnchor(anchor)
             self.ScrollLines(-1)
         else:
-            self.Scroll(0,0)
+            self.Scroll(0, 0)
 
     def _get_anchor(self, data):
         if isinstance(data, UserKeyword):
@@ -185,7 +187,6 @@ class HtmlView(wx.html.HtmlWindow):
 
 
 class TxtView(wx.TextCtrl):
-
     def __init__(self, parent):
         wx.TextCtrl.__init__(self, parent, style=wx.TE_MULTILINE)
         self.SetEditable(False)

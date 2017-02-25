@@ -37,6 +37,8 @@ from .progress import LoadProgressObserver
 from robotide.KTV.KTV import KTV
 import time
 
+from robotide.publish import DuplicateDetection, RideLoadDatafileFinish
+
 _menudata = """
 [File]
 !&New Project | Create a new top level suite | Ctrlcmd-N
@@ -105,9 +107,16 @@ class RideFrame(wx.Frame, RideEventHandler):
             (lambda msg: self.SetStatusText('Saved all files'), RideSaveAll),
             (self._set_label, RideTreeSelection),
             (self._show_validation_error, RideInputValidationError),
-            (self._show_modification_prevented_error, RideModificationPrevented)
+            (self._show_modification_prevented_error, RideModificationPrevented),
+            (self._load_datafile_finish, RideLoadDatafileFinish)
         ]:
             PUBLISHER.subscribe(listener, topic)
+
+    """-----------------------------------------------------------------------"""
+    def _load_datafile_finish(self, data):
+        # print 'load finish'
+        DuplicateDetection(controller=self._get_datafile_list()).publish()
+    """-----------------------------------------------------------------------"""
 
     def _set_label(self, message):
         self.SetTitle(self._create_title(message))

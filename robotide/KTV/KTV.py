@@ -1508,20 +1508,13 @@ class KTV:
                     combinations[1])
                 new_level_node[level][index1], new_level_node[level][index2] = level_node[level][index2], \
                                                                                level_node[level][index1]
-                """print '---------------------------'
-                print 'level = ' + str(level)
-                print 'old level_node'
-                print level_node[level]
-                print 'new_level_node'
-                print new_level_node[level]
-                print '---------------------------'
-                print 'enter new_level_node'"""
                 self.rebuild_level_node(level + 1, max_level, node_level, new_level_node, edges, node_parent_dict)
                 # print 'leave new_level_node'
                 new_total_cross = 0
                 new_total_cross += self.calculate_cross(top_node, edges, max_level, node_parent_dict, node_level,
                                                         new_level_node)
                 if new_total_cross < total_cross:
+                    # print new_total_cross
                     total_cross = new_total_cross
                     level_node[level] = new_level_node[level][:]
                     # print 'enter level_node'
@@ -1534,6 +1527,48 @@ class KTV:
             if not swap:
                 redo = False
         return change
+
+    """def switch_node_order(self, node_list, node_level, edges, max_level, node_parent_dict, level_node, top_node):
+        total_cross = 0
+        total_cross += self.calculate_cross(top_node, edges, max_level, node_parent_dict, node_level, level_node)
+        change = False
+        redo = True
+        while redo:
+            swap = False
+            for i in xrange(len(node_list)):
+                for j in xrange(i + 1, len(node_list)):
+                    level = node_level[node_list[0]]
+                    new_level_node = {}
+                    for key in level_node:
+                        new_level_node[key] = level_node[key][:]
+                    start_index = level_node[level].index(node_list[i])
+                    temp = node_list[i]
+                    new_level_node[level].remove(temp)
+                    new_node_list = new_level_node[level][:start_index + j]
+                    new_node_list.append(temp)
+                    new_node_list.extend(new_level_node[level][start_index + j:])
+                    new_level_node[level] = new_node_list[:]
+                    self.rebuild_level_node(level + 1, max_level, node_level, new_level_node, edges, node_parent_dict)
+                    new_total_cross = 0
+                    new_total_cross += self.calculate_cross(top_node, edges, max_level, node_parent_dict, node_level,
+                                                            new_level_node)
+
+                    if new_total_cross < total_cross:
+                        # print new_total_cross
+                        total_cross = new_total_cross
+                        node_list = new_node_list[:]
+                        level_node[level] = new_level_node[level][:]
+                        self.rebuild_level_node(level + 1, max_level, node_level, level_node, edges, node_parent_dict)
+                        del new_node_list[:]
+                        new_level_node.clear()
+                        swap = True
+                        change = True
+                        break
+                if swap:
+                    break
+            if not swap:
+                redo = False
+        return change"""
 
     def get_descendant(self, root, edges, root_level, max_level):
         next_level_node = [edge[1] for edge in edges if edge[0] == root]
@@ -1567,12 +1602,20 @@ class KTV:
                     for edge in edges:
                         if edge[1] == node:
                             target_level = node_level[edge[0]]
+                            target_node = edge[0]
                             current_node = node
                             while target_level != node_level[current_node]:
                                 current_node = node_parent_dict[current_node][0][0]
-                            if edge[0] != current_node:
+                            """while node_parent_dict[target_node][0] != node_parent_dict[current_node][0]:
+                                current_node = node_parent_dict[current_node][0][0]
+                                target_node = node_parent_dict[target_node][0][0]
+                                target_level = node_level[target_node]"""
+                            if target_node != current_node:
                                 cross_list.append(edge)
-                                cross += math.fabs(level_node[target_level].index(edge[0]) -
+                                """print edge
+                                print math.fabs(level_node[target_level].index(target_node) -
+                                                level_node[target_level].index(current_node))"""
+                                cross += math.fabs(level_node[target_level].index(target_node) -
                                                    level_node[target_level].index(current_node))
                 subcross = self.calculate_subcross(node_list, cross_list, node_level, level_node, node_parent_dict)
                 cross += subcross
@@ -1599,10 +1642,13 @@ class KTV:
         subcross = 0.0
         for edge in cross_list:
             temp, node = edge
-            current_list = level_node[node_level[temp]]
             parent = node_parent_dict[node][0]
             while parent[1] != node_level[temp]:
                 parent = node_parent_dict[parent[0]][0]
+            """while node_parent_dict[parent[0]][0] != node_parent_dict[temp][0]:
+                parent = node_parent_dict[parent[0]][0]
+                temp = node_parent_dict[temp][0][0]"""
+            current_list = level_node[node_level[temp]]
             if current_list.index(temp) < current_list.index(parent[0]):
                 subcross += subcross_dict[node]
             else:

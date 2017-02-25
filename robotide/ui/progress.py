@@ -17,6 +17,7 @@ import time
 
 from robotide import context
 
+from robotide.publish import RideLoadDatafileFinish
 
 class ProgressObserver(object):
 
@@ -29,6 +30,10 @@ class ProgressObserver(object):
         self._progressbar.Pulse()
 
     def finish(self):
+        """------------------------------------------------------------------------------------------------"""
+        # print 'ProgressObserver finish'
+        RideLoadDatafileFinish().publish()
+        """------------------------------------------------------------------------------------------------"""
         self._progressbar.Destroy()
         context.LOG.report_parsing_errors()
 

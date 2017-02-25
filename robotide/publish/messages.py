@@ -121,7 +121,7 @@ class RideLogException(RideLog):
         if exc_traceback:
             tb = traceback.extract_tb(exc_traceback)
             message += '\n\nTraceback (most recent call last):\n%s\n%s' % \
-                (unicode(exception), ''.join(traceback.format_list(tb)))
+                       (unicode(exception), ''.join(traceback.format_list(tb)))
         RideMessage.__init__(
             self, message=message, level=level, notify_user=False,
             timestamp=utils.get_timestamp(), exception=exception)
@@ -151,33 +151,41 @@ class RideSettingsChanged(RideMessage):
 class RideExecuteSpecXmlImport(RideMessage):
     """Sent whenever spec xml import is requested"""
 
+
 class RideTreeSelection(RideMessage):
     """Sent whenever user selects a node from the tree."""
     data = ['node', 'item', 'silent']
+
 
 class RideOpenVariableDialog(RideMessage):
     """Sent when variable dialog is requested to be open"""
     data = ['controller']
 
+
 class RideTestExecutionStarted(RideMessage):
     """Sent whenever new test execution is started."""
     data = ['results']
+
 
 class RideTestSelectedForRunningChanged(RideMessage):
     """Sent whenever a test is selected or unselected from the tree."""
     data = ['tests']
 
+
 class RideTestRunning(RideMessage):
     """Sent whenever RIDE is starting to run a test case."""
     data = ['item']
+
 
 class RideTestPassed(RideMessage):
     """Sent whenever RIDE has executed a test case and it passed."""
     data = ['item']
 
+
 class RideTestFailed(RideMessage):
     """Sent whenever RIDE has executed a test case and it failed."""
     data = ['item']
+
 
 class RideNotebookTabChanging(RideMessage):
     """Sent when the notebook tab change has started.
@@ -274,11 +282,14 @@ class RideImportSetting(RideDataChanged):
     def name(self):
         return self.import_controller.name
 
+
 class _RideExcludes(RideMessage):
     data = ['old_controller', 'new_controller']
 
+
 class RideIncludesChanged(_RideExcludes):
     pass
+
 
 class RideExcludesChanged(_RideExcludes):
     pass
@@ -406,7 +417,22 @@ class RideVariableUpdated(RideDataChanged):
 
 class RideOpenTagSearch(RideMessage):
     """ Sent we when want to open Search Tags)"""
-    data = ['includes','excludes']
+    data = ['includes', 'excludes']
 
-__all__ = [ name for name, cls in globals().items()
-            if inspect.isclass(cls) and issubclass(cls, RideMessage) ]
+
+class RideLoadDatafileFinish(RideMessage):
+    """"""
+    pass
+
+
+class DuplicateDetection(RideMessage):
+    data = ['controller']
+
+
+class MyTreeSelectedItemChanged(RideMessage):
+    """ for my tree selected item changed"""
+    data = ['node', 'start', 'end']
+
+
+__all__ = [name for name, cls in globals().items()
+           if inspect.isclass(cls) and issubclass(cls, RideMessage)]
