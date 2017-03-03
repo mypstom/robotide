@@ -27,10 +27,8 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         PUBLISHER.subscribe(self.build_node_dict, DuplicateDetection)
 
     def build_tree(self, node_list):
-        self.create_group(self._root, self.group_count, 'duplicate_group' + str(self.group_count))
+        self.create_group(self._root, self.group_count, 'duplicate_group' + str(self.group_count + 1))
         for node in node_list:
-            #start, end = node_list[node]
-            #label = '%s    Line: %d ~ %d' % (node, start, end)
             self.create_item(self._group_nodes[self.group_count],
                              len(self._group_children_nodes[self._group_nodes[self.group_count]]), node)
         self.group_count += 1
@@ -46,7 +44,6 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
             for line in f:
                 if flag:
                     if line == '\n':
-                        print node_list
                         self.build_tree(node_list)
                         del node_list[:]
                         flag = False

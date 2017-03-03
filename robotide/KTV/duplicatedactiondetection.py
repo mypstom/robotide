@@ -151,7 +151,7 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
 
 
 class LongestRepeatedSubstring(DuplicatedActionDetection):
-    threshold = 3
+    threshold = 5
     token = '%$&*$#@'
 
     hash_table = {}
@@ -197,8 +197,11 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                     string += item
                 else:
                     string += str(self.hash_table[item])
+                    # string += item
                 string += ','
             string = string[:len(string) - 1]
+            # print 'all_step'
+            # print string
             start_time = time.time()
             result = self.maxRepeatedSubstring(string)
             elapsed_time = time.time() - start_time
@@ -229,21 +232,23 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                 if item in self.hash_table and self.hash_table[item] == int(lrs):
                     result.append(item)
                     break
+            """if lrs in all_step_list:
+                result.append(lrs)"""
+
+        # print result
 
         if len(result) < self.threshold:
             return True, all_step_list
 
         string = 'resultList = ['
         for item in result:
-            #if self.token in item:
-                #continue
             string += item
             string += ','
         string = string[:len(string) - 1] + ']'
         f.write(string)
         f.write('\n')
 
-        for df in datafiles:
+        """for df in datafiles:
             for testcase in df.tests:
                 start = 0
                 match = False
@@ -269,13 +274,39 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                             index2 = start
                             start = 0
                             match = False
-                    index2 += 1
+                    index2 += 1"""
+
+        for df in datafiles:
+            for test_case in df.tests:
+                region_list = []
+                for i in xrange(len(test_case.steps)):
+                    if test_case.steps[i].keyword == result[0] and i + len(result) <= len(test_case.steps):
+                        temp = [test_case.steps[i + j].keyword for j in xrange(len(result))]
+                        if temp == result:
+                            region_list.append(i)
+                for start in region_list:
+                    f.write('TC:' + str(test_case.name) + '\n')
+                    f.write(str(start + 1) + ' ~ ' + str(start + len(result)) + ' action duplicated\n')
+
+                del region_list[:]
+                self.rebuild_all_step_list(result, all_step_list)
 
         f.write('\n')
 
         return False, all_step_list
 
     def rebuild_all_step_list(self, result, all_step_list):
+        remove_set = set()
+        for i in xrange(len(all_step_list)):
+            if all_step_list[i] == result[0] and i + len(result) <= len(all_step_list):
+                temp = all_step_list[i:i + len(result)]
+                if temp == result:
+                    for j in xrange(len(result)):
+                        remove_set.add(i + j)
+        for index in reversed(sorted(remove_set)):  # because del will change the index
+            del all_step_list[index]
+
+    """def rebuild_all_step_list(self, result, all_step_list):
         temp = [item for item in all_step_list]
 
         new_step_list = list()
@@ -301,7 +332,7 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                     return new_step_list
             else:
                 return all_step_list
-        return all_step_list
+        return all_step_list"""
 
     def DetectionBetweenUKandUK(self, datafiles):
         f = open('UK2UKduplicated-LRS.txt', 'w+')

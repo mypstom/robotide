@@ -53,9 +53,7 @@ class PreviewPlugin(Plugin, TreeAwarePluginMixin):
         return self.tab_is_visible(self._panel)
 
     def OnShowPreview(self, event):
-        # print 'OnShowPreview'
         if not self._panel:
-            # print 'new PreviewPanel'
             self._panel = PreviewPanel(self, self.notebook)
         self.show_tab(self._panel)
         self._update_preview()
@@ -68,7 +66,6 @@ class PreviewPlugin(Plugin, TreeAwarePluginMixin):
         self._update_preview()
 
     def _update_preview(self, event=None):
-        # print '_update_preview'
         if self.is_focused() and self.datafile:
             self._panel.update_preview()
 

@@ -16,7 +16,6 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
 
         self.left_panel_show = False
         self.datafiles = None
-        #self.node_dict = {}
 
     def bind_event(self):
         PUBLISHER.subscribe(self.tree_selected_item_changed, MyTreeSelectedItemChanged)
@@ -24,24 +23,6 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
 
     def load_datafiles(self, data):
         self.datafiles = data.controller
-        """flag = False
-
-        with open('ScriptDuplicated-LRS.txt', 'r+') as f:
-            node = None
-            for line in f:
-                if flag:
-                    if line == '\n':
-                        flag = False
-                        # break
-                    if node is None:
-                        node = line.split(':')[1].strip('\n')
-                    else:
-                        temp = line[:len(line) - len('action duplicated\n')]
-                        region = (int(temp.split('~')[0]), int(temp.split('~')[1]))
-                        self.node_dict[node] = region
-                        node = None
-                if 'resultList' in line:
-                    flag = True"""
 
     def tree_selected_item_changed(self, data):
         node, start, end = data.node, data.start, data.end
@@ -56,12 +37,10 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
 
     def get_node_text_data(self, node):
         string = ''
-        # string = node + '\n'
         for df in self.datafiles:
             for testcase in df.tests:
                 if testcase.name == node:
                     for step in testcase.steps:
-                        # string += '\t' + str(step.keyword)
                         string += str(step.keyword)
                         for arg in step.args:
                             string += '\t' + arg
@@ -91,8 +70,6 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.notebook.add_tab(splitter, self.title, allow_closing=False)
 
     def create_duplicate_view(self, parent):
-        # font = wx.Font(18, wx.ROMAN, wx.ITALIC, wx.NORMAL)
-
         sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         left_panel = wx.Panel(parent)
@@ -112,11 +89,6 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.right_label, self.right_button = self.create_top_label_panel(right_top_panel, 'Preview 2')
         self.left_button.Bind(wx.EVT_BUTTON, self.left_button_click)
         self.right_button.Bind(wx.EVT_BUTTON, self.right_button_click)
-
-        """self.left_label = wx.StaticText(left_panel, label='Preview 1')
-        self.left_label.SetFont(font)
-        self.right_label = wx.StaticText(right_panel, label='Preview 2')
-        self.right_label.SetFont(font)"""
 
         left_sizer.Add(left_top_panel, 0, wx.TOP | wx.BOTTOM)
         left_sizer.Add(self.left_text, 1, wx.EXPAND)

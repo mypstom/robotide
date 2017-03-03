@@ -815,7 +815,7 @@ class KTV:
         start_time = time.time()
         self.duplicatedactiondetection.Excute(self.datafiles)
         elapsed_time = time.time() - start_time
-        print(elapsed_time)
+        print 'Duplicated Action elapsed_time %r' % elapsed_time
         self.ShowMessage('Duplicated Action Detection Finish')
 
     def OnDynamicGenerateGraph(self, filepath):
@@ -1006,6 +1006,8 @@ class KTV:
                         LK_list[index][2] = LK_list[index][2].replace(arg, serial_number[arg])
                 LK_list[index][1] = serial_number[LK_list[index][1]]
 
+        #print serial_number
+
         for TS in TS_list:
             nodes.add(TS)
             nodesWithType[TS] = 'TestSuite'
@@ -1086,12 +1088,12 @@ class KTV:
         print change_impact_dict"""
 
         # print self.get_descendant('U12', edges, 2, 7)
-        level_node = self.tree_layout(node_level, edges)
+        level_node = self.tree_layout(node_level, edges, action_count)
         node_list = []
         for value in level_node.values():
             node_list.extend(value)
         # print 'count = ' + str(len(node_list))
-        self.calculate_coupling(nodes, edges, action_count)
+        # self.calculate_coupling(nodes, edges, action_count)
         self.test()
         return node_list
 
@@ -1245,13 +1247,17 @@ class KTV:
         return count
 
     def calculate_coupling(self, nodes, edges, action_count):
-        nodes_set = set()
+        """nodes_set = set()
         for item in nodes:
-            nodes_set.add(item)
-        unweighted_coupling = float(len(edges.keys())) / (len(nodes_set) * (len(nodes_set) - 1))
+            nodes_set.add(item)"""
+        # unweighted_coupling = float(len(edges.keys())) / (len(nodes_set) * (len(nodes_set) - 1))
+        unweighted_coupling = float(len(edges.keys())) / (len(nodes) * (len(nodes) - 1))
         print 'unweighted coupling = %r' % unweighted_coupling
+        # weighted_coupling = float(self.get_weighted(None, None, edges)) / action_count
         # print 'weighted coupling = %r' % (float(self.get_weighted(None, None, edges)) / action_count)
+        weighted_coupling = self.get_weighted(None, None, edges)
         print 'weighted coupling = %r' % self.get_weighted(None, None, edges)
+        return weighted_coupling, unweighted_coupling
 
     def get_change_impact_by_formula(self, edges, change_list):
         change_impact_dict = dict()
@@ -1376,7 +1382,7 @@ class KTV:
             level_node[level] = level_node_list[:]
             del level_node_list[:]
 
-    def tree_layout(self, node_level, edges):
+    def tree_layout(self, node_level, edges, action_count):
         level_node = dict()
         node_descendant = dict()
         max_level = 0
@@ -1414,12 +1420,17 @@ class KTV:
         string = ''
         leaf_number = len([node for node in node_level if len(node_descendant[node]) == 0])
         print 'leaf_number = ' + str(leaf_number)
+        weighted_coupling, unweighted_coupling = self.calculate_coupling(node_level.keys(), edges, action_count)
         with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'r+') as f:
             for line in f:
                 if 'width' in line:
                     string += '		"width"        : %d,\n' % (leaf_number * 600)
                 elif 'height' in line:
                     string += '		"height"       : %d,\n' % ((max_level + 1) * 200)
+                elif 'unweightedCoupling' in line:
+                    string += '		"unweightedCoupling": %r,\n' % unweighted_coupling
+                elif 'weightedCoupling' in line:
+                    string += '		"weightedCoupling": %r,\n' % weighted_coupling
                 else:
                     string += line
                 if 'constraints' in line:
