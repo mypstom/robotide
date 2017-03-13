@@ -1,11 +1,12 @@
 import robotide
 
 import time
+import os
 from robotide.publish import DuplicateDetection
 
 
 class DuplicatedActionDetection:
-    def Excute(self, datafiles):
+    def Excute(self, datafiles, filepath):
         pass
 
 
@@ -59,7 +60,7 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
         # start the process...
         return self.all_lcs(mapping, self.lcs_mat(list1, list2), list1, list2, len(list1), len(list2))
 
-    def Excute(self, datafiles):
+    def Excute(self, datafiles, fliepath):
         self.DetectionBetweenUKandUK(datafiles)
         self.DetectionBetweenTCandTC(datafiles)
 
@@ -156,15 +157,16 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
 
     hash_table = {}
 
-    def Excute(self, datafiles):
+    def Excute(self, datafiles, filepath):
+        source = os.path.abspath(filepath)
         # self.DetectionBetweenUKandUK(datafiles)
         # self.DetectionBetweenTCandTC(datafiles)
-        self.DetectionAllScript(datafiles)
+        self.DetectionAllScript(datafiles, source)
         DuplicateDetection(controller=datafiles).publish()
 
-    def DetectionAllScript(self, datafiles):
+    def DetectionAllScript(self, datafiles, source):
         token_count = 1
-        f = open('ScriptDuplicated-LRS.txt', 'w+')
+        f = open(source + '\ScriptDuplicated-LRS.txt', 'w+')
         count = 1
         all_step_list = list()
         for df in datafiles:
@@ -211,7 +213,7 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
             f.write(str(elapsed_time))
             f.write('\n')
             if result is not None:
-                print result
+                # print result
                 is_finish, all_step_list = self.FindLRSResultPosition(result, all_step_list, datafiles, f)
                 if is_finish:
                     f.write('duplicated action length smaller than threshold\n')
@@ -276,6 +278,9 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                             match = False
                     index2 += 1"""
 
+        #print 'origin'
+        #print all_step_list
+
         for df in datafiles:
             for test_case in df.tests:
                 region_list = []
@@ -292,6 +297,9 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                 self.rebuild_all_step_list(result, all_step_list)
 
         f.write('\n')
+
+        #print 'after'
+        #print all_step_list
 
         return False, all_step_list
 
@@ -334,7 +342,7 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                 return all_step_list
         return all_step_list"""
 
-    def DetectionBetweenUKandUK(self, datafiles):
+    """def DetectionBetweenUKandUK(self, datafiles):
         f = open('UK2UKduplicated-LRS.txt', 'w+')
         for df in datafiles:
             i = 0
@@ -400,7 +408,7 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                     j += 1
                 i += 1
 
-        f.close()
+        f.close()"""
 
     def maxRepeatedSubstring(self, repeatedString):  # get longestSubString from string
         maxSubstringLength = len(repeatedString) - 1

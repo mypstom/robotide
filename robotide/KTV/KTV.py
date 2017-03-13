@@ -811,9 +811,9 @@ class KTV:
                         if (step._get_comment(step.as_list()) == 'KTV'):
                             step.remove()
 
-    def duplicatedActionDetection(self):
+    def duplicatedActionDetection(self, filepath):
         start_time = time.time()
-        self.duplicatedactiondetection.Excute(self.datafiles)
+        self.duplicatedactiondetection.Excute(self.datafiles, filepath)
         elapsed_time = time.time() - start_time
         print 'Duplicated Action elapsed_time %r' % elapsed_time
         self.ShowMessage('Duplicated Action Detection Finish')

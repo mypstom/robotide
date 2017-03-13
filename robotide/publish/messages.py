@@ -433,6 +433,10 @@ class MyTreeSelectedItemChanged(RideMessage):
     """ for my tree selected item changed"""
     data = ['node', 'start', 'end']
 
+class MyTreeBuildFinish(RideMessage):
+    """the time of build my tree finish"""
+    data = ['duplicated_actions']
+
 
 __all__ = [name for name, cls in globals().items()
            if inspect.isclass(cls) and issubclass(cls, RideMessage)]

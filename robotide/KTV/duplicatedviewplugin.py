@@ -3,7 +3,7 @@ import wx
 from robotide.pluginapi import Plugin, TreeAwarePluginMixin
 from robotide.KTV.tree import Tree
 
-from robotide.publish import PUBLISHER, MyTreeSelectedItemChanged, DuplicateDetection
+from robotide.publish import PUBLISHER, MyTreeSelectedItemChanged, DuplicateDetection, MyTreeBuildFinish
 
 STYLE_STDERR = 2
 
@@ -16,13 +16,31 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
 
         self.left_panel_show = False
         self.datafiles = None
+        self.total_actions = 0
 
     def bind_event(self):
         PUBLISHER.subscribe(self.tree_selected_item_changed, MyTreeSelectedItemChanged)
         PUBLISHER.subscribe(self.load_datafiles, DuplicateDetection)
+        PUBLISHER.subscribe(self.set_all_label, MyTreeBuildFinish)
+
+    def set_all_label(self, data):
+        self.total_label.SetLabel('Total actions : %d' % self.total_actions)
+        self.duplicated_label.SetLabel('Duplicated actions : %d' % data.duplicated_actions)
+        percentage = float(data.duplicated_actions) / self.total_actions * 100
+        self.percentage_label.SetLabel('Duplicated Percentage : %0.2f' % percentage + ' %')
 
     def load_datafiles(self, data):
         self.datafiles = data.controller
+        self.compute_actions_count()
+        self.my_tree.set_filepath(self.frame._controller.suite.source)
+        self.bottom_splitter.SetSashPosition(-250, True)
+
+    def compute_actions_count(self):
+        for df in self.datafiles:
+            for test_case in df.tests:
+                self.total_actions += len(test_case.steps)
+            for userKeyword in df.keywords:
+                self.total_actions += len(userKeyword.steps)
 
     def tree_selected_item_changed(self, data):
         node, start, end = data.node, data.start, data.end
@@ -61,10 +79,7 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.up = wx.Panel(splitter)
         self.down = wx.Panel(splitter)
         self.create_duplicate_view(self.up)
-        tree = Tree(self.down)
-        tree_size = wx.BoxSizer(wx.HORIZONTAL)
-        tree_size.Add(tree, 1, wx.EXPAND, 5)
-        self.down.SetSizer(tree_size)
+        self.create_bottom_tree_panel(self.down)
         splitter.SetMinimumPaneSize(100)
         splitter.SplitHorizontally(self.up, self.down, 500)
         self.notebook.add_tab(splitter, self.title, allow_closing=False)
@@ -123,6 +138,32 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         controller = self.get_controller(self.right_label.GetLabelText())
         self.tree.select_node_by_data(controller)
 
+    def create_bottom_tree_panel(self, parent):
+        self.bottom_splitter = wx.SplitterWindow(parent, style=wx.SP_LIVE_UPDATE)
+        sizer = wx.BoxSizer(wx.VERTICAL)
+        sizer.Add(self.bottom_splitter, 1, wx.EXPAND, 5)
+        parent.SetSizer(sizer)
+
+        left_panel = wx.Panel(self.bottom_splitter)
+        right_panel = wx.Panel(self.bottom_splitter)
+
+        self.my_tree = Tree(left_panel)
+        left_sizer = wx.BoxSizer(wx.HORIZONTAL)
+        left_sizer.Add(self.my_tree, 1, wx.EXPAND, 5)
+        left_panel.SetSizer(left_sizer)
+
+        self.total_label = wx.StaticText(right_panel, label='Total actions : ')
+        self.duplicated_label = wx.StaticText(right_panel, label='Duplicated actions : ')
+        self.percentage_label = wx.StaticText(right_panel, label='Duplicated Percentage : ')
+        right_sizer = wx.BoxSizer(wx.VERTICAL)
+        right_sizer.Add(self.total_label, 0, wx.EXPAND, 5)
+        right_sizer.Add(self.duplicated_label, 0, wx.EXPAND, 5)
+        right_sizer.Add(self.percentage_label, 0, wx.EXPAND, 5)
+        right_panel.SetSizer(right_sizer)
+
+        self.bottom_splitter.SetMinimumPaneSize(200)
+        self.bottom_splitter.SplitVertically(left_panel, right_panel)
+
     def get_controller(self, name):
         for df in self.datafiles:
             for testcase in df.tests:
@@ -133,8 +174,8 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
                     return userKeyword
 
     def enable(self):
-        self._create_ui()
         self.bind_event()
+        self._create_ui()
 
     def disable(self):
         pass

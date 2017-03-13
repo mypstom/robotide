@@ -342,7 +342,7 @@ class RideFrame(wx.Frame, RideEventHandler):
 
     def OnDuplicatedActionDetection(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())
-        self.KTV.duplicatedActionDetection()
+        self.KTV.duplicatedActionDetection(self._controller.suite.source)
 
     def _get_datafile_list(self):
         return [df for df in self._controller.datafiles]

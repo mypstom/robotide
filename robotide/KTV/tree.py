@@ -1,9 +1,10 @@
 import wx
+import os
 from wx.lib.agw import customtreectrl
 from wx.lib.mixins import treemixin
 from robotide.context import IS_WINDOWS
 
-from robotide.publish import PUBLISHER, MyTreeSelectedItemChanged, DuplicateDetection
+from robotide.publish import PUBLISHER, MyTreeSelectedItemChanged, DuplicateDetection, MyTreeBuildFinish
 
 _TREE_ARGS = {'style': wx.TR_DEFAULT_STYLE}
 
@@ -20,6 +21,10 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         treemixin.DragAndDrop.__init__(self, parent, **_TREE_ARGS)
         self._bind_tree_events()
         self._clear_tree_data()
+        self.duplicated_actions_count = 0
+
+    def set_filepath(self, filepath):
+        self.source = os.path.abspath(filepath)
 
     def _bind_tree_events(self):
         self.Bind(wx.EVT_LEFT_DCLICK, self.OnDoubleClick)
@@ -27,8 +32,13 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         PUBLISHER.subscribe(self.build_node_dict, DuplicateDetection)
 
     def build_tree(self, node_list):
-        self.create_group(self._root, self.group_count, 'duplicate_group' + str(self.group_count + 1))
+        temp = node_list[0].split('Line:')[1]
+        start, end = int(temp.split('~')[0]), int(temp.split('~')[1])
+        size = end - start + 1
+        self.create_group(self._root, self.group_count,
+                          'duplicate_group' + str(self.group_count + 1) + '    %d Lines' % size)
         for node in node_list:
+            self.duplicated_actions_count += size
             self.create_item(self._group_nodes[self.group_count],
                              len(self._group_children_nodes[self._group_nodes[self.group_count]]), node)
         self.group_count += 1
@@ -39,7 +49,7 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         self._clear_tree_data()
         node_list = []
         flag = False
-        with open('ScriptDuplicated-LRS.txt', 'r+') as f:
+        with open(self.source + '\ScriptDuplicated-LRS.txt', 'r+') as f:
             node = None
             for line in f:
                 if flag:
@@ -57,6 +67,7 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
                         node = None
                 if 'resultList' in line:
                     flag = True
+        MyTreeBuildFinish(duplicated_actions=self.duplicated_actions_count).publish()
 
     def OnDoubleClick(self, event):
         item, pos = self.HitTest(self.ScreenToClient(wx.GetMousePosition()))
@@ -75,6 +86,7 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         self._group_nodes = []
         self._group_children_nodes = {}
         self.group_count = 0
+        self.duplicated_actions_count = 0
 
     def create_node(self, parent_node, index, label):
         return self.InsertItemByIndex(parent_node, index, label)
