@@ -25,8 +25,8 @@ def get_core_plugins():
     from robotide.spec.specimporter import SpecImporterPlugin
 
     from robotide.KTV.duplicatedviewplugin import DuplicatedViewPlugin
+    from robotide.KTV.graphfilter import GraphFilter
 
     return [RunAnything, RecentFilesPlugin, PreviewPlugin, SpecImporterPlugin,
             EditorPlugin, TextEditorPlugin, KeywordSearch, LogPlugin, TestSearchPlugin,
-            DuplicatedViewPlugin]
-
+            DuplicatedViewPlugin, GraphFilter]

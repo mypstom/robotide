@@ -39,8 +39,8 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         for df in self.datafiles:
             for test_case in df.tests:
                 self.total_actions += len(test_case.steps)
-            for userKeyword in df.keywords:
-                self.total_actions += len(userKeyword.steps)
+            for user_keyword in df.keywords:
+                self.total_actions += len(user_keyword.steps)
 
     def tree_selected_item_changed(self, data):
         node, start, end = data.node, data.start, data.end

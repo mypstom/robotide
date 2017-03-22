@@ -5,6 +5,7 @@ from wx.lib.mixins import treemixin
 from robotide.context import IS_WINDOWS
 
 from robotide.publish import PUBLISHER, MyTreeSelectedItemChanged, DuplicateDetection, MyTreeBuildFinish
+import itertools
 
 _TREE_ARGS = {'style': wx.TR_DEFAULT_STYLE}
 
@@ -32,11 +33,17 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         PUBLISHER.subscribe(self.build_node_dict, DuplicateDetection)
 
     def build_tree(self, node_list):
-        temp = node_list[0].split('Line:')[1]
+        """temp = node_list[0].split('Line:')[1]
         start, end = int(temp.split('~')[0]), int(temp.split('~')[1])
-        size = end - start + 1
-        self.create_group(self._root, self.group_count,
-                          'duplicate_group' + str(self.group_count + 1) + '    %d Lines' % size)
+        size = end - start + 1"""
+        size, overlapping_lines = self.check_overlapping(node_list)
+        if overlapping_lines > 0:
+            self.create_group(self._root, self.group_count,
+                              'duplicate_group' + str(self.group_count + 1) +
+                              '    %d Lines    there are %d overlapping lines' % (size, overlapping_lines))
+        else:
+            self.create_group(self._root, self.group_count,
+                              'duplicate_group' + str(self.group_count + 1) + '    %d Lines' % size)
         for node in node_list:
             self.duplicated_actions_count += size
             self.create_item(self._group_nodes[self.group_count],
@@ -45,11 +52,35 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         if not self.IsExpanded(self._group_nodes[0]):
             self.Expand(self._group_nodes[0])
 
+    def check_overlapping(self, node_list):
+        region = {}
+        overlapping_lines = 0
+        for node in node_list:
+            name = node.split('Line:')[0].strip(' ')
+            temp = node.split('Line:')[1]
+            start, end = int(temp.split('~')[0]), int(temp.split('~')[1])
+            if name not in region:
+                region[name] = []
+            region[name].append((start, end))
+        size = end - start + 1
+        for key in region:
+            if len(region[key]) > 1:
+                set_list = []
+                s = set()
+                for x, y in region[key]:
+                    for i in xrange(x, y + 1):
+                        s.add(i)
+                    set_list.append(s.copy())
+                    s.clear()
+                for combinations in itertools.combinations(set_list, 2):
+                    overlapping_lines = len(combinations[0].intersection(combinations[1]))
+        return size, overlapping_lines
+
     def build_node_dict(self, data):
         self._clear_tree_data()
         node_list = []
         flag = False
-        with open(self.source + '\ScriptDuplicated-LRS.txt', 'r+') as f:
+        with open(self.source + '\ScriptDuplicated.txt', 'r+') as f:
             node = None
             for line in f:
                 if flag:
@@ -62,6 +93,8 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
                         node = line.split(':')[1].strip('\n')
                     else:
                         temp = line[:len(line) - len('action duplicated\n')]
+                        line_list = temp.split(',')
+                        label = ''
                         start, end = int(temp.split('~')[0]), int(temp.split('~')[1])
                         node_list.append('%s    Line: %d ~ %d' % (node, start, end))
                         node = None

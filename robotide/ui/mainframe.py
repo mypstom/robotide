@@ -17,7 +17,7 @@ import wx
 from robotide.action import ActionInfoCollection, ActionFactory, SeparatorInfo
 from robotide.context import ABOUT_RIDE, SHORTCUT_KEYS
 from robotide.controller.commands import SaveFile, SaveAll
-from robotide.publish import RideSaveAll, RideClosing, RideSaved, PUBLISHER,\
+from robotide.publish import RideSaveAll, RideClosing, RideSaved, PUBLISHER, \
     RideInputValidationError, RideTreeSelection, RideModificationPrevented
 from robotide.ui.tagdialogs import ViewAllTagsDialog
 from robotide.ui.filedialogs import RobotFilePathDialog
@@ -37,7 +37,7 @@ from .progress import LoadProgressObserver
 from robotide.KTV.KTV import KTV
 import time
 
-from robotide.publish import DuplicateDetection, RideLoadDatafileFinish
+from robotide.publish import DuplicateDetection, RideLoadDatafileFinish, GenerateSpecificGraph
 
 _menudata = """
 [File]
@@ -69,12 +69,12 @@ _menudata = """
 !Dynamic Generate Graph | Generate the Hierarchical Graph
 !Insert ScreenShot | Insert ScreenShot 
 !Remove ScreenShot | Remove ScreenShot
-!Duplicated Action Detection | Duplicated Action Detection
+!Duplicated Action Detection LCS | Duplicated Action Detection
+!Duplicated Action Detection LRS | Duplicated Action Detection
 """
 
 
 class RideFrame(wx.Frame, RideEventHandler):
-
     def __init__(self, application, controller):
         wx.Frame.__init__(self, parent=None, title='RIDE',
                           pos=application.settings['mainframe position'],
@@ -108,14 +108,17 @@ class RideFrame(wx.Frame, RideEventHandler):
             (self._set_label, RideTreeSelection),
             (self._show_validation_error, RideInputValidationError),
             (self._show_modification_prevented_error, RideModificationPrevented),
-            (self._load_datafile_finish, RideLoadDatafileFinish)
+            (self._load_datafile_finish, RideLoadDatafileFinish),
+            (self._generate_specific_graph, GenerateSpecificGraph)
         ]:
             PUBLISHER.subscribe(listener, topic)
 
     """-----------------------------------------------------------------------"""
+
     def _load_datafile_finish(self, data):
         # print 'load finish'
         DuplicateDetection(controller=self._get_datafile_list()).publish()
+
     """-----------------------------------------------------------------------"""
 
     def _set_label(self, message):
@@ -192,7 +195,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         if self.has_unsaved_changes():
             ret = wx.MessageBox('There are unsaved modifications.\n'
                                 'Do you want to save your changes before exiting?',
-                                'Warning', wx.ICON_WARNING|wx.CANCEL|wx.YES_NO)
+                                'Warning', wx.ICON_WARNING | wx.CANCEL | wx.YES_NO)
             if ret == wx.CANCEL:
                 return False
             if ret == wx.YES:
@@ -223,7 +226,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         if self.has_unsaved_changes():
             ret = wx.MessageBox('There are unsaved modifications.\n'
                                 'Do you want to proceed without saving?',
-                                'Warning', wx.ICON_WARNING|wx.YES_NO)
+                                'Warning', wx.ICON_WARNING | wx.YES_NO)
             return ret == wx.YES
         return True
 
@@ -253,7 +256,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         self._controller.execute(SaveAll())
 
     def save(self, controller=None):
-        if controller is None :
+        if controller is None:
             controller = self.get_selected_datafile_controller()
         if controller is not None:
             if not controller.has_format():
@@ -317,7 +320,19 @@ class RideFrame(wx.Frame, RideEventHandler):
     def OnDynamicGenerateGraph(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())
         start_time = time.time()
+        """---------------------------------------"""
+        data = ['ClickSuggestWordAtCell', 'DoubleClickSuggestListItem', 'AssertSuggestListItem',
+                'SaveFileByNameDirectly', 'myKeyword1']
+        """---------------------------------------"""
         self.KTV.OnDynamicGenerateGraph(self._controller.suite.source)
+        # self.KTV.OnDynamicGenerateGraph(self._controller.suite.source, data)
+        elapsed_time = time.time() - start_time
+        print 'DynamicGenerateGraph elapsed_time = %s' % elapsed_time
+
+    def _generate_specific_graph(self, data):
+        self.KTV.setDataFiles(self._get_datafile_list())
+        start_time = time.time()
+        self.KTV.OnDynamicGenerateGraph(self._controller.suite.source, data.node_list)
         elapsed_time = time.time() - start_time
         print 'DynamicGenerateGraph elapsed_time = %s' % elapsed_time
 
@@ -340,9 +355,13 @@ class RideFrame(wx.Frame, RideEventHandler):
         self.KTV.removeScreenShot()
         self.save()
 
-    def OnDuplicatedActionDetection(self, event):
+    def OnDuplicatedActionDetectionLCS(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())
-        self.KTV.duplicatedActionDetection(self._controller.suite.source)
+        self.KTV.LCS(self._controller.suite.source)
+
+    def OnDuplicatedActionDetectionLRS(self, event):
+        self.KTV.setDataFiles(self._get_datafile_list())
+        self.KTV.LRS(self._controller.suite.source)
 
     def _get_datafile_list(self):
         return [df for df in self._controller.datafiles]
@@ -353,8 +372,8 @@ class RideFrame(wx.Frame, RideEventHandler):
     def _refresh(self):
         self._controller.update_namespace()
 
-# This code is copied from http://wiki.wxpython.org/EnsureFrameIsOnScreen,
-# and adapted to fit our code style.
+    # This code is copied from http://wiki.wxpython.org/EnsureFrameIsOnScreen,
+    # and adapted to fit our code style.
     def ensure_on_screen(self):
         try:
             display_id = wx.Display.GetFromWindow(self)
@@ -384,7 +403,6 @@ class RideFrame(wx.Frame, RideEventHandler):
 
 
 class ActionRegisterer(object):
-
     def __init__(self, menubar, toolbar, shortcut_registry):
         self._menubar = menubar
         self._toolbar = toolbar
@@ -395,7 +413,7 @@ class ActionRegisterer(object):
         menubar_can_be_registered = True
         action = ActionFactory(action_info)
         self._shortcut_registry.register(action)
-        if hasattr(action_info,"menu_name"):
+        if hasattr(action_info, "menu_name"):
             if action_info.menu_name == "Tools":
                 self._tools_items[action_info.position] = action
                 menubar_can_be_registered = False
@@ -406,7 +424,7 @@ class ActionRegisterer(object):
 
     def register_tools(self):
         separator_action = ActionFactory(SeparatorInfo("Tools"))
-        add_separator_after = ["stop test run","search unused keywords","preview","view ride log"]
+        add_separator_after = ["stop test run", "search unused keywords", "preview", "view ride log"]
         for key in sorted(self._tools_items.iterkeys()):
             self._menubar.register(self._tools_items[key])
             if self._tools_items[key].name.lower() in add_separator_after:
@@ -423,7 +441,6 @@ class ActionRegisterer(object):
 
 
 class AboutDialog(Dialog):
-
     def __init__(self):
         Dialog.__init__(self, title='RIDE')
         sizer = wx.BoxSizer(wx.VERTICAL)
@@ -435,7 +452,6 @@ class AboutDialog(Dialog):
 
 
 class ShortcutKeysDialog(Dialog):
-
     def __init__(self):
         Dialog.__init__(self, title='Shortcut keys for RIDE')
         sizer = wx.BoxSizer(wx.HORIZONTAL)

@@ -10,6 +10,7 @@ import graphviz
 from graphviz import Graph
 from robot.parsing.model import Step
 from duplicatedactiondetection import LongestCommonSubsequence, LongestRepeatedSubstring
+from dynamicanalyzer import DynamicAnalyzer
 
 from shutil import copyfile
 
@@ -25,11 +26,6 @@ class KTV:
         self.componentChangeImpact = dict()
         self.user_def_keyword = dict()
         self.userKeywordObject = list()
-
-        # self.duplicatedactiondetection = LongestCommonSubsequence()
-        self.duplicatedactiondetection = LongestRepeatedSubstring()
-
-        self.serial_number_flag = True  # 使node顯示名稱變成流水號
 
     def setDataFiles(self, datafiles):
         self.datafiles = datafiles
@@ -811,28 +807,40 @@ class KTV:
                         if (step._get_comment(step.as_list()) == 'KTV'):
                             step.remove()
 
-    def duplicatedActionDetection(self, filepath):
+    def LCS(self, filepath):
         start_time = time.time()
-        self.duplicatedactiondetection.Excute(self.datafiles, filepath)
+        LongestCommonSubsequence().Excute(self.datafiles, filepath)
         elapsed_time = time.time() - start_time
         print 'Duplicated Action elapsed_time %r' % elapsed_time
         self.ShowMessage('Duplicated Action Detection Finish')
 
-    def OnDynamicGenerateGraph(self, filepath):
+    def LRS(self, filepath):
+        start_time = time.time()
+        LongestRepeatedSubstring().Excute(self.datafiles, filepath)
+        elapsed_time = time.time() - start_time
+        print 'Duplicated Action elapsed_time %r' % elapsed_time
+        self.ShowMessage('Duplicated Action Detection Finish')
+
+    def OnDynamicGenerateGraph(self, filepath, node_list=None):
         jsonOutput = []
         edgeSet = set()
-        nodes_set = set()
 
-        nodes = set()
+        """nodes = set()
         edges = dict()
-        nodesWithType = dict()
+        nodesWithType = dict()"""
         """try:
             self.build_model(filepath, nodes, edges, nodesWithType)
         except Exception as e:
             print e
             self.ShowMessage(str(e))
             raise e"""
-        nodes = self.build_model(filepath, nodes, edges, nodesWithType)
+
+        dynamic_analyzer = DynamicAnalyzer()
+        dynamic_analyzer.build_model(filepath)
+        if node_list is None:
+            nodes, edges, nodesWithType = dynamic_analyzer.generate_full_graph()
+        else:
+            nodes, edges, nodesWithType = dynamic_analyzer.generate_specific_graph(node_list)
         for item in edges.keys():
             edgeSet.add(item)
         """for item in nodes:
@@ -856,7 +864,7 @@ class KTV:
         # print jsonOutput
         webbrowser.open('http://localhost/TSVisual/index.html')
 
-    def get_change_impact_dict(self, nodes, edges, nodesWithType, change_list):
+    """def get_change_impact_dict(self, nodes, edges, nodesWithType, change_list):
         change_impact_dict = dict()
         limit_level = 1
         while True:
@@ -905,8 +913,9 @@ class KTV:
             if len(new_change_list) > 0:
                 change_impact = self.set_change_impact_node(nodes, edges, nodesWithType, new_change_list, change_impact,
                                                             level + 1, limit_level)
-        return change_impact
+        return change_impact"""
 
+    """
     def read_excluded_library_keyword_file(self):
         excluded_node_not_show = set()
         excluded_node_show = set()
@@ -1049,8 +1058,10 @@ class KTV:
         self.remove_redundant_edges(edges, node_level, nodesWithType, UK_list, LK_list)
         # print 'temp = %r' % self.get_weighted('NewCrosswordByValidGridSize', 'SelectCrosswordSageWindow', edges)
         # print edges
+        print 'edges number : %d' % len(edges)
+        print 'nodes number : %d' % len(node_level.keys())
 
-        """nodes_parent_dict = dict()
+        """"""nodes_parent_dict = dict()
         for node in nodes:
             nodes_parent_dict[node] = set()
             if nodesWithType[node] == 'TestSuite':
@@ -1069,9 +1080,9 @@ class KTV:
                         nodes_parent_dict[node].add(LK[0])
         for LK in LK_list:
             if len(LK[2]) > 0:
-                nodes_parent_dict[node].add(LK[2].split(',')[0])"""
+                nodes_parent_dict[node].add(LK[2].split(',')[0])""""""
 
-        """change_list = list()
+        """"""change_list = list()
         change_list.append('btnSuggestWords')
         # change_list.append('btnFind')
         # change_list.append('btnAddWord')
@@ -1080,12 +1091,12 @@ class KTV:
         #nodesWithType['btnSuggestWords'] = 'Changed'
         print change_impact_dict
         change_impact_dict = self.get_change_impact_by_formula(edges, change_list)
-        print change_impact_dict"""
-        """change_impact_dict = self.get_change_impact_dict(nodes, edges, nodesWithType, ['File|New Crossword'])
+        print change_impact_dict""""""
+        """"""change_impact_dict = self.get_change_impact_dict(nodes, edges, nodesWithType, ['File|New Crossword'])
         #nodesWithType['File|New Crossword'] = 'Changed'
         print change_impact_dict
         change_impact_dict = self.get_change_impact_by_formula(edges, ['File|New Crossword'])
-        print change_impact_dict"""
+        print change_impact_dict""""""
 
         # print self.get_descendant('U12', edges, 2, 7)
         level_node = self.tree_layout(node_level, edges, action_count)
@@ -1094,7 +1105,7 @@ class KTV:
             node_list.extend(value)
         # print 'count = ' + str(len(node_list))
         # self.calculate_coupling(nodes, edges, action_count)
-        self.test()
+        # self.test()
         return node_list
 
     def set_level(self, TC_list, UK_list, LK_list, C_set, nodesWithType, node_level, current, current_level):
@@ -1189,7 +1200,7 @@ class KTV:
                                 del LK_list[index]
                                 index -= 1
                         index += 1
-                """elif type == 'Librarykeyword':
+                """"""elif type == 'Librarykeyword':
                     for LK in LK_list:
                         if LK[1] == current:
                             for C in C_set:
@@ -1197,7 +1208,7 @@ class KTV:
                                     edges.append((current, C))
                                     C_set.remove(C)
                                     break
-                            break"""
+                            break""""""
             current_level += 1
             del current_level_list[:]
             for key in node_level.keys():
@@ -1247,9 +1258,9 @@ class KTV:
         return count
 
     def calculate_coupling(self, nodes, edges, action_count):
-        """nodes_set = set()
+        """"""nodes_set = set()
         for item in nodes:
-            nodes_set.add(item)"""
+            nodes_set.add(item)""""""
         # unweighted_coupling = float(len(edges.keys())) / (len(nodes_set) * (len(nodes_set) - 1))
         unweighted_coupling = float(len(edges.keys())) / (len(nodes) * (len(nodes) - 1))
         print 'unweighted coupling = %r' % unweighted_coupling
@@ -1289,7 +1300,7 @@ class KTV:
         change_impact_dict[level] = weight
         return edges_set
 
-    """def get_nodes(self, change, nodes_parent_dict, level):
+    """"""def get_nodes(self, change, nodes_parent_dict, level):
         result = set()
         node_list = list()
         for parent in nodes_parent_dict[change]:
@@ -1303,7 +1314,7 @@ class KTV:
                     new_node_list.append(parent)
             node_list = list(new_node_list)
             del new_node_list[:]
-        return result"""
+        return result""""""
 
     def get_edges(self, node, edges):
         result = set()
@@ -1358,9 +1369,9 @@ class KTV:
                                 and parent == node_parent_dict[node][0][0]:
                             node_list.append(node)
             level_node[level] = node_list[:]
-            """seen = set()
+            """"""seen = set()
             seen_add = seen.add
-            level_node[level] = [x for x in level_node[level] if not (x in seen or seen_add(x))]"""
+            level_node[level] = [x for x in level_node[level] if not (x in seen or seen_add(x))]""""""
             for node in node_list:
                 node_descendant[node] = self.get_descendant(node, edges, node_level[node], max_level)
             del node_list[:]
@@ -1409,12 +1420,12 @@ class KTV:
                 level_node_list.extend(temp)
                 change = self.switch_node_order(temp, node_level, edges, max_level, node_parent_dict, level_node,
                                                 top_node)
-                """if change:
+                """"""if change:
                     break
             if change:
                 change = False
             else:
-                redo = False"""
+                redo = False""""""
 
         node_x_position = self.tree_layout_x(level_node, node_descendant, edges, node_parent_dict)
         string = ''
@@ -1539,7 +1550,7 @@ class KTV:
                 redo = False
         return change
 
-    """def switch_node_order(self, node_list, node_level, edges, max_level, node_parent_dict, level_node, top_node):
+    """"""def switch_node_order(self, node_list, node_level, edges, max_level, node_parent_dict, level_node, top_node):
         total_cross = 0
         total_cross += self.calculate_cross(top_node, edges, max_level, node_parent_dict, node_level, level_node)
         change = False
@@ -1579,7 +1590,7 @@ class KTV:
                     break
             if not swap:
                 redo = False
-        return change"""
+        return change""""""
 
     def get_descendant(self, root, edges, root_level, max_level):
         next_level_node = [edge[1] for edge in edges if edge[0] == root]
@@ -1617,15 +1628,15 @@ class KTV:
                             current_node = node
                             while target_level != node_level[current_node]:
                                 current_node = node_parent_dict[current_node][0][0]
-                            """while node_parent_dict[target_node][0] != node_parent_dict[current_node][0]:
+                            """"""while node_parent_dict[target_node][0] != node_parent_dict[current_node][0]:
                                 current_node = node_parent_dict[current_node][0][0]
                                 target_node = node_parent_dict[target_node][0][0]
-                                target_level = node_level[target_node]"""
+                                target_level = node_level[target_node]""""""
                             if target_node != current_node:
                                 cross_list.append(edge)
-                                """print edge
+                                """"""print edge
                                 print math.fabs(level_node[target_level].index(target_node) -
-                                                level_node[target_level].index(current_node))"""
+                                                level_node[target_level].index(current_node))""""""
                                 cross += math.fabs(level_node[target_level].index(target_node) -
                                                    level_node[target_level].index(current_node))
                 subcross = self.calculate_subcross(node_list, cross_list, node_level, level_node, node_parent_dict)
@@ -1656,15 +1667,16 @@ class KTV:
             parent = node_parent_dict[node][0]
             while parent[1] != node_level[temp]:
                 parent = node_parent_dict[parent[0]][0]
-            """while node_parent_dict[parent[0]][0] != node_parent_dict[temp][0]:
+            """"""while node_parent_dict[parent[0]][0] != node_parent_dict[temp][0]:
                 parent = node_parent_dict[parent[0]][0]
-                temp = node_parent_dict[temp][0][0]"""
+                temp = node_parent_dict[temp][0][0]""""""
             current_list = level_node[node_level[temp]]
             if current_list.index(temp) < current_list.index(parent[0]):
                 subcross += subcross_dict[node]
             else:
                 subcross -= subcross_dict[node]
         return subcross
+    """
 
     def test(self):
         """a = ['A', 'B', 'C']

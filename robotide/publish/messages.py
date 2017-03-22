@@ -437,6 +437,10 @@ class MyTreeBuildFinish(RideMessage):
     """the time of build my tree finish"""
     data = ['duplicated_actions']
 
+class GenerateSpecificGraph(RideMessage):
+    """"""
+    data = ['node_list']
+
 
 __all__ = [name for name, cls in globals().items()
            if inspect.isclass(cls) and issubclass(cls, RideMessage)]
