@@ -35,9 +35,11 @@ from .notebook import NoteBook
 from .progress import LoadProgressObserver
 
 from robotide.KTV.KTV import KTV
+from robotide.KTV.dynamicanalyzer import DynamicAnalyzer
 import time
 
-from robotide.publish import DuplicateDetection, RideLoadDatafileFinish, GenerateSpecificGraph
+from robotide.publish import DuplicateDetection, RideLoadDatafileFinish, GenerateSpecificGraph, \
+    GenerateChangedImpactGraph, MyDynamicAnalyzerBuildFinish
 
 _menudata = """
 [File]
@@ -97,6 +99,7 @@ class RideFrame(wx.Frame, RideEventHandler):
         wx.CallLater(100, self.actions.register_tools)
 
         self.KTV = KTV()
+        self.dynamic_analyzer = DynamicAnalyzer()
 
     def ShowMessage(self, Info):
         wx.MessageBox(Info, 'Info', wx.ICON_INFORMATION | wx.OK)
@@ -109,7 +112,8 @@ class RideFrame(wx.Frame, RideEventHandler):
             (self._show_validation_error, RideInputValidationError),
             (self._show_modification_prevented_error, RideModificationPrevented),
             (self._load_datafile_finish, RideLoadDatafileFinish),
-            (self._generate_specific_graph, GenerateSpecificGraph)
+            (self._generate_specific_graph, GenerateSpecificGraph),
+            (self._generate_changed_impact_graph, GenerateChangedImpactGraph)
         ]:
             PUBLISHER.subscribe(listener, topic)
 
@@ -118,6 +122,8 @@ class RideFrame(wx.Frame, RideEventHandler):
     def _load_datafile_finish(self, data):
         # print 'load finish'
         DuplicateDetection(controller=self._get_datafile_list()).publish()
+        self.dynamic_analyzer.build_model(self._controller.suite.source)
+        MyDynamicAnalyzerBuildFinish().publish()
 
     """-----------------------------------------------------------------------"""
 
@@ -321,18 +327,28 @@ class RideFrame(wx.Frame, RideEventHandler):
         self.KTV.setDataFiles(self._get_datafile_list())
         start_time = time.time()
         """---------------------------------------"""
-        data = ['ClickSuggestWordAtCell', 'DoubleClickSuggestListItem', 'AssertSuggestListItem',
-                'SaveFileByNameDirectly', 'myKeyword1']
+        #data = ['ClickSuggestWordAtCell', 'DoubleClickSuggestListItem', 'AssertSuggestListItem',
+        #        'SaveFileByNameDirectly', 'myKeyword1']
+        data = ['File|New Crossword']
+        distance = 1
         """---------------------------------------"""
-        self.KTV.OnDynamicGenerateGraph(self._controller.suite.source)
-        # self.KTV.OnDynamicGenerateGraph(self._controller.suite.source, data)
+        # self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer)
+        # self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer, data)
+        self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer, data, distance)
         elapsed_time = time.time() - start_time
         print 'DynamicGenerateGraph elapsed_time = %s' % elapsed_time
 
     def _generate_specific_graph(self, data):
         self.KTV.setDataFiles(self._get_datafile_list())
         start_time = time.time()
-        self.KTV.OnDynamicGenerateGraph(self._controller.suite.source, data.node_list)
+        self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer, data.node_list)
+        elapsed_time = time.time() - start_time
+        print 'DynamicGenerateGraph elapsed_time = %s' % elapsed_time
+
+    def _generate_changed_impact_graph(self, data):
+        self.KTV.setDataFiles(self._get_datafile_list())
+        start_time = time.time()
+        self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer, data.node_list, data.distance)
         elapsed_time = time.time() - start_time
         print 'DynamicGenerateGraph elapsed_time = %s' % elapsed_time
 

@@ -821,30 +821,19 @@ class KTV:
         print 'Duplicated Action elapsed_time %r' % elapsed_time
         self.ShowMessage('Duplicated Action Detection Finish')
 
-    def OnDynamicGenerateGraph(self, filepath, node_list=None):
+    def OnDynamicGenerateGraph(self, dynamic_analyzer, node_list=None, distance=None):
         jsonOutput = []
         edgeSet = set()
 
-        """nodes = set()
-        edges = dict()
-        nodesWithType = dict()"""
-        """try:
-            self.build_model(filepath, nodes, edges, nodesWithType)
-        except Exception as e:
-            print e
-            self.ShowMessage(str(e))
-            raise e"""
-
-        dynamic_analyzer = DynamicAnalyzer()
-        dynamic_analyzer.build_model(filepath)
         if node_list is None:
             nodes, edges, nodesWithType = dynamic_analyzer.generate_full_graph()
         else:
-            nodes, edges, nodesWithType = dynamic_analyzer.generate_specific_graph(node_list)
+            if distance is None:
+                nodes, edges, nodesWithType = dynamic_analyzer.generate_specific_graph(node_list)
+            else:
+                nodes, edges, nodesWithType = dynamic_analyzer.generate_change_impact_graph(node_list, distance)
         for item in edges.keys():
             edgeSet.add(item)
-        """for item in nodes:
-            nodes_set.add(item)"""
 
         for node in nodes:
             tempDepend = list()
@@ -861,7 +850,6 @@ class KTV:
             json.dump(jsonOutput, f)
 
         copyfile('objects.json', 'C:/wamp64/www/TSVisual/process_map/data/component01/objects.json')
-        # print jsonOutput
         webbrowser.open('http://localhost/TSVisual/index.html')
 
     """def get_change_impact_dict(self, nodes, edges, nodesWithType, change_list):

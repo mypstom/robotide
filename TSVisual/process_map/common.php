@@ -27,6 +27,11 @@ function get_html_docs($obj) {
     }
 
     $markdown = "## $name *$type*\n\n";
+	
+	if ($config['serial_number'][$name]) {
+		$full_name = $config['serial_number'][$name];
+		$markdown .= "## $full_name";
+	}
 
     if (file_exists($filename)) {
         $markdown .= "### Documentation\n\n";
@@ -84,10 +89,12 @@ function get_id_string($name) {
 }
 
 function read_config() {
-    global $config, $dataset, $dataset_qs;
+    global $config, $dataset, $dataset_qs, $weighted_coupling, $unweighted_coupling;
 
     $config = json_decode(file_get_contents("data/$dataset/config.json" ), true);
     $config['jsonUrl'] = "json.php$dataset_qs";
+	$weighted_coupling = $config["graph"]["weightedCoupling"];
+	$unweighted_coupling = $config["graph"]["unweightedCoupling"];
 }
 
 function read_data() {

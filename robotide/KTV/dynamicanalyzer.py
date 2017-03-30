@@ -3,6 +3,7 @@
 import math
 import os
 import itertools
+import re
 
 
 class DynamicAnalyzer:
@@ -14,12 +15,55 @@ class DynamicAnalyzer:
     node_level = dict()  # key : node, value : level
     nodes = set()
     edges = dict()  # key : (node1, node2), value : weighted number
-    nodesWithType = dict()  # key : node, value : type
+    nodes_with_type = dict()  # key : node, value : type
     serial_number = dict()
 
     def __init__(self):
         self.serial_number_flag = True  # 使node顯示名稱變成流水號
         self.action_count = 0
+
+    def get_nodes(self):
+        if not self.serial_number_flag:
+            return list(self.nodes)
+        return self.serial_number.keys()
+
+    def generate_change_impact_graph(self, node_list, distance):
+        if self.serial_number_flag:
+            node_list = [self.serial_number[node] for node in node_list]
+        change_impact_dict = self.get_change_impact_by_formula(list(node_list), self.edges)
+        nodes = self.get_nodes_by_node_list_and_distance(node_list, distance)
+        level_node = self.tree_layout(self.edges, self.node_level)
+        nodes_with_type = self.nodes_with_type.copy()
+        for node in nodes:
+            nodes_with_type[node] = 'Changed'
+        node_list = []
+        for value in level_node.values():  # to control color of the nodes of the changed type
+            node_list.extend([node for node in value if nodes_with_type[node] != 'Changed'])
+        for node in [node for node in nodes_with_type if nodes_with_type[node] == 'Changed']:
+            node_list.append(node)
+
+        change_impact_node = 'Change impact = %d' % change_impact_dict[distance]
+        node_list.append(change_impact_node)
+        nodes_with_type[change_impact_node] = 'Changed'
+        string1 = ''
+        string2 = ''
+        flag = True
+        with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'r+') as f:
+            for line in f:
+                if flag:
+                    string1 += line
+                else:
+                    string2 += line
+                if 'constraints' in line:
+                    flag = False
+        with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'w+') as f:
+            f.write(string1)
+            line = '\t\t{"has":{"name":"%s"},"type":"position","x":%.8f,"y":%.8f,"weight":0.6},' % (
+                change_impact_node, 0.1, 0.1)
+            f.write(line + '\n')
+            f.write(string2)
+
+        return node_list, self.edges, nodes_with_type
 
     def get_change_impact_dict(self, change_list):
         change_impact_dict = dict()
@@ -44,7 +88,7 @@ class DynamicAnalyzer:
             return change_impact
         for change in change_list:
             new_change_list = list()
-            if self.nodesWithType[change] == 'TestSuite':
+            if self.nodes_with_type[change] == 'TestSuite':
                 continue
             else:
                 index = 0
@@ -85,26 +129,18 @@ class DynamicAnalyzer:
         node_list = []
         for value in level_node.values():
             node_list.extend(value)
-        return node_list, self.edges, self.nodesWithType
+        return node_list, self.edges, self.nodes_with_type
 
     def generate_specific_graph(self, node_list):
-        # print 'generate_specific_graph'
         specific_nodes, specific_edges = self.specific_tree_data(node_list)
-        # print 'specific_tree_data finish'
         specific_node_level = self.build_specific_node_level(specific_nodes)
-        # print specific_node_level
-        # print 'build_specific_node_level finish'
         self.add_fake_top_node(specific_nodes, specific_edges, specific_node_level)
-        # print specific_node_level
-        # print 'add_fake_top_node finish'
         level_node = self.tree_layout(specific_edges, specific_node_level)
-        print level_node
-        print 'tree_layout finish'
         level_node = self.remove_fake_top_node(specific_nodes, specific_edges, specific_node_level, level_node)
         node_list = []
         for value in level_node.values():
             node_list.extend(value)
-        return node_list, specific_edges, self.nodesWithType
+        return node_list, specific_edges, self.nodes_with_type
 
     def add_fake_top_node(self, nodes, edges, node_level):
         fake_node = 'Fake_node'
@@ -142,6 +178,19 @@ class DynamicAnalyzer:
         nodes.remove(fake_node)
         return new_level_node
 
+    def get_nodes_by_node_list_and_distance(self, node_list, distance):
+        print 'distance = %d' % distance
+        print 'node_list = %r' % node_list
+        if distance == 0:
+            return node_list
+        specific_nodes = set(node_list)
+        for edge in self.edges.keys():
+            if edge[0] in node_list:
+                specific_nodes.add(edge[1])
+            elif edge[1] in node_list:
+                specific_nodes.add(edge[0])
+        return self.get_nodes_by_node_list_and_distance(specific_nodes, distance - 1)
+
     def specific_tree_data(self, node_list):
         if self.serial_number_flag:
             node_list = [self.serial_number[node] for node in node_list]
@@ -149,12 +198,13 @@ class DynamicAnalyzer:
         for edge in self.edges.keys():
             if edge[0] in node_list or edge[1] in node_list:
                 specific_edges[edge] = self.edges[edge]
-        specific_nodes = set(node_list)
+        specific_nodes = self.get_nodes_by_node_list_and_distance(node_list, 1)
+        """specific_nodes = set(node_list)
         for edge in specific_edges:
             if edge[0] not in specific_nodes:
                 specific_nodes.add(edge[0])
             if edge[1] not in specific_nodes:
-                specific_nodes.add(edge[1])
+                specific_nodes.add(edge[1])"""
         return specific_nodes, specific_edges
 
     def find_node_level_range(self, node_set):
@@ -252,19 +302,19 @@ class DynamicAnalyzer:
 
         for TS in self.TS_list:
             self.nodes.add(TS)
-            self.nodesWithType[TS] = 'TestSuite'
+            self.nodes_with_type[TS] = 'TestSuite'
         for TC in self.TC_list:
             self.nodes.add(TC[1])
-            self.nodesWithType[TC[1]] = 'TestCase'
+            self.nodes_with_type[TC[1]] = 'TestCase'
         for LK in self.UK_list:
             self.nodes.add(LK[1])
-            self.nodesWithType[LK[1]] = 'Userkeyword'
+            self.nodes_with_type[LK[1]] = 'Userkeyword'
         for LK in self.LK_list:
             self.nodes.add(LK[1])
-            self.nodesWithType[LK[1]] = 'Librarykeyword'
+            self.nodes_with_type[LK[1]] = 'Librarykeyword'
         for C in self.C_set:
             self.nodes.add(C)
-            self.nodesWithType[C] = 'Component'
+            self.nodes_with_type[C] = 'Component'
 
         TS_set = set(self.TS_list)
         print 'TS:%r' % len(TS_set)
@@ -310,7 +360,7 @@ class DynamicAnalyzer:
         print change_impact_dict"""
 
     def set_level(self, current, current_level):
-        node_type = self.nodesWithType[current]
+        node_type = self.nodes_with_type[current]
         if current not in self.node_level.keys():
             self.node_level[current] = current_level
         else:
@@ -361,7 +411,7 @@ class DynamicAnalyzer:
         while len(current_level_list) > 0:
             for current in current_level_list:
                 # print current
-                node_type = self.nodesWithType[current]
+                node_type = self.nodes_with_type[current]
                 if node_type == 'TestSuite':
                     for TC in self.TC_list:
                         if TC[0] == current:
@@ -415,11 +465,11 @@ class DynamicAnalyzer:
                     change_list.append(key)
             for change in change_list:
                 parent_list = list()
-                if self.nodesWithType[change] == 'Librarykeyword':
+                if self.nodes_with_type[change] == 'Librarykeyword':
                     for LK in self.LK_list:
                         if LK[1] == change:
                             parent_list.append(LK[0])
-                elif self.nodesWithType[change] == 'Userkeyword':
+                elif self.nodes_with_type[change] == 'Userkeyword':
                     for UK in self.UK_list:
                         if UK[1] == change:
                             parent_list.append(UK[0])
@@ -592,8 +642,8 @@ class DynamicAnalyzer:
         for level in node_level.values():
             max_level = max(max_level, level)
         node_parent_dict = self.build_node_parent_dict(edges, node_level, max_level)
-        print node_parent_dict
-        print 'node_parent_dict'
+        # print node_parent_dict
+        # print 'node_parent_dict'
         self.build_level_node(max_level, node_level, level_node, node_descendant, node_parent_dict, edges)
         for level in range(max_level + 1):
             if len(level_node[level]) > 1:
@@ -633,9 +683,11 @@ class DynamicAnalyzer:
         with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'r+') as f:
             for line in f:
                 if 'width' in line:
-                    string += '		"width"        : %d,\n' % (leaf_number * 300)
+                    width = leaf_number * 300 if leaf_number * 300 > 3600 else 3600
+                    string += '		"width"        : %d,\n' % width
                 elif 'height' in line:
-                    string += '		"height"       : %d,\n' % ((max_level + 1) * 200)
+                    height = (max_level + 1) * 200 if (max_level + 1) * 200 > 1400 else 1400
+                    string += '		"height"       : %d,\n' % height
                 elif 'unweightedCoupling' in line:
                     string += '		"unweightedCoupling": %r,\n' % unweighted_coupling
                 elif 'weightedCoupling' in line:
@@ -663,6 +715,17 @@ class DynamicAnalyzer:
             f.write(temp)
             f.seek(-3, 1)
             f.write('\n\t]\n}')
+            if self.serial_number_flag:
+                f.seek(-3, 1)
+                f.write(',\n\t"serial_number" : {\n')
+                for node in node_level:
+                    if node in self.serial_number.values():
+                        full_name = self.serial_number.keys()[self.serial_number.values().index(node)]
+                        if '\\' in full_name:
+                            full_name = full_name.replace("\\", "\\\\")
+                        f.write('\t\t"%s" : "%s",\n' % (node, full_name))
+                f.seek(-3, 1)
+                f.write('\n\t}\n}')
         return level_node
 
     def get_leaf_node_count(self, descendant, edges):
@@ -685,7 +748,7 @@ class DynamicAnalyzer:
         node_x_position = dict()
         node_x_position[level_node[0][0]] = 0.5
         for level in xrange(max_level):
-            print 'level = %d' % level
+            # print 'level = %d' % level
             for node in level_node[level]:
                 width = dict()
                 total = 0
@@ -697,8 +760,8 @@ class DynamicAnalyzer:
                         child_node_list.append(child_node)
                 if node in child_node_list:
                     child_node_list.remove(node)
-                print 'node = %s    child_node_list' % node
-                print child_node_list
+                # print 'node = %s    child_node_list' % node
+                # print child_node_list
                 for child_node in child_node_list:
                     width[child_node] = self.get_leaf_node_count(node_descendant[child_node], edges)
                     total += width[child_node]
@@ -708,7 +771,7 @@ class DynamicAnalyzer:
                     right = float(
                         "{0:.8f}".format(left + float(width[child_node]) / total * (duration[1] - duration[0])))
                     duration_dict[node][child_node] = (left, right)
-                    print 'node = %s    duration = %r' % (child_node, (left, right))
+                    # print 'node = %s    duration = %r' % (child_node, (left, right))
                     node_x_position[child_node] = float("{0:.8f}".format((right + left) / 2))
                     left = right
         return node_x_position

@@ -55,14 +55,24 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
     def check_overlapping(self, node_list):
         region = {}
         overlapping_lines = 0
+        size = 0
         for node in node_list:
+            size = 0
             name = node.split('Line:')[0].strip(' ')
-            temp = node.split('Line:')[1]
-            start, end = int(temp.split('~')[0]), int(temp.split('~')[1])
             if name not in region:
                 region[name] = []
-            region[name].append((start, end))
-        size = end - start + 1
+            temp = node.split('Line:')[1]
+            duration_list = temp.split(',')
+            for duration in duration_list:
+                if len(duration.split('~')) == 1:
+                    start = end = int(duration.split('~')[0])
+                else:
+                    start, end = int(duration.split('~')[0]), int(duration.split('~')[1])
+                region[name].append((start, end))
+                size += end - start + 1
+                # start, end = int(temp.split('~')[0]), int(temp.split('~')[1])
+                # region[name].append((start, end))
+        # size = end - start + 1
         for key in region:
             if len(region[key]) > 1:
                 set_list = []
@@ -93,10 +103,17 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
                         node = line.split(':')[1].strip('\n')
                     else:
                         temp = line[:len(line) - len('action duplicated\n')]
-                        line_list = temp.split(',')
-                        label = ''
-                        start, end = int(temp.split('~')[0]), int(temp.split('~')[1])
-                        node_list.append('%s    Line: %d ~ %d' % (node, start, end))
+                        duration_list = temp.split(',')
+                        label = '%s    Line:' % node
+                        for duration in duration_list:
+                            start, end = int(duration.split('~')[0]), int(duration.split('~')[1])
+                            if start == end:
+                                label += ' %d,' % start
+                            else:
+                                label += ' %d ~ %d,' % (start, end)
+                        label = label[:len(label) - 1]
+                        # start, end = int(temp.split('~')[0]), int(temp.split('~')[1])
+                        node_list.append(label)
                         node = None
                 if 'resultList' in line:
                     flag = True
@@ -108,9 +125,17 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         if item and item.GetText() not in temp:
             data = item.GetText().split('Line:')
             node = data[0].strip(' ')
-            start = int(data[1].split('~')[0])
-            end = int(data[1].split('~')[1])
-            MyTreeSelectedItemChanged(node=node, start=start, end=end).publish()
+            duration_list = []
+            temp_list = data[1].split(',')
+            for duration in temp_list:
+                if len(duration.split('~')) == 1:
+                    start = end = int(duration.split('~')[0])
+                else:
+                    start, end = int(duration.split('~')[0]), int(duration.split('~')[1])
+                duration_list.append((start, end))
+            # start = int(data[1].split('~')[0])
+            # end = int(data[1].split('~')[1])
+            MyTreeSelectedItemChanged(node=node, duration_list=duration_list).publish()
         event.Skip()
 
     def _clear_tree_data(self):

@@ -9,12 +9,13 @@ $(function() {
     isIE = $.browser.msie;
 
     d3.json(config.jsonUrl, function(data) {
+		console.log(data)
         if (data.errors.length) {
             alert('Data error(s):\n\n' + data.errors.join('\n'));
             return;
         }
 		graph.data = data.data
-		console.log(graph.data)
+		//console.log(graph.data)
         drawGraph();
     });
 
@@ -49,8 +50,8 @@ function drawGraph() {
         .css('display', 'block')
 		.css('width', config.graph.width + 'px')
         .css('height', config.graph.height + 'px');
-    graph.width  = $('#graph').width()  - graph.margin.left - graph.margin.right;
-    graph.height = $('#graph').height() - graph.margin.top  - graph.margin.bottom;
+    graph.width  = config.graph.width  - graph.margin.left - graph.margin.right;
+    graph.height = config.graph.height - graph.margin.top  - graph.margin.bottom;
 	console.log('width = ' + graph.width)
 	console.log('height = ' + graph.height)
     $('#graph').css('display', display);
@@ -647,7 +648,7 @@ function resize(showDocs) {
         $docs.css('height', docsHeight + 'px');
     }
 
-    graphHeight = window.innerHeight - docsHeight;
+    graphHeight = window.innerHeight - docsHeight - 100; // -100 because the 2 div of coupling
     $graph.css('height', graphHeight + 'px');
 
     $close.css({

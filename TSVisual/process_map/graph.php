@@ -24,6 +24,14 @@ read_config();
         </div>
         <![endif]-->
         <div id="split-container">
+			<div>
+				<label> weighted coupling = </label>
+				<?php echo $weighted_coupling; ?>
+			</div>
+			<div>
+				<label> unweighted coupling = </label>
+				<?php echo $unweighted_coupling; ?>
+			</div>
             <div id="graph-container">
                 <div id="graph"></div>
             </div>

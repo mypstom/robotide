@@ -2,6 +2,7 @@ import wx
 
 from robotide.pluginapi import Plugin, TreeAwarePluginMixin
 from robotide.KTV.tree import Tree
+from robotide.KTV.extractframe import ExtractFrame
 
 from robotide.publish import PUBLISHER, MyTreeSelectedItemChanged, DuplicateDetection, MyTreeBuildFinish
 
@@ -36,6 +37,7 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.bottom_splitter.SetSashPosition(-250, True)
 
     def compute_actions_count(self):
+        self.total_actions = 0
         for df in self.datafiles:
             for test_case in df.tests:
                 self.total_actions += len(test_case.steps)
@@ -43,15 +45,15 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
                 self.total_actions += len(user_keyword.steps)
 
     def tree_selected_item_changed(self, data):
-        node, start, end = data.node, data.start, data.end
+        node, duration_list = data.node, data.duration_list
         if not self.left_panel_show:
             self.left_label.SetLabel(node)
             self.left_panel_show = True
-            self.left_text.set_text(self.get_node_text_data(node), start, end)
+            self.left_text.set_text(self.get_node_text_data(node), duration_list)
         else:
             self.right_label.SetLabel(node)
             self.left_panel_show = False
-            self.right_text.set_text(self.get_node_text_data(node), start, end)
+            self.right_text.set_text(self.get_node_text_data(node), duration_list)
 
     def get_node_text_data(self, node):
         string = ''
@@ -94,9 +96,9 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         right_sizer = wx.BoxSizer(wx.VERTICAL)
 
         self.left_text = RobotDataEditor(left_panel)
-        self.left_text.set_text('', 0, 0)
+        self.left_text.set_text('', [(0, 0)])
         self.right_text = RobotDataEditor(right_panel)
-        self.right_text.set_text('', 0, 0)
+        self.right_text.set_text('', [(0, 0)])
 
         left_top_panel = wx.Panel(left_panel)
         right_top_panel = wx.Panel(right_panel)
@@ -146,23 +148,42 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
 
         left_panel = wx.Panel(self.bottom_splitter)
         right_panel = wx.Panel(self.bottom_splitter)
+        up_panel = wx.Panel(right_panel)
+        down_panel = wx.Panel(right_panel)
 
         self.my_tree = Tree(left_panel)
         left_sizer = wx.BoxSizer(wx.HORIZONTAL)
         left_sizer.Add(self.my_tree, 1, wx.EXPAND, 5)
         left_panel.SetSizer(left_sizer)
 
-        self.total_label = wx.StaticText(right_panel, label='Total actions : ')
-        self.duplicated_label = wx.StaticText(right_panel, label='Duplicated actions : ')
-        self.percentage_label = wx.StaticText(right_panel, label='Duplicated Percentage : ')
+        self.total_label = wx.StaticText(up_panel, label='Total actions : ')
+        self.duplicated_label = wx.StaticText(up_panel, label='Duplicated actions : ')
+        self.percentage_label = wx.StaticText(up_panel, label='Duplicated Percentage : ')
+        extract_button = wx.Button(down_panel, label='Extract')
+        extract_button.Bind(wx.EVT_BUTTON, self.extract_click)
+        up_right_sizer = wx.BoxSizer(wx.VERTICAL)
+        up_right_sizer.Add(self.total_label, 0, wx.EXPAND, 5)
+        up_right_sizer.Add(self.duplicated_label, 0, wx.EXPAND, 5)
+        up_right_sizer.Add(self.percentage_label, 0, wx.EXPAND, 5)
+        up_panel.SetSizer(up_right_sizer)
+        down_right_sizer = wx.BoxSizer(wx.HORIZONTAL)
+        down_right_sizer.Add(wx.Panel(down_panel), 1, wx.ALL, 5)
+        down_right_sizer.Add(extract_button, 1, wx.ALL, 5)
+        down_right_sizer.Add(wx.Panel(down_panel), 1, wx.ALL, 5)
+        down_panel.SetSizer(down_right_sizer)
+
         right_sizer = wx.BoxSizer(wx.VERTICAL)
-        right_sizer.Add(self.total_label, 0, wx.EXPAND, 5)
-        right_sizer.Add(self.duplicated_label, 0, wx.EXPAND, 5)
-        right_sizer.Add(self.percentage_label, 0, wx.EXPAND, 5)
+        right_sizer.Add(up_panel, 1, wx.ALL, 5)
+        right_sizer.Add(down_panel, 1, wx.ALL, 5)
         right_panel.SetSizer(right_sizer)
 
-        self.bottom_splitter.SetMinimumPaneSize(200)
+        self.bottom_splitter.SetMinimumPaneSize(250)
         self.bottom_splitter.SplitVertically(left_panel, right_panel)
+
+    def extract_click(self, event):
+        frame = ExtractFrame()
+        frame.set_text(self.left_text.GetSelectedText())
+        frame.Show()
 
     def get_controller(self, name):
         for df in self.datafiles:
@@ -192,16 +213,17 @@ class RobotDataEditor(wx.stc.StyledTextCtrl):
 
         self.StyleSetSpec(10, "fore:#FF0000,back:#E6E6E4")
 
-    def set_text(self, text, start, end):
+    def set_text(self, text, duration_list):
         self.SetReadOnly(False)
         self.ClearAll()
         self.SetText(text)
-        self.GotoLine(start - 1)
-        pos_start = self.GetCurrentPos()
-        self.GotoLine(end)
-        pos_end = self.GetCurrentPos()
-        self.StartStyling(pos_start, 0xff)
-        self.SetStyling(pos_end - pos_start, 10)
+        for start, end in duration_list:
+            self.GotoLine(start - 1)
+            pos_start = self.GetCurrentPos()
+            self.GotoLine(end)
+            pos_end = self.GetCurrentPos()
+            self.StartStyling(pos_start, 0xff)
+            self.SetStyling(pos_end - pos_start, 10)
         self.EmptyUndoBuffer()
         self.SetReadOnly(True)
 

@@ -426,20 +426,33 @@ class RideLoadDatafileFinish(RideMessage):
 
 
 class DuplicateDetection(RideMessage):
+    """ for duplicate detection finish"""
     data = ['controller']
 
 
 class MyTreeSelectedItemChanged(RideMessage):
     """ for my tree selected item changed"""
-    data = ['node', 'start', 'end']
+    data = ['node', 'duration_list']
+
 
 class MyTreeBuildFinish(RideMessage):
     """the time of build my tree finish"""
     data = ['duplicated_actions']
 
+
 class GenerateSpecificGraph(RideMessage):
-    """"""
+    """Generate Specific Graph"""
     data = ['node_list']
+
+
+class GenerateChangedImpactGraph(RideMessage):
+    """Generate Changed Impact Graph"""
+    data = ['node_list', 'distance']
+
+
+class MyDynamicAnalyzerBuildFinish(RideMessage):
+    """Dynamic Analyzer Build Finish"""
+    pass
 
 
 __all__ = [name for name, cls in globals().items()

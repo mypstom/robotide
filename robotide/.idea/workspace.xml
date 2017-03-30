@@ -20,21 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="application.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/application.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="832">
-              <caret line="50" column="24" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="mainframe.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ui/mainframe.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="488">
-              <caret line="324" column="53" selection-start-line="324" selection-start-column="43" selection-end-line="324" selection-end-column="53" />
+            <state relative-caret-position="3172">
+              <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
               <folding>
                 <element signature="e#608#617#0" expanded="true" />
               </folding>
@@ -45,8 +35,8 @@
       <file leaf-file-name="plugin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pluginapi/plugin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1300">
-              <caret line="55" column="52" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
+            <state relative-caret-position="2782">
+              <caret line="112" column="29" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
               <folding />
             </state>
           </provider>
@@ -55,21 +45,29 @@
       <file leaf-file-name="messages.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/publish/messages.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11284">
-              <caret line="441" column="22" selection-start-line="441" selection-start-column="22" selection-end-line="441" selection-end-column="22" />
+            <state relative-caret-position="8632">
+              <caret line="339" column="17" selection-start-line="339" selection-start-column="17" selection-end-line="339" selection-end-column="17" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="KTV.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KTV/KTV.py">
+      <file leaf-file-name="tablecontrollers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/tablecontrollers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="644">
-              <caret line="863" column="10" selection-start-line="863" selection-start-column="10" selection-end-line="863" selection-end-column="10" />
-              <folding>
-                <element signature="e#26#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="7696">
+              <caret line="307" column="18" selection-start-line="307" selection-start-column="18" selection-end-line="307" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="filecontrollers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/filecontrollers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="488">
+              <caret line="174" column="51" selection-start-line="174" selection-start-column="51" selection-end-line="174" selection-end-column="51" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -77,8 +75,8 @@
       <file leaf-file-name="dynamicanalyzer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KTV/dynamicanalyzer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4672">
-              <caret line="690" column="25" selection-start-line="690" selection-start-column="25" selection-end-line="690" selection-end-column="25" />
+            <state relative-caret-position="1040">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding>
                 <element signature="e#26#37#0" expanded="true" />
               </folding>
@@ -86,11 +84,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="extractframe.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/KTV/extractframe.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="866">
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="duplicatedviewplugin.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KTV/duplicatedviewplugin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2184">
-              <caret line="84" column="72" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="72" />
+            <state relative-caret-position="5512">
+              <caret line="218" column="20" selection-start-line="218" selection-start-column="13" selection-end-line="218" selection-end-column="20" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -98,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="graphfilter.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="graphfilter.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/KTV/graphfilter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="624">
-              <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+            <state relative-caret-position="242">
+              <caret line="67" column="61" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -110,25 +118,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tree.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tree.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KTV/tree.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="736">
-              <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
+            <state relative-caret-position="3276">
+              <caret line="133" column="89" selection-start-line="133" selection-start-column="89" selection-end-line="133" selection-end-column="89" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="duplicatedactiondetection.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KTV/duplicatedactiondetection.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -176,15 +172,16 @@
         <option value="$PROJECT_DIR$/editor/editorcreator.py" />
         <option value="$PROJECT_DIR$/ui/tree.py" />
         <option value="$PROJECT_DIR$/ui/preview.py" />
-        <option value="$PROJECT_DIR$/KTV/duplicatedviewplugin.py" />
         <option value="$PROJECT_DIR$/context/coreplugins.py" />
-        <option value="$PROJECT_DIR$/publish/messages.py" />
-        <option value="$PROJECT_DIR$/KTV/KTV.py" />
-        <option value="$PROJECT_DIR$/KTV/dynamicanalyzer.py" />
-        <option value="$PROJECT_DIR$/ui/mainframe.py" />
-        <option value="$PROJECT_DIR$/KTV/graphfilter.py" />
         <option value="$PROJECT_DIR$/KTV/duplicatedactiondetection.py" />
+        <option value="$PROJECT_DIR$/KTV/KTV.py" />
+        <option value="$PROJECT_DIR$/ui/mainframe.py" />
+        <option value="$PROJECT_DIR$/KTV/dynamicanalyzer.py" />
+        <option value="$PROJECT_DIR$/publish/messages.py" />
         <option value="$PROJECT_DIR$/KTV/tree.py" />
+        <option value="$PROJECT_DIR$/KTV/duplicatedviewplugin.py" />
+        <option value="$PROJECT_DIR$/KTV/extractframe.py" />
+        <option value="$PROJECT_DIR$/KTV/graphfilter.py" />
       </list>
     </option>
   </component>
@@ -219,7 +216,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -311,6 +307,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -517,20 +514,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/controller/commands.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="242" column="8" selection-start-line="242" selection-start-column="8" selection-end-line="242" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/action/action.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui/notebook.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-18">
@@ -550,13 +533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller/filecontrollers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11538">
-          <caret line="796" column="8" selection-start-line="796" selection-start-column="8" selection-end-line="796" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -721,13 +697,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller/tablecontrollers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7436">
-          <caret line="297" column="18" selection-start-line="297" selection-start-column="18" selection-end-line="297" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/editor/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="488">
@@ -796,7 +765,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="832">
           <caret line="50" column="24" selection-start-line="50" selection-start-column="13" selection-end-line="50" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -807,86 +775,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pluginapi/plugin.py">
+    <entry file="file://$PROJECT_DIR$/KTV/duplicatedactiondetection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1300">
-          <caret line="55" column="52" selection-start-line="55" selection-start-column="52" selection-end-line="55" selection-end-column="52" />
-          <folding />
+        <state relative-caret-position="312">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/publish/messages.py">
+    <entry file="file://$PROJECT_DIR$/ui/pluginmanager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11284">
-          <caret line="441" column="22" selection-start-line="441" selection-start-column="22" selection-end-line="441" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui/mainframe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="324" column="53" selection-start-line="324" selection-start-column="43" selection-end-line="324" selection-end-column="53" />
-          <folding>
-            <element signature="e#608#617#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-2424">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/KTV/KTV.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="644">
-          <caret line="863" column="10" selection-start-line="863" selection-start-column="10" selection-end-line="863" selection-end-column="10" />
-          <folding>
-            <element signature="e#26#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="124">
+          <caret line="823" column="24" selection-start-line="823" selection-start-column="24" selection-end-line="823" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/KTV/dynamicanalyzer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4672">
-          <caret line="690" column="25" selection-start-line="690" selection-start-column="25" selection-end-line="690" selection-end-column="25" />
+        <state relative-caret-position="1040">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
           <folding>
             <element signature="e#26#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KTV/graphfilter.py">
+    <entry file="file://$PROJECT_DIR$/pluginapi/plugin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="624">
-          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        <state relative-caret-position="2782">
+          <caret line="112" column="29" selection-start-line="112" selection-start-column="29" selection-end-line="112" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KTV/tree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3276">
+          <caret line="133" column="89" selection-start-line="133" selection-start-column="89" selection-end-line="133" selection-end-column="89" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ui/mainframe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3172">
+          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
+          <folding>
+            <element signature="e#608#617#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/KTV/duplicatedviewplugin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2184">
-          <caret line="84" column="72" selection-start-line="84" selection-start-column="8" selection-end-line="84" selection-end-column="72" />
+        <state relative-caret-position="5512">
+          <caret line="218" column="20" selection-start-line="218" selection-start-column="13" selection-end-line="218" selection-end-column="20" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KTV/duplicatedactiondetection.py">
+    <entry file="file://$PROJECT_DIR$/publish/messages.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="8632">
+          <caret line="339" column="17" selection-start-line="339" selection-start-column="17" selection-end-line="339" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KTV/tree.py">
+    <entry file="file://$PROJECT_DIR$/controller/tablecontrollers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="96" selection-end-column="34" />
+        <state relative-caret-position="7696">
+          <caret line="307" column="18" selection-start-line="307" selection-start-column="18" selection-end-line="307" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/filecontrollers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="174" column="51" selection-start-line="174" selection-start-column="51" selection-end-line="174" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KTV/extractframe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="866">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KTV/graphfilter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="67" column="61" selection-start-line="67" selection-start-column="61" selection-end-line="67" selection-end-column="61" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
