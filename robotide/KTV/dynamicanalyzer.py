@@ -3,7 +3,6 @@
 import math
 import os
 import itertools
-import re
 
 
 class DynamicAnalyzer:
@@ -22,27 +21,48 @@ class DynamicAnalyzer:
         self.serial_number_flag = True  # 使node顯示名稱變成流水號
         self.action_count = 0
 
+    def clear_data(self):
+        del self.TS_list[:]
+        del self.TC_list[:]
+        del self.UK_list[:]
+        del self.LK_list[:]
+        self.C_set.clear()
+        self.node_level.clear()
+        self.nodes.clear()
+        self.edges.clear()
+        self.nodes_with_type.clear()
+        self.serial_number.clear()
+
     def get_nodes(self):
         if not self.serial_number_flag:
             return list(self.nodes)
         return self.serial_number.keys()
 
+    def get_component_nodes(self):
+        result = [node for node in self.nodes if self.nodes_with_type[node] == 'Component']
+        if not self.serial_number_flag:
+            return result
+        temp = dict((value, key) for key, value in self.serial_number.iteritems())
+        return [temp[node] for node in result]
+
     def generate_change_impact_graph(self, node_list, distance):
         if self.serial_number_flag:
             node_list = [self.serial_number[node] for node in node_list]
-        change_impact_dict = self.get_change_impact_by_formula(list(node_list), self.edges)
-        nodes = self.get_nodes_by_node_list_and_distance(node_list, distance)
-        level_node = self.tree_layout(self.edges, self.node_level)
         nodes_with_type = self.nodes_with_type.copy()
-        for node in nodes:
+        change_impact, nodes_with_type = self.get_change_impact_by_formula(list(node_list), self.edges, nodes_with_type,
+                                                                           distance)
+        for node in node_list:
             nodes_with_type[node] = 'Changed'
+        # nodes = self.get_nodes_by_node_list_and_distance(node_list, distance)
+        level_node = self.tree_layout(self.edges, self.node_level)
+
         node_list = []
         for value in level_node.values():  # to control color of the nodes of the changed type
-            node_list.extend([node for node in value if nodes_with_type[node] != 'Changed'])
-        for node in [node for node in nodes_with_type if nodes_with_type[node] == 'Changed']:
+            node_list.extend([node for node in value if nodes_with_type[node] != 'Impacted'])
+        for node in [node for node in nodes_with_type if nodes_with_type[node] == 'Impacted']:
             node_list.append(node)
 
-        change_impact_node = 'Change impact = %d' % change_impact_dict[distance]
+        change_impact_node = 'Change impact = %d' % change_impact
         node_list.append(change_impact_node)
         nodes_with_type[change_impact_node] = 'Changed'
         string1 = ''
@@ -225,6 +245,7 @@ class DynamicAnalyzer:
         return new_node_level
 
     def build_model(self, filepath):
+        self.clear_data()
         excluded_node_show, excluded_node_not_show = self.read_excluded_library_keyword_file()
         source = os.path.abspath(filepath)
 
@@ -504,35 +525,40 @@ class DynamicAnalyzer:
         print 'weighted coupling = %r' % weighted_coupling
         return weighted_coupling, unweighted_coupling
 
-    def get_change_impact_by_formula(self, change_list, edges):
+    def get_change_impact_by_formula(self, change_list, edges, nodes_with_type, level=None):
         change_impact_dict = dict()
         edges_set = set()
         limit_level = 1
         while True:
-            edges_set = self.calculate_change_impact_by_formula(edges_set, change_list, change_impact_dict,
-                                                                limit_level, edges)
+            edges_set, nodes_with_type = self.calculate_change_impact_by_formula(edges_set, change_list,
+                                                                                 change_impact_dict, limit_level, edges,
+                                                                                 nodes_with_type)
+            if level is not None and level == limit_level:  # remove LK~C corresponding relation
+                return change_impact_dict[level] - change_impact_dict[1], nodes_with_type
             if limit_level - 1 in change_impact_dict.keys():
                 if change_impact_dict[limit_level] == change_impact_dict[limit_level - 1]:
                     break
             limit_level += 1
         change_impact_dict.pop(limit_level)
-        for key in change_impact_dict.keys():  # remove LK~C response relation
+        for key in change_impact_dict.keys():  # remove LK~C corresponding relation
             if key == 1:
                 continue
             change_impact_dict[key] -= change_impact_dict[1]
         return change_impact_dict
 
-    def calculate_change_impact_by_formula(self, edges_set, change_list, change_impact_dict, level, edges):
+    def calculate_change_impact_by_formula(self, edges_set, change_list, change_impact_dict, level, edges,
+                                           nodes_with_type):
         for change in change_list:
             temp_set = self.get_edges(change, edges)
             edges_set = edges_set.union(temp_set)
         weight = 0
         del change_list[:]
         for edge in edges_set:
+            nodes_with_type[edge[0]] = 'Impacted'
             change_list.append(edge[0])
             weight += edges[(edge[0], edge[1])]
         change_impact_dict[level] = weight
-        return edges_set
+        return edges_set, nodes_with_type
 
     def get_edges(self, node, edges):
         result = set()
@@ -645,10 +671,11 @@ class DynamicAnalyzer:
         # print node_parent_dict
         # print 'node_parent_dict'
         self.build_level_node(max_level, node_level, level_node, node_descendant, node_parent_dict, edges)
-        for level in range(max_level + 1):
+        """for level in range(max_level + 1):
             if len(level_node[level]) > 1:
                 top_node = level_node[level - 1][0]
-                break
+                break"""
+        top_node = level_node[0][0]
         # redo = True
         # while redo:
         # print level_node

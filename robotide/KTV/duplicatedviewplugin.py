@@ -3,6 +3,7 @@ import wx
 from robotide.pluginapi import Plugin, TreeAwarePluginMixin
 from robotide.KTV.tree import Tree
 from robotide.KTV.extractframe import ExtractFrame
+from robotide.controller.filecontrollers import TestCaseFileController
 
 from robotide.publish import PUBLISHER, MyTreeSelectedItemChanged, DuplicateDetection, MyTreeBuildFinish
 
@@ -14,7 +15,6 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
 
     def __init__(self, application):
         Plugin.__init__(self, application)
-
         self.left_panel_show = False
         self.datafiles = None
         self.total_actions = 0
@@ -24,6 +24,21 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         PUBLISHER.subscribe(self.load_datafiles, DuplicateDetection)
         PUBLISHER.subscribe(self.set_all_label, MyTreeBuildFinish)
 
+    def clear_data(self):
+        self.left_panel_show = False
+        self.datafiles = None
+        self.total_actions = 0
+
+        self.left_label.SetLabel('Preview 1')
+        self.left_text.SetReadOnly(False)
+        self.left_text.ClearAll()
+        self.left_text.SetReadOnly(True)
+        self.right_label.SetLabel('Preview 2')
+        self.right_text.SetReadOnly(False)
+        self.right_text.ClearAll()
+        self.right_text.SetReadOnly(True)
+        self.extract_button.Enable(False)
+
     def set_all_label(self, data):
         self.total_label.SetLabel('Total actions : %d' % self.total_actions)
         self.duplicated_label.SetLabel('Duplicated actions : %d' % data.duplicated_actions)
@@ -31,6 +46,7 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.percentage_label.SetLabel('Duplicated Percentage : %0.2f' % percentage + ' %')
 
     def load_datafiles(self, data):
+        self.clear_data()
         self.datafiles = data.controller
         self.compute_actions_count()
         self.my_tree.set_filepath(self.frame._controller.suite.source)
@@ -45,6 +61,7 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
                 self.total_actions += len(user_keyword.steps)
 
     def tree_selected_item_changed(self, data):
+        self.extract_button.Enable(True)
         node, duration_list = data.node, data.duration_list
         if not self.left_panel_show:
             self.left_label.SetLabel(node)
@@ -159,8 +176,9 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.total_label = wx.StaticText(up_panel, label='Total actions : ')
         self.duplicated_label = wx.StaticText(up_panel, label='Duplicated actions : ')
         self.percentage_label = wx.StaticText(up_panel, label='Duplicated Percentage : ')
-        extract_button = wx.Button(down_panel, label='Extract')
-        extract_button.Bind(wx.EVT_BUTTON, self.extract_click)
+        self.extract_button = wx.Button(down_panel, label='Extract')
+        self.extract_button.Enable(False)
+        self.extract_button.Bind(wx.EVT_BUTTON, self.extract_click)
         up_right_sizer = wx.BoxSizer(wx.VERTICAL)
         up_right_sizer.Add(self.total_label, 0, wx.EXPAND, 5)
         up_right_sizer.Add(self.duplicated_label, 0, wx.EXPAND, 5)
@@ -168,7 +186,7 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         up_panel.SetSizer(up_right_sizer)
         down_right_sizer = wx.BoxSizer(wx.HORIZONTAL)
         down_right_sizer.Add(wx.Panel(down_panel), 1, wx.ALL, 5)
-        down_right_sizer.Add(extract_button, 1, wx.ALL, 5)
+        down_right_sizer.Add(self.extract_button, 1, wx.ALL, 5)
         down_right_sizer.Add(wx.Panel(down_panel), 1, wx.ALL, 5)
         down_panel.SetSizer(down_right_sizer)
 
@@ -181,9 +199,41 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.bottom_splitter.SplitVertically(left_panel, right_panel)
 
     def extract_click(self, event):
-        frame = ExtractFrame()
-        frame.set_text(self.left_text.GetSelectedText())
-        frame.Show()
+        text = self.left_text.GetSelectedText()
+        for df in self.datafiles:
+            if type(df) is TestCaseFileController:
+                self.tree.select_node_by_data(df)
+                start, end = self.left_text.GetSelection()
+                self.left_text.GotoPos(start)
+                start = self.left_text.GetCurrentLine()
+                self.left_text.GotoPos(end)
+                end = self.left_text.GetCurrentLine()
+                name = self.left_label.GetLabelText()
+                frame = ExtractFrame(self.get_controller(name), self.find_all_should_be_extract(text))
+                frame.Show()
+                break
+
+    def find_all_should_be_extract(self, text):
+        steps = text.strip('\n').split('\n')
+        steps = [step.split('\t')[0] for step in steps]
+        result = {}
+        for df in self.datafiles:
+            for test_case in df.tests:
+                lines = self.get_extract_lines(steps, test_case.steps)
+                if lines is not None:
+                    result[test_case] = lines
+            for userKeyword in df.keywords:
+                lines = self.get_extract_lines(steps, userKeyword.steps)
+                if lines is not None:
+                    result[userKeyword] = lines
+        return result
+
+    def get_extract_lines(self, steps, target_steps):
+        target_steps = [target_step.keyword for target_step in target_steps]
+        for index in xrange(len(target_steps)):
+            if target_steps[index:index + len(steps)] == steps:
+                return index + 1, index + len(steps)  # because line number start from 1 not 0
+        return None
 
     def get_controller(self, name):
         for df in self.datafiles:

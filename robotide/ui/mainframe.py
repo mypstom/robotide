@@ -327,14 +327,15 @@ class RideFrame(wx.Frame, RideEventHandler):
         self.KTV.setDataFiles(self._get_datafile_list())
         start_time = time.time()
         """---------------------------------------"""
-        #data = ['ClickSuggestWordAtCell', 'DoubleClickSuggestListItem', 'AssertSuggestListItem',
+        # data = ['ClickSuggestWordAtCell', 'DoubleClickSuggestListItem', 'AssertSuggestListItem',
         #        'SaveFileByNameDirectly', 'myKeyword1']
-        data = ['File|New Crossword']
-        distance = 1
+        # data = ['File|New Crossword']
+        # data = ['OK']
+        # distance = 1
         """---------------------------------------"""
-        # self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer)
+        self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer)
         # self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer, data)
-        self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer, data, distance)
+        # self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer, data, distance)
         elapsed_time = time.time() - start_time
         print 'DynamicGenerateGraph elapsed_time = %s' % elapsed_time
 
