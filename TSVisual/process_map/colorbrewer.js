@@ -300,5 +300,5 @@ var colorbrewer = {YlGn: {
 11: ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5"],
 12: ["#8dd3c7","#ffffb3","#bebada","#fb8072","#80b1d3","#fdb462","#b3de69","#fccde5","#d9d9d9","#bc80bd","#ccebc5","#ffed6f"]
 },MySet: {
-6: ["#fdb462","#bebada","#ffffb3","#80b1d3","#8dd3c7","#fb8072"]
+7: ["#fdb462","#bebada","#ffffb3","#80b1d3","#8dd3c7","#fb8072","#bc80bd"]
 }};

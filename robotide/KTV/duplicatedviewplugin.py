@@ -3,6 +3,7 @@ import wx
 from robotide.pluginapi import Plugin, TreeAwarePluginMixin
 from robotide.KTV.tree import Tree
 from robotide.KTV.extractframe import ExtractFrame
+from robotide.KTV.extractlistview import ExtractListView
 from robotide.controller.filecontrollers import TestCaseFileController
 
 from robotide.publish import PUBLISHER, MyTreeSelectedItemChanged, DuplicateDetection, MyTreeBuildFinish
@@ -18,6 +19,8 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.left_panel_show = False
         self.datafiles = None
         self.total_actions = 0
+        self.extract_frame = None
+        self.extract_list_view = None
 
     def bind_event(self):
         PUBLISHER.subscribe(self.tree_selected_item_changed, MyTreeSelectedItemChanged)
@@ -203,14 +206,12 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         for df in self.datafiles:
             if type(df) is TestCaseFileController:
                 self.tree.select_node_by_data(df)
-                start, end = self.left_text.GetSelection()
-                self.left_text.GotoPos(start)
-                start = self.left_text.GetCurrentLine()
-                self.left_text.GotoPos(end)
-                end = self.left_text.GetCurrentLine()
                 name = self.left_label.GetLabelText()
-                frame = ExtractFrame(self.get_controller(name), self.find_all_should_be_extract(text))
-                frame.Show()
+                impact_list = self.find_all_should_be_extract(text)
+                self.extract_frame = ExtractFrame(self.get_controller(name), impact_list)
+                self.extract_frame.Show()
+                self.extract_list_view = ExtractListView(impact_list)
+                self.extract_list_view.Show()
                 break
 
     def find_all_should_be_extract(self, text):
@@ -249,6 +250,8 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self._create_ui()
 
     def disable(self):
+        self.extract_frame.Close()
+        self.extract_list_view.Close()
         pass
 
 
