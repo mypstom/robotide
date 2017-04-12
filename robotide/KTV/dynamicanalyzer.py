@@ -53,7 +53,6 @@ class DynamicAnalyzer:
                                                                            distance)
         for node in node_list:
             nodes_with_type[node] = 'Changed'
-        # nodes = self.get_nodes_by_node_list_and_distance(node_list, distance)
         level_node = self.tree_layout(self.edges, self.node_level)
 
         node_list = []
@@ -62,7 +61,7 @@ class DynamicAnalyzer:
         for node in [node for node in nodes_with_type if nodes_with_type[node] == 'Impacted']:
             node_list.append(node)
 
-        change_impact_node = 'Change impact = %d' % change_impact
+        change_impact_node = 'Level %d change impact = %d' % (distance, change_impact)
         node_list.append(change_impact_node)
         nodes_with_type[change_impact_node] = 'Changed'
         string1 = ''
@@ -199,8 +198,6 @@ class DynamicAnalyzer:
         return new_level_node
 
     def get_nodes_by_node_list_and_distance(self, node_list, distance):
-        print 'distance = %d' % distance
-        print 'node_list = %r' % node_list
         if distance == 0:
             return node_list
         specific_nodes = set(node_list)
@@ -219,12 +216,6 @@ class DynamicAnalyzer:
             if edge[0] in node_list or edge[1] in node_list:
                 specific_edges[edge] = self.edges[edge]
         specific_nodes = self.get_nodes_by_node_list_and_distance(node_list, 1)
-        """specific_nodes = set(node_list)
-        for edge in specific_edges:
-            if edge[0] not in specific_nodes:
-                specific_nodes.add(edge[0])
-            if edge[1] not in specific_nodes:
-                specific_nodes.add(edge[1])"""
         return specific_nodes, specific_edges
 
     def find_node_level_range(self, node_set):
@@ -355,30 +346,10 @@ class DynamicAnalyzer:
 
         for TS in self.TS_list:
             self.set_level(TS, 0)
-        # print node_level
         self.build_edges()
-        # print 'weighted coupling = %r\n--------------------' % self.get_weighted(None, None, edges)
         self.remove_redundant_edges()
-        # print 'temp = %r' % self.get_weighted('NewCrosswordByValidGridSize', 'SelectCrosswordSageWindow', edges)
-        # print edges
         print 'edges number : %d' % len(self.edges)
         print 'nodes number : %d' % len(self.node_level.keys())
-
-        """change_list = list()
-        change_list.append('btnSuggestWords')
-        # change_list.append('btnFind')
-        # change_list.append('btnAddWord')
-        # change_list.append('File|New Crossword')
-        change_impact_dict = self.get_change_impact_dict(nodes, edges, nodesWithType, change_list)
-        #nodesWithType['btnSuggestWords'] = 'Changed'
-        print change_impact_dict
-        change_impact_dict = self.get_change_impact_by_formula(edges, change_list)
-        print change_impact_dict"""
-        """change_impact_dict = self.get_change_impact_dict(nodes, edges, nodesWithType, ['File|New Crossword'])
-        #nodesWithType['File|New Crossword'] = 'Changed'
-        print change_impact_dict
-        change_impact_dict = self.get_change_impact_by_formula(edges, ['File|New Crossword'])
-        print change_impact_dict"""
 
     def set_level(self, current, current_level):
         node_type = self.nodes_with_type[current]
@@ -653,12 +624,7 @@ class DynamicAnalyzer:
             for node in level_node[level]:
                 if node not in level_node_list:
                     level_node_list.append(node)
-            # print 'level = %d' % level
-            # print 'old level_node[level]'
-            # print level_node[level]
             level_node[level] = level_node_list[:]
-            # print 'new level_node[level]'
-            # print level_node[level]
             del level_node_list[:]
 
     def tree_layout(self, edges, node_level):
@@ -668,18 +634,8 @@ class DynamicAnalyzer:
         for level in node_level.values():
             max_level = max(max_level, level)
         node_parent_dict = self.build_node_parent_dict(edges, node_level, max_level)
-        # print node_parent_dict
-        # print 'node_parent_dict'
         self.build_level_node(max_level, node_level, level_node, node_descendant, node_parent_dict, edges)
-        """for level in range(max_level + 1):
-            if len(level_node[level]) > 1:
-                top_node = level_node[level - 1][0]
-                break"""
         top_node = level_node[0][0]
-        # redo = True
-        # while redo:
-        # print level_node
-        # print 'build_level_node finish'
         for level in range(1, max_level + 1):
             level_node_list = []
             for parent in level_node[level - 1]:
@@ -692,15 +648,8 @@ class DynamicAnalyzer:
                 if len(temp) == 0:
                     continue
                 level_node_list.extend(temp)
-                # print 'inter switch_node_order'
-                change = self.switch_node_order(temp, max_level, node_parent_dict, node_level, level_node, top_node,
-                                                edges)
-                """if change:
-                    break
-            if change:
-                change = False
-            else:
-                redo = False"""
+                self.switch_node_order(temp, max_level, node_parent_dict, node_level, level_node, top_node,
+                                       edges)
 
         node_x_position = self.tree_layout_x(level_node, node_descendant, node_parent_dict, edges)
         string = ''
@@ -775,7 +724,6 @@ class DynamicAnalyzer:
         node_x_position = dict()
         node_x_position[level_node[0][0]] = 0.5
         for level in xrange(max_level):
-            # print 'level = %d' % level
             for node in level_node[level]:
                 width = dict()
                 total = 0
@@ -787,8 +735,6 @@ class DynamicAnalyzer:
                         child_node_list.append(child_node)
                 if node in child_node_list:
                     child_node_list.remove(node)
-                # print 'node = %s    child_node_list' % node
-                # print child_node_list
                 for child_node in child_node_list:
                     width[child_node] = self.get_leaf_node_count(node_descendant[child_node], edges)
                     total += width[child_node]
@@ -798,49 +744,13 @@ class DynamicAnalyzer:
                     right = float(
                         "{0:.8f}".format(left + float(width[child_node]) / total * (duration[1] - duration[0])))
                     duration_dict[node][child_node] = (left, right)
-                    # print 'node = %s    duration = %r' % (child_node, (left, right))
                     node_x_position[child_node] = float("{0:.8f}".format((right + left) / 2))
                     left = right
         return node_x_position
 
-    """def tree_layout_x(self, level_node, node_descendant, node_parent_dict, edges):
-        node_x_position = dict()
-        root = level_node[0][0]
-        node_x_position[root] = 0.5
-        node_x_position = self.tree_layout_x_recursive(root, 1, edges, level_node, (0.0, 1.0), node_descendant,
-                                                       node_x_position, node_parent_dict)
-        return node_x_position
-
-    def tree_layout_x_recursive(self, root, level, edges, level_node, duration, node_descendant, node_x_position,
-                                node_parent_dict):
-        width = dict()
-        current_level_nodes = [node for node in level_node[level] if
-                               node in node_descendant[root] and root == node_parent_dict[node][0][0]]
-        print 'current_level_nodes'
-        print current_level_nodes
-        duration_list = []
-        total = 0
-        for node in current_level_nodes:
-            width[node] = self.get_leaf_node_count(node_descendant[node], edges)
-            total += width[node]
-        left, right = duration[0], duration[1]
-        for node in current_level_nodes:
-            right = float("{0:.8f}".format(left + float(width[node]) / total * (duration[1] - duration[0])))
-            duration_list.append((left, right))
-            node_x_position[node] = float("{0:.8f}".format((right + left) / 2))
-            left = right
-        for node in current_level_nodes:
-            if len(node_descendant[node]) > 0:
-                node_x_position = self.tree_layout_x_recursive(node, level + 1, edges, level_node,
-                                                               duration_list[current_level_nodes.index(node)],
-                                                               node_descendant, node_x_position, node_parent_dict)
-        return node_x_position"""
-
     def switch_node_order(self, node_list, max_level, node_parent_dict, node_level, level_node, top_node, edges):
         total_cross = 0
         total_cross += self.calculate_cross(top_node, max_level, node_parent_dict, node_level, level_node, edges)
-        # print 'calculate_cross finish'
-        change = False
         redo = True
         while redo:
             swap = False
@@ -853,7 +763,6 @@ class DynamicAnalyzer:
                     combinations[1])
                 new_level_node[level][index1], new_level_node[level][index2] = level_node[level][index2], \
                                                                                level_node[level][index1]
-                # print 'rebuild_level_node'
                 self.rebuild_level_node(level + 1, max_level, node_level, new_level_node, node_parent_dict, edges)
                 new_total_cross = 0
                 new_total_cross += self.calculate_cross(top_node, max_level, node_parent_dict, node_level,
@@ -864,53 +773,9 @@ class DynamicAnalyzer:
                     self.rebuild_level_node(level + 1, max_level, node_level, level_node, node_parent_dict, edges)
                     new_level_node.clear()
                     swap = True
-                    change = True
                     break
             if not swap:
                 redo = False
-        return change
-
-    """def switch_node_order(self, node_list, node_level, edges, max_level, node_parent_dict, level_node, top_node):
-        total_cross = 0
-        total_cross += self.calculate_cross(top_node, edges, max_level, node_parent_dict, node_level, level_node)
-        change = False
-        redo = True
-        while redo:
-            swap = False
-            for i in xrange(len(node_list)):
-                for j in xrange(i + 1, len(node_list)):
-                    level = node_level[node_list[0]]
-                    new_level_node = {}
-                    for key in level_node:
-                        new_level_node[key] = level_node[key][:]
-                    start_index = level_node[level].index(node_list[i])
-                    temp = node_list[i]
-                    new_level_node[level].remove(temp)
-                    new_node_list = new_level_node[level][:start_index + j]
-                    new_node_list.append(temp)
-                    new_node_list.extend(new_level_node[level][start_index + j:])
-                    new_level_node[level] = new_node_list[:]
-                    self.rebuild_level_node(level + 1, max_level, node_level, new_level_node, edges, node_parent_dict)
-                    new_total_cross = 0
-                    new_total_cross += self.calculate_cross(top_node, edges, max_level, node_parent_dict, node_level,
-                                                            new_level_node)
-
-                    if new_total_cross < total_cross:
-                        # print new_total_cross
-                        total_cross = new_total_cross
-                        node_list = new_node_list[:]
-                        level_node[level] = new_level_node[level][:]
-                        self.rebuild_level_node(level + 1, max_level, node_level, level_node, edges, node_parent_dict)
-                        del new_node_list[:]
-                        new_level_node.clear()
-                        swap = True
-                        change = True
-                        break
-                if swap:
-                    break
-            if not swap:
-                redo = False
-        return change"""
 
     def get_descendant(self, root, root_level, max_level, edges):
         next_level_node = [edge[1] for edge in edges if edge[0] == root]

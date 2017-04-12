@@ -15,6 +15,8 @@ class AdvanceGraph(Plugin, TreeAwarePluginMixin):
         self.node_combobox = None
         self.listbox = None
         self.level_spinctrl = None
+        self.simplified_button = None
+        self.change_impact_button = None
 
     def bind_event(self):
         PUBLISHER.subscribe(self.load_data, MyDynamicAnalyzerBuildFinish)
@@ -95,8 +97,9 @@ class AdvanceGraph(Plugin, TreeAwarePluginMixin):
         sizer = wx.BoxSizer(wx.VERTICAL)
         simplified_group = wx.StaticBox(parent, -1, 'Simplified Graph', size=(300, 100))
         simplified_sizer = wx.StaticBoxSizer(simplified_group, wx.HORIZONTAL)
-        simplified_button = wx.Button(parent, label='Generate Simplified Graph')
-        simplified_sizer.Add(simplified_button, 0, wx.ALL, 5)
+        self.simplified_button = wx.Button(parent, label='Generate Simplified Graph')
+        self.simplified_button.Enable(False)
+        simplified_sizer.Add(self.simplified_button, 0, wx.ALL, 5)
         change_impact_group = wx.StaticBox(parent, -1, 'Change impact', size=(300, 100))
         panel = wx.Panel(parent)
         label = wx.StaticText(panel, label='level:')
@@ -107,18 +110,19 @@ class AdvanceGraph(Plugin, TreeAwarePluginMixin):
         self.level_spinctrl = wx.SpinCtrl(panel)
         self.level_spinctrl.SetRange(1, 100)
         self.level_spinctrl.SetValue(1)
-        change_impact_button = wx.Button(parent, label='Generate Change Impact Graph')
+        self.change_impact_button = wx.Button(parent, label='Generate Change Impact Graph')
+        self.change_impact_button.Enable(False)
         sizer.Add(simplified_sizer, 0, wx.ALL, 5)
         sizer.Add(wx.Panel(parent), 0, wx.ALL, 5)
         level_sizer.Add(label, 0, wx.ALL, 5)
         level_sizer.Add(self.level_spinctrl, 0, wx.ALL, 5)
         panel.SetSizer(level_sizer)
         change_impact_sizer.Add(panel, 0, wx.ALL, 5)
-        change_impact_sizer.Add(change_impact_button, 0, wx.ALL, 5)
+        change_impact_sizer.Add(self.change_impact_button, 0, wx.ALL, 5)
         sizer.Add(change_impact_sizer, 0, wx.ALL, 5)
         parent.SetSizer(sizer)
-        simplified_button.Bind(wx.EVT_BUTTON, self.generate_button_click)
-        change_impact_button.Bind(wx.EVT_BUTTON, self.change_impact_button_click)
+        self.simplified_button.Bind(wx.EVT_BUTTON, self.generate_button_click)
+        self.change_impact_button.Bind(wx.EVT_BUTTON, self.change_impact_button_click)
 
     def node_combobox_text_changed(self, event):
         self.node_combobox.SetStringSelection(self.node_combobox.GetValue())
@@ -129,13 +133,21 @@ class AdvanceGraph(Plugin, TreeAwarePluginMixin):
     def add_button_click(self, event):
         if self.node_combobox.GetSelection() != -1:
             self.listbox.Append(self.node_list[self.node_combobox.GetSelection()])
+        if len(self.listbox.GetItems()) > 0:
+            self.simplified_button.Enable(True)
+            self.change_impact_button.Enable(True)
 
     def delete_button_click(self, event):
         if self.listbox.GetSelection() != -1:
             self.listbox.Delete(self.listbox.GetSelection())
+        if not len(self.listbox.GetItems()) > 0:
+            self.simplified_button.Enable(False)
+            self.change_impact_button.Enable(False)
 
     def clear_button_click(self, event):
         self.listbox.Clear()
+        self.simplified_button.Enable(False)
+        self.change_impact_button.Enable(False)
 
     def generate_button_click(self, event):
         data = self.listbox.GetItems()

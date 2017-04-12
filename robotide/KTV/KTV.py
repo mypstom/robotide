@@ -850,4 +850,5 @@ class KTV:
             json.dump(jsonOutput, f)
 
         copyfile('objects.json', 'C:/wamp64/www/TSVisual/process_map/data/component01/objects.json')
-        webbrowser.open('http://localhost/TSVisual/index.html')
+        webbrowser.open('http://localhost/TSVisual/process_map/graph.php?dataset=component01')
+        # webbrowser.open('http://localhost/TSVisual/index.html')

@@ -243,7 +243,7 @@ class _WithStepsController(ControllerWithParent, WithUndoRedoStacks):
     def extract_keyword(self, name, argstr, step_range):
         extracted_steps = self._extract_steps(step_range)
         self._replace_steps_with_kw(name, step_range)
-        self._create_extracted_kw(name, argstr, extracted_steps)
+        return self._create_extracted_kw(name, argstr, extracted_steps)
 
     def get_raw_steps(self):
         # Reveales inner state so can't be sure if cache is up to date

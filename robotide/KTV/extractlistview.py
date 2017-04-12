@@ -7,7 +7,9 @@ class ExtractListView(wx.Frame):
         self.impact_list = impact_list
         self.listbox = None
         self.list_ctrl = None
+        self.controller_dict = None
         self.create_ui()
+        self.set_controller_dict()
 
     def create_ui(self):
         panel = wx.Panel(self)
@@ -32,11 +34,15 @@ class ExtractListView(wx.Frame):
         sizer.Add(right, 0, wx.ALL, 5)
         panel.SetSizer(sizer)
 
+    def set_controller_dict(self):
+        self.controller_dict = {}
+        for controller, duration in zip(self.impact_list.keys(), self.impact_list.values()):
+            lines, max_col = self.get_extract_lines(controller, duration[0], duration[1])
+            self.controller_dict[controller] = (lines, max_col)
+
     def list_box_selection_changed(self, event):
         self.list_ctrl.ClearAll()
-        controller, duration = self.impact_list.items()[self.listbox.GetSelection()]
-        lines, max_col = self.get_extract_lines(controller, duration[0] - 1,
-                                                duration[1] - 1)  # because duration is start at 1 not 0
+        lines, max_col = self.controller_dict[self.impact_list.keys()[self.listbox.GetSelection()]]
         self.list_ctrl.InsertColumn(0, 'Keyword')
         for index in xrange(1, max_col):
             self.list_ctrl.InsertColumn(index, 'arg%d' % index)

@@ -41,6 +41,7 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.right_text.ClearAll()
         self.right_text.SetReadOnly(True)
         self.extract_button.Enable(False)
+        self.show_button.Enable(False)
 
     def set_all_label(self, data):
         self.total_label.SetLabel('Total actions : %d' % self.total_actions)
@@ -65,6 +66,7 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
 
     def tree_selected_item_changed(self, data):
         self.extract_button.Enable(True)
+        self.show_button.Enable(True)
         node, duration_list = data.node, data.duration_list
         if not self.left_panel_show:
             self.left_label.SetLabel(node)
@@ -182,15 +184,20 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.extract_button = wx.Button(down_panel, label='Extract')
         self.extract_button.Enable(False)
         self.extract_button.Bind(wx.EVT_BUTTON, self.extract_click)
+        self.show_button = wx.Button(down_panel, label='Show impact')
+        self.show_button.Enable(False)
+        self.show_button.Bind(wx.EVT_BUTTON, self.show_click)
         up_right_sizer = wx.BoxSizer(wx.VERTICAL)
         up_right_sizer.Add(self.total_label, 0, wx.EXPAND, 5)
         up_right_sizer.Add(self.duplicated_label, 0, wx.EXPAND, 5)
         up_right_sizer.Add(self.percentage_label, 0, wx.EXPAND, 5)
         up_panel.SetSizer(up_right_sizer)
         down_right_sizer = wx.BoxSizer(wx.HORIZONTAL)
-        down_right_sizer.Add(wx.Panel(down_panel), 1, wx.ALL, 5)
+        #down_right_sizer.Add(wx.Panel(down_panel), 1, wx.ALL, 5)
         down_right_sizer.Add(self.extract_button, 1, wx.ALL, 5)
-        down_right_sizer.Add(wx.Panel(down_panel), 1, wx.ALL, 5)
+        # down_right_sizer.Add(wx.Panel(down_panel), 1, wx.ALL, 5)
+        down_right_sizer.Add(self.show_button, 1, wx.ALL, 5)
+        #down_right_sizer.Add(wx.Panel(down_panel), 1, wx.ALL, 5)
         down_panel.SetSizer(down_right_sizer)
 
         right_sizer = wx.BoxSizer(wx.VERTICAL)
@@ -210,6 +217,13 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
                 impact_list = self.find_all_should_be_extract(text)
                 self.extract_frame = ExtractFrame(self.get_controller(name), impact_list)
                 self.extract_frame.Show()
+                break
+
+    def show_click(self, event):
+        text = self.left_text.GetSelectedText()
+        for df in self.datafiles:
+            if type(df) is TestCaseFileController:
+                impact_list = self.find_all_should_be_extract(text)
                 self.extract_list_view = ExtractListView(impact_list)
                 self.extract_list_view.Show()
                 break
@@ -233,7 +247,7 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         target_steps = [target_step.keyword for target_step in target_steps]
         for index in xrange(len(target_steps)):
             if target_steps[index:index + len(steps)] == steps:
-                return index + 1, index + len(steps)  # because line number start from 1 not 0
+                return index, index + len(steps) - 1
         return None
 
     def get_controller(self, name):
