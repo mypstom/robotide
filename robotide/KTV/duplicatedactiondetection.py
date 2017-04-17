@@ -4,6 +4,7 @@ import time
 import os
 import itertools
 from robotide.publish import DuplicateDetection
+from robotide.controller.stepcontrollers import ForLoopStepController
 
 
 class DuplicatedActionDetection:
@@ -11,9 +12,38 @@ class DuplicatedActionDetection:
     threshold = 5
     use_hash = True
     hash_table = {}
+    comment_list = []
 
-    def Excute(self, datafiles, filepath):
+    def execute(self, datafiles, file_path):
+        source = os.path.abspath(file_path)
+        self.check_step_have_keyword(datafiles)
+        self.detect_all_script(datafiles, source)
+        self.uncommend_steps()
+        DuplicateDetection(controller=datafiles).publish()
+
+    def detect_all_script(self, datafiles, source):
         pass
+
+    def check_step_have_keyword(self, datafiles):
+        user_keyword_count = 0
+        for df in datafiles:
+            for test_case in df.tests:
+                for step in test_case.steps:
+                    if type(step) is not ForLoopStepController and step.keyword is None:
+                        self.comment_list.append(step)
+                        step.comment()
+            user_keyword_count += len(df.keywords)
+            for user_keyword in df.keywords:
+                for step in user_keyword.steps:
+                    if type(step) is not ForLoopStepController and step.keyword is None:
+                        self.comment_list.append(step)
+                        step.comment()
+        print 'user_keyword_count = %d' % user_keyword_count
+
+    def uncommend_steps(self):
+        for step in self.comment_list:
+            step.uncomment()
+        del self.comment_list[:]
 
     def build_table(self, all_step_list):
         for item in all_step_list:
@@ -73,14 +103,7 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
         # start the process...
         return self.all_lcs(mapping, self.lcs_mat(list1, list2), list1, list2, len(list1), len(list2))
 
-    def Excute(self, datafiles, filepath):
-        source = os.path.abspath(filepath)
-        # self.DetectionBetweenUKandUK(datafiles)
-        # self.DetectionBetweenTCandTC(datafiles)
-        self.DetectionAllScript(datafiles, source)
-        DuplicateDetection(controller=datafiles).publish()
-
-    def DetectionAllScript(self, datafiles, source):
+    def detect_all_script(self, datafiles, source):
         steps_list = []
         result_list = []
 
@@ -104,7 +127,7 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
 
         result_list.sort(key=lambda x: len(x))
         result_list.reverse()
-        #print result_list
+        # print result_list
         with open(source + '\ScriptDuplicated.txt', 'w+') as f:
             for result in result_list:
                 if len(result) == 0:
@@ -166,106 +189,15 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
     def get_step_list(self, steps):
         result = []
         for step in steps:
-            if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
+            if type(step) is ForLoopStepController:
                 result.append('Loop')
             else:
                 result.append(step.keyword)
         return result
 
-    """def DetectionBetweenUKandUK(self, datafiles):
-        f = open('UK2UKduplicated-LCS.txt', 'w+')
-        for df in datafiles:
-            i = 0
-            length = len(df.keywords)
-            while i < length - 1:
-                userKeywordsListFirstList = list()
-                for step in df.keywords[i].steps:
-                    if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
-                        userKeywordsListFirstList.append('Loop')
-                    else:
-                        userKeywordsListFirstList.append(step.keyword)
-                j = i + 1
-                while j < length:
-                    userKeywordsListSecondList = list()
-                    for step in df.keywords[j].steps:
-                        if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
-                            userKeywordsListSecondList.append('Loop')
-                        else:
-                            userKeywordsListSecondList.append(step.keyword)
-                    result = list()
-                    result = self.LCS(userKeywordsListFirstList, userKeywordsListSecondList)
-                    f.write(df.keywords[i].display_name)
-                    f.write(' , ')
-                    f.write(df.keywords[j].display_name)
-                    f.write('\n')
-                    f.write('len(lcs) = ')
-                    f.write(str(len(result[0])))
-                    f.write('\n')
-                    f.write('len(result) = ')
-                    f.write(str(len(result)))
-                    f.write('\n')
-                    for lcs in result:
-                        f.write('lcs = [')
-                        for item in lcs:
-                            f.write(str(item).encode('utf-8'))
-                            f.write(' , ')
-                        f.write(']\n\n')
-                    j += 1
-                i += 1
-
-        f.close()
-
-    def DetectionBetweenTCandTC(self, datafiles):
-        f = open('TC2TCduplicated-LCS.txt', 'w+')
-        for df in datafiles:
-            i = 0
-            length = len(df.tests)
-            while i < length - 1:
-                testCaseListFirstList = list()
-                for step in df.tests[i].steps:
-                    if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
-                        testCaseListFirstList.append('Loop')
-                    else:
-                        testCaseListFirstList.append(step.keyword)
-                j = i + 1
-                while j < length:
-                    testCaseListSecondList = list()
-                    for step in df.tests[j].steps:
-                        if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
-                            testCaseListSecondList.append('Loop')
-                        else:
-                            testCaseListSecondList.append(step.keyword)
-                    result = list()
-                    result = self.LCS(testCaseListFirstList, testCaseListSecondList)
-                    f.write(df.tests[i].display_name)
-                    f.write(' , ')
-                    f.write(df.tests[j].display_name)
-                    f.write('\n')
-                    f.write('len(lcs) = ')
-                    f.write(str(len(result[0])))
-                    f.write('\n')
-                    f.write('len(result) = ')
-                    f.write(str(len(result)))
-                    f.write('\n')
-                    for lcs in result:
-                        f.write('lcs = [')
-                        for item in lcs:
-                            f.write(str(item).encode('utf-8'))
-                            f.write(' , ')
-                        f.write(']\n\n')
-                    j += 1
-                i += 1
-
-        f.close()"""
-
 
 class LongestRepeatedSubstring(DuplicatedActionDetection):
-    def Excute(self, datafiles, filepath):
-        source = os.path.abspath(filepath)
-        self.DetectionAllScript(datafiles, source)
-        DuplicateDetection(controller=datafiles).publish()
-
-    def DetectionAllScript(self, datafiles, source):
+    def detect_all_script(self, datafiles, source):
         token_count = 1
         f = open(source + '\ScriptDuplicated.txt', 'w+')
         count = 1
@@ -273,18 +205,18 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
         for df in datafiles:
             for testcase in df.tests:
                 for step in testcase.steps:
-                    if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
+                    if type(step) is ForLoopStepController:
                         all_step_list.append('Loop')
                     else:
-                        all_step_list.append(str(step.keyword))
+                        all_step_list.append(step.keyword)
                 all_step_list.append(self.token + str(token_count))
                 token_count += 1
             for userKeyword in df.keywords:
                 for step in userKeyword.steps:
-                    if type(step) is robotide.controller.stepcontrollers.ForLoopStepController:
+                    if type(step) is ForLoopStepController:
                         all_step_list.append('Loop')
                     else:
-                        all_step_list.append(str(step.keyword))
+                        all_step_list.append(step.keyword)
                 all_step_list.append(self.token + str(token_count))
                 token_count += 1
 
@@ -350,12 +282,7 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
 
         for df in datafiles:
             for test_case in df.tests:
-                region_list = []
-                for i in xrange(len(test_case.steps)):
-                    if test_case.steps[i].keyword == result[0] and i + len(result) <= len(test_case.steps):
-                        temp = [test_case.steps[i + j].keyword for j in xrange(len(result))]
-                        if temp == result:
-                            region_list.append(i)
+                region_list = self.find_duplicated_region(test_case, result)
                 for start in region_list:
                     f.write('TC:' + str(test_case.name) + '\n')
                     f.write(str(start + 1) + ' ~ ' + str(start + len(result)) + ' action duplicated\n')
@@ -363,12 +290,7 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
                 del region_list[:]
                 self.rebuild_all_step_list(result, all_step_list)
             for user_keyword in df.keywords:
-                region_list = []
-                for i in xrange(len(user_keyword.steps)):
-                    if user_keyword.steps[i].keyword == result[0] and i + len(result) <= len(user_keyword.steps):
-                        temp = [user_keyword.steps[i + j].keyword for j in xrange(len(result))]
-                        if temp == result:
-                            region_list.append(i)
+                region_list = self.find_duplicated_region(user_keyword, result)
                 for start in region_list:
                     f.write('UK:' + str(user_keyword.name) + '\n')
                     f.write(str(start + 1) + ' ~ ' + str(start + len(result)) + ' action duplicated\n')
@@ -378,10 +300,34 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
 
         f.write('\n')
 
-        # print 'after'
-        # print all_step_list
-
         return False, all_step_list
+
+    def find_duplicated_region(self, controller, result):
+        region_list = []
+        for i in xrange(len(controller.steps)):
+            if isinstance(controller.steps[i], ForLoopStepController):
+                if 'Loop' == result[0] and i + len(result) <= len(controller.steps):
+                    # temp = [test_case.steps[i + j].keyword for j in xrange(len(result))]
+                    temp = []
+                    for j in xrange(len(result)):
+                        if isinstance(controller.steps[i + j], ForLoopStepController):
+                            temp.append('Loop')
+                        else:
+                            temp.append(controller.steps[i + j].keyword)
+                    if temp == result:
+                        region_list.append(i)
+            else:
+                if controller.steps[i].keyword == result[0] and i + len(result) <= len(controller.steps):
+                    # temp = [test_case.steps[i + j].keyword for j in xrange(len(result))]
+                    temp = []
+                    for j in xrange(len(result)):
+                        if isinstance(controller.steps[i + j], ForLoopStepController):
+                            temp.append('Loop')
+                        else:
+                            temp.append(controller.steps[i + j].keyword)
+                    if temp == result:
+                        region_list.append(i)
+        return region_list
 
     def rebuild_all_step_list(self, result, all_step_list):
         remove_set = set()

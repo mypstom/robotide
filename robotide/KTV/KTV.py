@@ -809,14 +809,14 @@ class KTV:
 
     def LCS(self, filepath):
         start_time = time.time()
-        LongestCommonSubsequence().Excute(self.datafiles, filepath)
+        LongestCommonSubsequence().execute(self.datafiles, filepath)
         elapsed_time = time.time() - start_time
         print 'Duplicated Action elapsed_time %r' % elapsed_time
         self.ShowMessage('Duplicated Action Detection Finish')
 
     def LRS(self, filepath):
         start_time = time.time()
-        LongestRepeatedSubstring().Excute(self.datafiles, filepath)
+        LongestRepeatedSubstring().execute(self.datafiles, filepath)
         elapsed_time = time.time() - start_time
         print 'Duplicated Action elapsed_time %r' % elapsed_time
         self.ShowMessage('Duplicated Action Detection Finish')

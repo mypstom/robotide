@@ -40,13 +40,16 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.right_text.SetReadOnly(False)
         self.right_text.ClearAll()
         self.right_text.SetReadOnly(True)
+
+        self.left_button.Enable(False)
+        self.right_button.Enable(False)
         self.extract_button.Enable(False)
         self.show_button.Enable(False)
 
     def set_all_label(self, data):
         self.total_label.SetLabel('Total actions : %d' % self.total_actions)
         self.duplicated_label.SetLabel('Duplicated actions : %d' % data.duplicated_actions)
-        percentage = float(data.duplicated_actions) / self.total_actions * 100
+        percentage = float(data.duplicated_actions * 2) / self.total_actions * 100
         self.percentage_label.SetLabel('Duplicated Percentage : %0.2f' % percentage + ' %')
 
     def load_datafiles(self, data):
@@ -69,10 +72,12 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         self.show_button.Enable(True)
         node, duration_list = data.node, data.duration_list
         if not self.left_panel_show:
+            self.left_button.Enable(True)
             self.left_label.SetLabel(node)
             self.left_panel_show = True
             self.left_text.set_text(self.get_node_text_data(node), duration_list)
         else:
+            self.right_button.Enable(True)
             self.right_label.SetLabel(node)
             self.left_panel_show = False
             self.right_text.set_text(self.get_node_text_data(node), duration_list)
@@ -126,6 +131,8 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         right_top_panel = wx.Panel(right_panel)
         self.left_label, self.left_button = self.create_top_label_panel(left_top_panel, 'Preview 1')
         self.right_label, self.right_button = self.create_top_label_panel(right_top_panel, 'Preview 2')
+        self.left_button.Enable(False)
+        self.right_button.Enable(False)
         self.left_button.Bind(wx.EVT_BUTTON, self.left_button_click)
         self.right_button.Bind(wx.EVT_BUTTON, self.right_button_click)
 
@@ -220,6 +227,8 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
                 break
 
     def show_click(self, event):
+        if self.extract_list_view is not None:
+            self.extract_list_view.Close()
         text = self.left_text.GetSelectedText()
         for df in self.datafiles:
             if type(df) is TestCaseFileController:

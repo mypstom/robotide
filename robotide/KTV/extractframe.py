@@ -92,6 +92,10 @@ class ExtractFrame(wx.Frame):
         args = ''
 
         self.get_extract_steps_and_args()
+        temp = self.set_args_same_number()
+        if temp != -1:
+            print self.steps[temp] + ' have difference arg number!'
+            return
         if self.checkbox.GetValue():
             controller, lines = self.impact_list.items()[0]
             self.extract_controller = controller.extract_keyword(name, args, lines)
@@ -114,7 +118,8 @@ class ExtractFrame(wx.Frame):
             for arg_index in xrange(len(self.args[keyword_index][0])):
                 args_set = set()
                 for args in self.args[keyword_index]:
-                    args_set.add(args[arg_index])
+                    if args[arg_index] != '':
+                        args_set.add(args[arg_index])
                 if len(args_set) == 1:
                     if len(re.findall(pattern, list(args_set)[0])) == 0:
                         pass  # the arg is constant
@@ -126,6 +131,8 @@ class ExtractFrame(wx.Frame):
                     self.replace_step_args_with_new_args(keyword_index, arg_index, '${arg%d}' % (len(new_args)),
                                                          controllers_args)
                     new_args.append('${arg%d}' % (len(new_args)))
+        while not self.merge_same_args(new_args, controllers_args):
+            pass
         self.set_extract_controller_args(new_args)
         self.set_controller_extract_step_args(controllers_args)
 
@@ -133,21 +140,40 @@ class ExtractFrame(wx.Frame):
         args = ' | '.join(new_args)
         self.extract_controller.arguments.set_value(args)
 
+    def merge_same_args(self, new_args, controllers_args):
+        arg_list = []
+        for arg_index in xrange(len(new_args)):
+            temp = []
+            for controller in controllers_args:
+                temp.append(controller[arg_index])
+            if temp not in arg_list:
+                arg_list.append(temp)
+            else:
+                index = arg_list.index(temp)
+                self.merge_arg_in_extract_keyword(new_args[index], new_args[arg_index])
+                self.rebuild_controllers_args(arg_index, controllers_args)
+                del new_args[arg_index]
+                return False
+        return True
+
+    def merge_arg_in_extract_keyword(self, arg, target_arg):
+        for step in self.extract_controller.steps:
+            for arg_index in xrange(len(step.args)):
+                if step.args[arg_index] == target_arg:
+                    step.args[arg_index] = arg
+
+    def rebuild_controllers_args(self, index, controllers_args):
+        for controllers_index in xrange(len(controllers_args)):
+            del controllers_args[controllers_index][index]
+
     def set_controller_extract_step_args(self, controllers_args):
         for index in xrange(len(self.impact_list)):
             controller = self.impact_list.keys()[index]
             for step in controller.steps:
                 if step.keyword == self.extract_controller.name:
                     for col in xrange(len(controllers_args[index])):
+                        # if controllers_args[index][col] != '#default#':
                         step.change(col + 1, controllers_args[index][col])
-
-    """def check_args_contain_the_same_variables_number(self, args, pattern):
-        count = set()
-        for arg in list(args):
-            count.add(len(re.findall(pattern, arg)))
-        if len(count) == 1:
-            return True
-        return False"""
 
     def check_args_only_have_variable(self, args, pattern):
         for arg in list(args):
@@ -164,6 +190,8 @@ class ExtractFrame(wx.Frame):
         # set arg of controllers of use extract UK
         for index in xrange(len(self.args[keyword_index])):
             args = self.args[keyword_index][index]
+            # if args[arg_index] != '#default#':
+            # controllers_args[index].append(arg_name + '=' + args[arg_index])
             controllers_args[index].append(args[arg_index])
         # set extract UK new arg
         step = self.extract_controller.steps[keyword_index]
@@ -174,7 +202,6 @@ class ExtractFrame(wx.Frame):
         for index in xrange(lines[1] + 1):
             if index >= lines[0]:
                 self.steps.append(controller.steps[index].keyword)
-        # print self.steps
         for i in xrange(len(self.steps)):  # args = [keywords] , keyword = [controllers], controller = [args]
             self.args.append([])
         for controller, lines in zip(self.impact_list.keys(), self.impact_list.values()):
@@ -184,7 +211,18 @@ class ExtractFrame(wx.Frame):
                     step = controller.steps[index]
                     self.args[step_index].append(step.args)
                     step_index += 1
-                    # print self.args
+
+    def set_args_same_number(self):
+        for keyword_index in xrange(len(self.steps)):
+            args_len = []
+            for controller_index in xrange(len(self.impact_list)):
+                args_len.append(len(self.args[keyword_index][controller_index]))
+            max_number = max(args_len)
+            for index in xrange(len(args_len)):
+                if args_len[index] < max_number:
+                    # self.args[keyword_index][index].append('#default#')
+                    return keyword_index
+        return -1
 
     def cancel_click(self, event):
         self.Close()

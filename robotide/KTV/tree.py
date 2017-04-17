@@ -44,8 +44,8 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         else:
             self.create_group(self._root, self.group_count,
                               'duplicate_group' + str(self.group_count + 1) + '    %d Lines' % size)
+        self.duplicated_actions_count += size
         for node in node_list:
-            self.duplicated_actions_count += size
             self.create_item(self._group_nodes[self.group_count],
                              len(self._group_children_nodes[self._group_nodes[self.group_count]]), node)
         self.group_count += 1
