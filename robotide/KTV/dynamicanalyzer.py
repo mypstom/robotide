@@ -350,6 +350,7 @@ class DynamicAnalyzer:
         self.remove_redundant_edges()
         print 'edges number : %d' % len(self.edges)
         print 'nodes number : %d' % len(self.node_level.keys())
+        self.calculate_coupling(self.node_level.keys(), self.edges)
 
     def set_level(self, current, current_level):
         node_type = self.nodes_with_type[current]
@@ -659,10 +660,10 @@ class DynamicAnalyzer:
         with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'r+') as f:
             for line in f:
                 if 'width' in line:
-                    width = leaf_number * 300 if leaf_number * 300 > 3600 else 3600
+                    width = leaf_number * 300 if leaf_number * 200 > 1800 else 1800
                     string += '		"width"        : %d,\n' % width
                 elif 'height' in line:
-                    height = (max_level + 1) * 200 if (max_level + 1) * 200 > 1400 else 1400
+                    height = (max_level + 1) * 200 if (max_level + 1) * 100 > 1000 else 1000
                     string += '		"height"       : %d,\n' % height
                 elif 'unweightedCoupling' in line:
                     string += '		"unweightedCoupling": %r,\n' % unweighted_coupling

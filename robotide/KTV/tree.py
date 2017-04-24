@@ -44,7 +44,7 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         else:
             self.create_group(self._root, self.group_count,
                               'duplicate_group' + str(self.group_count + 1) + '    %d Lines' % size)
-        self.duplicated_actions_count += size
+        self.duplicated_actions_count += (len(node_list) - 1) * size
         for node in node_list:
             self.create_item(self._group_nodes[self.group_count],
                              len(self._group_children_nodes[self._group_nodes[self.group_count]]), node)
@@ -90,12 +90,15 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         self._clear_tree_data()
         node_list = []
         flag = False
+        group_number_of_larger_than_two_node = 0
         with open(self.source + '\ScriptDuplicated.txt', 'r+') as f:
             node = None
             for line in f:
                 if flag:
                     if line == '\n':
                         self.build_tree(node_list)
+                        if len(node_list)>2:
+                            group_number_of_larger_than_two_node += 1
                         del node_list[:]
                         flag = False
                         continue
@@ -118,6 +121,7 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
                 if 'resultList' in line:
                     flag = True
         MyTreeBuildFinish(duplicated_actions=self.duplicated_actions_count).publish()
+        print 'group_number_of_larger_than_two_node = %d' % group_number_of_larger_than_two_node
 
     def OnDoubleClick(self, event):
         item, pos = self.HitTest(self.ScreenToClient(wx.GetMousePosition()))

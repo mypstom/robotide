@@ -49,7 +49,7 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
     def set_all_label(self, data):
         self.total_label.SetLabel('Total actions : %d' % self.total_actions)
         self.duplicated_label.SetLabel('Duplicated actions : %d' % data.duplicated_actions)
-        percentage = float(data.duplicated_actions * 2) / self.total_actions * 100
+        percentage = float(data.duplicated_actions) / self.total_actions * 100
         self.percentage_label.SetLabel('Duplicated Percentage : %0.2f' % percentage + ' %')
 
     def load_datafiles(self, data):

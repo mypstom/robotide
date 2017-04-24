@@ -9,7 +9,7 @@ from robotide.controller.stepcontrollers import ForLoopStepController
 
 class DuplicatedActionDetection:
     token = '%$&*$#@'
-    threshold = 5
+    threshold = 3
     use_hash = True
     hash_table = {}
     comment_list = []
@@ -46,11 +46,14 @@ class DuplicatedActionDetection:
         del self.comment_list[:]
 
     def build_table(self, all_step_list):
+        start_time = time.time()
         for item in all_step_list:
-            if self.token in item:
-                continue
+            #if self.token in item:
+                #continue
             if item not in self.hash_table:
                 self.hash_table[item] = unichr(abs(hash(item)) % 65536)
+        elapsed_time = time.time() - start_time
+        print 'build_table elapsed_time = %r' % elapsed_time
 
 
 class LongestCommonSubsequence(DuplicatedActionDetection):
@@ -226,14 +229,11 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
         while True:
             string = ''
             for item in all_step_list:
-                if self.token in item:
-                    string += item
-                else:
-                    string += self.hash_table[item] if self.use_hash else item
-                    # string += item
+                string += self.hash_table[item] if self.use_hash else item
                 string += ','
             string = string[:len(string) - 1]
             start_time = time.time()
+            # print string
             result = self.maxRepeatedSubstring(string)
             elapsed_time = time.time() - start_time
             f.write(str(count))
@@ -241,9 +241,13 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
             f.write('elapsed_time = ')
             f.write(str(elapsed_time))
             f.write('\n')
+            print 'maxRepeatedSubstring elapsed_time = %r' % elapsed_time
             if result is not None:
                 # print result
+                start_time = time.time()
                 is_finish, all_step_list = self.FindLRSResultPosition(result, all_step_list, datafiles, f)
+                elapsed_time = time.time() - start_time
+                print 'FindLRSResultPosition elapsed_time = %r' % elapsed_time
                 if is_finish:
                     f.write('duplicated action length smaller than threshold\n')
                     break
@@ -258,8 +262,6 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
         lrs_list = result_string.strip(',').split(',')
         result = list()
         for lrs in lrs_list:
-            if self.token in lrs:
-                continue
             if self.use_hash:
                 for item in all_step_list:
                     if item in self.hash_table and self.hash_table[item] == lrs:
@@ -272,6 +274,7 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
         if len(result) < self.threshold:
             return True, all_step_list
 
+        # print result
         string = 'resultList = ['
         for item in result:
             string += item
