@@ -44,7 +44,6 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
         else:
             self.create_group(self._root, self.group_count,
                               'duplicate_group' + str(self.group_count + 1) + '    %d Lines' % size)
-        self.duplicated_actions_count += (len(node_list) - 1) * size
         for node in node_list:
             self.create_item(self._group_nodes[self.group_count],
                              len(self._group_children_nodes[self._group_nodes[self.group_count]]), node)
@@ -97,7 +96,7 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
                 if flag:
                     if line == '\n':
                         self.build_tree(node_list)
-                        if len(node_list)>2:
+                        if len(node_list) > 2:
                             group_number_of_larger_than_two_node += 1
                         del node_list[:]
                         flag = False
@@ -120,6 +119,8 @@ class Tree(treemixin.DragAndDrop, customtreectrl.CustomTreeCtrl):
                         node = None
                 if 'resultList' in line:
                     flag = True
+                if 'duplicated lines' in line:
+                    self.duplicated_actions_count = int(line.replace('duplicated lines = ', ''))
         MyTreeBuildFinish(duplicated_actions=self.duplicated_actions_count).publish()
         print 'group_number_of_larger_than_two_node = %d' % group_number_of_larger_than_two_node
 
