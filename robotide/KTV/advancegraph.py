@@ -132,7 +132,8 @@ class AdvanceGraph(Plugin, TreeAwarePluginMixin):
 
     def add_button_click(self, event):
         if self.node_combobox.GetSelection() != -1:
-            self.listbox.Append(self.node_list[self.node_combobox.GetSelection()])
+            if self.node_list[self.node_combobox.GetSelection()] not in self.listbox.GetItems():
+                self.listbox.Append(self.node_list[self.node_combobox.GetSelection()])
         if len(self.listbox.GetItems()) > 0:
             self.simplified_button.Enable(True)
             self.change_impact_button.Enable(True)

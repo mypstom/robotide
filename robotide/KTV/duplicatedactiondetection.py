@@ -14,8 +14,8 @@ class DuplicatedActionDetection:
     duplicate_lines = 0
     steps_list = None
 
-    def __init__(self):
-        pass
+    def __init__(self, threshold):
+        self.threshold = threshold
 
     def execute(self, datafiles, file_path):
         source = os.path.abspath(file_path)
@@ -46,16 +46,23 @@ class DuplicatedActionDetection:
                 temp.extend(steps)
             temp = [item for item in temp]
             self.build_table(temp)
-            self.steps_list = [[(step, True) for step in steps] for steps in self.steps_list]
+            self.steps_list = [[(step, 0) for step in steps] for steps in self.steps_list]
 
-    def _set_step_duplicated(self, index, duplicated_step_set):
+    def _check_step_duplicated(self, index, duplicated_step_set):
         count = 0
         step_list = self.steps_list[index]
         for i in duplicated_step_set:
-            if step_list[i][1]:
-                step_list[i] = (step_list[i][0], False)
+            if step_list[i][1] == 0:
                 count += 1
         return count
+
+    def _set_step_duplicated(self, index, duplicated_step_set, flag):
+        step_list = self.steps_list[index]
+        for i in duplicated_step_set:
+            if step_list[i][1] == 0:
+                step_list[i] = (step_list[i][0], flag)
+            elif step_list[i][1] == 1:
+                step_list[i] = (step_list[i][0], flag)
 
     def _get_step_list(self, steps):
         result = []
@@ -92,15 +99,24 @@ class DuplicatedActionDetection:
             if item not in self.hash_table:
                 self.hash_table[item] = unichr(abs(hash(item)) % 65536)
 
-    def write_steps_flie(self, source):
+    def write_steps_file(self, source):
         index = 1
-        with open(source + '\Steps.txt', 'w+') as f:
+        with open(source + '\Steps1.txt', 'w+') as f:
             for steps in self.steps_list:
                 for step in steps:
-                    if step[1]:
-                        f.write(str(index) + '\t' + '1\n')
-                    else:
+                    if step[1] == 0:
                         f.write(str(index) + '\t' + '0\n')
+                    else:
+                        f.write(str(index) + '\t' + '1\n')
+                    index += 1
+        index = 1
+        with open(source + '\Steps2.txt', 'w+') as f:
+            for steps in self.steps_list:
+                for step in steps:
+                    if step[1] != 2:
+                        f.write(str(index) + '\t' + '0\n')
+                    else:
+                        f.write(str(index) + '\t' + '1\n')
                     index += 1
 
 
@@ -159,7 +175,7 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
         result_list = []
         f = open(source + '\ScriptDuplicated.txt', 'w+')
 
-        steps_list = [[self.hash_table[step[0]] for step in steps if step[1] and step[0] != 'Comment'] for steps in
+        steps_list = [[self.hash_table[step[0]] for step in steps if step[1] == 0 and step[0] != 'Comment'] for steps in
                       self.steps_list]
         for combinations in itertools.combinations(steps_list, 2):
             temp = self.LCS(combinations[0], combinations[1])[0]
@@ -182,30 +198,38 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
             f.write('\n')
         self.compute_duplicate_lines()
         f.write('duplicated lines = %d\n' % self.duplicate_lines)
-        self.write_steps_flie(source)
+        self.write_steps_file(source)
         f.close()
 
     def find_duplicated_position(self, datafiles, result, f):
         index = 0
         duplicate_lines = 0
+        is_first_duplicate_node = True
         for df in datafiles:
             for test_case in df.tests:
-                duplicate_lines += self.find_position_and_write_file(index, result, f, 'TC', test_case.name)
+                is_first_duplicate_node, temp = self.find_position_and_write_file(index, result, f, 'TC',
+                                                                                  test_case.name,
+                                                                                  is_first_duplicate_node)
+                duplicate_lines += temp
                 index += 1
             for user_keyword in df.keywords:
-                duplicate_lines += self.find_position_and_write_file(index, result, f, 'UK', user_keyword.name)
+                is_first_duplicate_node, temp = self.find_position_and_write_file(index, result, f, 'UK',
+                                                                                  user_keyword.name,
+                                                                                  is_first_duplicate_node)
+                duplicate_lines += temp
                 index += 1
         self.duplicate_lines += duplicate_lines
         if duplicate_lines >= len(result):
             self.duplicate_lines -= len(result)
 
-    def find_position_and_write_file(self, steps_index, result, f, type_name, name):
+    def find_position_and_write_file(self, steps_index, result, f, type_name, name, is_first_duplicate_node):
         temp = []
         index = 0
         match = False
         i = 0
         duplicated_step_set = set()
         step_list = self.steps_list[steps_index]
+        duplicated_lines = 0
         while i < len(step_list):
             if step_list[i][0] == result[index]:
                 if not match:
@@ -231,14 +255,26 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
                 i = temp[0][0]
                 index = 0
                 del temp[:]
+                if is_first_duplicate_node:
+                    temp_lines = self._check_step_duplicated(steps_index, duplicated_step_set)
+                    if temp_lines == len(result):
+                        duplicated_lines += temp_lines
+                        self._set_step_duplicated(steps_index, duplicated_step_set, 1)
+                        is_first_duplicate_node = False
+                else:
+                    temp_lines = self._check_step_duplicated(steps_index, duplicated_step_set)
+                    if temp_lines == len(result):
+                        duplicated_lines += temp_lines
+                        self._set_step_duplicated(steps_index, duplicated_step_set, 2)
+                duplicated_step_set.clear()
             i += 1
-        return self._set_step_duplicated(steps_index, duplicated_step_set)
+        return is_first_duplicate_node, duplicated_lines
 
     def compute_duplicate_lines(self):
         count = 0
         for steps in self.steps_list:
             for step in steps:
-                if step[1]:
+                if step[1] != 0:
                     count += 1
 
 
@@ -299,7 +335,7 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
             count += 1
             # break
         f.write('duplicated lines = %d\n' % self.duplicate_lines)
-        self.write_steps_flie(source)
+        self.write_steps_file(source)
         f.close()
 
     def FindLRSResultPosition(self, result_string, all_step_list, datafiles, f):
@@ -331,38 +367,73 @@ class LongestRepeatedSubstring(DuplicatedActionDetection):
         steps_index = 0
         duplicate_lines = 0
         duplicated_step_set = set()
+        is_first_duplicate_node = True
         for df in datafiles:
             for test_case in df.tests:
                 duplicated_step_set.clear()
                 region_list = self.find_duplicated_region(test_case, result)
                 for region in region_list:
                     node_count += 1
+                    # s = ''
                     f.write('TC:' + str(test_case.name) + '\n')
+                    # s += 'TC:' + str(test_case.name) + '\n'
                     for start, end in region:
                         f.write(str(start + 1) + ' ~ ' + str(end + 1) + ', ')
+                        # s += str(start + 1) + ' ~ ' + str(end + 1) + ', '
                         for j in xrange(start, end + 1):
                             duplicated_step_set.add(j)
                     f.seek(-2, 1)
+                    # s = s[:len(s) - 2]
                     f.write(' action duplicated\n')
+                    if is_first_duplicate_node:
+                        temp = self._check_step_duplicated(steps_index, duplicated_step_set)
+                        if temp == len(result):
+                            duplicate_lines += temp
+                            self._set_step_duplicated(steps_index, duplicated_step_set, 1)
+                            # print s + '\t' + str(temp)
+                            is_first_duplicate_node = False
+                    else:
+                        temp = self._check_step_duplicated(steps_index, duplicated_step_set)
+                        if temp == len(result):
+                            duplicate_lines += temp
+                            self._set_step_duplicated(steps_index, duplicated_step_set, 2)
+                            # print s + '\t' + str(temp)
+                    duplicated_step_set.clear()
                 del region_list[:]
                 self.rebuild_all_step_list(result, all_step_list)
-                duplicate_lines += self._set_step_duplicated(steps_index, duplicated_step_set)
                 steps_index += 1
             for user_keyword in df.keywords:
                 duplicated_step_set.clear()
                 region_list = self.find_duplicated_region(user_keyword, result)
                 for region in region_list:
                     node_count += 1
+                    # s = ''
                     f.write('UK:' + str(user_keyword.name) + '\n')
+                    # s += 'UK:' + str(user_keyword.name) + '\n'
                     for start, end in region:
                         f.write(str(start + 1) + ' ~ ' + str(end + 1) + ', ')
+                        # s += str(start + 1) + ' ~ ' + str(end + 1) + ', '
                         for j in xrange(start, end + 1):
                             duplicated_step_set.add(j)
                     f.seek(-2, 1)
+                    # s = s[:len(s) - 2]
                     f.write(' action duplicated\n')
+                    if is_first_duplicate_node:
+                        temp = self._check_step_duplicated(steps_index, duplicated_step_set)
+                        if temp == len(result):
+                            duplicate_lines += temp
+                            self._set_step_duplicated(steps_index, duplicated_step_set, 1)
+                            # print s + '\t' + str(temp)
+                            is_first_duplicate_node = False
+                    else:
+                        temp = self._check_step_duplicated(steps_index, duplicated_step_set)
+                        if temp == len(result):
+                            duplicate_lines += temp
+                            self._set_step_duplicated(steps_index, duplicated_step_set, 2)
+                            # print s + '\t' + str(temp)
+                    duplicated_step_set.clear()
                 del region_list[:]
                 self.rebuild_all_step_list(result, all_step_list)
-                duplicate_lines += self._set_step_duplicated(steps_index, duplicated_step_set)
                 steps_index += 1
         f.write('\n')
         # self.duplicate_lines += (node_count - 1) * len(result)

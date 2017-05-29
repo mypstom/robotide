@@ -455,5 +455,10 @@ class MyDynamicAnalyzerBuildFinish(RideMessage):
     pass
 
 
+class SettingDuplicatedDetectionThreshold(RideMessage):
+    """Change duplicated detection threshold"""
+    data = ['threshold']
+
+
 __all__ = [name for name, cls in globals().items()
            if inspect.isclass(cls) and issubclass(cls, RideMessage)]

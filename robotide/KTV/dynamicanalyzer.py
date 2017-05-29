@@ -17,6 +17,8 @@ class DynamicAnalyzer:
     nodes_with_type = dict()  # key : node, value : type
     serial_number = dict()
 
+    config_path = 'C:\wamp64\www\TSVisual\process_map\data\component01\config.json'
+
     def __init__(self):
         self.serial_number_flag = True  # 使node顯示名稱變成流水號
         self.action_count = 0
@@ -67,7 +69,7 @@ class DynamicAnalyzer:
         string1 = ''
         string2 = ''
         flag = True
-        with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'r+') as f:
+        with open(self.config_path, 'r+') as f:
             for line in f:
                 if flag:
                     string1 += line
@@ -75,7 +77,7 @@ class DynamicAnalyzer:
                     string2 += line
                 if 'constraints' in line:
                     flag = False
-        with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'w+') as f:
+        with open(self.config_path, 'w+') as f:
             f.write(string1)
             line = '\t\t{"has":{"name":"%s"},"type":"position","x":%.8f,"y":%.8f,"weight":0.6},' % (
                 change_impact_node, 0.1, 0.1)
@@ -657,7 +659,7 @@ class DynamicAnalyzer:
         leaf_number = len([node for node in node_level if len(node_descendant[node]) == 0])
         print 'leaf_number = ' + str(leaf_number)
         weighted_coupling, unweighted_coupling = self.calculate_coupling(node_level.keys(), edges)
-        with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'r+') as f:
+        with open(self.config_path, 'r+') as f:
             for line in f:
                 if 'width' in line:
                     width = leaf_number * 300 if leaf_number * 200 > 1800 else 1800
@@ -673,7 +675,7 @@ class DynamicAnalyzer:
                     string += line
                 if 'constraints' in line:
                     break
-        with open('C:\wamp64\www\TSVisual\process_map\data\component01\config.json', 'w+') as f:
+        with open(self.config_path, 'w+') as f:
             f.write(string)
             # {"has":{"name":"doKeywordSearch"},"type":"position","x":0.7,"y":0.2,"weight":0.6},
             temp = ''

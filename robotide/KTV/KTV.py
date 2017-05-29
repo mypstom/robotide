@@ -5,19 +5,17 @@ import math
 import json
 import webbrowser
 import robotide
-from operator import itemgetter, attrgetter
+from operator import itemgetter
 import graphviz
-from graphviz import Graph
 from robot.parsing.model import Step
 from duplicatedactiondetection import LongestCommonSubsequence, LongestRepeatedSubstring
-from dynamicanalyzer import DynamicAnalyzer
+from robotide.publish import PUBLISHER, SettingDuplicatedDetectionThreshold
+from configsetting import ConfigSetting
 
 from shutil import copyfile
 
 import time
 import os
-
-import itertools
 
 
 class KTV:
@@ -26,6 +24,9 @@ class KTV:
         self.componentChangeImpact = dict()
         self.user_def_keyword = dict()
         self.userKeywordObject = list()
+        self.threshold = 3
+
+        PUBLISHER.subscribe(self.set_duplicated_detection_threshold, SettingDuplicatedDetectionThreshold)
 
     def setDataFiles(self, datafiles):
         self.datafiles = datafiles
@@ -809,17 +810,23 @@ class KTV:
 
     def LCS(self, filepath):
         start_time = time.time()
-        LongestCommonSubsequence().execute(self.datafiles, filepath)
+        LongestCommonSubsequence(self.threshold).execute(self.datafiles, filepath)
         elapsed_time = time.time() - start_time
         print 'Duplicated Action elapsed_time %r' % elapsed_time
         self.ShowMessage('Duplicated Action Detection Finish')
 
     def LRS(self, filepath):
         start_time = time.time()
-        LongestRepeatedSubstring().execute(self.datafiles, filepath)
+        LongestRepeatedSubstring(self.threshold).execute(self.datafiles, filepath)
         elapsed_time = time.time() - start_time
         print 'Duplicated Action elapsed_time %r' % elapsed_time
         self.ShowMessage('Duplicated Action Detection Finish')
+
+    def setting_config(self):
+        ConfigSetting(self.threshold).Show()
+
+    def set_duplicated_detection_threshold(self, data):
+        self.threshold = data.threshold
 
     def OnDynamicGenerateGraph(self, dynamic_analyzer, node_list=None, distance=None):
         jsonOutput = []

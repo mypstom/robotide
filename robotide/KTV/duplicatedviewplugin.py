@@ -228,13 +228,16 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
                 break
 
     def show_click(self, event):
-        if self.extract_list_view is not None:
+        """if self.extract_list_view is not None:
+            print self.extract_list_view.Show
             self.extract_list_view.Close()
+            print 'close'"""
         text = self.left_text.GetSelectedText()
         for df in self.datafiles:
             if type(df) is TestCaseFileController:
                 impact_list = self.find_all_should_be_extract(text)
                 self.extract_list_view = ExtractListView(impact_list)
+                # print 'show'
                 self.extract_list_view.Show()
                 break
 

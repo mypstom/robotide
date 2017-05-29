@@ -73,6 +73,7 @@ _menudata = """
 !Remove ScreenShot | Remove ScreenShot
 !Duplicated Action Detection LCS | Duplicated Action Detection
 !Duplicated Action Detection LRS | Duplicated Action Detection
+!Config Setting | Config Setting
 """
 
 
@@ -379,6 +380,9 @@ class RideFrame(wx.Frame, RideEventHandler):
     def OnDuplicatedActionDetectionLRS(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())
         self.KTV.LRS(self._controller.suite.source)
+
+    def OnConfigSetting(self, event):
+        self.KTV.setting_config()
 
     def _get_datafile_list(self):
         return [df for df in self._controller.datafiles]
