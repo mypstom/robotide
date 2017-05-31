@@ -221,9 +221,8 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
         for df in self.datafiles:
             if type(df) is TestCaseFileController:
                 self.tree.select_node_by_data(df)
-                name = self.left_label.GetLabelText()
                 impact_list = self.find_all_should_be_extract(text)
-                self.extract_frame = ExtractFrame(self.get_controller(name), impact_list)
+                self.extract_frame = ExtractFrame(impact_list)
                 self.extract_frame.Show()
                 break
 
@@ -258,16 +257,19 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
 
     def get_extract_lines(self, steps, target_steps):
         target_steps = [target_step.keyword for target_step in target_steps]
+        lines = []
         for index in xrange(len(target_steps)):
             if target_steps[index:index + len(steps)] == steps:
-                return index, index + len(steps) - 1
-        return None
+                lines.append((index, index + len(steps) - 1))
+        if len(lines) == 0:
+            return None
+        return lines
 
     def get_controller(self, name):
         for df in self.datafiles:
-            for testcase in df.tests:
-                if testcase.name == name:
-                    return testcase
+            for test_case in df.tests:
+                if test_case.name == name:
+                    return test_case
             for userKeyword in df.keywords:
                 if userKeyword.name == name:
                     return userKeyword
