@@ -1,13 +1,13 @@
 import wx
 
 import re
+from extractinterface import ExtractInterface
 
 
-class ExtractFrame(wx.Frame):
-    def __init__(self, controller, impact_list):
+class ExtractFrame(ExtractInterface):
+    def __init__(self, impact_list):
         wx.Frame.__init__(self, parent=None, title='Extract User Keyword', size=(500, 400))
-        self.current_controller = controller
-        self.impact_list = impact_list
+        self._rebuild_impact_list(impact_list)
         self.checkbox = None
         self.listbox = None
         self.user_keyword_name = None
@@ -25,9 +25,9 @@ class ExtractFrame(wx.Frame):
         self.checkbox.SetValue(True)
         label = wx.StaticText(panel, label='TC/UK should be extract')
         label.SetForegroundColour((255, 0, 0))
-        choices = [item.name for item in self.impact_list.keys()]
+        choices = [item for item in self.impact_list.keys()]
         self.listbox = wx.ListBox(panel, size=(470, 200), choices=choices)
-        self.listbox.SetSelection(choices.index(self.current_controller.name))
+        self.listbox.SetSelection(choices.index(self.impact_list.keys()[0]))
         button_panel = self.create_button_panel(panel)
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(name_panel, 0, wx.ALL, 5)
@@ -97,14 +97,17 @@ class ExtractFrame(wx.Frame):
             print self.steps[temp] + ' have difference arg number!'
             return
         if self.checkbox.GetValue():
-            controller, lines = self.impact_list.items()[0]
+            module, lines = self.impact_list.items()[0]
+            controller = self.controller_dict[module]
             self.extract_controller = controller.extract_keyword(name, args, lines)
             for index in xrange(1, len(self.impact_list)):
-                controller, lines = self.impact_list.items()[index]
+                module, lines = self.impact_list.items()[index]
+                controller = self.controller_dict[module]
                 controller._replace_steps_with_kw(name, lines)
             self.set_args()
         else:
-            controller, lines = self.impact_list.items()[self.listbox.GetSelection()]
+            module, lines = self.impact_list.items()[self.listbox.GetSelection()]
+            controller = self.controller_dict[module]
             self.extract_controller = controller.extract_keyword(name, args, lines)
         self.Close()
 
@@ -168,7 +171,8 @@ class ExtractFrame(wx.Frame):
 
     def set_controller_extract_step_args(self, controllers_args):
         for index in xrange(len(self.impact_list)):
-            controller = self.impact_list.keys()[index]
+            module = self.impact_list.keys()[index]
+            controller = self.controller_dict[module]
             for step in controller.steps:
                 if step.keyword == self.extract_controller.name:
                     for col in xrange(len(controllers_args[index])):
@@ -198,13 +202,15 @@ class ExtractFrame(wx.Frame):
         step.args[arg_index] = arg_name
 
     def get_extract_steps_and_args(self):
-        controller, lines = self.impact_list.keys()[0], self.impact_list.values()[0]
+        module, lines = self.impact_list.keys()[0], self.impact_list.values()[0]
+        controller = self.controller_dict[module]
         for index in xrange(lines[1] + 1):
             if index >= lines[0]:
                 self.steps.append(controller.steps[index].keyword)
         for i in xrange(len(self.steps)):  # args = [keywords] , keyword = [controllers], controller = [args]
             self.args.append([])
-        for controller, lines in zip(self.impact_list.keys(), self.impact_list.values()):
+        for module, lines in zip(self.impact_list.keys(), self.impact_list.values()):
+            controller = self.controller_dict[module]
             step_index = 0
             for index in xrange(lines[1] + 1):
                 if index >= lines[0]:
