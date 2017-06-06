@@ -258,9 +258,12 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
     def get_extract_lines(self, steps, target_steps):
         target_steps = [target_step.keyword for target_step in target_steps]
         lines = []
-        for index in xrange(len(target_steps)):
+        index = 0
+        while index < len(target_steps):
             if target_steps[index:index + len(steps)] == steps:
                 lines.append((index, index + len(steps) - 1))
+                index += len(steps) - 1
+            index += 1
         if len(lines) == 0:
             return None
         return lines
@@ -281,7 +284,6 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
     def disable(self):
         self.extract_frame.Close()
         self.extract_list_view.Close()
-        pass
 
 
 class RobotDataEditor(wx.stc.StyledTextCtrl):

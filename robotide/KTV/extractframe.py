@@ -25,9 +25,9 @@ class ExtractFrame(ExtractInterface):
         self.checkbox.SetValue(True)
         label = wx.StaticText(panel, label='TC/UK should be extract')
         label.SetForegroundColour((255, 0, 0))
-        choices = [item for item in self.impact_list.keys()]
+        choices = [item[0] for item in self.impact_list]
         self.listbox = wx.ListBox(panel, size=(470, 200), choices=choices)
-        self.listbox.SetSelection(choices.index(self.impact_list.keys()[0]))
+        self.listbox.SetSelection(choices.index(self.impact_list[0][0]))
         button_panel = self.create_button_panel(panel)
         sizer = wx.BoxSizer(wx.VERTICAL)
         sizer.Add(name_panel, 0, wx.ALL, 5)
@@ -97,16 +97,16 @@ class ExtractFrame(ExtractInterface):
             print self.steps[temp] + ' have difference arg number!'
             return
         if self.checkbox.GetValue():
-            module, lines = self.impact_list.items()[0]
+            module, lines = self.impact_list[0]
             controller = self.controller_dict[module]
             self.extract_controller = controller.extract_keyword(name, args, lines)
             for index in xrange(1, len(self.impact_list)):
-                module, lines = self.impact_list.items()[index]
+                module, lines = self.impact_list[index]
                 controller = self.controller_dict[module]
                 controller._replace_steps_with_kw(name, lines)
             self.set_args()
         else:
-            module, lines = self.impact_list.items()[self.listbox.GetSelection()]
+            module, lines = self.impact_list[self.listbox.GetSelection()]
             controller = self.controller_dict[module]
             self.extract_controller = controller.extract_keyword(name, args, lines)
         self.Close()
@@ -136,6 +136,7 @@ class ExtractFrame(ExtractInterface):
                     new_args.append('${arg%d}' % (len(new_args)))
         while not self.merge_same_args(new_args, controllers_args):
             pass
+        new_args = self.rename_new_args(new_args)
         self.set_extract_controller_args(new_args)
         self.set_controller_extract_step_args(controllers_args)
 
@@ -165,19 +166,38 @@ class ExtractFrame(ExtractInterface):
                 if step.args[arg_index] == target_arg:
                     step.args[arg_index] = arg
 
+    def rename_new_args(self, new_args):
+        arg_dict = {}
+        count = 0
+        for arg in new_args:
+            arg_dict[arg] = '${arg%d}' % count
+            count += 1
+        for step in self.extract_controller.steps:
+            for arg_index in xrange(len(step.args)):
+                if step.args[arg_index] in arg_dict:
+                    step.args[arg_index] = arg_dict[step.args[arg_index]]
+        return [arg_dict[arg] for arg in new_args]
+
     def rebuild_controllers_args(self, index, controllers_args):
         for controllers_index in xrange(len(controllers_args)):
             del controllers_args[controllers_index][index]
 
     def set_controller_extract_step_args(self, controllers_args):
         for index in xrange(len(self.impact_list)):
-            module = self.impact_list.keys()[index]
+            module = self.impact_list[index][0]
             controller = self.controller_dict[module]
+            target = 0
+            if '...' in module:
+                target = int(module.split('...')[1])
+            temp = 0
             for step in controller.steps:
                 if step.keyword == self.extract_controller.name:
-                    for col in xrange(len(controllers_args[index])):
-                        # if controllers_args[index][col] != '#default#':
-                        step.change(col + 1, controllers_args[index][col])
+                    if temp == target:
+                        for col in xrange(len(controllers_args[index])):
+                            # if controllers_args[index][col] != '#default#':
+                            step.change(col + 1, controllers_args[index][col])
+                        break
+                    temp += 1
 
     def check_args_only_have_variable(self, args, pattern):
         for arg in list(args):
@@ -202,14 +222,14 @@ class ExtractFrame(ExtractInterface):
         step.args[arg_index] = arg_name
 
     def get_extract_steps_and_args(self):
-        module, lines = self.impact_list.keys()[0], self.impact_list.values()[0]
+        module, lines = self.impact_list[0][0], self.impact_list[0][1]
         controller = self.controller_dict[module]
         for index in xrange(lines[1] + 1):
             if index >= lines[0]:
                 self.steps.append(controller.steps[index].keyword)
         for i in xrange(len(self.steps)):  # args = [keywords] , keyword = [controllers], controller = [args]
             self.args.append([])
-        for module, lines in zip(self.impact_list.keys(), self.impact_list.values()):
+        for module, lines in self.impact_list:
             controller = self.controller_dict[module]
             step_index = 0
             for index in xrange(lines[1] + 1):

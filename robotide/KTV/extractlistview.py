@@ -17,7 +17,7 @@ class ExtractListView(ExtractInterface):
         panel = wx.Panel(self)
         left = wx.Panel(panel)
         right = wx.Panel(panel)
-        choices = [item for item in self.impact_list.keys()]
+        choices = [item[0] for item in self.impact_list]
         self.listbox = wx.ListBox(left, size=(100, 300), choices=choices)
         self.listbox.Bind(wx.EVT_LISTBOX, self.list_box_selection_changed)
         left_label = wx.StaticText(left, label='TC/UK')
@@ -38,14 +38,14 @@ class ExtractListView(ExtractInterface):
 
     def set_controller_dict(self):
         self.node_dict = {}
-        for module, duration in zip(self.impact_list.keys(), self.impact_list.values()):
+        for module, duration in self.impact_list:
             controller = self.controller_dict[module]
             lines, max_col = self.get_extract_lines(controller, duration[0], duration[1])
             self.node_dict[module] = (lines, max_col)
 
     def list_box_selection_changed(self, event):
         self.list_ctrl.ClearAll()
-        lines, max_col = self.node_dict[self.impact_list.keys()[self.listbox.GetSelection()]]
+        lines, max_col = self.node_dict[self.impact_list[self.listbox.GetSelection()][0]]
         self.list_ctrl.InsertColumn(0, 'Keyword')
         for index in xrange(1, max_col):
             self.list_ctrl.InsertColumn(index, 'arg%d' % index)
