@@ -316,16 +316,16 @@ class DynamicAnalyzer:
 
         for TS in self.TS_list:
             self.nodes.add(TS)
-            self.nodes_with_type[TS] = 'TestSuite'
+            self.nodes_with_type[TS] = 'Test Suite'
         for TC in self.TC_list:
             self.nodes.add(TC[1])
-            self.nodes_with_type[TC[1]] = 'TestCase'
+            self.nodes_with_type[TC[1]] = 'Test Case'
         for LK in self.UK_list:
             self.nodes.add(LK[1])
-            self.nodes_with_type[LK[1]] = 'Userkeyword'
+            self.nodes_with_type[LK[1]] = 'User Keyword'
         for LK in self.LK_list:
             self.nodes.add(LK[1])
-            self.nodes_with_type[LK[1]] = 'Librarykeyword'
+            self.nodes_with_type[LK[1]] = 'Library Keyword'
         for C in self.C_set:
             self.nodes.add(C)
             self.nodes_with_type[C] = 'Component'
@@ -361,11 +361,11 @@ class DynamicAnalyzer:
         else:
             self.node_level[current] = max(self.node_level[current], current_level)
         child_node_set = set()
-        if node_type == 'TestSuite':
+        if node_type == 'Test Suite':
             for TC in self.TC_list:
                 if TC[0] == current:
                     child_node_set.add(TC[1])
-        elif node_type == 'TestCase' or node_type == 'Userkeyword':
+        elif node_type == 'Test Case' or node_type == 'User Keyword':
             index = 0
             while index < len(self.UK_list):
                 UK = self.UK_list[index]
@@ -380,7 +380,7 @@ class DynamicAnalyzer:
                     if LK[1] not in child_node_set:
                         child_node_set.add(LK[1])
                 index += 1
-        elif node_type == 'Librarykeyword':
+        elif node_type == 'Library Keyword':
             for LK in self.LK_list:
                 if LK[1] == current:
                     for C in self.C_set:
@@ -407,11 +407,11 @@ class DynamicAnalyzer:
             for current in current_level_list:
                 # print current
                 node_type = self.nodes_with_type[current]
-                if node_type == 'TestSuite':
+                if node_type == 'Test Suite':
                     for TC in self.TC_list:
                         if TC[0] == current:
                             self.edges[(current, TC[1])] = 1
-                elif node_type == 'TestCase' or node_type == 'Userkeyword':
+                elif node_type == 'Test Case' or node_type == 'User Keyword':
                     index = 0
                     child_node_set = set()
                     while index < len(self.UK_list):
@@ -460,11 +460,11 @@ class DynamicAnalyzer:
                     change_list.append(key)
             for change in change_list:
                 parent_list = list()
-                if self.nodes_with_type[change] == 'Librarykeyword':
+                if self.nodes_with_type[change] == 'Library Keyword':
                     for LK in self.LK_list:
                         if LK[1] == change:
                             parent_list.append(LK[0])
-                elif self.nodes_with_type[change] == 'Userkeyword':
+                elif self.nodes_with_type[change] == 'User Keyword':
                     for UK in self.UK_list:
                         if UK[1] == change:
                             parent_list.append(UK[0])
