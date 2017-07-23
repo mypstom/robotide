@@ -5,7 +5,7 @@ from robotide.publish import DuplicateDetection
 from robotide.controller.stepcontrollers import ForLoopStepController
 
 
-class DuplicatedActionDetection:
+class DuplicateActionDetection:
     token = '%$&*$#@'
     threshold = 3
     use_hash = True
@@ -120,7 +120,7 @@ class DuplicatedActionDetection:
                     index += 1
 
 
-class LongestCommonSubsequence(DuplicatedActionDetection):
+class LongestCommonSubsequence(DuplicateActionDetection):
     def lcs_mat(self, list1, list2):
         m = len(list1)
         n = len(list2)
@@ -278,7 +278,7 @@ class LongestCommonSubsequence(DuplicatedActionDetection):
                     count += 1
 
 
-class LongestRepeatedSubstring(DuplicatedActionDetection):
+class LongestRepeatedSubstring(DuplicateActionDetection):
     def detect_all_script(self, datafiles, source):
         self.build_steps_list(datafiles)
         token_count = 1

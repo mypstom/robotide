@@ -4,7 +4,7 @@ from robotide.pluginapi import Plugin, TreeAwarePluginMixin
 
 
 class TestPlugin(Plugin, TreeAwarePluginMixin):
-    title = 'Test'
+    title = 'NewPlugin'
 
     def __init__(self, application):
         Plugin.__init__(self, application)

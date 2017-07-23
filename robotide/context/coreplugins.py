@@ -24,10 +24,9 @@ def get_core_plugins():
     from robotide.searchtests.searchtests import TestSearchPlugin
     from robotide.spec.specimporter import SpecImporterPlugin
 
-    from robotide.KTV.duplicatedviewplugin import DuplicatedViewPlugin
+    from robotide.DDT.duplicateviewplugin import DuplicateViewPlugin
     from robotide.KTV.advancegraph import AdvanceGraph
-    from robotide.KTV.testplugin import TestPlugin
 
     return [RunAnything, RecentFilesPlugin, PreviewPlugin, SpecImporterPlugin,
             EditorPlugin, TextEditorPlugin, KeywordSearch, LogPlugin, TestSearchPlugin,
-            DuplicatedViewPlugin, AdvanceGraph] #, TestPlugin]
+            DuplicateViewPlugin, AdvanceGraph]  # , TestPlugin]

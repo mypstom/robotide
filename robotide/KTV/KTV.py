@@ -1,21 +1,15 @@
 # -*- coding: utf-8 -*-　
 
-import wx
-import math
 import json
+import math
+import os
 import webbrowser
-import robotide
 from operator import itemgetter
-import graphviz
-from robot.parsing.model import Step
-from duplicatedactiondetection import LongestCommonSubsequence, LongestRepeatedSubstring
-from robotide.publish import PUBLISHER, SettingDuplicatedDetectionThreshold
-from configsetting import ConfigSetting
-
 from shutil import copyfile
 
-import time
-import os
+import graphviz
+import robotide
+import wx
 
 
 class KTV:
@@ -24,9 +18,6 @@ class KTV:
         self.componentChangeImpact = dict()
         self.user_def_keyword = dict()
         self.userKeywordObject = list()
-        self.threshold = 3
-
-        PUBLISHER.subscribe(self.set_duplicated_detection_threshold, SettingDuplicatedDetectionThreshold)
 
     def setDataFiles(self, datafiles):
         self.datafiles = datafiles
@@ -717,10 +708,7 @@ class KTV:
         for item in edges:
             edgeSet.add(item)
 
-        # temp = ''
         for node in nodes:
-            # temp += node
-            # temp += '\n'
             tempDepend = list()
             for item in edgeSet:
                 if item[0] == node:
@@ -732,101 +720,9 @@ class KTV:
             })
         with open('objects.json', 'w+') as f:
             json.dump(jsonOutput, f)
-        """with open('temp.txt', 'w+') as f:
-            f.write(temp)"""
 
         copyfile('objects.json', 'C:/wamp64/www/TSVisual/process_map/data/component01/objects.json')
         print jsonOutput
-
-    def checkHadInsertedScreenShotCommand(self):
-        for df in self.datafiles:
-            if type(df) is robotide.controller.filecontrollers.TestCaseFileController:
-                if len(df.tests._items) > 0:
-                    for testCase in df.tests:
-                        for step in testCase.steps:
-                            if (step._get_comment(step.as_list()) == 'KTV'):
-                                return True
-        return False
-
-    def insertScreenShot(self):
-        self.insertScreenShotIntoTC()
-        self.insertScreenShotIntoUK()
-
-    def insertScreenShotIntoTC(self):
-        screenShotPath = './/selenium-screenshot/'
-        for df in self.datafiles:
-            if type(df) is robotide.controller.filecontrollers.TestCaseFileController:
-                # print 'TS = %r' % (str(df.display_name))
-                # TestSuiteScreenShotPath = str(df.display_name)
-                # TestSuiteScreenShotPath += '/'
-                screenShotPath += str(df.display_name)
-                screenShotPath += '/'
-                if len(df.tests._items) > 0:
-                    for testCase in df.tests:
-                        # print 'TC = %r' % (str(testCase.display_name))
-                        # TestCaseScreenShotPath = str(testCase.display_name)
-                        # TestCaseScreenShotPath += '/'
-                        screenShotPath += str(testCase.display_name)
-                        screenShotPath += '/'
-                        # testCase.steps[0].insert_before(Step(['Set Selenium Speed', '0.6'], 'KTV'))
-                        testCase.steps[0].insert_after(Step(['Set Screenshot Directory', screenShotPath], 'KTV'))
-                        index = 2
-                        screenShotCount = 1
-                        while index < len(testCase.steps):
-                            # else:
-                            """newStep = Step(['Capture Page Screenshot',
-                                            TestSuiteScreenShotPath + TestCaseScreenShotPath + str(
-                                                screenShotCount) + '.png'], 'KTV')"""
-                            newStep = Step(['Capture Page Screenshot'], 'KTV')
-                            testCase.steps[index].insert_after(newStep)
-                            index += 2
-                            screenShotCount += 1
-
-    def insertScreenShotIntoUK(self):
-        for df in self.datafiles:
-            if type(df) is robotide.controller.filecontrollers.TestCaseFileController:
-                # print 'TS = %r' % (str(df.display_name))
-                if len(df.keywords._items) > 0:
-                    for userkeyword in df.keywords:
-                        # print 'TC = %r' % (str(testCase.display_name))
-                        index = 0
-                        while index < len(userkeyword.steps) - 1:
-                            newStep = Step(['Capture Page Screenshot'], 'KTV')
-                            userkeyword.steps[index].insert_after(newStep)
-                            index += 2
-
-    def removeScreenShot(self):
-        for df in self.datafiles:
-            if len(df.tests._items) > 0:
-                for testCase in df.tests:
-                    for step in testCase.steps:
-                        if (step._get_comment(step.as_list()) == 'KTV'):
-                            step.remove()
-            if len(df.keywords._items) > 0:
-                for userkeyword in df.keywords:
-                    for step in userkeyword.steps:
-                        if (step._get_comment(step.as_list()) == 'KTV'):
-                            step.remove()
-
-    def LCS(self, filepath):
-        start_time = time.time()
-        LongestCommonSubsequence(self.threshold).execute(self.datafiles, filepath)
-        elapsed_time = time.time() - start_time
-        print 'Duplicated Action elapsed_time %r' % elapsed_time
-        self.ShowMessage('Duplicated Action Detection Finish')
-
-    def LRS(self, filepath):
-        start_time = time.time()
-        LongestRepeatedSubstring(self.threshold).execute(self.datafiles, filepath)
-        elapsed_time = time.time() - start_time
-        print 'Duplicated Action elapsed_time %r' % elapsed_time
-        self.ShowMessage('Duplicated Action Detection Finish')
-
-    def setting_config(self):
-        ConfigSetting(self.threshold).Show()
-
-    def set_duplicated_detection_threshold(self, data):
-        self.threshold = data.threshold
 
     def OnDynamicGenerateGraph(self, dynamic_analyzer, node_list=None, distance=None):
         jsonOutput = []

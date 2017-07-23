@@ -1,18 +1,16 @@
 import wx
-
-from robotide.pluginapi import Plugin, TreeAwarePluginMixin
-from robotide.KTV.tree import Tree
-from robotide.KTV.extractframe import ExtractFrame
-from robotide.KTV.extractlistview import ExtractListView
+from robotide.DDT.extractlistview import ExtractListView
+from robotide.DDT.extractframe import ExtractFrame
+from robotide.DDT.tree import Tree
 from robotide.controller.filecontrollers import TestCaseFileController
-
+from robotide.pluginapi import Plugin, TreeAwarePluginMixin
 from robotide.publish import PUBLISHER, MyTreeSelectedItemChanged, DuplicateDetection, MyTreeBuildFinish
 
 STYLE_STDERR = 2
 
 
-class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
-    title = 'Duplicated Actions'
+class DuplicateViewPlugin(Plugin, TreeAwarePluginMixin):
+    title = 'Duplicate Actions'
 
     def __init__(self, application):
         Plugin.__init__(self, application)
@@ -48,9 +46,9 @@ class DuplicatedViewPlugin(Plugin, TreeAwarePluginMixin):
 
     def set_all_label(self, data):
         self.total_label.SetLabel('Total actions : %d' % self.total_actions)
-        self.duplicated_label.SetLabel('Duplicated actions : %d' % data.duplicated_actions)
+        self.duplicated_label.SetLabel('Duplicate actions : %d' % data.duplicated_actions)
         percentage = float(data.duplicated_actions) / self.total_actions * 100
-        self.percentage_label.SetLabel('Duplicated Percentage : %0.2f' % percentage + ' %')
+        self.percentage_label.SetLabel('Duplicate Percentage : %0.2f' % percentage + ' %')
 
     def load_datafiles(self, data):
         self.clear_data()

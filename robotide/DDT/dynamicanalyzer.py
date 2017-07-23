@@ -53,6 +53,7 @@ class DynamicAnalyzer:
         nodes_with_type = self.nodes_with_type.copy()
         change_impact, nodes_with_type = self.get_change_impact_by_formula(list(node_list), self.edges, nodes_with_type,
                                                                            distance)
+        print change_impact
         for node in node_list:
             nodes_with_type[node] = 'Changed'
         level_node = self.tree_layout(self.edges, self.node_level)
@@ -350,8 +351,8 @@ class DynamicAnalyzer:
             self.set_level(TS, 0)
         self.build_edges()
         self.remove_redundant_edges()
-        print 'edges number : %d' % len(self.edges)
-        print 'nodes number : %d' % len(self.node_level.keys())
+        # print 'edges number : %d' % len(self.edges)
+        # print 'nodes number : %d' % len(self.node_level.keys())
         self.calculate_coupling(self.node_level.keys(), self.edges)
 
     def set_level(self, current, current_level):
@@ -491,10 +492,11 @@ class DynamicAnalyzer:
         return count
 
     def calculate_coupling(self, nodes, edges):
-        # unweighted_coupling = float(len(edges.keys())) / (len(nodes_set) * (len(nodes_set) - 1))
-        unweighted_coupling = float(len(edges.keys())) / (len(nodes) * (len(nodes) - 1))
+        # unweighted_coupling = float(len(edges.keys())) / (len(nodes) * (len(nodes) - 1))
+        print 'edges number = %d' % len(edges.keys())
+        print 'nodes number = %d' % len(nodes)
+        unweighted_coupling = float(len(edges.keys())) / (len(nodes) - 1)
         print 'unweighted coupling = %r' % unweighted_coupling
-        # weighted_coupling = float(self.get_weighted(None, None, edges)) / self.action_count
         weighted_coupling = self.get_weighted(None, None, edges)
         print 'weighted coupling = %r' % weighted_coupling
         return weighted_coupling, unweighted_coupling
@@ -661,13 +663,13 @@ class DynamicAnalyzer:
         weighted_coupling, unweighted_coupling = self.calculate_coupling(node_level.keys(), edges)
         with open(self.config_path, 'r+') as f:
             for line in f:
-                if 'width' in line:
+                """if 'width' in line:
                     width = leaf_number * 300 if leaf_number * 200 > 1800 else 1800
                     string += '		"width"        : %d,\n' % width
                 elif 'height' in line:
                     height = (max_level + 1) * 200 if (max_level + 1) * 100 > 1000 else 1000
-                    string += '		"height"       : %d,\n' % height
-                elif 'unweightedCoupling' in line:
+                    string += '		"height"       : %d,\n' % height"""
+                if 'unweightedCoupling' in line:
                     string += '		"unweightedCoupling": %r,\n' % unweighted_coupling
                 elif 'weightedCoupling' in line:
                     string += '		"weightedCoupling": %r,\n' % weighted_coupling

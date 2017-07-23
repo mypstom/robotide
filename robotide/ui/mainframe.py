@@ -12,34 +12,33 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-import wx
+import time
 
+import wx
+from robotide.KTV.KTV import KTV
+from robotide.DDT.dynamicanalyzer import DynamicAnalyzer
+from robotide.DDT.DDT import DDT
 from robotide.action import ActionInfoCollection, ActionFactory, SeparatorInfo
+from robotide.action.shortcut import localize_shortcuts
 from robotide.context import ABOUT_RIDE, SHORTCUT_KEYS
 from robotide.controller.commands import SaveFile, SaveAll
+from robotide.preferences import PreferenceEditor
+from robotide.publish import DuplicateDetection, RideLoadDatafileFinish, GenerateSpecificGraph, \
+    GenerateChangedImpactGraph, MyDynamicAnalyzerBuildFinish
 from robotide.publish import RideSaveAll, RideClosing, RideSaved, PUBLISHER, \
     RideInputValidationError, RideTreeSelection, RideModificationPrevented
-from robotide.ui.tagdialogs import ViewAllTagsDialog
 from robotide.ui.filedialogs import RobotFilePathDialog
+from robotide.ui.tagdialogs import ViewAllTagsDialog
 from robotide.utils import RideEventHandler
 from robotide.widgets import Dialog, ImageProvider, HtmlWindow
-from robotide.preferences import PreferenceEditor
 
 from .actiontriggers import MenuBar, ToolBar, ShortcutRegistry
 from .filedialogs import (NewProjectDialog, InitFileFormatDialog)
-from .review import ReviewDialog
-from .pluginmanager import PluginManager
-from robotide.action.shortcut import localize_shortcuts
-from .tree import Tree
 from .notebook import NoteBook
+from .pluginmanager import PluginManager
 from .progress import LoadProgressObserver
-
-from robotide.KTV.KTV import KTV
-from robotide.KTV.dynamicanalyzer import DynamicAnalyzer
-import time
-
-from robotide.publish import DuplicateDetection, RideLoadDatafileFinish, GenerateSpecificGraph, \
-    GenerateChangedImpactGraph, MyDynamicAnalyzerBuildFinish
+from .review import ReviewDialog
+from .tree import Tree
 
 _menudata = """
 [File]
@@ -69,10 +68,12 @@ _menudata = """
 [KTV]
 !Static Generate Graph | Generate the Hierarchical Graph
 !Dynamic Generate Graph | Generate the Hierarchical Graph
+
+[DDT]
 !Insert ScreenShot | Insert ScreenShot 
 !Remove ScreenShot | Remove ScreenShot
-!Duplicated Action Detection LCS | Duplicated Action Detection
-!Duplicated Action Detection LRS | Duplicated Action Detection
+!Duplicate Action Detection LCS | Duplicate Action Detection
+!Duplicate Action Detection LRS | Duplicate Action Detection
 !Config Setting | Config Setting
 """
 
@@ -101,6 +102,7 @@ class RideFrame(wx.Frame, RideEventHandler):
 
         self.KTV = KTV()
         self.dynamic_analyzer = DynamicAnalyzer()
+        self.DDT = DDT()
 
     def ShowMessage(self, Info):
         wx.MessageBox(Info, 'Info', wx.ICON_INFORMATION | wx.OK)
@@ -327,16 +329,7 @@ class RideFrame(wx.Frame, RideEventHandler):
     def OnDynamicGenerateGraph(self, event):
         self.KTV.setDataFiles(self._get_datafile_list())
         start_time = time.time()
-        """---------------------------------------"""
-        # data = ['ClickSuggestWordAtCell', 'DoubleClickSuggestListItem', 'AssertSuggestListItem',
-        #        'SaveFileByNameDirectly', 'myKeyword1']
-        # data = ['File|New Crossword']
-        # data = ['OK']
-        # distance = 1
-        """---------------------------------------"""
         self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer)
-        # self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer, data)
-        # self.KTV.OnDynamicGenerateGraph(self.dynamic_analyzer, data, distance)
         elapsed_time = time.time() - start_time
         print 'DynamicGenerateGraph elapsed_time = %s' % elapsed_time
 
@@ -355,34 +348,28 @@ class RideFrame(wx.Frame, RideEventHandler):
         print 'DynamicGenerateGraph elapsed_time = %s' % elapsed_time
 
     def OnInsertScreenShot(self, event):
-        self.KTV.setDataFiles(self._get_datafile_list())
-        if not self.KTV.checkHadInsertedScreenShotCommand():
-            self.KTV.insertScreenShot()
+        self.DDT.setDataFiles(self._get_datafile_list())
+        if not self.DDT.checkHadInsertedScreenShotCommand():
+            self.DDT.insertScreenShot()
             self.save()
         else:
             self.ShowMessage('The script has already inserted screenshot commands')
 
-        """plugin = self._application._plugin_loader.getPluginByName('Test Runner')._plugin
-        plugin.OnRun(None)
-
-        self.KTV.removeScreenShot()
-        self.save()"""
-
     def OnRemoveScreenShot(self, event):
-        self.KTV.setDataFiles(self._get_datafile_list())
-        self.KTV.removeScreenShot()
+        self.DDT.setDataFiles(self._get_datafile_list())
+        self.DDT.removeScreenShot()
         self.save()
 
-    def OnDuplicatedActionDetectionLCS(self, event):
-        self.KTV.setDataFiles(self._get_datafile_list())
-        self.KTV.LCS(self._controller.suite.source)
+    def OnDuplicateActionDetectionLCS(self, event):
+        self.DDT.setDataFiles(self._get_datafile_list())
+        self.DDT.LCS(self._controller.suite.source)
 
-    def OnDuplicatedActionDetectionLRS(self, event):
-        self.KTV.setDataFiles(self._get_datafile_list())
-        self.KTV.LRS(self._controller.suite.source)
+    def OnDuplicateActionDetectionLRS(self, event):
+        self.DDT.setDataFiles(self._get_datafile_list())
+        self.DDT.LRS(self._controller.suite.source)
 
     def OnConfigSetting(self, event):
-        self.KTV.setting_config()
+        self.DDT.setting_config()
 
     def _get_datafile_list(self):
         return [df for df in self._controller.datafiles]
