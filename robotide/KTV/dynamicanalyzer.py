@@ -663,13 +663,13 @@ class DynamicAnalyzer:
         weighted_coupling, unweighted_coupling = self.calculate_coupling(node_level.keys(), edges)
         with open(self.config_path, 'r+') as f:
             for line in f:
-                """if 'width' in line:
+                if 'width' in line:
                     width = leaf_number * 300 if leaf_number * 200 > 1800 else 1800
                     string += '		"width"        : %d,\n' % width
                 elif 'height' in line:
                     height = (max_level + 1) * 200 if (max_level + 1) * 100 > 1000 else 1000
-                    string += '		"height"       : %d,\n' % height"""
-                if 'unweightedCoupling' in line:
+                    string += '		"height"       : %d,\n' % height
+                elif 'unweightedCoupling' in line:
                     string += '		"unweightedCoupling": %r,\n' % unweighted_coupling
                 elif 'weightedCoupling' in line:
                     string += '		"weightedCoupling": %r,\n' % weighted_coupling

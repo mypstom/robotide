@@ -15,9 +15,9 @@
 import time
 
 import wx
-from robotide.KTV.KTV import KTV
-from robotide.DDT.dynamicanalyzer import DynamicAnalyzer
+from robotide.KTV.dynamicanalyzer import DynamicAnalyzer
 from robotide.DDT.DDT import DDT
+from robotide.KTV.KTV import KTV
 from robotide.action import ActionInfoCollection, ActionFactory, SeparatorInfo
 from robotide.action.shortcut import localize_shortcuts
 from robotide.context import ABOUT_RIDE, SHORTCUT_KEYS
